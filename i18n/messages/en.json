@@ -493,7 +493,7 @@
             "The product, and how thick it is: pourable, thick or paste.",
             "Whether it is sold by weight or by volume.",
             "The label, if we are applying it.",
-            "Units per run, how often you run, and the date the first run ships."
+            "How many pails a run, how often, and when the first one ships."
           ]
         },
         {
@@ -592,7 +592,7 @@
             "Whether it is a concentrate or ready to use.",
             "The container, the closure and the label.",
             "How much it foams when it is poured.",
-            "Units per run, how often you run, and the first ship date."
+            "Run size, frequency, and the date the first batch has to be out."
           ]
         }
       ]
@@ -642,7 +642,7 @@
             "The viscosity grade, or a sample.",
             "The container and the closure, and whether it takes a spout.",
             "Whether the fill has to hit a weight or a volume.",
-            "Units per run, how often you run, and the first ship date."
+            "How many units, how often, and the date you need the first run."
           ]
         }
       ]

@@ -18,7 +18,12 @@
     "check:locale-switch": "node scripts/locale-switch.ts",
     "census": "node scripts/census.ts",
     "check:hreflang": "node scripts/hreflang.ts",
-    "shots": "node scripts/screenshots.ts"
+    "shots": "node scripts/screenshots.ts",
+    "proof:diff": "node scripts/proof-diff.ts",
+    "proof:parity": "node scripts/proof-parity.ts",
+    "lighthouse": "node scripts/lighthouse.ts",
+    "first-load-js": "node scripts/first-load-js.ts",
+    "overlap": "node scripts/overlap.ts"
   },
   "dependencies": {
     "@vercel/analytics": "2.0.1",

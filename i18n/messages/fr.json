@@ -493,7 +493,7 @@
             "Le produit, et sa consistance : coulant, épais ou pâteux.",
             "S’il se vend au poids ou au volume.",
             "L’étiquette, si c’est nous qui la posons.",
-            "Les unités par production, la fréquence, et la date d’expédition de la première."
+            "Combien de seaux, à quelle fréquence, et quand part le premier."
           ]
         },
         {
@@ -592,7 +592,7 @@
             "S’il s’agit d’un concentré ou d’un prêt à l’emploi.",
             "Le contenant, la fermeture et l’étiquette.",
             "À quel point le produit mousse au versement.",
-            "Les unités par production, la fréquence et la première date d’expédition."
+            "La taille de la production, sa fréquence, et la date où le premier lot doit sortir."
           ]
         }
       ]
@@ -642,7 +642,7 @@
             "Le grade de viscosité, ou un échantillon.",
             "Le contenant, sa fermeture, et s’il reçoit un bec.",
             "Si le remplissage doit viser un poids ou un volume.",
-            "Les unités par production, la fréquence et la première date d’expédition."
+            "Combien d’unités, à quelle fréquence, et la date de la première production."
           ]
         }
       ]
