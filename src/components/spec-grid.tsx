@@ -24,5 +24,9 @@ export function SpecGrid({
     .map((row) => ({ name: row.label, value: localized(row.value, locale) }))
     .filter((row): row is { name: string; value: string } => row.value !== null);
   if (present.length === 0) return null;
-  return <Placard title={title} headingLevel="h2" fields={present} />;
+  return (
+    <section className="wrap mt-14">
+      <Placard title={title} headingLevel="h2" fields={present} className="max-w-3xl" />
+    </section>
+  );
 }

@@ -4,6 +4,40 @@ import { fillMethods, services } from "@/lib/content";
 import { getCopy } from "@/lib/i18n";
 import { localizedPath, type Locale } from "@/i18n/pathnames";
 
+/** The Second Shift label: a D16 surface carrying all four facts. */
+export async function SecondShiftPlacard({
+  locale,
+  headingLevel = "h3",
+  showLink = true,
+}: {
+  locale: Locale;
+  headingLevel?: "h2" | "h3";
+  showLink?: boolean;
+}) {
+  const { t } = await getCopy(locale);
+  const ss = services.secondShift;
+  return (
+    <Placard
+      guard="second-shift"
+      headingLevel={headingLevel}
+      title={ss.name[locale]}
+      where={ss.where[locale]}
+      fields={[
+        { name: t("common.fields.buy"), value: t("services.ss.buy") },
+        { name: t("common.fields.directedBy"), value: t("services.ss.directedBy") },
+        { name: t("common.fields.doneBy"), value: t("services.ss.doneBy") },
+        { name: t("common.fields.documentedBy"), value: t("services.ss.documentedBy") },
+        { name: t("common.fields.billed"), value: t("services.ss.billed") },
+      ]}
+      footer={
+        showLink ? (
+          <Link href={localizedPath(locale, "/services/second-shift")}>{t("services.ss.more")}</Link>
+        ) : undefined
+      }
+    />
+  );
+}
+
 /**
  * The two services as two pallet labels. The Second Shift label is a D16
  * surface: it carries all four facts and is checked by the guard.
@@ -18,28 +52,12 @@ export async function ServicePlacards({
   showNameNote?: boolean;
 }) {
   const { t } = await getCopy(locale);
-  const ss = services.secondShift;
   const bn = services.bottleneck;
   const nameNote = bn.nameNote?.[locale];
 
   return (
     <div className="grid gap-5 md:grid-cols-2">
-      <Placard
-        guard="second-shift"
-        headingLevel={headingLevel}
-        title={ss.name[locale]}
-        where={ss.where[locale]}
-        fields={[
-          { name: t("common.fields.buy"), value: t("services.ss.buy") },
-          { name: t("common.fields.directedBy"), value: t("services.ss.directedBy") },
-          { name: t("common.fields.doneBy"), value: t("services.ss.doneBy") },
-          { name: t("common.fields.documentedBy"), value: t("services.ss.documentedBy") },
-          { name: t("common.fields.billed"), value: t("services.ss.billed") },
-        ]}
-        footer={
-          <Link href={localizedPath(locale, "/services/second-shift")}>{t("services.ss.more")}</Link>
-        }
-      />
+      <SecondShiftPlacard locale={locale} headingLevel={headingLevel} />
       <Placard
         headingLevel={headingLevel}
         title={bn.name[locale]}

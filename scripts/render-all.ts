@@ -48,7 +48,9 @@ mkdirSync(out, { recursive: true });
 const browser = await chromium.launch();
 const context = await browser.newContext({ javaScriptEnabled: false, extraHTTPHeaders: extraHeaders });
 const page = await context.newPage();
-const urls = allUrls();
+// --only <route-prefix>: draft-time partial renders (skips the completeness check).
+const only = args.includes("--only") ? flag("--only", "") : "";
+const urls = allUrls().filter((u) => !only || u.route.startsWith(only));
 let written = 0;
 
 for (const url of urls) {
@@ -100,8 +102,8 @@ for (const url of urls) {
 }
 
 await browser.close();
-const expected = expectedPageCount();
-console.log(`rendered ${written}/${expected} pages from ${base} → ${out}/`);
+const expected = only ? urls.length : expectedPageCount();
+console.log(`rendered ${written}/${expected} pages from ${base} → ${out}/${only ? ` (only ${only})` : ""}`);
 if (written !== expected) {
   console.error("render set is incomplete");
   process.exit(1);

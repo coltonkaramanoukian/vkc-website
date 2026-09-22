@@ -52,11 +52,27 @@
       "fillMethods": "Fill methods",
       "containers": "Containers"
     },
-    "specs": "On file",
     "clientsHeading": "Who we work for",
     "ctaBand": {
       "heading": "Tell us what is backing up.",
       "body": "A product, a container, a rough run size and a date are enough to start."
+    },
+    "specLabels": {
+      "title": "Specifications",
+      "minimumRunSize": "Minimum run",
+      "maximumRunSize": "Maximum run",
+      "fillSizesOffered": "Fill sizes",
+      "viscosityRange": "Viscosity range",
+      "blendingBatchSizes": "Batch sizes",
+      "leadTime": "Lead time",
+      "fillers": "Fillers",
+      "cappers": "Cappers",
+      "tijLidPrinters": "TIJ lid printers",
+      "scales": "Scales",
+      "crewSize": "Crew size",
+      "shiftsOffered": "Shifts offered",
+      "minimumCommitment": "Minimum commitment",
+      "insurance": "Insurance"
     }
   },
   "services": {
@@ -91,17 +107,29 @@
     },
     "notFound": {
       "title": "Page not found"
+    },
+    "secondShift": {
+      "title": "Second Shift: second shift production at your plant",
+      "description": "Second shift production at your plant. Our lead hand directs the shift, our crew does the work, and our QC sheets and production log document it. Priced per unit or per shift."
+    },
+    "contractPackaging": {
+      "title": "Contract packaging and liquid filling, greater Montreal",
+      "description": "VKC Packaging is a co-packer for liquids and pastes. Send the overflow your line can’t absorb: we fill, label, kit and pack it at our facility."
+    },
+    "tollBlending": {
+      "title": "Toll blending, greater Montreal",
+      "description": "Toll blending to your formula at VKC’s facility, then filling and packing on the same site if you need it. For cleaners, lubricants, sealers, coatings and colourants."
     }
   },
   "home": {
     "eyebrow": "Contract packaging and toll blending, greater Montreal",
-    "sub": "VKC Packaging runs a shift on your line, or takes your overflow onto ours. Filling, packaging and toll blending for makers of cleaners, lubricants, sealers, coatings and colourants in greater Montreal.",
+    "sub": "VKC Packaging runs a shift on your line, or takes your overflow onto ours. Contract filling, packaging and toll blending for makers of cleaners, lubricants, sealers, coatings and colourants in greater Montreal.",
     "servicesHeading": "Two services",
-    "servicesIntro": "One runs at your plant. The other runs at ours.",
+    "servicesIntro": "One runs at your plant, on your own equipment. The other runs at ours.",
     "containersHeading": "Containers we have run",
-    "containersIntro": "These container families have already run through VKC. The list says what we know, not how many units we can run: that depends on the job.",
+    "containersIntro": "These container families have already run through VKC. The list says what we know, not how many units we can run: that depends on the product and the job.",
     "industriesHeading": "Where we focus",
-    "industriesIntro": "Liquids and pastes that need to be filled cleanly and counted right: cleaners, lubricants, sealers, coatings and colourants.",
+    "industriesIntro": "Liquids and pastes that have to be filled cleanly and counted right: cleaners, lubricants, sealers, coatings and colourants.",
     "stepsHeading": "How a first job starts",
     "steps": [
       {
@@ -120,19 +148,19 @@
   },
   "visit": {
     "heading": "Two ways VKC takes pressure off your plant",
-    "intro": "Here is the short version, and the fastest way to the next step.",
+    "intro": "Here is the short version of what we do, and the fastest way to the next step.",
     "ss": "At your plant: our lead hand directs a shift your plant doesn’t cover, our crew does the work, and our QC sheets and production log document it. Priced per unit or per shift.",
-    "bn": "At our facility: send the overflow your line can’t absorb. We fill, label, kit and pack it, and toll-blend to your formula.",
+    "bn": "At our facility: send the overflow your line can’t absorb. We fill, label, kit and pack it, and toll-blend to your formula, all under one roof.",
     "ssLink": "More on {ss}",
     "bnLink": "More on {bn}",
     "formHeading": "Book a walkthrough",
-    "formIntro": "Leave a name and a way to reach you. We will set a time to walk through your plant."
+    "formIntro": "Leave a name and a way to reach you, and we will set a time to walk through your plant together."
   },
   "quote": {
     "heading": "Get a quote",
     "lead": "Tell us about the product and the job. The more we know up front, the more useful our first answer will be.",
     "nextHeading": "What happens next",
-    "next": "Your request goes to VKC by email. We reply by phone or email, whichever you leave us, and if a walkthrough makes sense we set one up.",
+    "next": "Your request goes to VKC by email. We reply by phone or by email, whichever you leave us, and if a walkthrough of your line makes sense, we set one up.",
     "helpsHeading": "What helps us quote",
     "helps": [
       "What the product is, and roughly how thick it runs",
@@ -142,7 +170,7 @@
       "For {ss}: the shift you want covered"
     ],
     "dataHeading": "What happens to this information",
-    "data": "The form sends what you type to VKC by email so we can answer you. This site keeps no database and no copy of your request. The privacy page has the details."
+    "data": "The form sends what you type to VKC by email so we can answer you. This site keeps no database and no copy of your request."
   },
   "form": {
     "required": "required",
@@ -200,5 +228,155 @@
     "heading": "This page does not exist.",
     "body": "The link may be old, or the address mistyped.",
     "home": "Go to the home page"
+  },
+  "pages": {
+    "secondShift": {
+      "eyebrow": "{ss}: second shift production at your plant",
+      "h1": "We run your line on a shift your plant doesn’t cover.",
+      "lead": "Your filling line is already paid for. On a shift your plant doesn’t cover, VKC runs it as a service: you buy the shift’s output, finished and documented, not hours of work.",
+      "sections": [
+        {
+          "h2": "You buy output",
+          "body": [
+            "A {ss} is a production shift that VKC runs for you. Before it starts, we agree on what it has to produce: the product, the container, the specification and the count. Then we run it, and what comes back to you is finished, packed product and the record of how it was made.",
+            "That is why it is priced per unit or per shift. The price follows the output, because the output is what you are buying."
+          ]
+        },
+        {
+          "h2": "Who does what",
+          "body": [
+            "The line stays yours. How the shift runs is ours."
+          ],
+          "split": [
+            {
+              "heading": "VKC",
+              "items": [
+                "Our lead hand directs the shift and makes the calls on the floor from start to finish.",
+                "Our crew does the work, from the first container to the last case.",
+                "Our QC sheets and production log document the shift."
+              ]
+            },
+            {
+              "heading": "Your plant",
+              "items": [
+                "The line, and the equipment it runs on.",
+                "The product, and the specification the output has to meet."
+              ]
+            }
+          ]
+        },
+        {
+          "h2": "What the records are for",
+          "body": [
+            "Every {ss} is documented on our QC sheets and in our production log. Together they are the written account of the shift: what ran, and how it was checked.",
+            "If a question comes up about a lot the next morning, the answer is on paper rather than in someone’s memory."
+          ]
+        },
+        {
+          "h2": "How a {ss} starts",
+          "steps": [
+            "We walk your line with you and look at the product, the containers and the equipment.",
+            "We agree on the output and the price, per unit or per shift.",
+            "When the shift comes, our lead hand directs it and our crew runs your line.",
+            "The shift is documented on our QC sheets and in our production log, and you get your line back."
+          ]
+        },
+        {
+          "h2": "When it makes sense",
+          "list": [
+            "Orders are waiting, and your line stands idle on a shift you don’t run.",
+            "A seasonal peak needs more output than your own shifts produce, but not all year.",
+            "A launch or a large order needs extra output for a while."
+          ]
+        }
+      ]
+    },
+    "contractPackaging": {
+      "eyebrow": "{bn}: contract packaging",
+      "h1": "Contract packaging for the overflow your line can’t absorb",
+      "lead": "When orders outrun your line, send the overflow to VKC. We fill it, label it, kit it and pack it at our facility, as a co-packer for liquids and pastes.",
+      "sections": [
+        {
+          "h2": "What {bn} covers",
+          "list": [
+            "Filling, by weight or to a line on the container, whichever your product calls for.",
+            "Labelling.",
+            "Kitting: putting separate components together into one package.",
+            "Packing, so the product leaves ready to ship.",
+            "And [toll blending](/services/toll-blending), if the product has to be made before it is packed."
+          ]
+        },
+        {
+          "h2": "Why it is called {bn}",
+          "body": [
+            "A bottleneck is the slowest step in a plant, the one everything else waits on. It is also the neck of the bottle we fill. {bn} works on both readings: it takes volume away from the step that is holding you back and puts it through our line instead."
+          ]
+        },
+        {
+          "h2": "Containers we have run",
+          "body": [
+            "These container families have already been through our line. If yours is not listed, tell us what it is."
+          ],
+          "slot": "containers"
+        },
+        {
+          "h2": "How your product runs",
+          "body": [
+            "The first thing we will ask is how thick your product is: water-thin, pourable, thick or paste. It decides how the product is filled, how fast, and which of our fill methods fits."
+          ]
+        },
+        {
+          "h2": "What to send for a quote",
+          "list": [
+            "The product, and roughly how it runs.",
+            "The container and its closure.",
+            "Labels or kit components, if we are applying or assembling them.",
+            "Units per run, and how often you run.",
+            "When the first run has to ship."
+          ]
+        }
+      ]
+    },
+    "tollBlending": {
+      "eyebrow": "{bn}: toll blending",
+      "h1": "Toll blending to your formula",
+      "lead": "You own the formula. We make the batch at our facility and, if you need it, fill and pack it there too.",
+      "sections": [
+        {
+          "h2": "What toll blending means",
+          "body": [
+            "Toll blending means we mix your product to your formula and your specification. The formula is yours; the work of making the batch is ours.",
+            "The word is an old one: a toll is the fee paid to have your own material processed by someone else. You pay for the processing, and the product stays yours.",
+            "It suits a product that sells well enough to need more batches than you want to make yourself, or a new product you want made before you invest in equipment of your own."
+          ]
+        },
+        {
+          "h2": "From batch to container",
+          "body": [
+            "{bn} puts blending, filling and packing at the same facility. A batch made here can go into bottles, jugs, pails or kits without another truck ride in between, with one quote and one place to call about it."
+          ]
+        },
+        {
+          "h2": "Products we focus on",
+          "body": [
+            "Cleaners, lubricants, sealers, coatings and colourants. Each behaves differently in a mixer and in a container; the industry pages say how."
+          ],
+          "list": [
+            "[Cleaners](/industries/cleaners)",
+            "[Lubricants](/industries/lubricants)",
+            "[Sealers and coatings](/industries/sealers-and-coatings)"
+          ]
+        },
+        {
+          "h2": "What we need to quote a blend",
+          "list": [
+            "The formula, or enough about it to price the work.",
+            "The batch size you need, and how often.",
+            "How the finished product runs: water-thin, pourable, thick or paste.",
+            "How it should be packed, if we are packing it too."
+          ]
+        }
+      ]
+    }
   }
 }
