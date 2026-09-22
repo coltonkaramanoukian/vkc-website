@@ -49,14 +49,6 @@ export const pathnames = {
     fr: "/regions/montreal",
     en: "/locations/montreal",
   },
-  "/locations/laval": {
-    fr: "/regions/laval",
-    en: "/locations/laval",
-  },
-  "/locations/quebec": {
-    fr: "/regions/quebec",
-    en: "/locations/quebec",
-  },
   "/about": { fr: "/a-propos", en: "/about" },
   "/quote": { fr: "/soumission", en: "/quote" },
   "/privacy": { fr: "/confidentialite", en: "/privacy" },

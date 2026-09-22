@@ -18,8 +18,6 @@
       "lubricants": "Lubrifiants",
       "sealersCoatings": "Scellants et revêtements",
       "montreal": "Montréal",
-      "laval": "Laval",
-      "quebec": "Québec",
       "about": "À propos",
       "quote": "Obtenir une soumission",
       "privacy": "Confidentialité"
@@ -119,6 +117,18 @@
     "tollBlending": {
       "title": "Mélange à façon, Grand Montréal",
       "description": "Mélange à façon selon votre formule chez VKC, puis remplissage et emballage sur place au besoin. Pour nettoyants, lubrifiants, scellants, revêtements et colorants."
+    },
+    "bottlesAndJugs": {
+      "title": "Remplissage de liquides en bouteilles et bidons",
+      "description": "Remplissage de liquides en bouteilles PEHD et bidons D-jug, au poids ou au niveau. Envoyez à VKC Packaging la bouteille, le bouchon et l’étiquette pour une soumission."
+    },
+    "pails": {
+      "title": "Remplissage de seaux : plastique, métal et Ropak",
+      "description": "Remplissage à forfait de seaux de plastique, de seaux de métal et de contenants Ropak pour scellants, revêtements, pâtes et lubrifiants, au poids ou au niveau. Soumission chez VKC Packaging."
+    },
+    "kits": {
+      "title": "Assemblage de trousses pour produits de consommation",
+      "description": "Des trousses assemblées à partir de vos composants chez VKC Packaging : produits remplis, accessoires et imprimés emballés en une seule unité."
     }
   },
   "home": {
@@ -374,6 +384,135 @@
             "La taille de lot, et la fréquence.",
             "La consistance du produit fini : très liquide, coulant, épais ou pâteux.",
             "L’emballage voulu, si on s’en charge."
+          ]
+        }
+      ]
+    },
+    "bottlesAndJugs": {
+      "eyebrow": "Contenants : bouteilles et bidons",
+      "h1": "Bouteilles et bidons pour les produits qui se versent",
+      "lead": "Les bouteilles PEHD et les bidons D-jug contiennent la plupart des nettoyants et bien des lubrifiants. Voici ceux déjà passés sur notre ligne, et nos deux façons de les remplir.",
+      "sections": [
+        {
+          "h2": "Bouteilles et bidons déjà remplis",
+          "body": [
+            "Cette liste recense ce qu’on a rempli; elle ne limite pas ce qu’on examine. Votre bouteille n’y est pas? Envoyez son nom ou un échantillon."
+          ],
+          "slot": "containers"
+        },
+        {
+          "h2": "Au poids ou au niveau",
+          "body": [
+            "Le remplissage pondéral met le même poids de produit dans chaque contenant. Il convient au produit vendu au poids, et à celui qui mousse, dont le niveau se lit mal tant que la mousse n’est pas retombée.",
+            "Le remplissage au niveau amène chaque contenant à la même hauteur visible. Une rangée remplie au niveau paraît égale en tablette, ce qui compte quand l’acheteur compare deux bouteilles voisines.",
+            "Le choix revient au produit, pas à nous. On vous dira laquelle on retiendrait, et pourquoi."
+          ]
+        },
+        {
+          "h2": "Le bouchon et l’étiquette",
+          "body": [
+            "Une bouteille n’est finie qu’une fois fermée et étiquetée. Le bouchon et l’étiquette font donc partie de la soumission : ce qu’ils sont, qui les fournit, et si c’est nous qui les posons."
+          ]
+        },
+        {
+          "h2": "Quoi nous envoyer",
+          "list": [
+            "La bouteille ou le bidon : nom, format et matière, ou un échantillon.",
+            "Le bouchon qu’il reçoit, et qui le fournit.",
+            "L’étiquette, si c’est nous qui la posons.",
+            "Si le produit mousse, dégoutte ou file au versement.",
+            "Les unités par production, la fréquence, et la date d’expédition de la première."
+          ]
+        },
+        {
+          "h2": "Après le remplissage",
+          "body": [
+            "Si le produit doit d’abord être fabriqué, le [mélange à façon](/services/toll-blending) se fait dans le même bâtiment que le remplissage. Si la bouteille se vend dans un ensemble, voyez les [trousses](/containers/kits). Les remplissages plus lourds vont en [seaux](/containers/pails)."
+          ]
+        }
+      ]
+    },
+    "pails": {
+      "eyebrow": "Contenants : seaux",
+      "h1": "Des seaux pour les produits épais, lourds et industriels",
+      "lead": "Seaux de plastique, seaux de métal et contenants Ropak : c’est là que vont les produits épais, comme les scellants, les revêtements, les pâtes et les lubrifiants vendus au seau.",
+      "sections": [
+        {
+          "h2": "Les seaux déjà remplis",
+          "body": [
+            "Plastique, métal et Ropak, dans les formats ci-dessous. Votre seau est différent? Envoyez-nous son nom ou un échantillon."
+          ],
+          "slot": "containers"
+        },
+        {
+          "h2": "Plastique, métal ou Ropak",
+          "body": [
+            "Le contenant est choisi avant de nous arriver : par la chimie du produit, par les attentes de votre client, ou par ce que votre ligne utilise déjà. On remplit celui dans lequel vous vendez."
+          ]
+        },
+        {
+          "h2": "Remplir un produit épais",
+          "body": [
+            "Un produit épais se remplit et se place lentement. Une pâte ne se nivelle pas seule comme un liquide, et la surface trompe qui juge le remplissage à l’œil.",
+            "C’est là que le remplissage pondéral fait ses preuves : la balance lit le même poids, quelle que soit l’allure de la surface."
+          ]
+        },
+        {
+          "h2": "Quoi nous envoyer",
+          "list": [
+            "Le seau : plastique, métal ou Ropak, son format et son couvercle.",
+            "Le produit, et sa consistance : coulant, épais ou pâteux.",
+            "S’il se vend au poids ou au volume.",
+            "L’étiquette, si c’est nous qui la posons.",
+            "Les unités par production, la fréquence, et la date d’expédition de la première."
+          ]
+        },
+        {
+          "h2": "Les seaux et le reste du {bn}",
+          "body": [
+            "Un seau contient souvent un produit mélangé pour l’occasion. Le [mélange à façon](/services/toll-blending) et le remplissage se font au même endroit : le lot ne voyage pas entre les deux. Les produits plus légers vont en [bouteilles et bidons](/containers/bottles-and-jugs)."
+          ]
+        }
+      ]
+    },
+    "kits": {
+      "eyebrow": "Contenants : trousses",
+      "h1": "Des trousses assemblées à partir de vos composants",
+      "lead": "Une trousse, c’est plusieurs produits vendus comme un seul : une bouteille et sa brosse, un scellant et son applicateur, un ensemble pour la tablette. On réunit les pièces en un emballage fini.",
+      "sections": [
+        {
+          "h2": "Ce qu’est l’assemblage de trousses",
+          "body": [
+            "Assembler une trousse, c’est réunir des composants séparés dans un emballage vendu comme une seule unité : des produits remplis, des accessoires comme une brosse ou un chiffon, des imprimés comme une fiche d’instructions."
+          ]
+        },
+        {
+          "h2": "Les trousses déjà assemblées",
+          "body": [
+            "Des trousses de détail sont déjà passées chez nous. La liste reste courte exprès : c’est son contenu qui définit une trousse, et aucune ne se ressemble."
+          ],
+          "slot": "containers"
+        },
+        {
+          "h2": "Pourquoi les trousses sortent de l’usine",
+          "body": [
+            "Une trousse, c’est de l’assemblage manuel dans une usine pensée pour le débit. Il faut des tables, le compte de chaque composant, et du temps que la ligne ne peut pas céder. Les trousses saisonnières et promotionnelles y ajoutent une échéance. C’est un travail minutieux : un composant manquant revient en retour. Le confier garde votre ligne sur ce qu’elle fait de mieux."
+          ]
+        },
+        {
+          "h2": "Quoi nous envoyer",
+          "list": [
+            "Une trousse finie, ou sa photo, comme modèle.",
+            "La liste des composants, et qui fournit chacun.",
+            "L’emballage extérieur dans lequel elle se vend.",
+            "La place des pièces dans l’emballage.",
+            "Le nombre de trousses par production, et leur date d’expédition."
+          ]
+        },
+        {
+          "h2": "Trousses et remplissage ensemble",
+          "body": [
+            "Quand une trousse contient un produit à remplir, tout se fait chez nous : la [bouteille](/containers/bottles-and-jugs) est remplie, puis passe dans la trousse. Une soumission, une date de livraison, un seul numéro à appeler."
           ]
         }
       ]

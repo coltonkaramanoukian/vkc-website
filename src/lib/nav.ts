@@ -41,8 +41,6 @@ export const navGroups: NavGroup[] = [
     key: "regions",
     items: [
       { route: "/locations/montreal", label: "montreal" },
-      { route: "/locations/laval", label: "laval" },
-      { route: "/locations/quebec", label: "quebec" },
     ],
   },
   {

@@ -18,8 +18,6 @@
       "lubricants": "Lubricants",
       "sealersCoatings": "Sealers and coatings",
       "montreal": "Montreal",
-      "laval": "Laval",
-      "quebec": "Quebec",
       "about": "About",
       "quote": "Get a quote",
       "privacy": "Privacy"
@@ -119,6 +117,18 @@
     "tollBlending": {
       "title": "Toll blending, greater Montreal",
       "description": "Toll blending to your formula at VKC’s facility, then filling and packing on the same site if you need it. For cleaners, lubricants, sealers, coatings and colourants."
+    },
+    "bottlesAndJugs": {
+      "title": "Liquid filling in bottles and jugs",
+      "description": "Liquid filling in HDPE bottles and D-jugs, by weight or to the line. Send VKC Packaging the bottle, the closure and the label, and get a quote."
+    },
+    "pails": {
+      "title": "Pail filling: plastic, metal and Ropak pails",
+      "description": "Contract filling of plastic pails, metal pails and Ropak containers for sealers, coatings, pastes and lubricants, by weight or to the line. Get a quote from VKC Packaging."
+    },
+    "kits": {
+      "title": "Kitting and kit assembly for consumer products",
+      "description": "Consumer kits assembled from your components at VKC Packaging: filled products, accessories and printed pieces packed as one unit. Get a quote."
     }
   },
   "home": {
@@ -374,6 +384,135 @@
             "The batch size you need, and how often.",
             "How the finished product runs: water-thin, pourable, thick or paste.",
             "How it should be packed, if we are packing it too."
+          ]
+        }
+      ]
+    },
+    "bottlesAndJugs": {
+      "eyebrow": "Containers: bottles and jugs",
+      "h1": "Bottles and jugs for products that pour",
+      "lead": "HDPE bottles and D-jugs carry most cleaners and many lubricants. Here are the ones that have already been through our line, and the two ways we fill them.",
+      "sections": [
+        {
+          "h2": "Bottles and jugs we have run",
+          "body": [
+            "This list is a record of what we have filled, not a limit on what we will look at. If your bottle isn’t on it, send us its name or a sample."
+          ],
+          "slot": "containers"
+        },
+        {
+          "h2": "Weigh-fill or fill-to-line",
+          "body": [
+            "Weigh-fill puts the same weight of product in every container. It suits a product sold by weight, and a product that foams, where the level is hard to read until the foam settles.",
+            "Fill-to-line brings every container to the same visible level. A row of bottles filled to the line looks even on a shelf, which matters when a buyer compares one bottle with the one beside it.",
+            "Which one fits is usually the product’s call, not ours. We’ll tell you which one we would use, and why."
+          ]
+        },
+        {
+          "h2": "The closure and the label",
+          "body": [
+            "A bottle is only finished once it is closed and labelled. So when you ask for a quote, the closure and the label are part of the question: what they are, who supplies them, and whether we are the ones putting them on."
+          ]
+        },
+        {
+          "h2": "What to send us",
+          "list": [
+            "The bottle or jug: its name, size and material, or a sample.",
+            "The closure it takes, and who supplies it.",
+            "The label, if we are applying it.",
+            "Whether the product foams, drips or strings when it pours.",
+            "Units per run, how often you run, and the date the first run ships."
+          ]
+        },
+        {
+          "h2": "After the fill",
+          "body": [
+            "If the product has to be made first, [toll blending](/services/toll-blending) happens in the same building as the fill. If the bottle is sold as part of a set, see [kits](/containers/kits). Heavier fills go in [pails](/containers/pails)."
+          ]
+        }
+      ]
+    },
+    "pails": {
+      "eyebrow": "Containers: pails",
+      "h1": "Pails for thick, heavy and industrial products",
+      "lead": "Plastic pails, metal pails and Ropak containers are where thick products usually go: sealers, coatings, pastes, and lubricants sold by the pail.",
+      "sections": [
+        {
+          "h2": "Pails we have run",
+          "body": [
+            "Plastic, metal and Ropak, in the sizes listed below. If your pail is a different one, send us its name or a sample."
+          ],
+          "slot": "containers"
+        },
+        {
+          "h2": "Plastic, metal or Ropak",
+          "body": [
+            "The container is usually chosen before it reaches us: by the product’s chemistry, by what your own customer expects, or by what your line already runs. We fill the one you sell in."
+          ]
+        },
+        {
+          "h2": "Filling a thick product",
+          "body": [
+            "Thick products fill slowly and settle slowly. A paste doesn’t level itself in a pail the way a liquid does, so the surface can mislead anyone reading the fill by eye.",
+            "That is where weigh-fill earns its place: the scale reads the same weight whatever the surface looks like."
+          ]
+        },
+        {
+          "h2": "What to send us",
+          "list": [
+            "The pail: plastic, metal or Ropak, its size, and its lid.",
+            "The product, and how thick it is: pourable, thick or paste.",
+            "Whether it is sold by weight or by volume.",
+            "The label, if we are applying it.",
+            "Units per run, how often you run, and the date the first run ships."
+          ]
+        },
+        {
+          "h2": "Pails and the rest of {bn}",
+          "body": [
+            "A pail often holds a product that was blended for the job. [Toll blending](/services/toll-blending) and filling happen at the same facility, so the batch doesn’t travel between them. Lighter products go in [bottles and jugs](/containers/bottles-and-jugs)."
+          ]
+        }
+      ]
+    },
+    "kits": {
+      "eyebrow": "Containers: kits",
+      "h1": "Consumer kits, assembled from your components",
+      "lead": "A kit is several products sold as one: a bottle and its brush, a sealer and its applicator, a set built for a store shelf. We put the pieces together into one finished package.",
+      "sections": [
+        {
+          "h2": "What kitting means",
+          "body": [
+            "Kitting means bringing separate components together in one package that sells as a single unit. The components can be filled products, accessories such as a brush or a cloth, and printed pieces such as an instruction sheet."
+          ]
+        },
+        {
+          "h2": "Kits we have run",
+          "body": [
+            "Consumer kits have already been through our facility. The list stays short on purpose: a kit is defined by what goes into it, and no two are alike."
+          ],
+          "slot": "containers"
+        },
+        {
+          "h2": "Why kits leave the plant",
+          "body": [
+            "A kit is hand assembly in a plant built for flow. It needs table space, a count of every component, and time the filling line can’t spare. Seasonal kits and promotional sets add a deadline on top. It is careful work, and a missing component comes back as a return. Sending the assembly out keeps your line on what it does best."
+          ]
+        },
+        {
+          "h2": "What to send us",
+          "list": [
+            "One finished kit, or a photo of one, as the reference.",
+            "The list of components, and who supplies each one.",
+            "The outer package the kit is sold in.",
+            "How the pieces sit in the package.",
+            "Kits per run, and the date they have to ship."
+          ]
+        },
+        {
+          "h2": "Kits and filling together",
+          "body": [
+            "When a kit holds a product that also has to be filled, both jobs can happen at our facility: the [bottle](/containers/bottles-and-jugs) is filled, then goes straight into the kit. One quote, one delivery date, one number to call."
           ]
         }
       ]

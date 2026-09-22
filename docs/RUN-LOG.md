@@ -71,3 +71,18 @@ Resume from the last checkpoint; every phase is idempotent.
 11. macOS bash 3.2 treats an empty array as unbound under `set -u` (NC-8
     script); switched to `${H[@]+...}` expansion.
 12. ESLint `no-html-link-for-pages` in the global 404; switched to next/link.
+
+## Page cuts (D7 cut rule)
+
+- `/locations/laval` and `/locations/quebec` CUT in Phase 2, before drafting.
+  Everything true about VKC in Laval is the same sentence as Montreal with the
+  city swapped: the site carries no facility address (`contact.json` is null),
+  no service radius (`contact.serviceRadiusKm` null) and no travel claim, so a
+  Laval page could only repeat the Montreal page or invent a local presence.
+  Quebec City is a second problem: nothing supplied says VKC serves it, and
+  writing that it does would be an invented fact. Two thin doorway pages would
+  also have failed the ≤40% pairwise-overlap pre-mortem by construction.
+  Routes: 17 → 15, URLs 34 → 30, sitemap 32 → 28.
+- `/containers/pails-and-drums` renamed `/containers/pails` (fr `/contenants/seaux`).
+  Drums are not in the §1 container vocabulary; naming them in the slug would
+  advertise a container VKC was never said to run.

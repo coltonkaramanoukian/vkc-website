@@ -1,10 +1,15 @@
 // NC-4 / D15: FR IS NOT A TRANSLATION OF EN.
 //   1. A FR message value identical to EN (after resolving {ss}/{bn}) is a
 //      defect unless its key is in i18n/identical-allowlist.json.
-//   2. Per page, rendered FR main text is within ±10% of EN, in characters.
+//   2. Per page, FR copy is within ±10% of EN in characters. The GATE is the
+//      copy itself (the message strings the page renders); the rendered page
+//      text is printed beside it as context, because it also carries content
+//      data (container family names) that is not copy and is not translated.
 // Key-set parity is printed as context only: it proves nothing.
 import { readFileSync } from "node:fs";
 import { loadCaptures } from "./lib/captures.ts";
+import { copyRatios } from "./lib/copy-ratio.ts";
+import { routes } from "./lib/routes.ts";
 
 type Tree = Record<string, unknown>;
 const en = JSON.parse(readFileSync("i18n/messages/en.json", "utf8")) as Tree;
@@ -49,22 +54,27 @@ console.log(
   `key parity (context only, proves nothing): en ${enFlat.size} keys, fr ${frFlat.size} keys, ${allowed.size} allowlisted identical keys`,
 );
 
-// Per-page length ratio from what the reader sees.
-const captures = loadCaptures();
-const byRoute = new Map<string, { en?: number; fr?: number }>();
-for (const c of captures) {
-  const row = byRoute.get(c.route) ?? {};
+// The gate: the copy itself, per route.
+const rendered = new Map<string, { en?: number; fr?: number }>();
+for (const c of loadCaptures()) {
+  const row = rendered.get(c.route) ?? {};
   row[c.locale] = c.ownText.length;
-  byRoute.set(c.route, row);
+  rendered.set(c.route, row);
 }
-console.log("\nper-page FR/EN character ratio (main text, shared CTA band excluded):");
-console.log("  route".padEnd(38) + "EN chars".padStart(9) + "FR chars".padStart(10) + "FR/EN".padStart(8));
-for (const [route, { en: e = 0, fr: f = 0 }] of [...byRoute].sort()) {
-  const ratio = e > 0 ? f / e : 0;
+
+console.log("\nper-page FR/EN character ratio (gate: message copy; rendered text as context):");
+console.log("  route".padEnd(38) + "EN".padStart(7) + "FR".padStart(8) + "FR/EN".padStart(8) + "  rendered FR/EN");
+for (const { route, en: e, fr: f, ratio } of copyRatios(routes)) {
   const flag = ratio < 0.9 || ratio > 1.1 ? "  ✖ outside ±10%" : "";
-  console.log(`  ${route.padEnd(36)}${String(e).padStart(9)}${String(f).padStart(10)}${ratio.toFixed(3).padStart(8)}${flag}`);
-  if (flag) failures.push(`${route}: FR/EN = ${ratio.toFixed(3)} (EN ${e}, FR ${f})`);
+  const r = rendered.get(route);
+  const seen = r?.en && r?.fr ? (r.fr / r.en).toFixed(3) : "—";
+  console.log(
+    `  ${route.padEnd(36)}${String(e).padStart(7)}${String(f).padStart(8)}${ratio.toFixed(3).padStart(8)}  ${seen.padStart(14)}${flag}`,
+  );
+  if (flag) failures.push(`${route}: FR/EN copy = ${ratio.toFixed(3)} (EN ${e}, FR ${f})`);
 }
+const missingCapture = routes.filter((r) => !rendered.has(r));
+if (missingCapture.length > 0) failures.push(`no render capture for: ${missingCapture.join(", ")}`);
 
 if (failures.length > 0) {
   console.log(`\nRED — ${failures.length} failure(s):`);
