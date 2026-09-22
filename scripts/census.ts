@@ -14,10 +14,23 @@ const extra: Record<string, string> = headerArg
   ? { [headerArg.split(":")[0].trim()]: headerArg.slice(headerArg.indexOf(":") + 1).trim() }
   : {};
 
+/** A home connection, not a CI runner: retry transient resets. */
+async function fetchRetry(url: string, init: RequestInit, attempts = 4): Promise<Response> {
+  for (let i = 1; i <= attempts; i += 1) {
+    try {
+      return await fetch(url, init);
+    } catch (error) {
+      if (i === attempts) throw error;
+      await new Promise((r) => setTimeout(r, 1000 * i));
+    }
+  }
+  throw new Error("unreachable");
+}
+
 const urls = allUrls();
 let ok = 0;
 for (const url of urls) {
-  const res = await fetch(base + url.path, { redirect: "manual", headers: extra });
+  const res = await fetchRetry(base + url.path, { redirect: "manual", headers: extra });
   if (res.status === 200) ok += 1;
   console.log(`${res.status} ${url.path}`);
 }
@@ -33,7 +46,7 @@ console.log("\n/v door route:");
 for (const [label, value, want] of cases) {
   const headers: Record<string, string> = { ...extra };
   if (value) headers["accept-language"] = value;
-  const res = await fetch(`${base}/v`, { redirect: "manual", headers });
+  const res = await fetchRetry(`${base}/v`, { redirect: "manual", headers });
   const location = res.headers.get("location");
   const pass = res.status === 307 && location === want;
   if (pass) vOk += 1;

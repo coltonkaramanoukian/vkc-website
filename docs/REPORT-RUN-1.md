@@ -134,8 +134,8 @@ appears: `grep -c -E '/visit|/visite'` → `0`. `robots.txt` → `Allow: /`,
 
 **10. Deploy proof.**
 ```
-githubCommitSha: 160174fb4aea07e83052b0591ccdcccd955dca4a
-HEAD:            160174fb4aea07e83052b0591ccdcccd955dca4a
+githubCommitSha: 4b464fb47764e0da65e7122289a0f4fdb6374628
+HEAD:            4b464fb47764e0da65e7122289a0f4fdb6374628
 200 /fr   200 /en   307 /v → 200 /fr/visite   (fetched from outside)
 30 pages compared, 16 fields each
 GREEN — production serves the same content as a local build of this SHA
@@ -340,8 +340,12 @@ Full log: `docs/DESIGN-DECISIONS.md`. The parts worth reading on a phone:
     switched to curl with `Accept-Encoding: gzip`: 176 kB, not 567 kB.
 18. The overlap pre-mortem had no pairs left after the cut → repointed at the
     container/industry pages and split into vocabulary vs reused phrases.
-19. A home connection, not a CI runner: `first-load-js` now retries transient
-    `ECONNRESET`/curl timeouts instead of failing the measurement.
+19. A home connection, not a CI runner: `first-load-js` and `census` now retry
+    transient `ECONNRESET`s and curl timeouts instead of failing the run. The
+    Vercel CLI hit the same link twice — once "Not authorized", once "fetch
+    failed" mid-build; the second deployment had in fact completed server-side
+    (READY, production, aliased), which the API confirmed. A CLI error is not
+    proof that a deploy failed: check the deployment, then decide.
 
 ## 8. Degraded — each with the one thing that closes it
 
