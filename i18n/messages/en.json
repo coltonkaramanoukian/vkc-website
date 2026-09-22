@@ -71,6 +71,11 @@
       "shiftsOffered": "Shifts offered",
       "minimumCommitment": "Minimum commitment",
       "insurance": "Insurance"
+    },
+    "privacy": {
+      "officer": "Privacy contact",
+      "name": "Name",
+      "role": "Role"
     }
   },
   "services": {
@@ -141,6 +146,18 @@
     "sealersAndCoatings": {
       "title": "Contract packaging for sealers, coatings and colourants",
       "description": "Filling and toll blending for sealers, coatings and colourants, in plastic and metal pails or assembled into kits. Get a quote from VKC Packaging."
+    },
+    "montreal": {
+      "title": "Co-packer in greater Montreal: filling, blending, second shift",
+      "description": "VKC Packaging fills, packs and toll-blends for plants across greater Montreal, and runs second shift production on your own line. Get a quote."
+    },
+    "about": {
+      "title": "About VKC Packaging",
+      "description": "{brand} is the operating name of {legal}: contract filling, packaging and toll blending, at our facility or on your line."
+    },
+    "privacy": {
+      "title": "Privacy",
+      "description": "What this site collects, where it goes, and what it does not do: no trackers, no advertising cookies, no mailing list."
     }
   },
   "home": {
@@ -676,6 +693,132 @@
             "Whether it skins, settles, or has a pot life.",
             "The pail or the kit, and the lid or the outer package.",
             "Units per run, and the date the run has to ship."
+          ]
+        }
+      ]
+    },
+    "montreal": {
+      "eyebrow": "Regions: greater Montreal",
+      "h1": "Contract packaging and second shift production in greater Montreal",
+      "lead": "Two ways to add output without adding a line: we run a shift on yours, or we fill and pack on ours. Both are built for plants close enough to drive to.",
+      "sections": [
+        {
+          "h2": "Which one fits your plant",
+          "body": [
+            "A plant runs out of capacity in one of two ways. Either the line is fine and the shifts are the limit, or the line itself is full and the orders keep arriving.",
+            "In the first case the equipment already exists and stands still for part of the day, and [{ss}](/services/second-shift) puts it back to work. In the second, nothing on your own floor will fix it in time, and the overflow has to go somewhere else. That is what our facility is for."
+          ],
+          "slot": "services"
+        },
+        {
+          "h2": "Why the distance matters",
+          "body": [
+            "Overflow work is urgent by definition: it exists because an order is already waiting. Every hour the product spends on a truck is an hour of that order. A supplier at the other end of the province can quote the same run, but it can’t bring a pallet back the same afternoon.",
+            "It works the same way in the other direction. We can walk a line in greater Montreal and be back the same day, which is what makes a walkthrough easy to arrange before anything is committed to."
+          ]
+        },
+        {
+          "h2": "The products we are set up for",
+          "body": [
+            "They are made all over greater Montreal, in plants of every size:"
+          ],
+          "list": [
+            "[Cleaners](/industries/cleaners): degreasers, all-purpose, glass and floor.",
+            "[Lubricants](/industries/lubricants): oils, hydraulic and cutting fluids, greases.",
+            "[Sealers and coatings](/industries/sealers-and-coatings), and the colourants that go with them."
+          ]
+        },
+        {
+          "h2": "Two ways to start",
+          "body": [
+            "Send the product, the container and a rough run size, and we will come back with a quote. Or ask us to walk your line first: for [{ss}](/services/second-shift) that is usually the shorter path, because the shift is quoted against what is actually on your floor."
+          ]
+        }
+      ]
+    },
+    "about": {
+      "eyebrow": "About",
+      "h1": "Who you are dealing with",
+      "lead": "{brand} is the operating name of {legal}. We fill, pack and blend other companies’ products: on our line, or on theirs.",
+      "sections": [
+        {
+          "h2": "What we do",
+          "body": [
+            "Two things, and they are the same trade seen from two sides. [{ss}](/services/second-shift) is a production shift we run at your plant, on your line, on a shift your plant doesn’t cover. [{bn}](/services/contract-packaging) is the overflow your line can’t absorb: filled, packed and blended at ours.",
+            "Everything else on this site — the containers, the industries, the fill methods — is a description of how those two get done."
+          ],
+          "slot": "services"
+        },
+        {
+          "h2": "What won’t be written here",
+          "body": [
+            "No certifications, no production figures, no square footage, no customer logos. Not because there is nothing to say, but because a claim on a marketing page can’t be checked, while a number in a quote can: it is measured against your product, your container and your run.",
+            "A client’s name appears here only with their written permission, and never as scenery."
+          ]
+        },
+        {
+          "h2": "The two names",
+          "body": [
+            "“{bn}” reads twice. A bottleneck is the slowest step in a plant, the one everything else waits on; a bottleneck is also the neck of the bottle we fill. French gives us the same pair for nothing — goulot is both — so the name works in either language without being translated.",
+            "“{ss}” means what it says: the shift after yours, run as a service rather than sold as time."
+          ]
+        },
+        {
+          "h2": "What we work with",
+          "body": [
+            "Liquids and pastes, in the containers they are sold in. They come from a handful of trades:"
+          ],
+          "list": [
+            "[Cleaners](/industries/cleaners)",
+            "[Lubricants](/industries/lubricants)",
+            "[Sealers, coatings and colourants](/industries/sealers-and-coatings)"
+          ]
+        },
+        {
+          "h2": "How a job starts",
+          "body": [
+            "It starts with a question about your product, not about us: what it is, what it goes in, how many, and by when. [Getting a quote](/quote) is the short way to ask. A walkthrough of your line is the longer one, and the better one whenever the answer depends on how your floor is laid out."
+          ]
+        }
+      ]
+    },
+    "privacy": {
+      "eyebrow": "Privacy",
+      "h1": "What this site does with your information",
+      "lead": "The short version: the quote form sends an email to VKC, and nothing else on this site is watching you.",
+      "sections": [
+        {
+          "h2": "What the form collects",
+          "body": [
+            "The quote form asks for what it takes to answer you: your name, your company, a phone number or an email address, what the product is, what it goes in, how big the run is and when you need it. Anything else you want to tell us goes in the notes.",
+            "It also records which page it was sent from, so we know whether you were reading about a walkthrough or about a service."
+          ]
+        },
+        {
+          "h2": "Where it goes",
+          "body": [
+            "What you type is turned into an email and delivered to {brand} through an email delivery service. It is used to answer your request. It is not sold, rented or passed to anyone else, and there is no mailing list here to add you to.",
+            "This site has no database. Your request exists as the email we received, and nowhere else."
+          ]
+        },
+        {
+          "h2": "Cookies and measurement",
+          "body": [
+            "This site sets no advertising cookies and carries no third-party trackers, no pixels and no chat widget. Page views are counted by a measurement tool that uses no cookies and builds no profile of you, which is why nothing here asks you to accept anything.",
+            "Your choice of language is in the address of the page you are on, not in a cookie."
+          ]
+        },
+        {
+          "h2": "Your information, your call",
+          "body": [
+            "Quebec’s private-sector privacy law gives you the right to ask what personal information an organization holds about you, to have it corrected, and to ask that it be deleted. If you sent us a quote request and want it gone, ask us and it goes."
+          ],
+          "slot": "privacyContact"
+        },
+        {
+          "h2": "If this changes",
+          "body": [
+            "If what this site does with your information changes — a new form, a tracker, anything that collects more than it collects today — this page changes with it. The change gets written here rather than left to be noticed."
           ]
         }
       ]

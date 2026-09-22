@@ -1,5 +1,5 @@
 import { getTranslations } from "next-intl/server";
-import { serviceNames } from "@/lib/content";
+import { serviceNames, site } from "@/lib/content";
 import type { Locale } from "@/i18n/pathnames";
 
 type Values = Record<string, string | number>;
@@ -21,13 +21,14 @@ export function interpolate<T>(value: T, values: Values): T {
 }
 
 /**
- * Translator with the service names pre-bound, so copy can say {ss} / {bn}
- * and a rename in content/services.json reaches every string.
+ * Translator with the content-owned names pre-bound, so copy can say {ss} /
+ * {bn} / {brand} / {legal} and an edit in content/ reaches every string. Copy
+ * never hard-codes a name that lives in content.
  */
 export async function getCopy(locale: Locale, namespace?: string) {
   const t = await getTranslations({ locale, namespace });
   const names = serviceNames(locale);
-  const base: Values = { ss: names.ss, bn: names.bn };
+  const base: Values = { ss: names.ss, bn: names.bn, brand: site.brandName, legal: site.legalName };
 
   const text = (key: string, values?: Values): string =>
     // Keys are validated at build: request.ts throws on MISSING_MESSAGE.

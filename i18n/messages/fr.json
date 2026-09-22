@@ -71,6 +71,11 @@
       "shiftsOffered": "Quarts offerts",
       "minimumCommitment": "Engagement minimal",
       "insurance": "Assurance"
+    },
+    "privacy": {
+      "officer": "Responsable de la protection des renseignements",
+      "name": "Nom",
+      "role": "Fonction"
     }
   },
   "services": {
@@ -141,6 +146,18 @@
     "sealersAndCoatings": {
       "title": "Conditionnement à forfait de scellants, revêtements et colorants",
       "description": "Remplissage et mélange à façon de scellants, revêtements et colorants, en seaux de plastique et de métal ou assemblés en trousses. Soumission chez VKC Packaging."
+    },
+    "montreal": {
+      "title": "Sous-traitance d’emballage dans le Grand Montréal",
+      "description": "VKC Packaging remplit, emballe et mélange à façon pour les usines du Grand Montréal, et fait rouler un deuxième quart de production sur votre ligne."
+    },
+    "about": {
+      "title": "À propos de VKC Packaging",
+      "description": "{brand} est le nom commercial de {legal} : conditionnement à forfait, remplissage et mélange à façon, chez nous ou sur votre ligne."
+    },
+    "privacy": {
+      "title": "Confidentialité",
+      "description": "Ce que ce site recueille, où ça va, et ce qu’il ne fait pas : aucun traceur, aucun témoin publicitaire, aucune liste d’envoi."
     }
   },
   "home": {
@@ -676,6 +693,132 @@
             "Si le produit forme une peau, décante ou a une durée de vie en pot.",
             "Le seau ou la trousse, et le couvercle ou l’emballage extérieur.",
             "Les unités par production, et la date d’expédition."
+          ]
+        }
+      ]
+    },
+    "montreal": {
+      "eyebrow": "Régions : Grand Montréal",
+      "h1": "Conditionnement à forfait et deuxième quart de production dans le Grand Montréal",
+      "lead": "Deux façons d’ajouter de la production sans ajouter de ligne : on fait rouler un quart sur la vôtre, ou on remplit et emballe sur la nôtre. Les deux visent les usines assez proches pour qu’on s’y rende.",
+      "sections": [
+        {
+          "h2": "Laquelle convient à votre usine",
+          "body": [
+            "Une usine manque de capacité de deux façons. Ou la ligne suffit et ce sont les quarts qui limitent, ou la ligne est pleine et les commandes continuent d’entrer.",
+            "Dans le premier cas, l’équipement existe déjà et dort une partie de la journée : le [{ss}](/services/second-shift) le remet au travail. Dans le second, rien sur votre plancher n’y changera quoi que ce soit à temps, et le surplus doit aller ailleurs. C’est à ça que sert notre installation."
+          ],
+          "slot": "services"
+        },
+        {
+          "h2": "Pourquoi la distance compte",
+          "body": [
+            "Le surplus est urgent par définition : il existe parce qu’une commande attend déjà. Chaque heure passée sur un camion est une heure de cette commande. Un fournisseur à l’autre bout de la province chiffrera la même production, mais il ne rapportera pas une palette le même après-midi.",
+            "Ça vaut dans l’autre sens aussi. On visite une ligne du Grand Montréal et on rentre le jour même : voilà ce qui rend la visite facile à organiser avant tout engagement."
+          ]
+        },
+        {
+          "h2": "Les produits qu’on traite",
+          "body": [
+            "Ils se fabriquent partout dans le Grand Montréal, dans des usines de toutes tailles :"
+          ],
+          "list": [
+            "[Nettoyants](/industries/cleaners) : dégraissants, tout usage, vitres et planchers.",
+            "[Lubrifiants](/industries/lubricants) : huiles, fluides hydrauliques et de coupe, graisses.",
+            "[Scellants et revêtements](/industries/sealers-and-coatings), et les colorants qui vont avec."
+          ]
+        },
+        {
+          "h2": "Deux façons de commencer",
+          "body": [
+            "Envoyez le produit, le contenant et un ordre de grandeur, on revient avec une soumission. Ou demandez-nous de visiter votre ligne d’abord : pour le [{ss}](/services/second-shift), c’est souvent le chemin le plus court, puisque le quart se chiffre sur ce qui est vraiment chez vous."
+          ]
+        }
+      ]
+    },
+    "about": {
+      "eyebrow": "À propos",
+      "h1": "À qui vous avez affaire",
+      "lead": "{brand} est le nom commercial de {legal}. On remplit, emballe et mélange les produits des autres : sur notre ligne, ou sur la leur.",
+      "sections": [
+        {
+          "h2": "Ce qu’on fait",
+          "body": [
+            "Deux choses, et c’est le même métier vu de deux côtés. Le [{ss}](/services/second-shift) est un quart de production qu’on fait rouler chez vous, sur votre ligne, pendant un quart que votre usine ne couvre pas. Le [{bn}](/services/contract-packaging), c’est le surplus que votre ligne n’absorbe pas : rempli, emballé et mélangé chez nous.",
+            "Tout le reste du site — les contenants, les secteurs, les méthodes — décrit comment ces deux-là se font."
+          ],
+          "slot": "services"
+        },
+        {
+          "h2": "Ce qui ne s’écrira pas ici",
+          "body": [
+            "Aucune certification, aucun chiffre de production, aucune superficie, aucun logo de client. Non qu’il n’y ait rien à dire : une affirmation sur une page ne se vérifie pas, tandis qu’un chiffre dans une soumission se vérifie, contre votre produit, votre contenant et votre production.",
+            "Le nom d’un client ne paraît ici qu’avec sa permission écrite, jamais en décor."
+          ]
+        },
+        {
+          "h2": "Les deux noms",
+          "body": [
+            "« {bn} » se lit deux fois. Un goulot d’étranglement, c’est l’étape la plus lente d’une usine, celle que tout le reste attend; un goulot, c’est le col de la bouteille qu’on remplit. L’anglais offre la même paire avec bottleneck : le nom tient dans les deux langues sans traduction.",
+            "« {ss} » dit ce qu’il veut dire : le quart d’après le vôtre, fait comme un service plutôt que vendu comme du temps."
+          ]
+        },
+        {
+          "h2": "Ce qu’on traite",
+          "body": [
+            "Des liquides et des pâtes, dans les contenants où ils se vendent. Ils viennent d’une poignée de métiers :"
+          ],
+          "list": [
+            "[Nettoyants](/industries/cleaners)",
+            "[Lubrifiants](/industries/lubricants)",
+            "[Scellants, revêtements et colorants](/industries/sealers-and-coatings)"
+          ]
+        },
+        {
+          "h2": "Comment un travail commence",
+          "body": [
+            "Ça commence par une question sur votre produit, pas sur nous : ce que c’est, dans quoi il va, combien, et pour quand. [Demander une soumission](/quote) est la façon courte. Une visite de votre ligne est la plus longue, et la meilleure dès que la réponse dépend de la disposition de votre plancher."
+          ]
+        }
+      ]
+    },
+    "privacy": {
+      "eyebrow": "Confidentialité",
+      "h1": "Ce que ce site fait de vos renseignements",
+      "lead": "En bref : le formulaire de soumission envoie un courriel à VKC, et rien d’autre ici ne vous observe.",
+      "sections": [
+        {
+          "h2": "Ce que le formulaire recueille",
+          "body": [
+            "Le formulaire demande ce qu’il faut pour vous répondre : votre nom, votre entreprise, un téléphone ou un courriel, le produit, son contenant, la taille de la production et la date voulue. Tout ce que vous voulez ajouter va dans les notes.",
+            "Il note aussi la page d’où il part, pour savoir si vous lisiez sur une visite ou sur un service."
+          ]
+        },
+        {
+          "h2": "Où ça va",
+          "body": [
+            "Ce que vous écrivez devient un courriel livré à {brand} par un service de livraison de courriels. Il sert à répondre à votre demande. Il n’est ni vendu, ni loué, ni transmis à personne, et aucune liste d’envoi ne vous attend ici.",
+            "Ce site n’a pas de base de données. Votre demande existe sous la forme du courriel reçu, nulle part ailleurs."
+          ]
+        },
+        {
+          "h2": "Témoins et mesure",
+          "body": [
+            "Ce site ne pose aucun témoin publicitaire et ne porte ni traceur externe, ni pixel, ni fenêtre de clavardage. Les pages vues se comptent avec un outil sans témoins, qui ne construit aucun profil de vous : voilà pourquoi rien ici ne vous demande d’accepter quoi que ce soit.",
+            "Votre choix de langue est dans l’adresse de la page, pas dans un témoin."
+          ]
+        },
+        {
+          "h2": "Vos renseignements, votre décision",
+          "body": [
+            "La loi québécoise sur la protection des renseignements personnels dans le secteur privé vous donne le droit de savoir ce qu’une entreprise détient sur vous, de le faire corriger et d’en demander la suppression. Si vous nous avez envoyé une demande et que vous la voulez effacée, dites-le-nous et elle part."
+          ],
+          "slot": "privacyContact"
+        },
+        {
+          "h2": "Si ça change",
+          "body": [
+            "Si ce que ce site fait de vos renseignements change — un nouveau formulaire, un traceur, quoi que ce soit qui recueille plus qu’aujourd’hui —, cette page change avec. Le changement s’écrit ici plutôt que de se deviner."
           ]
         }
       ]
