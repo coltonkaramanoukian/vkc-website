@@ -7,7 +7,14 @@ const load = (l: string) => JSON.parse(readFileSync(`i18n/messages/${l}.json`, "
 const services = JSON.parse(readFileSync("content/services.json", "utf8"));
 
 const strings = (v: unknown): string[] =>
-  typeof v === "string" ? [v] : Array.isArray(v) ? v.flatMap(strings) : v && typeof v === "object" ? Object.values(v).flatMap(strings) : [];
+  typeof v === "string"
+    ? [v]
+    : Array.isArray(v)
+      ? v.flatMap(strings)
+      : v && typeof v === "object"
+        ? // a section's "slot" names a component, not copy
+          Object.entries(v).flatMap(([k, x]) => (k === "slot" ? [] : strings(x)))
+        : [];
 const get = (tree: Tree, path: string) => path.split(".").reduce<unknown>((n, k) => (n as Tree | undefined)?.[k], tree);
 const resolve = (s: string, l: "en" | "fr") =>
   s.replace(/\{ss\}/g, services.secondShift.name[l]).replace(/\{bn\}/g, services.bottleneck.name[l]).replace(/\[([^\]]+)\]\([^)]*\)/g, "$1");

@@ -38,9 +38,17 @@ const enFlat = flatten(en);
 const frFlat = flatten(fr);
 const failures: string[] = [];
 
+/** pages.*.sections[n].slot names a component, not copy: identical by design. */
+const isStructural = (key: string) => key.endsWith(".slot");
+let structural = 0;
+
 for (const [key, frValue] of frFlat) {
   const enValue = enFlat.get(key);
   if (enValue === undefined) continue;
+  if (isStructural(key)) {
+    structural += 1;
+    continue;
+  }
   if (resolve(frValue, "fr") === resolve(enValue, "en") && !allowed.has(key)) {
     failures.push(`identical FR/EN value at "${key}": ${JSON.stringify(frValue)}`);
   }
@@ -51,7 +59,8 @@ for (const k of missingInFr) failures.push(`key missing in fr.json: ${k}`);
 for (const k of missingInEn) failures.push(`key missing in en.json: ${k}`);
 
 console.log(
-  `key parity (context only, proves nothing): en ${enFlat.size} keys, fr ${frFlat.size} keys, ${allowed.size} allowlisted identical keys`,
+  `key parity (context only, proves nothing): en ${enFlat.size} keys, fr ${frFlat.size} keys, ` +
+    `${allowed.size} allowlisted identical keys, ${structural} structural keys skipped`,
 );
 
 // The gate: the copy itself, per route.
