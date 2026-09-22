@@ -129,6 +129,18 @@
     "kits": {
       "title": "Assemblage de trousses pour produits de consommation",
       "description": "Des trousses assemblées à partir de vos composants chez VKC Packaging : produits remplis, accessoires et imprimés emballés en une seule unité."
+    },
+    "cleaners": {
+      "title": "Conditionnement à forfait de produits nettoyants",
+      "description": "Remplissage et mélange à façon de nettoyants : dégraissants, tout usage, vitres et planchers, savons industriels, en bouteilles, bidons et seaux. Soumission chez VKC Packaging."
+    },
+    "lubricants": {
+      "title": "Conditionnement à forfait de lubrifiants, huiles et graisses",
+      "description": "Remplissage de liquides et mélange à façon de lubrifiants : huiles, fluides hydrauliques et de coupe, graisses, en bidons et en seaux. Soumission chez VKC Packaging."
+    },
+    "sealersAndCoatings": {
+      "title": "Conditionnement à forfait de scellants, revêtements et colorants",
+      "description": "Remplissage et mélange à façon de scellants, revêtements et colorants, en seaux de plastique et de métal ou assemblés en trousses. Soumission chez VKC Packaging."
     }
   },
   "home": {
@@ -513,6 +525,157 @@
           "h2": "Trousses et remplissage ensemble",
           "body": [
             "Quand une trousse contient un produit à remplir, tout se fait chez nous : la [bouteille](/containers/bottles-and-jugs) est remplie, puis passe dans la trousse. Une soumission, une date de livraison, un seul numéro à appeler."
+          ]
+        }
+      ]
+    },
+    "cleaners": {
+      "eyebrow": "Secteurs : produits nettoyants",
+      "h1": "Nettoyants, remplis et mélangés selon votre formule",
+      "lead": "Dégraissants, nettoyants tout usage, à vitres et à planchers, savons industriels : des produits à base d’eau qui moussent dès qu’on les brasse et qui se vendent en bouteilles, bidons et seaux.",
+      "sections": [
+        {
+          "h2": "Pourquoi les nettoyants sont un cas à part",
+          "body": [
+            "Un nettoyant, c’est surtout de l’eau qui transporte un agent actif, le plus souvent un tensioactif. À la ligne de remplissage, ça donne une chose avant tout : ça mousse. Brassé, versé, éclaboussé, le produit monte en mousse, et la mousse cache le vrai niveau dans le contenant.",
+            "Le remplissage ralentit donc, ou le contenant se pèse au lieu de se lire à l’œil, ou les deux. Rien de grave : il faut seulement le savoir avant le premier contenant."
+          ]
+        },
+        {
+          "h2": "Concentré ou prêt à l’emploi",
+          "body": [
+            "Un concentré et sa version prête à l’emploi sont deux travaux. Le concentré, c’est une production plus courte d’un produit plus épais et plus fort, souvent en seau. Le prêt à l’emploi, c’est une production plus longue d’eau surtout, en bouteille à gâchette ou à bouchon. Même formule sur papier, autre travail sur le plancher.",
+            "Dites-nous lequel vous faites chiffrer, ou les deux, et comment le volume se partage."
+          ]
+        },
+        {
+          "h2": "Les contenants des nettoyants",
+          "body": [
+            "Bouteilles et bidons pour la tablette; seaux pour le concentré et pour ce qu’une usine achète pour elle-même."
+          ],
+          "slot": "containers"
+        },
+        {
+          "h2": "Deux façons de prendre le travail",
+          "body": [
+            "Si c’est votre ligne qui bloque, le [{ss}](/services/second-shift) la fait rouler pendant un quart que vous ne couvrez pas. Si elle est pleine, c’est le surplus qui vient chez nous."
+          ],
+          "slot": "services"
+        },
+        {
+          "h2": "Mélanger autant qu’emballer",
+          "body": [
+            "Si le lot doit être fabriqué autant qu’emballé, le [mélange à façon](/services/toll-blending) se fait dans le même bâtiment que le remplissage."
+          ]
+        },
+        {
+          "h2": "Quoi envoyer pour une soumission",
+          "list": [
+            "La fiche de données de sécurité, pour savoir ce qu’on manipule.",
+            "S’il s’agit d’un concentré ou d’un prêt à l’emploi.",
+            "Le contenant, la fermeture et l’étiquette.",
+            "À quel point le produit mousse au versement.",
+            "Les unités par production, la fréquence et la première date d’expédition."
+          ]
+        }
+      ]
+    },
+    "lubricants": {
+      "eyebrow": "Secteurs : lubrifiants",
+      "h1": "Lubrifiants, des huiles légères à la graisse",
+      "lead": "Huiles à moteur et industrielles, fluides hydrauliques et de coupe, graisses : des produits vendus au litre ou au seau, qui ne se comportent en rien comme l’eau à la tête de remplissage.",
+      "sections": [
+        {
+          "h2": "Épais, lent et collant",
+          "body": [
+            "Une huile se remplit et s’égoutte plus lentement qu’un nettoyant. Une graisse, elle, ne coule presque pas : il faut la pousser. L’essentiel de ce que vend un mélangeur de lubrifiants se situe entre les deux, et cette place décide du montage.",
+            "La température a son mot à dire. Un litre d’huile chaude pèse moins qu’un litre d’huile froide, car l’huile prend du volume en chauffant. Quand le chiffre sur l’étiquette doit être juste, voilà un argument pour remplir au poids."
+          ]
+        },
+        {
+          "h2": "Propre entre deux produits",
+          "body": [
+            "Un lubrifiant laisse un film. Ce qui a roulé avant compte, et ce qui suit aussi. Dites-nous ce que votre produit ne doit pas croiser — une couleur, un additif, une huile de base — et on établira l’ordre et le nettoyage avec vous."
+          ]
+        },
+        {
+          "h2": "Les contenants des lubrifiants",
+          "body": [
+            "Bidons et bouteilles pour les formats de tablette, seaux pour les formats d’atelier et d’usine."
+          ],
+          "slot": "containers"
+        },
+        {
+          "h2": "Deux façons de prendre le travail",
+          "body": [
+            "Si le mélange est fait et que seul l’emballage retarde, envoyez le produit. Si la ligne est la vôtre et que le problème est le quart, on se déplace : c’est le [{ss}](/services/second-shift)."
+          ],
+          "slot": "services"
+        },
+        {
+          "h2": "Mélanger autant qu’emballer",
+          "body": [
+            "Si l’huile doit d’abord être mélangée, le [mélange à façon](/services/toll-blending) et le remplissage se font au même endroit."
+          ]
+        },
+        {
+          "h2": "Quoi envoyer pour une soumission",
+          "list": [
+            "La fiche de données de sécurité.",
+            "Le grade de viscosité, ou un échantillon.",
+            "Le contenant, sa fermeture, et s’il reçoit un bec.",
+            "Si le remplissage doit viser un poids ou un volume.",
+            "Les unités par production, la fréquence et la première date d’expédition."
+          ]
+        }
+      ]
+    },
+    "sealersAndCoatings": {
+      "eyebrow": "Secteurs : scellants et revêtements",
+      "h1": "Scellants, revêtements et colorants",
+      "lead": "Scellants à asphalte et à béton, peintures et revêtements protecteurs, teintes et colorants : des produits où le contenant, la couleur et le moment comptent autant que le remplissage.",
+      "sections": [
+        {
+          "h2": "Des produits qui n’attendent pas",
+          "body": [
+            "Un scellant ou un revêtement, c’est un produit avec une horloge dedans. Certains forment une peau au contact de l’air. D’autres décantent : le pigment descend et le haut de la cuve cesse de ressembler au fond. D’autres ont une durée de vie en pot qui part dès que deux parties se rencontrent.",
+            "L’horaire fait donc partie de la soumission : non pas seulement quelle production, mais quand le produit sera prêt, et combien de temps il restera celui que vous vouliez."
+          ]
+        },
+        {
+          "h2": "La couleur est une spécification, pas un goût",
+          "body": [
+            "Quand c’est la couleur que votre client achète, le remplissage doit la tenir du premier contenant au dernier, et la production suivante doit s’y accorder. Dites-nous comment votre couleur se spécifie et se vérifie — une norme, une plaquette, une lecture — et ça entre dans la vérification de la production."
+          ]
+        },
+        {
+          "h2": "Solvant ou eau, et la fiche qui le dit",
+          "body": [
+            "Solvant ou eau : voilà la première question, et la fiche de données de sécurité répond au reste. Elle décide de ce qui peut rouler, de la manutention et de l’entreposage; envoyez-la avant l’échantillon."
+          ]
+        },
+        {
+          "h2": "Contenants et trousses",
+          "body": [
+            "Les seaux, de plastique et de métal, portent l’essentiel du travail. Les trousses réunissent un scellant et son applicateur en un seul emballage."
+          ],
+          "slot": "containers"
+        },
+        {
+          "h2": "Deux façons de prendre le travail",
+          "body": [
+            "Une usine avec sa ligne et un quart vide peut nous le confier : c’est le [{ss}](/services/second-shift). Celle dont la ligne est pleine envoie le surplus ici."
+          ],
+          "slot": "services"
+        },
+        {
+          "h2": "Quoi envoyer pour une soumission",
+          "list": [
+            "La fiche de données de sécurité, et la base : solvant ou eau.",
+            "Comment la couleur se spécifie et se vérifie.",
+            "Si le produit forme une peau, décante ou a une durée de vie en pot.",
+            "Le seau ou la trousse, et le couvercle ou l’emballage extérieur.",
+            "Les unités par production, et la date d’expédition."
           ]
         }
       ]

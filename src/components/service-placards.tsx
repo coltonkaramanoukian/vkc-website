@@ -41,22 +41,27 @@ export async function SecondShiftPlacard({
 /**
  * The two services as two pallet labels. The Second Shift label is a D16
  * surface: it carries all four facts and is checked by the guard.
+ *
+ * `shared` marks the block as repeated site furniture, so the cut-rule word
+ * count (render-all's ownText) does not credit a page for it.
  */
 export async function ServicePlacards({
   locale,
   headingLevel = "h3",
   showNameNote = false,
+  shared = false,
 }: {
   locale: Locale;
   headingLevel?: "h2" | "h3";
   showNameNote?: boolean;
+  shared?: boolean;
 }) {
   const { t } = await getCopy(locale);
   const bn = services.bottleneck;
   const nameNote = bn.nameNote?.[locale];
 
   return (
-    <div className="grid gap-5 md:grid-cols-2">
+    <div className="grid gap-5 md:grid-cols-2" data-shared={shared ? "services" : undefined}>
       <SecondShiftPlacard locale={locale} headingLevel={headingLevel} />
       <Placard
         headingLevel={headingLevel}

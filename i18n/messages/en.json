@@ -129,6 +129,18 @@
     "kits": {
       "title": "Kitting and kit assembly for consumer products",
       "description": "Consumer kits assembled from your components at VKC Packaging: filled products, accessories and printed pieces packed as one unit. Get a quote."
+    },
+    "cleaners": {
+      "title": "Contract packaging for cleaners and degreasers",
+      "description": "Filling and toll blending for cleaners: degreasers, all-purpose, glass and floor cleaners, industrial soaps, in bottles, jugs and pails. Get a quote from VKC Packaging."
+    },
+    "lubricants": {
+      "title": "Contract packaging for lubricants, oils and greases",
+      "description": "Liquid filling and toll blending for lubricants: oils, hydraulic and cutting fluids, greases, in jugs and pails. Get a quote from VKC Packaging."
+    },
+    "sealersAndCoatings": {
+      "title": "Contract packaging for sealers, coatings and colourants",
+      "description": "Filling and toll blending for sealers, coatings and colourants, in plastic and metal pails or assembled into kits. Get a quote from VKC Packaging."
     }
   },
   "home": {
@@ -513,6 +525,157 @@
           "h2": "Kits and filling together",
           "body": [
             "When a kit holds a product that also has to be filled, both jobs can happen at our facility: the [bottle](/containers/bottles-and-jugs) is filled, then goes straight into the kit. One quote, one delivery date, one number to call."
+          ]
+        }
+      ]
+    },
+    "cleaners": {
+      "eyebrow": "Industries: cleaners",
+      "h1": "Cleaners, filled and blended to your formula",
+      "lead": "Degreasers, all-purpose cleaners, glass and floor cleaners, industrial soaps: water-based products that foam the moment they move, and that sell in bottles, jugs and pails.",
+      "sections": [
+        {
+          "h2": "Why cleaners are their own job",
+          "body": [
+            "A cleaner is mostly water carrying something that works, and that something is usually a surfactant. At a filling line it has one consequence above all others: it foams. Move it, drop it, splash it, and it throws a head of foam that hides the real level in the container.",
+            "So the fill slows down, or the container is weighed instead of read by eye, or both. None of that is a problem. It just has to be known before the first container goes under the head."
+          ]
+        },
+        {
+          "h2": "Concentrate or ready to use",
+          "body": [
+            "A concentrate and its ready-to-use version are two different jobs. The concentrate is a shorter run of a thicker, stronger product, often in a pail. The ready-to-use version is a longer run of mostly water, in a bottle with a trigger or a cap. Same formula on paper, different work on the floor.",
+            "Tell us which one you are quoting, or both, and how the volume splits between them."
+          ]
+        },
+        {
+          "h2": "Containers cleaners go in",
+          "body": [
+            "Bottles and jugs for what goes on a shelf; pails for concentrate and for what a plant buys for its own use."
+          ],
+          "slot": "containers"
+        },
+        {
+          "h2": "Two ways we can take the work",
+          "body": [
+            "If your own line is the constraint, [{ss}](/services/second-shift) runs it on a shift your plant doesn’t cover. If the line is full, the overflow comes to us instead."
+          ],
+          "slot": "services"
+        },
+        {
+          "h2": "Blending as well as packing",
+          "body": [
+            "If the batch has to be made as well as packed, [toll blending](/services/toll-blending) happens in the same building as the fill."
+          ]
+        },
+        {
+          "h2": "What to send for a quote",
+          "list": [
+            "The safety data sheet, so we know what we are handling.",
+            "Whether it is a concentrate or ready to use.",
+            "The container, the closure and the label.",
+            "How much it foams when it is poured.",
+            "Units per run, how often you run, and the first ship date."
+          ]
+        }
+      ]
+    },
+    "lubricants": {
+      "eyebrow": "Industries: lubricants",
+      "h1": "Lubricants, from light oils to grease",
+      "lead": "Motor and machine oils, hydraulic and cutting fluids, greases: products sold by the litre or by the pail, which behave nothing like water at a filling head.",
+      "sections": [
+        {
+          "h2": "Thick, slow and clinging",
+          "body": [
+            "An oil fills slower than a cleaner and drains slower off the nozzle. A grease barely flows at all; it has to be pushed. Most of what a lubricant blender sells sits somewhere between those two, and where a product sits decides how the fill is set up.",
+            "Temperature has a say too. A litre of warm oil weighs less than a litre of cold oil, because oil takes up more room as it warms. When the number on the label has to be exact, that is an argument for filling by weight."
+          ]
+        },
+        {
+          "h2": "Clean between products",
+          "body": [
+            "A lubricant leaves a film behind. What ran before yours matters, and so does what follows it. Tell us what your product must not meet — a colour, an additive, a base oil — and we will work out the order and the cleanup with you."
+          ]
+        },
+        {
+          "h2": "Containers lubricants go in",
+          "body": [
+            "Jugs and bottles for shelf sizes, pails for shop and plant sizes."
+          ],
+          "slot": "containers"
+        },
+        {
+          "h2": "Two ways we can take the work",
+          "body": [
+            "If the blending is done and only the packaging is behind, send us the product. If the line is yours and the shift is the problem, we come to you: that is [{ss}](/services/second-shift)."
+          ],
+          "slot": "services"
+        },
+        {
+          "h2": "Blending as well as packing",
+          "body": [
+            "If the oil has to be made first, [toll blending](/services/toll-blending) and the fill happen at the same facility."
+          ]
+        },
+        {
+          "h2": "What to send for a quote",
+          "list": [
+            "The safety data sheet.",
+            "The viscosity grade, or a sample.",
+            "The container and the closure, and whether it takes a spout.",
+            "Whether the fill has to hit a weight or a volume.",
+            "Units per run, how often you run, and the first ship date."
+          ]
+        }
+      ]
+    },
+    "sealersAndCoatings": {
+      "eyebrow": "Industries: sealers and coatings",
+      "h1": "Sealers, coatings and colourants",
+      "lead": "Asphalt and concrete sealers, paints and protective coatings, tints and colourants: products where the container, the colour and the timing matter as much as the fill itself.",
+      "sections": [
+        {
+          "h2": "Products that don’t wait",
+          "body": [
+            "A sealer or a coating is a product with a clock in it. Some form a skin where they meet air. Some settle, so the pigment sinks and the top of the tank stops matching the bottom. Some have a pot life that starts the moment two parts are brought together.",
+            "That makes the schedule part of the quote. The question is not only what the run is, but when the product will be ready, and how long it stays the product you intended."
+          ]
+        },
+        {
+          "h2": "Colour is a spec, not a preference",
+          "body": [
+            "When colour is what your customer buys, the fill has to hold it from the first container to the last, and the next run has to match this one. Tell us how your colour is specified and how it is checked — a standard, a chip, a reading — and that becomes part of how the run is checked."
+          ]
+        },
+        {
+          "h2": "Solvent or water, and the sheet that says so",
+          "body": [
+            "Solvent or water is the first question, and the safety data sheet answers most of the rest. It decides what can run, how the product is handled and how it is stored, so send it before the sample rather than after."
+          ]
+        },
+        {
+          "h2": "Containers and kits",
+          "body": [
+            "Pails, plastic and metal, take most of this work. Kits put a sealer together with its applicator in one package."
+          ],
+          "slot": "containers"
+        },
+        {
+          "h2": "Two ways we can take the work",
+          "body": [
+            "A plant with its own line and an empty shift can hand us the shift: [{ss}](/services/second-shift). A plant whose line is full sends the overflow here instead."
+          ],
+          "slot": "services"
+        },
+        {
+          "h2": "What to send for a quote",
+          "list": [
+            "The safety data sheet, and whether it is solvent- or water-based.",
+            "How the colour is specified and checked.",
+            "Whether it skins, settles, or has a pot life.",
+            "The pail or the kit, and the lid or the outer package.",
+            "Units per run, and the date the run has to ship."
           ]
         }
       ]

@@ -57,11 +57,18 @@ for (const url of urls) {
   const response = await page.goto(base + url.path, { waitUntil: "load" });
   const status = response?.status() ?? 0;
   const capture = await page.evaluate(() => {
+    // Element boundaries become spaces: textContent alone glues a label to the
+    // value beside it ("Directed by" + "Our lead hand...") and a word-boundary
+    // guard can then miss a term that is plainly on the page.
+    const serialize = (node: Node): string =>
+      node.nodeType === Node.TEXT_NODE
+        ? (node.textContent ?? "")
+        : Array.from(node.childNodes).map(serialize).join(" ");
     const clean = (root: Element | null, drop: string[] = []) => {
       if (!root) return "";
       const clone = root.cloneNode(true) as Element;
       clone.querySelectorAll(["script", "style", "template", ...drop].join(",")).forEach((n) => n.remove());
-      return (clone.textContent ?? "").replace(/\s+/g, " ").trim();
+      return serialize(clone).replace(/\s+/g, " ").trim();
     };
     const meta = (sel: string) => document.querySelector<HTMLMetaElement>(sel)?.content ?? "";
     const attrs = Array.from(document.body.querySelectorAll("[alt],[title],[aria-label],[placeholder]"))
