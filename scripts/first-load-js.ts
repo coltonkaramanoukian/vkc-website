@@ -16,15 +16,31 @@ const flag = (name: string, fallback: string) => {
 };
 const site = JSON.parse(readFileSync("content/site.json", "utf8")) as { baseUrl: string };
 const base = flag("--base", site.baseUrl).replace(/\/$/, "");
+/** The link here is a home connection, not a CI runner: retry transient resets. */
+async function fetchText(url: string, attempts = 4): Promise<string> {
+  for (let i = 1; i <= attempts; i += 1) {
+    try {
+      return await (await fetch(url)).text();
+    } catch (error) {
+      if (i === attempts) throw error;
+      await new Promise((r) => setTimeout(r, 1000 * i));
+    }
+  }
+  throw new Error("unreachable");
+}
+
 const ROUTES: AppPathname[] = ["/", "/visit", "/services/second-shift"];
 const kb = (bytes: number) => `${(bytes / 1024).toFixed(1)} kB`;
 
 console.log(`first load JS, measured from ${base} (gzip transfer size)`);
 const transfer = (url: string, encoding: string) =>
   Number(
-    execFileSync("curl", ["-s", "-H", `Accept-Encoding: ${encoding}`, "-o", "/dev/null", "-w", "%{size_download}", url], {
-      encoding: "utf8",
-    }),
+    execFileSync(
+      "curl",
+      ["-s", "--retry", "3", "--retry-all-errors", "--connect-timeout", "20", "--max-time", "120",
+       "-H", `Accept-Encoding: ${encoding}`, "-o", "/dev/null", "-w", "%{size_download}", url],
+      { encoding: "utf8" },
+    ),
   );
 console.log(
   "  page".padEnd(32) + "scripts".padStart(9) + "JS gzip".padStart(11) + "JS raw".padStart(11) +
@@ -33,7 +49,7 @@ console.log(
 for (const route of ROUTES) {
   for (const locale of locales) {
     const path = localizedPath(locale, route);
-    const html = await (await fetch(base + path)).text();
+    const html = await fetchText(base + path);
     const srcs = [...html.matchAll(/<script[^>]+src="([^"]+)"/g)].map((m) => m[1]);
     let gzip = 0;
     let raw = 0;
