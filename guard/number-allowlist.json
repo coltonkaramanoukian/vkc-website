@@ -1,0 +1,6 @@
+{
+  "_note": "NC-3. Digit-runs allowed in rendered text beyond those found in content/*.json. Every line is justified in docs/DESIGN-DECISIONS.md. Nothing else belongs here.",
+  "values": [
+    { "value": "2026", "why": "Copyright year in the footer. The footer prints the build year, so the first build of 2027 turns this guard red until this line is updated." }
+  ]
+}

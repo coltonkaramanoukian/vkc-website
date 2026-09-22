@@ -1,0 +1,20 @@
+{
+  "minimumRunSize": { "en": null, "fr": null },
+  "maximumRunSize": { "en": null, "fr": null },
+  "fillSizesOffered": { "en": null, "fr": null },
+  "viscosityRange": { "en": null, "fr": null },
+  "blendingBatchSizes": { "en": null, "fr": null },
+  "leadTime": { "en": null, "fr": null },
+  "equipment": {
+    "fillers": { "en": null, "fr": null },
+    "cappers": { "en": null, "fr": null },
+    "tijLidPrinters": { "en": null, "fr": null },
+    "scales": { "en": null, "fr": null }
+  },
+  "secondShift": {
+    "crewSize": { "en": null, "fr": null },
+    "shiftsOffered": { "en": null, "fr": null },
+    "minimumCommitment": { "en": null, "fr": null },
+    "insurance": { "en": null, "fr": null }
+  }
+}

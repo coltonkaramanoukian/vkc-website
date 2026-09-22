@@ -1,0 +1,18 @@
+{
+  "phone": null,
+  "email": null,
+  "address": {
+    "street": null,
+    "city": null,
+    "province": null,
+    "postalCode": null,
+    "country": null
+  },
+  "hours": { "en": null, "fr": null, "schema": null },
+  "serviceRadiusKm": null,
+  "privacyOfficer": {
+    "name": null,
+    "title": { "en": null, "fr": null },
+    "email": null
+  }
+}

@@ -1,26 +1,242 @@
 @import "tailwindcss";
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@import "../../brand/tokens.css";
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-floor: var(--vkc-floor);
+  --color-label: var(--vkc-label);
+  --color-ink: var(--vkc-ink);
+  --color-graphite: var(--vkc-graphite);
+  --color-hairline: var(--vkc-hairline);
+  --color-qc: var(--vkc-qc);
+  --color-on-qc: var(--vkc-on-qc);
+  --font-sans: var(--font-archivo), var(--vkc-font-sans);
+  --font-mono: var(--font-plex-mono), var(--vkc-font-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    background: var(--vkc-floor);
+    color: var(--vkc-ink);
+    font-family: var(--font-archivo), var(--vkc-font-sans);
+    font-stretch: var(--vkc-stretch-body);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    text-rendering: optimizeLegibility;
+  }
+
+  :where(h1, h2, h3) {
+    font-stretch: var(--vkc-stretch-display);
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+    overflow-wrap: break-word;
+    hyphens: manual;
+    text-wrap: balance;
+  }
+
+  h1 {
+    font-size: clamp(2rem, 1.35rem + 3.4vw, 3.5rem);
+    font-weight: 800;
+  }
+
+  h2 {
+    font-size: clamp(1.5rem, 1.2rem + 1.6vw, 2.25rem);
+    font-weight: 760;
+  }
+
+  h3 {
+    font-size: 1.1875rem;
+    font-weight: 700;
+    line-height: 1.25;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  a {
+    color: var(--vkc-qc);
+    text-decoration-line: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+  }
+
+  a:hover {
+    text-decoration-thickness: 2px;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--vkc-qc);
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background: var(--vkc-qc);
+    color: var(--vkc-on-qc);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  /* ---- Layout primitives ------------------------------------------------- */
+
+  .wrap {
+    width: 100%;
+    max-width: var(--vkc-page-max);
+    margin-inline: auto;
+    padding-inline: var(--vkc-gutter);
+  }
+
+  @media (min-width: 640px) {
+    .wrap {
+      padding-inline: 24px;
+    }
+  }
+
+  .prose-measure {
+    max-width: var(--vkc-measure);
+  }
+
+  .prose-measure > * + * {
+    margin-top: 1em;
+  }
+
+  /* The fill line: a hairline with a short heavy tick at the left, like the
+     fill-to-line mark moulded into a jug. Used as the section divider. */
+  .fill-rule {
+    height: 3px;
+    border: 0;
+    margin: 0;
+    background:
+      linear-gradient(var(--vkc-ink), var(--vkc-ink)) left center / 3rem 3px no-repeat,
+      linear-gradient(var(--vkc-hairline), var(--vkc-hairline)) center / 100% 1px no-repeat;
+  }
+
+  /* Field name, as printed on a pallet label. Sentence case, never all caps. */
+  .field-name {
+    font-family: var(--font-plex-mono), var(--vkc-font-mono);
+    font-weight: 500;
+    font-size: 0.8125rem;
+    line-height: 1.4;
+    letter-spacing: 0.01em;
+    color: var(--vkc-graphite);
+  }
+
+  /* The label: a bordered placard with a field grid. Square, no shadow. */
+  .placard {
+    background: var(--vkc-label);
+    border: var(--vkc-border) solid var(--vkc-ink);
+    border-radius: var(--vkc-radius);
+  }
+
+  .placard-row + .placard-row {
+    border-top: 1px solid var(--vkc-hairline);
+  }
+
+  /* Buttons: text only, no appended arrows. */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    padding: 0.75rem 1.25rem;
+    border-radius: var(--vkc-radius);
+    font-weight: 650;
+    font-stretch: 106%;
+    line-height: 1.2;
+    text-decoration: none;
+    border: var(--vkc-border) solid transparent;
+  }
+
+  .btn-primary {
+    background: var(--vkc-qc);
+    color: var(--vkc-on-qc);
+  }
+
+  .btn-primary:hover {
+    text-decoration: underline;
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--vkc-ink);
+    border-color: var(--vkc-ink);
+  }
+
+  /* Form fields */
+  .field-input {
+    width: 100%;
+    min-height: 48px;
+    padding: 0.625rem 0.75rem;
+    background: var(--vkc-label);
+    color: var(--vkc-ink);
+    border: var(--vkc-border) solid var(--vkc-graphite);
+    border-radius: var(--vkc-radius);
+    font: inherit;
+  }
+
+  .field-input:focus-visible {
+    border-color: var(--vkc-qc);
+  }
+
+  /* "Shift to cover" appears only when Second Shift is picked; CSS-only so it
+     works before hydration. */
+  .shift-field {
+    display: none;
+  }
+
+  form:has(input[name="service"][value="second-shift"]:checked) .shift-field {
+    display: block;
+  }
+
+  /* Honeypot: off-screen, not display:none (some bots skip hidden fields). */
+  .hp-field {
+    position: absolute;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
+  /* Preview-only placeholder for a missing photo. Never rendered in production. */
+  .vkc-photo-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 11rem;
+    padding: 1rem;
+    border: 2px dashed var(--vkc-graphite);
+    color: var(--vkc-graphite);
+    font-family: var(--font-plex-mono), var(--vkc-font-mono);
+    font-size: 0.875rem;
+    text-align: center;
+    background: repeating-linear-gradient(
+      -45deg,
+      transparent 0 12px,
+      color-mix(in srgb, var(--vkc-hairline) 35%, transparent) 12px 13px
+    );
+  }
+
+  .skip-link {
+    position: absolute;
+    left: 8px;
+    top: -100px;
+    z-index: 50;
+    padding: 0.5rem 0.75rem;
+    background: var(--vkc-label);
+    border: var(--vkc-border) solid var(--vkc-ink);
+  }
+
+  .skip-link:focus {
+    top: 8px;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }

@@ -1,0 +1,34 @@
+{
+  "secondShift": {
+    "name": {
+      "en": "Second Shift",
+      "fr": "Deuxième quart"
+    },
+    "where": {
+      "en": "At your plant",
+      "fr": "À votre usine"
+    },
+    "summary": {
+      "en": "We run your line on a shift your plant doesn’t cover. Our lead hand directs the shift, our crew does the work, and our QC sheets and production log document it. Priced per unit or per shift.",
+      "fr": "Nous faisons rouler votre ligne pendant un quart que votre usine ne couvre pas. Notre chef d’équipe dirige le quart, notre équipe fait le travail, et nos feuilles de contrôle qualité et notre registre de production le documentent. Facturé à l’unité ou au quart."
+    }
+  },
+  "bottleneck": {
+    "name": {
+      "en": "Bottleneck",
+      "fr": "Goulot"
+    },
+    "where": {
+      "en": "At our facility",
+      "fr": "Chez nous"
+    },
+    "summary": {
+      "en": "Send us the overflow your line can’t absorb. At our facility we fill, label, kit and pack it, and toll-blend to your formula.",
+      "fr": "Envoyez-nous le surplus que votre ligne n’arrive pas à absorber. Chez nous, on le remplit, on l’étiquette, on l’assemble en trousses et on l’emballe, et on fait le mélange à façon selon votre formule."
+    },
+    "nameNote": {
+      "en": "Why “Bottleneck”: we fill necked containers, and we take the pressure off the slowest step in your plant.",
+      "fr": "Pourquoi « Goulot » : on remplit des contenants à goulot, et on soulage l’étape qui ralentit votre usine."
+    }
+  }
+}

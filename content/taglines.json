@@ -1,0 +1,20 @@
+{
+  "default": "fillToTheLine",
+  "options": {
+    "fillToTheLine": {
+      "en": "Filled to the line. On yours or ours.",
+      "fr": "Rempli jusqu’à la ligne. Sur la vôtre ou la nôtre.",
+      "reading": "Fill line (fill-to-line, the floor's own term) and production line. 'Yours' is Second Shift at your plant; 'ours' is Bottleneck at our facility. Works identically in French: 'ligne' is both."
+    },
+    "bottleneckTrade": {
+      "en": "Got a bottleneck? Filling them is the job.",
+      "fr": "Un goulot? Le remplir, c’est notre métier.",
+      "reading": "Bottleneck/goulot as the neck of a bottle (we fill them) and as the constraint in your plant (we take it off your hands)."
+    },
+    "shiftEnds": {
+      "en": "Your line keeps running when your shift ends.",
+      "fr": "Votre ligne roule encore quand votre quart finit.",
+      "reading": "The Second Shift angle: the output continues after your own shift, run by VKC."
+    }
+  }
+}

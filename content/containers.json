@@ -1,0 +1,20 @@
+{
+  "fillMethods": [
+    { "id": "weigh-fill", "name": { "en": "Weigh-fill", "fr": "Remplissage pondéral" } },
+    { "id": "fill-to-line", "name": { "en": "Fill-to-line", "fr": "Remplissage au niveau" } }
+  ],
+  "families": [
+    { "id": "hdpe-bottle-500ml", "group": "bottles-and-jugs", "name": { "en": "500 mL HDPE bottle", "fr": "Bouteille PEHD 500 mL" } },
+    { "id": "hdpe-bottle-1l", "group": "bottles-and-jugs", "name": { "en": "1 L HDPE bottle", "fr": "Bouteille PEHD 1 L" } },
+    { "id": "d-jug-1-5g", "group": "bottles-and-jugs", "name": { "en": "1.5G D-jug", "fr": "Bidon D-jug 1,5G" } },
+    { "id": "d-jug-2g", "group": "bottles-and-jugs", "name": { "en": "2G D-jug", "fr": "Bidon D-jug 2G" } },
+    { "id": "plastic-pail-1g", "group": "pails", "name": { "en": "1G plastic pail", "fr": "Seau de plastique 1G" } },
+    { "id": "plastic-pail-3-5g", "group": "pails", "name": { "en": "3.5G plastic pail", "fr": "Seau de plastique 3,5G" } },
+    { "id": "plastic-pail-5g", "group": "pails", "name": { "en": "5G plastic pail", "fr": "Seau de plastique 5G" } },
+    { "id": "ropak-4-25g", "group": "pails", "name": { "en": "4.25G Ropak", "fr": "Ropak 4,25G" } },
+    { "id": "ropak-20l", "group": "pails", "name": { "en": "20 L Ropak", "fr": "Ropak 20 L" } },
+    { "id": "metal-pail-1g", "group": "pails", "name": { "en": "1G metal pail", "fr": "Seau de métal 1G" } },
+    { "id": "metal-pail-5g", "group": "pails", "name": { "en": "5G metal pail", "fr": "Seau de métal 5G" } },
+    { "id": "consumer-kit", "group": "kits", "name": { "en": "Consumer kits", "fr": "Trousses pour la vente au détail" } }
+  ]
+}

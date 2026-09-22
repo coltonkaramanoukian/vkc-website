@@ -1,0 +1,204 @@
+{
+  "common": {
+    "skip": "Skip to content",
+    "otherLocaleName": "Français",
+    "otherLocaleLabel": "Lire cette page en français",
+    "menu": "Menu",
+    "primaryNav": "Main",
+    "footerNav": "Site",
+    "home": "Home",
+    "nav": {
+      "secondShift": "{ss}",
+      "contractPackaging": "Contract packaging",
+      "tollBlending": "Toll blending",
+      "bottlesAndJugs": "Bottles and jugs",
+      "pails": "Pails",
+      "kits": "Kits",
+      "cleaners": "Cleaners",
+      "lubricants": "Lubricants",
+      "sealersCoatings": "Sealers and coatings",
+      "montreal": "Montreal",
+      "laval": "Laval",
+      "quebec": "Quebec",
+      "about": "About",
+      "quote": "Get a quote",
+      "privacy": "Privacy"
+    },
+    "groups": {
+      "services": "Services",
+      "containers": "Containers",
+      "industries": "Industries",
+      "regions": "Regions",
+      "company": "Company"
+    },
+    "cta": {
+      "quote": "Get a quote",
+      "call": "Call {phone}"
+    },
+    "contact": {
+      "phone": "Phone",
+      "email": "Email",
+      "address": "Address",
+      "hours": "Hours"
+    },
+    "fields": {
+      "buy": "What you buy",
+      "directedBy": "Directed by",
+      "doneBy": "Done by",
+      "documentedBy": "Documented by",
+      "billed": "Billed",
+      "fillPack": "Fill and pack",
+      "blending": "Blending",
+      "fillMethods": "Fill methods",
+      "containers": "Containers"
+    },
+    "specs": "On file",
+    "clientsHeading": "Who we work for",
+    "ctaBand": {
+      "heading": "Tell us what is backing up.",
+      "body": "A product, a container, a rough run size and a date are enough to start."
+    }
+  },
+  "services": {
+    "ss": {
+      "buy": "The output of a shift your plant doesn’t cover",
+      "directedBy": "Our lead hand directs the shift",
+      "doneBy": "Our crew does the work, on your line and your equipment",
+      "documentedBy": "Our QC sheets and production log document every shift",
+      "billed": "Priced per unit or per shift",
+      "more": "How {ss} works"
+    },
+    "bn": {
+      "buy": "The overflow your line can’t absorb, filled and packed",
+      "fillPack": "Fill, label, kit and pack",
+      "blending": "Toll blending to your formula",
+      "moreFill": "Contract packaging",
+      "moreBlend": "Toll blending"
+    }
+  },
+  "meta": {
+    "home": {
+      "title": "VKC Packaging — contract packaging and toll blending, greater Montreal",
+      "description": "Contract filling, packaging and toll blending for makers of cleaners, lubricants, sealers, coatings and colourants in greater Montreal. Get a quote from VKC Packaging."
+    },
+    "visit": {
+      "title": "Two ways VKC takes pressure off your plant",
+      "description": "The two services VKC Packaging offers, and a quick way to book a walkthrough of your line."
+    },
+    "quote": {
+      "title": "Get a quote",
+      "description": "Ask VKC Packaging for a quote on contract filling, packaging or toll blending. Tell us the product, the container and the run."
+    },
+    "notFound": {
+      "title": "Page not found"
+    }
+  },
+  "home": {
+    "eyebrow": "Contract packaging and toll blending, greater Montreal",
+    "sub": "VKC Packaging runs a shift on your line, or takes your overflow onto ours. Filling, packaging and toll blending for makers of cleaners, lubricants, sealers, coatings and colourants in greater Montreal.",
+    "servicesHeading": "Two services",
+    "servicesIntro": "One runs at your plant. The other runs at ours.",
+    "containersHeading": "Containers we have run",
+    "containersIntro": "These container families have already run through VKC. The list says what we know, not how many units we can run: that depends on the job.",
+    "industriesHeading": "Where we focus",
+    "industriesIntro": "Liquids and pastes that need to be filled cleanly and counted right: cleaners, lubricants, sealers, coatings and colourants.",
+    "stepsHeading": "How a first job starts",
+    "steps": [
+      {
+        "title": "We come and look",
+        "body": "You show us the product, the containers and, for {ss}, the line we would run."
+      },
+      {
+        "title": "You get a quote",
+        "body": "{ss} is priced per unit or per shift. {bn} work is quoted on the job you describe."
+      },
+      {
+        "title": "The work runs",
+        "body": "On a {ss}, our lead hand directs the shift and our crew does the work. With {bn}, your product runs at our facility."
+      }
+    ]
+  },
+  "visit": {
+    "heading": "Two ways VKC takes pressure off your plant",
+    "intro": "Here is the short version, and the fastest way to the next step.",
+    "ss": "At your plant: our lead hand directs a shift your plant doesn’t cover, our crew does the work, and our QC sheets and production log document it. Priced per unit or per shift.",
+    "bn": "At our facility: send the overflow your line can’t absorb. We fill, label, kit and pack it, and toll-blend to your formula.",
+    "ssLink": "More on {ss}",
+    "bnLink": "More on {bn}",
+    "formHeading": "Book a walkthrough",
+    "formIntro": "Leave a name and a way to reach you. We will set a time to walk through your plant."
+  },
+  "quote": {
+    "heading": "Get a quote",
+    "lead": "Tell us about the product and the job. The more we know up front, the more useful our first answer will be.",
+    "nextHeading": "What happens next",
+    "next": "Your request goes to VKC by email. We reply by phone or email, whichever you leave us, and if a walkthrough makes sense we set one up.",
+    "helpsHeading": "What helps us quote",
+    "helps": [
+      "What the product is, and roughly how thick it runs",
+      "The container and its size",
+      "How many units per run, and how often",
+      "When the first run needs to happen",
+      "For {ss}: the shift you want covered"
+    ],
+    "dataHeading": "What happens to this information",
+    "data": "The form sends what you type to VKC by email so we can answer you. This site keeps no database and no copy of your request. The privacy page has the details."
+  },
+  "form": {
+    "required": "required",
+    "company": "Company",
+    "name": "Your name",
+    "email": "Email",
+    "phone": "Phone",
+    "contact": "Phone or email",
+    "service": "What do you need?",
+    "serviceSs": "{ss} (at your plant)",
+    "serviceBn": "{bn} (at our facility)",
+    "serviceUnsure": "Not sure yet",
+    "ssHint": "Our lead hand directs the shift, our crew does the work, and our QC sheets and production log document it. Priced per unit or per shift.",
+    "bnHint": "Filling, packaging and toll blending at our facility.",
+    "shift": "Which shift should we cover?",
+    "shiftEvenings": "Evenings",
+    "shiftNights": "Nights",
+    "shiftWeekends": "Weekends",
+    "shiftUnsure": "Not sure",
+    "product": "Product type",
+    "productHint": "For example: degreaser, gear oil, acrylic sealer",
+    "viscosity": "Rough viscosity",
+    "viscosityWater": "Water-thin",
+    "viscosityPourable": "Pourable",
+    "viscosityThick": "Thick",
+    "viscosityPaste": "Paste",
+    "viscosityUnsure": "Not sure",
+    "container": "Container and size",
+    "containerChoose": "Choose one",
+    "containerOther": "Something else",
+    "containerUnsure": "Not sure",
+    "units": "Units per run",
+    "timeline": "Timeline",
+    "timelineHint": "When should the first run happen?",
+    "notes": "Notes",
+    "honeypot": "Leave this field empty",
+    "submitQuote": "Send request",
+    "submitVisit": "Book a walkthrough",
+    "sending": "Sending…",
+    "sent": "Thank you. Your request reached VKC and we will get back to you.",
+    "unconfigured": "Email is not set up on this site yet, so your request was not sent. Please call us.",
+    "unconfiguredPhone": "Email is not set up on this site yet, so your request was not sent. Please call us at {phone}.",
+    "error": "Something went wrong and your request was not sent. Please try again, or call us.",
+    "rateLimited": "Too many requests from this connection. Wait a minute, then try again.",
+    "invalid": "Check the fields marked below.",
+    "errRequired": "This field is required.",
+    "errEmail": "Enter a valid email address.",
+    "errContact": "Enter a phone number or an email address.",
+    "errChoice": "Choose one of the options.",
+    "errLength": "This is too long.",
+    "privacy": "What you send goes to VKC by email so we can answer you. This site keeps no copy.",
+    "privacyLink": "Privacy"
+  },
+  "notFound": {
+    "heading": "This page does not exist.",
+    "body": "The link may be old, or the address mistyped.",
+    "home": "Go to the home page"
+  }
+}

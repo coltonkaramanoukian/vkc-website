@@ -1,0 +1,25 @@
+{
+  "_note": "D16(a). Every surface that mentions Second Shift must contain, per fact, at least one phrase from EACH inner list (allOf of anyOf). Matched after normalization (lowercase, accents stripped, apostrophes unified, hyphens as spaces).",
+  "en": [
+    { "id": "lead-hand-directs", "fact": "VKC's lead hand directs the shift",
+      "allOf": [["our lead hand directs", "vkc's lead hand directs", "directed by our lead hand", "directed by vkc's lead hand"]] },
+    { "id": "crew-does-the-work", "fact": "VKC's crew does the work",
+      "allOf": [["our crew does the work", "vkc's crew does the work", "our crew runs", "vkc's crew runs", "run by our crew", "done by our crew"]] },
+    { "id": "qc-and-log-document", "fact": "VKC's QC sheets and production log document it",
+      "allOf": [["our qc sheets and production log", "our qc sheets and our production log", "vkc's qc sheets and production log"],
+                ["document", "documents", "documented"]] },
+    { "id": "priced-per-unit-or-shift", "fact": "Priced per unit or per shift",
+      "allOf": [["per unit or per shift"]] }
+  ],
+  "fr": [
+    { "id": "lead-hand-directs", "fact": "Le chef d'équipe de VKC dirige le quart",
+      "allOf": [["notre chef d'equipe dirige", "le chef d'equipe de vkc dirige", "dirige par notre chef d'equipe", "dirige par le chef d'equipe de vkc"]] },
+    { "id": "crew-does-the-work", "fact": "L'équipe de VKC fait le travail",
+      "allOf": [["notre equipe fait le travail", "l'equipe de vkc fait le travail", "notre equipe fait rouler", "fait par notre equipe", "realise par notre equipe"]] },
+    { "id": "qc-and-log-document", "fact": "Les feuilles de contrôle qualité et le registre de production de VKC le documentent",
+      "allOf": [["nos feuilles de controle qualite et notre registre de production", "les feuilles de controle qualite et le registre de production de vkc"],
+                ["documente", "documentent", "documentes", "documentee", "documentees"]] },
+    { "id": "priced-per-unit-or-shift", "fact": "Facturé à l'unité ou au quart",
+      "allOf": [["a l'unite ou au quart"]] }
+  ]
+}

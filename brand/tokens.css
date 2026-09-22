@@ -1,0 +1,49 @@
+/*
+ * VKC Packaging — brand tokens. Framework-agnostic: the site imports this file,
+ * and the video run reads it. Rationale for every value: brand/BRAND.md.
+ *
+ * Six named colours, taken from the floor:
+ *   floor     sealed-concrete grey the labels sit on (page ground)
+ *   label     thermal label stock (placards, fields)
+ *   ink       thermal-print black (text, label borders)
+ *   graphite  secondary print (field names, meta)
+ *   hairline  the rules printed inside a pallet label
+ *   qc        QC-sheet ballpoint blue (the one accent: links, primary action, focus)
+ */
+
+:root {
+  --vkc-floor: #edeff2;
+  --vkc-label: #ffffff;
+  --vkc-ink: #15171a;
+  --vkc-graphite: #525964;
+  --vkc-hairline: #c7ccd3;
+  --vkc-qc: #1f33a6;
+  --vkc-on-qc: #ffffff;
+
+  --vkc-font-sans: "Archivo", system-ui, sans-serif;
+  --vkc-font-mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  /* Archivo width axis (font-stretch). Display type runs semi-expanded. */
+  --vkc-stretch-display: 112.5%;
+  --vkc-stretch-body: 100%;
+
+  --vkc-border: 1.5px;
+  --vkc-radius: 2px;
+  --vkc-measure: 64ch;
+  --vkc-page-max: 72rem;
+  --vkc-gutter: 16px;
+
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --vkc-floor: #111316;
+    --vkc-label: #1a1d22;
+    --vkc-ink: #e8eaee;
+    --vkc-graphite: #a2a9b4;
+    --vkc-hairline: #343a43;
+    --vkc-qc: #9caeff;
+    --vkc-on-qc: #0e1330;
+  }
+}

@@ -1,0 +1,204 @@
+{
+  "common": {
+    "skip": "Aller au contenu",
+    "otherLocaleName": "English",
+    "otherLocaleLabel": "Read this page in English",
+    "menu": "Menu",
+    "primaryNav": "Principal",
+    "footerNav": "Plan du site",
+    "home": "Accueil",
+    "nav": {
+      "secondShift": "{ss}",
+      "contractPackaging": "Conditionnement à forfait",
+      "tollBlending": "Mélange à façon",
+      "bottlesAndJugs": "Bouteilles et bidons",
+      "pails": "Seaux",
+      "kits": "Trousses",
+      "cleaners": "Produits nettoyants",
+      "lubricants": "Lubrifiants",
+      "sealersCoatings": "Scellants et revêtements",
+      "montreal": "Montréal",
+      "laval": "Laval",
+      "quebec": "Québec",
+      "about": "À propos",
+      "quote": "Obtenir une soumission",
+      "privacy": "Confidentialité"
+    },
+    "groups": {
+      "services": "Nos services",
+      "containers": "Contenants",
+      "industries": "Secteurs",
+      "regions": "Régions",
+      "company": "L’entreprise"
+    },
+    "cta": {
+      "quote": "Obtenir une soumission",
+      "call": "Appeler au {phone}"
+    },
+    "contact": {
+      "phone": "Téléphone",
+      "email": "Courriel",
+      "address": "Adresse",
+      "hours": "Heures d’ouverture"
+    },
+    "fields": {
+      "buy": "Ce que vous achetez",
+      "directedBy": "Dirigé par",
+      "doneBy": "Réalisé par",
+      "documentedBy": "Documenté par",
+      "billed": "Facturation",
+      "fillPack": "Remplissage et emballage",
+      "blending": "Mélange",
+      "fillMethods": "Méthodes de remplissage",
+      "containers": "Contenants"
+    },
+    "specs": "Au dossier",
+    "clientsHeading": "Pour qui nous travaillons",
+    "ctaBand": {
+      "heading": "Dites-nous ce qui bloque.",
+      "body": "Un produit, un contenant, un volume approximatif et une date suffisent pour commencer."
+    }
+  },
+  "services": {
+    "ss": {
+      "buy": "La production d’un quart que votre usine ne couvre pas",
+      "directedBy": "Notre chef d’équipe dirige le quart",
+      "doneBy": "Notre équipe fait le travail, sur votre ligne et votre équipement",
+      "documentedBy": "Nos feuilles de contrôle qualité et notre registre de production documentent chaque quart",
+      "billed": "Facturé à l’unité ou au quart",
+      "more": "Comment fonctionne le {ss}"
+    },
+    "bn": {
+      "buy": "Le surplus que votre ligne n’absorbe pas, rempli et emballé",
+      "fillPack": "Remplir, étiqueter, assembler en trousses, emballer",
+      "blending": "Mélange à façon selon votre formule",
+      "moreFill": "Conditionnement à forfait",
+      "moreBlend": "Mélange à façon"
+    }
+  },
+  "meta": {
+    "home": {
+      "title": "VKC Packaging — conditionnement à forfait et mélange à façon, Grand Montréal",
+      "description": "Remplissage, conditionnement et mélange à façon pour les fabricants de nettoyants, lubrifiants, scellants, revêtements et colorants du Grand Montréal. Obtenez une soumission."
+    },
+    "visit": {
+      "title": "Deux façons d’alléger la charge de votre usine",
+      "description": "Les deux services de VKC Packaging, et une façon rapide de réserver une visite de votre ligne."
+    },
+    "quote": {
+      "title": "Obtenir une soumission",
+      "description": "Demandez à VKC Packaging une soumission pour du remplissage, du conditionnement ou du mélange à façon. Décrivez le produit, le contenant et le volume."
+    },
+    "notFound": {
+      "title": "Page introuvable"
+    }
+  },
+  "home": {
+    "eyebrow": "Conditionnement à forfait et mélange à façon, Grand Montréal",
+    "sub": "VKC Packaging fait rouler un quart sur votre ligne, ou prend votre surplus sur la sienne. Remplissage, conditionnement et mélange à façon pour les fabricants de nettoyants, lubrifiants, scellants, revêtements et colorants du Grand Montréal.",
+    "servicesHeading": "Deux services",
+    "servicesIntro": "L’un se passe dans votre usine. L’autre, chez nous.",
+    "containersHeading": "Les contenants qu’on connaît déjà",
+    "containersIntro": "Ces familles de contenants sont déjà passées chez VKC. La liste dit ce qu’on connaît, pas combien d’unités on peut produire : ça dépend du travail.",
+    "industriesHeading": "Là où on se concentre",
+    "industriesIntro": "Des liquides et des pâtes qui doivent être remplis proprement et comptés juste : nettoyants, lubrifiants, scellants, revêtements et colorants.",
+    "stepsHeading": "Comment démarre un premier mandat",
+    "steps": [
+      {
+        "title": "On vient voir",
+        "body": "Vous nous montrez le produit, les contenants et, pour le {ss}, la ligne qu’on ferait rouler."
+      },
+      {
+        "title": "Vous recevez une soumission",
+        "body": "Le {ss} est facturé à l’unité ou au quart. Le service {bn} est chiffré selon le travail que vous décrivez."
+      },
+      {
+        "title": "Le travail roule",
+        "body": "Pendant un {ss}, notre chef d’équipe dirige le quart et notre équipe fait le travail. Avec le service {bn}, votre produit passe chez nous."
+      }
+    ]
+  },
+  "visit": {
+    "heading": "Deux façons d’alléger la charge de votre usine",
+    "intro": "Voici la version courte, et le chemin le plus rapide vers la suite.",
+    "ss": "Dans votre usine : notre chef d’équipe dirige un quart que votre usine ne couvre pas, notre équipe fait le travail, et nos feuilles de contrôle qualité et notre registre de production le documentent. Facturé à l’unité ou au quart.",
+    "bn": "Chez nous : envoyez le surplus que votre ligne n’absorbe pas. On le remplit, on l’étiquette, on l’assemble en trousses et on l’emballe, et on fait le mélange à façon selon votre formule.",
+    "ssLink": "En savoir plus sur le {ss}",
+    "bnLink": "En savoir plus sur le service {bn}",
+    "formHeading": "Réserver une visite",
+    "formIntro": "Laissez un nom et un moyen de vous joindre. On fixera un moment pour faire le tour de votre usine."
+  },
+  "quote": {
+    "heading": "Obtenir une soumission",
+    "lead": "Parlez-nous du produit et du travail. Plus on en sait au départ, plus notre première réponse vous sera utile.",
+    "nextHeading": "La suite",
+    "next": "Votre demande est envoyée à VKC par courriel. On vous répond par téléphone ou par courriel, selon ce que vous nous laissez, et si une visite est utile, on la planifie.",
+    "helpsHeading": "Ce qui nous aide à chiffrer",
+    "helps": [
+      "Le produit, et sa consistance approximative",
+      "Le contenant et son format",
+      "Le nombre d’unités par production, et la fréquence",
+      "La date visée pour la première production",
+      "Pour le {ss} : le quart à couvrir"
+    ],
+    "dataHeading": "Ce qu’il advient de ces renseignements",
+    "data": "Le formulaire envoie à VKC par courriel ce que vous inscrivez, pour qu’on puisse vous répondre. Ce site n’a aucune base de données et ne garde aucune copie de votre demande. La page Confidentialité donne les détails."
+  },
+  "form": {
+    "required": "obligatoire",
+    "company": "Entreprise",
+    "name": "Votre nom",
+    "email": "Courriel",
+    "phone": "Téléphone",
+    "contact": "Téléphone ou courriel",
+    "service": "De quoi avez-vous besoin?",
+    "serviceSs": "{ss} (dans votre usine)",
+    "serviceBn": "{bn} (chez nous)",
+    "serviceUnsure": "Je ne sais pas encore",
+    "ssHint": "Notre chef d’équipe dirige le quart, notre équipe fait le travail, et nos feuilles de contrôle qualité et notre registre de production le documentent. Facturé à l’unité ou au quart.",
+    "bnHint": "Remplissage, conditionnement et mélange à façon chez nous.",
+    "shift": "Quel quart devrait-on couvrir?",
+    "shiftEvenings": "Soirs",
+    "shiftNights": "Nuits",
+    "shiftWeekends": "Fins de semaine",
+    "shiftUnsure": "Je ne sais pas",
+    "product": "Type de produit",
+    "productHint": "Par exemple : dégraissant, huile à engrenages, scellant acrylique",
+    "viscosity": "Viscosité approximative",
+    "viscosityWater": "Liquide comme l’eau",
+    "viscosityPourable": "Coulant",
+    "viscosityThick": "Épais",
+    "viscosityPaste": "Pâteux",
+    "viscosityUnsure": "Je ne sais pas",
+    "container": "Contenant et format",
+    "containerChoose": "Choisir",
+    "containerOther": "Autre chose",
+    "containerUnsure": "Je ne sais pas",
+    "units": "Unités par production",
+    "timeline": "Échéancier",
+    "timelineHint": "Quand la première production devrait-elle avoir lieu?",
+    "notes": "Remarques",
+    "honeypot": "Laissez ce champ vide",
+    "submitQuote": "Envoyer la demande",
+    "submitVisit": "Réserver une visite",
+    "sending": "Envoi…",
+    "sent": "Merci. Votre demande est bien arrivée chez VKC; on vous revient.",
+    "unconfigured": "Le courriel n’est pas encore configuré sur ce site : votre demande n’a pas été envoyée. Appelez-nous, s’il vous plaît.",
+    "unconfiguredPhone": "Le courriel n’est pas encore configuré sur ce site : votre demande n’a pas été envoyée. Appelez-nous au {phone}.",
+    "error": "Un problème est survenu et votre demande n’a pas été envoyée. Réessayez, ou appelez-nous.",
+    "rateLimited": "Trop de demandes depuis cette connexion. Attendez une minute, puis réessayez.",
+    "invalid": "Vérifiez les champs indiqués ci-dessous.",
+    "errRequired": "Ce champ est obligatoire.",
+    "errEmail": "Entrez une adresse courriel valide.",
+    "errContact": "Entrez un numéro de téléphone ou une adresse courriel.",
+    "errChoice": "Choisissez une des options.",
+    "errLength": "C’est trop long.",
+    "privacy": "Ce que vous envoyez est transmis à VKC par courriel pour qu’on puisse vous répondre. Ce site n’en garde aucune copie.",
+    "privacyLink": "Confidentialité"
+  },
+  "notFound": {
+    "heading": "Cette page n’existe pas.",
+    "body": "Le lien est peut-être ancien, ou l’adresse mal tapée.",
+    "home": "Aller à l’accueil"
+  }
+}

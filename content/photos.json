@@ -1,0 +1,12 @@
+[
+  { "id": "home-second-shift", "page": "/", "intent": "VKC's crew running a customer's line on a Second Shift (customer's written OK needed)", "src": null, "alt": { "en": null, "fr": null } },
+  { "id": "home-bottleneck", "page": "/", "intent": "Overflow product being filled at VKC's facility", "src": null, "alt": { "en": null, "fr": null } },
+  { "id": "second-shift-lead-hand", "page": "/services/second-shift", "intent": "VKC's lead hand at the line, QC sheet on a clipboard", "src": null, "alt": { "en": null, "fr": null } },
+  { "id": "second-shift-records", "page": "/services/second-shift", "intent": "A VKC QC sheet and production log page, customer details covered", "src": null, "alt": { "en": null, "fr": null } },
+  { "id": "contract-packaging-line", "page": "/services/contract-packaging", "intent": "Filling and labelling at VKC's facility", "src": null, "alt": { "en": null, "fr": null } },
+  { "id": "toll-blending-batch", "page": "/services/toll-blending", "intent": "A blend in progress at VKC's facility", "src": null, "alt": { "en": null, "fr": null } },
+  { "id": "bottles-and-jugs", "page": "/containers/bottles-and-jugs", "intent": "HDPE bottles and D-jugs VKC has filled, no customer labels visible", "src": null, "alt": { "en": null, "fr": null } },
+  { "id": "pails", "page": "/containers/pails", "intent": "Plastic pails, metal pails and Ropak containers VKC has filled, on a pallet", "src": null, "alt": { "en": null, "fr": null } },
+  { "id": "kits", "page": "/containers/kits", "intent": "A consumer kit VKC assembled, components laid out beside the finished box", "src": null, "alt": { "en": null, "fr": null } },
+  { "id": "about-floor", "page": "/about", "intent": "VKC's floor or crew, no customer product visible without permission", "src": null, "alt": { "en": null, "fr": null } }
+]

@@ -6,7 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "test": "node --test \"guard/*.test.ts\" \"src/lib/**/*.test.ts\"",
+    "brand:sync": "node scripts/sync-wordmark.ts",
+    "qr": "node scripts/qr.ts"
   },
   "dependencies": {
     "@vercel/analytics": "2.0.1",
