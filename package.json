@@ -16,7 +16,8 @@
     "guard:numbers": "node scripts/guard-numbers.ts",
     "guard:fr": "node scripts/guard-fr.ts",
     "check:locale-switch": "node scripts/locale-switch.ts",
-    "census": "node scripts/census.ts"
+    "census": "node scripts/census.ts",
+    "check:hreflang": "node scripts/hreflang.ts"
   },
   "dependencies": {
     "@vercel/analytics": "2.0.1",
