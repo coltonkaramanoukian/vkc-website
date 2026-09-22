@@ -1,0 +1,7 @@
+{
+  "_note": "D15. FR message values allowed to equal their EN counterpart (after {ss}/{bn} resolve to the per-locale service names). Brand names, SKUs, URLs, container codes and proper nouns only; each line says why.",
+  "keys": [
+    { "key": "common.menu", "why": "\"Menu\" is the same word in French and English; a site-chrome label, not copy." },
+    { "key": "common.nav.laval", "why": "Proper noun: the city of Laval." }
+  ]
+}

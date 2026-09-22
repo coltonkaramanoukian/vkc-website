@@ -10,7 +10,13 @@
     "typecheck": "tsc --noEmit",
     "test": "node --test \"guard/*.test.ts\" \"src/lib/**/*.test.ts\"",
     "brand:sync": "node scripts/sync-wordmark.ts",
-    "qr": "node scripts/qr.ts"
+    "qr": "node scripts/qr.ts",
+    "render": "node scripts/render-all.ts",
+    "guard:staffing": "node scripts/guard-staffing.ts",
+    "guard:numbers": "node scripts/guard-numbers.ts",
+    "guard:fr": "node scripts/guard-fr.ts",
+    "check:locale-switch": "node scripts/locale-switch.ts",
+    "census": "node scripts/census.ts"
   },
   "dependencies": {
     "@vercel/analytics": "2.0.1",

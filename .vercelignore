@@ -1,0 +1,6 @@
+# run artifacts and local state never ship
+/artifacts
+/.render
+/.next
+/node_modules
+.env*
