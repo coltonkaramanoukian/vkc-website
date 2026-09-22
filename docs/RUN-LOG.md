@@ -8,6 +8,7 @@ Resume from the last checkpoint; every phase is idempotent.
 | Phase | Status |
 |---|---|
 | 0 | Scaffolded, constitution written, identity gate passed, pushed to coltonkaramanoukian/vkc-website (private). |
+| 1 | Brand, i18n spine, home/visit/quote, /v, QR, form. Preview: https://vkc-website-jaim15abr-coltonkaramanoukian-8035s-projects.vercel.app. NC-1, NC-5, NC-6, NC-8 red→green. Content birth commit ba5a12f. |
 
 ## Ground-truth corrections (premise checked 2026-09-22)
 
@@ -17,6 +18,16 @@ Resume from the last checkpoint; every phase is idempotent.
   Left untouched; the project was built at the brief's path, `~/Desktop/vkc-website`.
 - Otherwise the premise held: no `vkc-website` repo on GitHub, no Vercel
   project, zero domains under the Vercel scope.
+- **`vkc-website.vercel.app` belongs to someone else**: it serves "Victory
+  Kingdom Church SA" (Kuils River, Cape Town). Vercel assigned this project
+  `vkc-website-zeta.vercel.app`. `content/site.json` baseUrl corrected and the
+  QR regenerated in Phase 1 (the brief's Phase 5 correction, done early).
+- `vercel link --yes` connected the GitHub repo automatically, and Vercel
+  assigned the project's FIRST `vercel deploy` (no `--prod`) to production.
+  Production therefore served the Phase 1 build from Phase 1 onward.
+- The team's default Deployment Protection is `all_except_custom_domains`.
+  Previews are behind Vercel Authentication; the assigned production domain
+  answered 200 publicly (checked with curl, no credentials).
 
 ## Environment facts
 
@@ -40,3 +51,23 @@ Resume from the last checkpoint; every phase is idempotent.
    dependency to the exact lockfile version.
 4. The session environment asked for multi-agent workflows ("ultracode"); the
    brief says NO SUBAGENTS. The brief wins: everything runs in the orchestrator.
+5. Next.js 16 removed "First Load JS" from `next build` output (its upgrade
+   guide says the numbers were inaccurate under RSC). Measured instead by
+   summing the JS each page's HTML loads (`scripts/first-load-js.ts`).
+6. Turbopack picked up `~/package-lock.json` as a workspace-root candidate;
+   pinned `turbopack.root` to the repo.
+7. Tailwind v4 cascade: unlayered custom CSS (`.btn { display:inline-flex }`)
+   beat layered utilities (`hidden`), so the header CTA showed on phones.
+   Moved custom CSS into `@layer base` / `@layer components`.
+8. `vercel.json` sets `git.deploymentEnabled.main = false`, so a push to main
+   never deploys production; production ships only via `vercel --prod`.
+9. Previews are protected. `vercel curl` generated a Protection Bypass for
+   Automation secret; scripts send it as the `x-vercel-protection-bypass`
+   header. The value is kept in the session scratchpad, never printed or
+   committed.
+10. Previews carry `x-robots-tag: noindex`, which Lighthouse scores as an SEO
+    failure, so D12 is measured on production (and on local builds while
+    iterating).
+11. macOS bash 3.2 treats an empty array as unbound under `set -u` (NC-8
+    script); switched to `${H[@]+...}` expansion.
+12. ESLint `no-html-link-for-pages` in the global 404; switched to next/link.
