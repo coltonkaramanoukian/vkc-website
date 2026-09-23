@@ -133,12 +133,23 @@ appears: `grep -c -E '/visit|/visite'` → `0`. `robots.txt` → `Allow: /`,
 `Disallow: /api/`, sitemap listed.
 
 **10. Deploy proof.**
+Re-run after every production deploy in this run, including the one that
+shipped this report. The last deploy and `git rev-parse HEAD` matched, and:
+
 ```
-githubCommitSha: 4b464fb47764e0da65e7122289a0f4fdb6374628
-HEAD:            4b464fb47764e0da65e7122289a0f4fdb6374628
+vercel api /v13/deployments/<dpl>  →  state READY, target production,
+                                      githubCommitSha == git rev-parse HEAD,
+                                      aliased to vkc-website-zeta.vercel.app
 200 /fr   200 /en   307 /v → 200 /fr/visite   (fetched from outside)
 30 pages compared, 16 fields each
 GREEN — production serves the same content as a local build of this SHA
+```
+
+To check it yourself at any time:
+
+```bash
+cd "$HOME/Desktop/vkc-website"
+npm run build && npm run proof:parity
 ```
 The byte diff in §6(b) is not achievable and was replaced; see DEGRADED and
 `docs/DESIGN-DECISIONS.md` §9.
