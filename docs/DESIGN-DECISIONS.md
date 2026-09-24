@@ -196,6 +196,19 @@ silently widening the rule.
   two-page comparison and prints exactly what still differs.
 - **Lighthouse runs on production, not on a preview.** Previews carry
   `x-robots-tag: noindex`, which Lighthouse scores as an SEO failure.
+- **`/visit` is excluded from the overlap gate, not from the measurement.** It
+  exists to restate the whole site in thirty seconds (D17), and D16 requires the
+  four Second Shift facts as fixed phrases wherever the service is named — so
+  its pairs run 10–19% reused phrases by design. They are printed with the
+  reason; the gate covers the pages that are supposed to be distinct (worst
+  pair 9.5%).
+- **A guard now covers the §6 DON'T words.** NC-3 covers invented numbers and
+  the staffing guard covers the D16 wording, but nothing watched for
+  certifications, tenure, square footage, headcount, client counts,
+  superlatives, or "licensed / compliant / approved". `npm run guard:claims`
+  does, in both languages, and NC-9 proves it fails. It found the word
+  "fastest" sitting on `/visit` — shipped, live, with five other guards green.
+  A guard nobody wrote is not a standard, it is a hope.
 - **The render capture separates element boundaries with a space.** `textContent`
   glued a placard label to its value ("Directed by" + "Our lead hand…" →
   "byour"), which could hide a required fact — or a staffing term — from a

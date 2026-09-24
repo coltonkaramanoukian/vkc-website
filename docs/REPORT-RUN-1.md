@@ -275,6 +275,22 @@ pointed at it):
 ```
 15 pairs, not 17: Laval and Quebec were cut.
 
+**NC-9 forbidden claims** — added after the first pass of this report, because
+a re-read found a banned word live on the site that every existing guard had
+passed. Certifications, tenure, square footage, headcount, client counts,
+superlatives, and §4's licensed/compliant/approved, in both languages:
+```
+clean:  GREEN (1 negated mention allowed: /fr/a-propos "aucune certification…")
+inject: RED — 3 failures
+  ✖ en /en/about: "iso 9001" (certification) …we are iso 9001 certified…
+  ✖ en /en/about: "certified" (certification claim)
+  ✖ fr /fr/a-propos: "chef de file" (superlatif) …le chef de file du conditionnement…
+revert: GREEN
+```
+It is negation-aware on purpose: `/about` says "no certifications, no
+production figures" in both languages, and a denial is not a claim — each one
+is printed rather than silently dropped.
+
 **NC-8 door route and QR** (run against production):
 ```
 Accept-Language: en    → 307 /en/visit
@@ -284,6 +300,24 @@ zbarimg --raw: https://vkc-website-zeta.vercel.app/v   GREEN: match
 regenerated for https://example.com/wrong → zbarimg: https://example.com/wrong   RED: mismatch (as intended)
 npm run qr → zbarimg: https://vkc-website-zeta.vercel.app/v   GREEN: match
 ```
+
+## 5b. What a late re-read found
+
+After the evidence above was gathered, the copy was read once more for claims
+that are IMPLIED rather than stated — the category no word list catches. Three
+lines failed:
+
+- `/visit` (EN): "the **fastest** way to the next step". `Fastest` is on the §6
+  banned list. Five guards were green and it had been live all phase. The FR
+  had said "le plus court" from the start, so only the EN drifted.
+- `/locations/montreal` (EN + FR): "a supplier at the other end of the province
+  … **can't bring a pallet back the same afternoon**" — which asserts by
+  contrast that VKC can — and "we can **walk a line in greater Montreal and be
+  back the same day**". Nothing supplied says anything about VKC's travel or
+  delivery times. Both now argue proximity without promising a schedule.
+
+Fixed, and `guard:claims` (NC-9) now watches that whole class. The lesson is
+the brief's own: a guard nobody wrote is not a standard.
 
 ## 6. Design decisions
 

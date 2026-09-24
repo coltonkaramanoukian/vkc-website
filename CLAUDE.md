@@ -34,6 +34,13 @@ Every fact on the site is either supplied by Colton or visibly absent.
   come from `content/*.json` or `guard/number-allowlist.json` (each line
   justified in `docs/DESIGN-DECISIONS.md`). Red on a clean tree = a number was
   invented = stop.
+- Guard: `npm run guard:claims` (NC-9). The claims above that no content field
+  could ever make true — certifications, tenure, square footage, headcount,
+  client counts, superlatives, and §4's licensed/compliant/approved — in both
+  languages, from `guard/forbidden-claims.json`. It is negation-aware: `/about`
+  says "no certifications, no production figures", and a denial is not a claim.
+  It exists because run 1 shipped "fastest" on `/visit` with every other guard
+  green.
 
 ## §2 CONTENT LIVES IN /content
 

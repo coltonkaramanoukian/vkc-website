@@ -94,6 +94,12 @@ Resume from the last checkpoint; every phase is idempotent.
 17. `first-load-js.ts` measured uncompressed bytes, because `fetch()`
     decompresses transparently; switched to curl with `Accept-Encoding: gzip`
     (176 kB gzip, not 567 kB).
+18b. A re-read for IMPLIED claims (after the report was written) found three
+    lines no guard watched: "the fastest way to the next step" on /visit — a
+    §6 banned superlative — and two lines on /locations/montreal that promised
+    logistics outcomes by implication ("can't bring a pallet back the same
+    afternoon", "we can walk a line and be back the same day"). Copy fixed, and
+    `guard:claims` + NC-9 added so the class cannot return.
 18. The pre-mortem-2 overlap test had no location pairs left after the cut, so
     it was pointed at the container and industry pages and split into shared
     vocabulary vs reused 5-word phrases. It then found three list lines that
