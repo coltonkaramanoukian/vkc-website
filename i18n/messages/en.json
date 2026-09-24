@@ -187,7 +187,7 @@
   },
   "visit": {
     "heading": "Two ways VKC takes pressure off your plant",
-    "intro": "Here is the short version of what we do, and the fastest way to the next step.",
+    "intro": "Here is the short version of what we do, and the shortest way to the next step.",
     "ss": "At your plant: our lead hand directs a shift your plant doesn’t cover, our crew does the work, and our QC sheets and production log document it. Priced per unit or per shift.",
     "bn": "At our facility: send the overflow your line can’t absorb. We fill, label, kit and pack it, and toll-blend to your formula, all under one roof.",
     "ssLink": "More on {ss}",
@@ -713,8 +713,8 @@
         {
           "h2": "Why the distance matters",
           "body": [
-            "Overflow work is urgent by definition: it exists because an order is already waiting. Every hour the product spends on a truck is an hour of that order. A supplier at the other end of the province can quote the same run, but it can’t bring a pallet back the same afternoon.",
-            "It works the same way in the other direction. We can walk a line in greater Montreal and be back the same day, which is what makes a walkthrough easy to arrange before anything is committed to."
+            "Overflow work is urgent by definition: it exists because an order is already waiting. Every hour the product spends on a truck is an hour of that order, and a supplier at the other end of the province spends more of them on the road than one in the same region does.",
+            "It works the same way in the other direction. Arranging a walkthrough of your line is a question of the calendar rather than of the distance, which is why we would rather look at the job than quote it blind."
           ]
         },
         {

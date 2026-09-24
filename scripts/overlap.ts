@@ -57,8 +57,16 @@ const shingles = (s: string, n = 5) => {
   return out;
 };
 
+// /visit exists to restate the whole site in thirty seconds (D17: what a
+// prospect opens after a knock), and D16 requires the four Second Shift facts
+// as FIXED phrases on every surface that names the service. Both make its
+// overlap with other pages high on purpose. Its pairs are measured and
+// printed, and excluded from the gate — with the reason said out loud.
+const RESTATES = new Set(["/visit"]);
+
 let worst = 0;
 let worstShingle = 0;
+let exempted = 0;
 for (const locale of ["fr", "en"] as const) {
   const pages = captures.filter((c) => c.locale === locale).sort((a, b) => a.route.localeCompare(b.route));
   console.log(`\n${locale.toUpperCase()} — unique-word overlap of ${copyMode ? "COPY (message strings)" : "rendered own text"}, |A∩B| / min(|A|,|B|)`);
@@ -72,13 +80,18 @@ for (const locale of ["fr", "en"] as const) {
       const sb = shingles(pages[j].ownText);
       const sharedPhrases = [...sa].filter((x) => sb.has(x));
       const spct = (sharedPhrases.length / Math.max(1, Math.min(sa.size, sb.size))) * 100;
-      worst = Math.max(worst, pct);
-      worstShingle = Math.max(worstShingle, spct);
+      const exempt = RESTATES.has(pages[i].route) || RESTATES.has(pages[j].route);
+      if (exempt) exempted += 1;
+      else {
+        worst = Math.max(worst, pct);
+        worstShingle = Math.max(worstShingle, spct);
+      }
       console.log(
         `  ${pages[i].route.padEnd(34)} vs ${pages[j].route.padEnd(34)} words ${pct.toFixed(1).padStart(5)}%` +
-          `  phrases ${spct.toFixed(1).padStart(5)}%${spct > 10 ? "  ✖ reused sentences" : ""}`,
+          `  phrases ${spct.toFixed(1).padStart(5)}%` +
+          (exempt ? "  (restates by design — not gated)" : spct > 10 ? "  ✖ reused sentences" : ""),
       );
-      if (spct > 10 && sharedPhrases.length > 0) {
+      if (!exempt && spct > 10 && sharedPhrases.length > 0) {
         console.log(`      e.g. "${sharedPhrases[0]}"`);
       }
     }
@@ -87,5 +100,11 @@ for (const locale of ["fr", "en"] as const) {
 console.log(
   `\nworst pair: ${worst.toFixed(1)}% shared vocabulary, ${worstShingle.toFixed(1)}% shared 5-word phrases`,
 );
-console.log("gate: reused sentences (5-word phrases) ≤ 10%. Shared trade vocabulary is not duplication.");
+console.log(
+  `gate: reused sentences (5-word phrases) ≤ 10%, over ${(routes.length || 0) === 0 ? "every route" : "the routes given"}. ` +
+    `Shared trade vocabulary is not duplication.`,
+);
+if (exempted > 0) {
+  console.log(`${exempted} pair(s) excluded from the gate: ${[...RESTATES].join(", ")} restate the site by design.`);
+}
 if (worstShingle > 10) process.exit(1);
