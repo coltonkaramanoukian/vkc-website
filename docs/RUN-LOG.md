@@ -138,7 +138,8 @@ convert. Never wait on Colton; log what needs him in `NEEDS-COLTON.md`.
 | #3 | cd3cf67 | Inner pages: hub pages `/services`, `/containers`, `/industries` (18 routes, 36 URLs, sitemap 34), breadcrumbs with BreadcrumbList JSON-LD, jump strip, related cards, Second Shift shift bar, Service JSON-LD on the service pages. |
 | #4 | 1672fed | Quote and visit: form in three groups, choice cards with pictograms, success placard, focus to the first invalid field; sticky aside on `/quote`; visit page placards. NC-5 selectors untouched, 5/5. |
 | #5 | 0caa045 | Per-page Open Graph cards (`/og/{locale}/{key}`, prerendered), Archivo pinned to the used axis ranges (90.1 → 57.9 kB), security headers, primary nav from `xl`. |
-| docs | this | `NEEDS-COLTON.md`, README, DESIGN-DECISIONS §10, BRAND motion rule, `npm run overlap` gates on copy. |
+| #6 | f0d2e8f | `NEEDS-COLTON.md`, README, DESIGN-DECISIONS §10, BRAND motion rule, `npm run overlap` gates on copy. |
+| #7 | 84dc1bc | Home hero at xl: title column 8/12, display capped at 3.75rem (EN two lines, FR three, was four). |
 
 ## Proof, each PR
 
@@ -178,8 +179,9 @@ localhost only). `check:hreflang --base local` 36/36. NC-5 5/5 after #4 and #5.
 
 ## Not done, on purpose
 
-- No production deploy. `main` is five PRs ahead of production; the command
-  and the proof steps are in `NEEDS-COLTON.md` item 1.
+- No production deploy. `main` is seven PRs ahead of production; the command
+  and the proof steps are in `NEEDS-COLTON.md` item 1. A preview deploy of
+  f0d2e8f built Ready on Vercel (79 static pages, 36 of them OG cards).
 - No value written into `contact`, `capabilities`, `clients`, `photos` or
   `media` (§2). Every null is still null.
 - No `lastModified` in the sitemap: there is no honest per-page date to render

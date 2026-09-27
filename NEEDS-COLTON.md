@@ -6,7 +6,7 @@ Each item says what is missing, where it goes, and what appears once it is done.
 
 ## 1. Ship run 2 to production
 
-`main` is five pull requests past the production build. Production only
+`main` is seven pull requests (#1–#7) past the production build. Production only
 deploys through `vercel --prod` (`vercel.json` disables auto-deploy of `main`),
 and pushing a public site is your call, not an agent's.
 
