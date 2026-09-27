@@ -36,7 +36,7 @@ export async function SiteFooter({ locale, route }: { locale: Locale; route: App
           >
             <Wordmark className="h-5 w-auto" />
           </Link>
-          <p className="mt-4 text-[1.125rem] font-bold leading-snug [font-stretch:112.5%]">{tagline(locale)}</p>
+          <p className="mt-4 max-w-[16ch] text-[1.375rem] font-extrabold leading-tight tracking-[-0.01em] [font-stretch:112.5%]">{tagline(locale)}</p>
           <p className="field-name mt-3">{site.legalName}</p>
           {contactRows.length > 0 && (
             <dl className="mt-5 space-y-2 text-[0.9375rem]">

@@ -111,7 +111,7 @@
   },
   "meta": {
     "home": {
-      "title": "VKC Packaging — conditionnement à forfait et mélange à façon, Grand Montréal",
+      "title": "VKC Packaging : conditionnement à forfait et mélange à façon, Grand Montréal",
       "description": "Remplissage, conditionnement et mélange à façon pour fabricants de nettoyants, lubrifiants, scellants, revêtements et colorants du Grand Montréal."
     },
     "visit": {
@@ -126,11 +126,11 @@
       "title": "Page introuvable"
     },
     "secondShift": {
-      "title": "Deuxième quart : un quart de production dans votre usine",
+      "title": "Deuxième quart de production dans votre usine",
       "description": "Un deuxième quart de production dans votre usine. Notre chef d’équipe dirige le quart, notre équipe fait le travail, et nos feuilles CQ et notre registre de production le documentent. Facturé à l’unité ou au quart."
     },
     "contractPackaging": {
-      "title": "Conditionnement à forfait et remplissage, Grand Montréal",
+      "title": "Conditionnement à forfait, remplissage, Grand Montréal",
       "description": "Sous-traitance d’emballage pour liquides et pâtes. Envoyez-nous le surplus que votre ligne n’absorbe pas : on le remplit, l’étiquette, l’assemble en trousses et l’emballe."
     },
     "tollBlending": {
@@ -154,15 +154,15 @@
       "description": "Remplissage et mélange à façon de nettoyants : dégraissants, tout usage, vitres et planchers, savons industriels, en bouteilles, bidons et seaux. Soumission chez VKC Packaging."
     },
     "lubricants": {
-      "title": "Conditionnement à forfait de lubrifiants, huiles et graisses",
+      "title": "Conditionnement de lubrifiants, huiles et graisses",
       "description": "Remplissage de liquides et mélange à façon de lubrifiants : huiles, fluides hydrauliques et de coupe, graisses, en bidons et en seaux. Soumission chez VKC Packaging."
     },
     "sealersAndCoatings": {
-      "title": "Conditionnement à forfait de scellants, revêtements et colorants",
+      "title": "Conditionnement de scellants, revêtements et colorants",
       "description": "Remplissage et mélange à façon de scellants, revêtements et colorants, en seaux de plastique et de métal ou assemblés en trousses. Soumission chez VKC Packaging."
     },
     "montreal": {
-      "title": "Remplissage et conditionnement, usines du Grand Montréal",
+      "title": "Remplissage et conditionnement, Grand Montréal",
       "description": "VKC Packaging remplit, emballe, assemble et mélange à façon pour les usines du Grand Montréal. Envoyez le surplus que votre ligne n’absorbe pas, ou demandez une visite."
     },
     "about": {
@@ -174,7 +174,7 @@
       "description": "Ce que ce site recueille, où ça va, et ce qu’il ne fait pas : aucun traceur, aucun témoin publicitaire, aucune liste d’envoi."
     },
     "services": {
-      "title": "Services : un quart chez vous, ou votre surplus chez nous",
+      "title": "Un quart chez vous, ou votre surplus chez nous",
       "description": "Deux façons d’ajouter de la production à une usine du Grand Montréal : un quart de production sur votre ligne, ou le conditionnement à forfait et le mélange à façon chez VKC."
     },
     "containers": {
@@ -182,7 +182,7 @@
       "description": "Les familles de contenants passées chez VKC Packaging, comment chacune se remplit, au poids ou au niveau, et quoi envoyer pour une soumission."
     },
     "industries": {
-      "title": "Secteurs : nettoyants, lubrifiants, scellants et revêtements",
+      "title": "Nettoyants, lubrifiants, scellants et revêtements",
       "description": "Remplissage à forfait et mélange à façon pour nettoyants, lubrifiants, scellants, revêtements et colorants, et ce qui change à la ligne pour chacun."
     },
     "contact": {
@@ -820,7 +820,7 @@
         {
           "h2": "Propre entre deux produits",
           "body": [
-            "Un lubrifiant laisse un film. Ce qui a roulé avant compte, et ce qui suit aussi. Dites-nous ce que votre produit ne doit pas croiser — une couleur, un additif, une huile de base — et on établira l’ordre et le nettoyage avec vous."
+            "Un lubrifiant laisse un film. Ce qui a roulé avant compte, et ce qui suit aussi. Dites-nous ce que votre produit ne doit pas croiser (une couleur, un additif, une huile de base) et on établira l’ordre et le nettoyage avec vous."
           ]
         },
         {
@@ -870,7 +870,7 @@
         {
           "h2": "La couleur est une spécification, pas un goût",
           "body": [
-            "Quand c’est la couleur que votre client achète, le remplissage doit la tenir du premier contenant au dernier, et la production suivante doit s’y accorder. Dites-nous comment votre couleur se spécifie et se vérifie — une norme, une plaquette, une lecture — et ça entre dans la vérification de la production."
+            "Quand c’est la couleur que votre client achète, le remplissage doit la tenir du premier contenant au dernier, et la production suivante doit s’y accorder. Dites-nous comment votre couleur se spécifie et se vérifie (une norme, une plaquette, une lecture) et ça entre dans la vérification de la production."
           ]
         },
         {
@@ -953,7 +953,7 @@
           "h2": "Ce qu’on fait",
           "body": [
             "Deux choses, et c’est le même métier vu de deux côtés. Le [{ss}](/services/second-shift) est un quart de production qu’on fait rouler chez vous, sur votre ligne, pendant un quart que votre usine ne couvre pas. Le [{bn}](/services/contract-packaging), c’est le surplus que votre ligne n’absorbe pas : rempli, emballé et mélangé chez nous.",
-            "Tout le reste du site — les contenants, les secteurs, les méthodes — décrit comment ces deux-là se font."
+            "Tout le reste du site (les contenants, les secteurs, les méthodes) décrit comment ces deux-là se font."
           ],
           "slot": "services"
         },
@@ -1026,7 +1026,7 @@
         {
           "h2": "Si ça change",
           "body": [
-            "Si ce que ce site fait de vos renseignements change — un nouveau formulaire, un traceur, quoi que ce soit qui recueille plus qu’aujourd’hui —, cette page change avec. Le changement s’écrit ici plutôt que de se deviner."
+            "Si ce que ce site fait de vos renseignements change (un nouveau formulaire, un traceur, quoi que ce soit qui recueille plus qu’aujourd’hui), cette page change avec. Le changement s’écrit ici plutôt que de se deviner."
           ]
         }
       ]

@@ -67,7 +67,7 @@ function SectionBody({ section, locale }: { section: SectionCopy; locale: Locale
         </p>
       ))}
       {section.list && (
-        <ul className="list-disc space-y-1.5 pl-5">
+        <ul className="tick-list space-y-2">
           {section.list.map((item) => (
             <li key={item}>
               <Inline text={item} locale={locale} />

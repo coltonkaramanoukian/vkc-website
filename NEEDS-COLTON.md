@@ -117,6 +117,29 @@ Not built, on purpose: no Higgsfield API call, no upload endpoint, no CMS.
 Generated files are committed like any other asset and go live with the next
 `vercel --prod`.
 
+Where each seam sits after the run 4 design pass (2026-09-27), so a generated
+scene lands in a composed place rather than an afterthought:
+
+- **`home-cover` (21/9)** renders full width directly under the home hero,
+  above the first fill rule. The hero keeps its drawing (the two containers)
+  whether or not the cover is filled: the drawing is the brand's device, the
+  cover is the floor it stands on. A silent loop plays in view with a
+  Play / Pause label; the poster stands under reduced motion.
+- **Page covers (16/9)** render between a longform page's hero and its
+  "on this page" strip, inside the same column as the copy, framed by the
+  1.5px ink rule like every placard.
+- **The two galleries (home, about)** render as three tiles from `md` and a
+  snap strip on a phone, after the two service placards on the home page and
+  after the page's sections on `/about`.
+- **Preview them before generating**: `NEXT_PUBLIC_SHOW_PLACEHOLDERS=1` draws
+  every empty slot as a dashed box with its `intent` line, in place, at the
+  size it will render. `docs/SCROLL-BRIEF.md` (self-authored in run 4) says
+  how each page should feel, which is what a scene brief should read first.
+- Nothing on the site fades, slides or parallaxes, and a generated scene
+  must not either: the motion rule in `brand/BRAND.md` (CSS only, the fill
+  line only, everything behind reduced motion) covers media too. A clip is a
+  still that happens to move; it is not a transition.
+
 ## Things that look like problems and are not
 
 - **Lighthouse best-practices 96 on a local build.** The only failing audit is

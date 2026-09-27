@@ -467,3 +467,14 @@ labels, the copy and every guard where they were.
   the scroll-driven pieces (a full-page capture reports a scroll timeline
   at its top-of-page state, so it cannot prove them). The desktop app's
   Preview Start prompt is never triggered.
+- **Polish, same day.** Twelve titles ran past 70 characters with the
+  " | VKC Packaging" suffix; eleven are trimmed without losing a D10
+  keyword (the French home title stays at 76 because it is the absolute
+  title carrying both keywords and the brand). The home titles used a
+  spaced em dash as a separator; a colon does the job, and the nine
+  em-dash constructions in body copy (EN five, FR four) became parentheses
+  or a colon, which is how the rest of the file was already punctuated.
+  Bulleted lists are marked with the fill tick (`.tick-list`) instead of
+  the browser's disc, the one place the default marker still showed. The
+  footer's tagline is set at display size, so the page's first and last
+  words are the same words at the same weight.
