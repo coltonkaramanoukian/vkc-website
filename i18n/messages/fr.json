@@ -461,6 +461,32 @@
         "yours": "Vos quarts",
         "ours": "{ss}",
         "caption": "La journée de votre usine : les quarts que vous couvrez, et celui que VKC fait rouler."
+      },
+      "faq": {
+        "eyebrow": "Vos questions",
+        "heading": "Avant le premier quart",
+        "items": [
+          {
+            "q": "Qui décide sur le plancher pendant le quart?",
+            "a": "Notre chef d’équipe. Du premier contenant à la dernière caisse, le quart est dirigé par notre chef d’équipe et fait par notre équipe; le produit, la ligne et la spécification restent à vous, comme le dernier mot sur ce que la production doit être."
+          },
+          {
+            "q": "Qu’est-ce qu’on retrouve le lendemain matin?",
+            "a": "Du produit fini, emballé, compté, et les papiers du quart : nos feuilles CQ et notre registre de production, remplis au fur et à mesure. Si un lot demande une explication plus tard, elle est déjà écrite."
+          },
+          {
+            "q": "Faut-il que quelqu’un de chez nous soit présent?",
+            "a": "C’est votre choix, pas une condition. Le quart n’en dépend pas : notre chef d’équipe le dirige et notre équipe fait le travail sur votre ligne dans tous les cas. Venez voir le premier si vous voulez le voir rouler."
+          },
+          {
+            "q": "Quel quart est chiffré?",
+            "a": "Celui que votre usine ne fait pas. Dites lequel dans le formulaire; la soumission vise ce quart-là, à l’unité ou au quart, et la visite confirme ce que la ligne peut y faire."
+          },
+          {
+            "q": "En quoi est-ce différent d’ajouter des gens à notre propre horaire?",
+            "a": "Vous n’achetez pas du temps sur votre plancher, vous achetez la production du quart. Les gens sur la ligne sont ceux de VKC, dirigés par notre chef d’équipe, et ce que vous payez, c’est ce qui sort de la ligne, à l’unité ou au quart, avec le registre qui va avec. Rien de la conduite du quart n’atterrit sur votre bureau."
+          }
+        ]
       }
     },
     "contractPackaging": {
@@ -507,7 +533,29 @@
             "La date où la première production doit partir."
           ]
         }
-      ]
+      ],
+      "faq": {
+        "eyebrow": "Vos questions",
+        "heading": "Avant le premier remplissage",
+        "items": [
+          {
+            "q": "Qu’est-ce qu’on vous envoie pour commencer?",
+            "a": "Le produit, ou la formule s’il reste à fabriquer; les contenants vides et leur fermeture; les étiquettes; et la spécification à respecter. Si un élément n’est pas encore fixé, dites-le : la soumission attendra plutôt que de deviner."
+          },
+          {
+            "q": "Comment vérifiez-vous que chaque contenant a la bonne quantité?",
+            "a": "Par l’une de deux méthodes, selon le produit : le remplissage pondéral, où la dose est fixée par le poids, ou le remplissage au niveau, où elle est fixée par le repère du contenant. La méthode retenue fait partie de la soumission."
+          },
+          {
+            "q": "Vous étiquetez et emballez, ou vous remplissez seulement?",
+            "a": "Tout, dans une seule soumission : le remplissage, l’étiquetage, les trousses quand un produit part avec des composants, et l’emballage pour que la palette sorte prête. Vous pouvez aussi n’envoyer que l’étape qui manque à votre ligne."
+          },
+          {
+            "q": "Et si le produit n’est pas encore fabriqué?",
+            "a": "Alors ça commence par le [mélange à façon](/services/toll-blending) : le lot est fabriqué ici selon votre formule, et le remplissage suit dans le même bâtiment. Une seule soumission couvre les deux étapes."
+          }
+        ]
+      }
     },
     "tollBlending": {
       "eyebrow": "{bn} : mélange à façon",
@@ -548,7 +596,29 @@
             "L’emballage voulu, si on s’en charge."
           ]
         }
-      ]
+      ],
+      "faq": {
+        "eyebrow": "Vos questions",
+        "heading": "Avant le premier lot",
+        "items": [
+          {
+            "q": "À qui appartient la formule?",
+            "a": "À vous. Le mélange à façon, c’est fabriquer votre produit selon votre formule; elle reste la vôtre, à modifier quand vous voulez, et le lot est fait comme elle l’écrit. Ce qu’il nous en faut, c’est assez pour chiffrer et faire le travail."
+          },
+          {
+            "q": "Le lot peut-il aussi être rempli ici?",
+            "a": "Oui, c’est tout l’intérêt de faire les deux au même endroit. Un lot fabriqué ici passe directement en bouteilles, en bidons, en seaux ou en trousses, avec une seule soumission pour le mélange et le remplissage."
+          },
+          {
+            "q": "Comment un mélange est-il chiffré?",
+            "a": "Sur le lot tel que décrit : ce qui entre dedans, comment il doit être mélangé et vérifié, sa taille et sa fréquence. Changez l’un de ces éléments et le chiffre bouge avec."
+          },
+          {
+            "q": "Quels produits mélangez-vous?",
+            "a": "Les mêmes métiers que la ligne de remplissage : nettoyants et dégraissants, lubrifiants et graisses, scellants, revêtements et colorants. Un produit proche de ceux-là vaut la question; c’est son comportement dans le mélangeur qui tranche."
+          }
+        ]
+      }
     },
     "bottlesAndJugs": {
       "eyebrow": "Contenants : bouteilles et bidons",
@@ -991,9 +1061,42 @@
           "h2": "Lequel, et quand",
           "body": [
             "Une usine dont l’équipement dort pendant un quart qu’elle ne fait pas veut un {ss}. Une usine dont la ligne est pleine veut {bn}. Un produit pas encore fabriqué veut d’abord le mélange à façon. Les deux questions ci-dessous font le tri; une visite tranche le reste."
-          ]
+          ],
+          "slot": "compare"
         }
-      ]
+      ],
+      "compare": {
+        "eyebrow": "Côte à côte",
+        "heading": "Les deux services, ligne par ligne",
+        "rowsLabel": "Ce qui change",
+        "rows": [
+          {
+            "label": "Où",
+            "ss": "Votre usine, votre ligne",
+            "bn": "Notre installation, notre ligne"
+          },
+          {
+            "label": "Ce que vous envoyez",
+            "ss": "Rien : le produit reste sur votre ligne",
+            "bn": "Le produit ou sa formule, les contenants, fermetures et étiquettes"
+          },
+          {
+            "label": "Qui fait rouler",
+            "ss": "Notre chef d’équipe dirige le quart; notre équipe fait le travail",
+            "bn": "Notre équipe, sur notre propre ligne"
+          },
+          {
+            "label": "Ce qui revient",
+            "ss": "La production du quart, emballée, documentée dans nos feuilles CQ et notre registre de production",
+            "bn": "Du produit rempli, étiqueté, mis en trousses et emballé"
+          },
+          {
+            "label": "Comment c’est facturé",
+            "ss": "À l’unité ou au quart",
+            "bn": "Chiffré sur le mandat : produit, contenant, quantité, date"
+          }
+        ]
+      }
     },
     "containers": {
       "eyebrow": "Contenants",
