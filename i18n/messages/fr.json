@@ -281,11 +281,11 @@
       "items": [
         {
           "q": "C’est quoi, un {ss}, au juste?",
-          "a": "Un quart que VKC fait rouler sur votre ligne quand votre usine ne le couvre pas. Notre chef d’équipe dirige, notre équipe fait le travail, et nos feuilles CQ et notre registre de production documentent ce qui a roulé. Vous achetez la production, facturée à l’unité ou au quart, pas le temps."
+          "a": "Un quart que VKC fait rouler sur votre ligne quand votre usine ne le couvre pas. Notre [chef d’équipe](/glossary#lead-hand) dirige, notre équipe fait le travail, et nos feuilles CQ et notre registre de production documentent ce qui a roulé. Vous achetez la production, facturée à l’unité ou au quart, pas le temps."
         },
         {
           "q": "Que couvre {bn}?",
-          "a": "Remplissage, étiquetage, trousses et emballage chez nous, plus le mélange à façon selon votre formule quand le produit doit d’abord être fabriqué. Le surplus que votre ligne n’absorbe pas, traité sous un même toit."
+          "a": "Remplissage, étiquetage, [trousses](/glossary#kitting) et emballage chez nous, plus le mélange à façon selon votre formule quand le produit doit d’abord être fabriqué. Le surplus que votre ligne n’absorbe pas, traité sous un même toit."
         },
         {
           "q": "Quels produits prenez-vous?",
@@ -410,7 +410,7 @@
         {
           "h2": "Vous achetez une production",
           "body": [
-            "Un {ss}, c’est un quart de production que VKC fait rouler pour vous. Avant de commencer, on s’entend sur ce qu’il doit produire : produit, contenant, spécification et quantité. Puis on le fait rouler, et vous recevez du produit fini, emballé, avec la trace de sa fabrication.",
+            "Un {ss}, c’est un quart de production que VKC fait rouler pour vous. Avant de commencer, on s’entend sur ce qu’il doit produire : produit, contenant, [spécification](/glossary#specification) et quantité. Puis on le fait rouler, et vous recevez du produit fini, emballé, avec la trace de sa fabrication.",
             "D’où la facturation à l’unité ou au quart : le prix suit la production, parce que c’est elle que vous achetez."
           ]
         },
@@ -423,9 +423,9 @@
             {
               "heading": "VKC",
               "items": [
-                "Notre chef d’équipe dirige le quart et prend les décisions sur le plancher, du début à la fin.",
+                "Notre [chef d’équipe](/glossary#lead-hand) dirige le quart et prend les décisions sur le plancher, du début à la fin.",
                 "Notre équipe fait le travail, du premier contenant à la dernière caisse.",
-                "Nos feuilles CQ et notre registre de production documentent le quart."
+                "Nos [feuilles CQ](/glossary#qc-sheet) et notre registre de production documentent le quart."
               ]
             },
             {
@@ -440,7 +440,7 @@
         {
           "h2": "À quoi servent les registres",
           "body": [
-            "Chaque {ss} est documenté dans nos feuilles CQ et notre registre de production : le compte rendu écrit du quart, ce qui a roulé et comment ç’a été vérifié.",
+            "Chaque {ss} est documenté dans nos feuilles CQ et notre [registre de production](/glossary#production-log) : le compte rendu écrit du quart, ce qui a roulé et comment ç’a été vérifié.",
             "Si une question se pose sur un lot le lendemain, la réponse est sur papier, pas dans la mémoire de quelqu’un."
           ]
         },
@@ -497,7 +497,7 @@
     "contractPackaging": {
       "eyebrow": "{bn} : conditionnement à forfait",
       "h1": "Conditionnement à forfait pour le surplus que votre ligne n’absorbe pas",
-      "lead": "Quand les commandes dépassent votre ligne, envoyez le surplus chez VKC. On le remplit, l’étiquette, l’assemble en trousses et l’emballe : de la sous-traitance d’emballage pour liquides et pâtes.",
+      "lead": "Quand les commandes dépassent votre ligne, envoyez le surplus chez VKC. On le remplit, l’étiquette, l’assemble en [trousses](/glossary#kitting) et l’emballe : de la sous-traitance d’emballage pour liquides et pâtes.",
       "sections": [
         {
           "h2": "Ce que couvre {bn}",
@@ -545,7 +545,7 @@
         "items": [
           {
             "q": "Qu’est-ce qu’on vous envoie pour commencer?",
-            "a": "Le produit, ou la formule s’il reste à fabriquer; les contenants vides et leur fermeture; les étiquettes; et la spécification à respecter. Si un élément n’est pas encore fixé, dites-le : la soumission attendra plutôt que de deviner."
+            "a": "Le produit, ou la formule s’il reste à fabriquer; les contenants vides et leur [fermeture](/glossary#closure); les étiquettes; et la spécification à respecter. Si un élément n’est pas encore fixé, dites-le : la soumission attendra plutôt que de deviner."
           },
           {
             "q": "Comment vérifiez-vous que chaque contenant a la bonne quantité?",
@@ -570,7 +570,7 @@
         {
           "h2": "Ce que veut dire mélange à façon",
           "body": [
-            "Le mélange à façon, c’est fabriquer votre produit selon votre formule et votre spécification. La formule est à vous; fabriquer le lot, c’est notre travail.",
+            "Le mélange à façon, c’est fabriquer votre produit selon votre formule et votre [spécification](/glossary#specification). La formule est à vous; fabriquer le lot, c’est notre travail.",
             "« À façon » vient du vieux travail à façon : on transforme la matière d’un autre, qui en reste propriétaire.",
             "Ça convient à un produit qui demande plus de lots que vous voulez en faire, ou à un nouveau produit à faire fabriquer avant d’investir dans votre propre équipement."
           ]
@@ -628,7 +628,7 @@
     "bottlesAndJugs": {
       "eyebrow": "Contenants : bouteilles et bidons",
       "h1": "Bouteilles et bidons pour les produits qui se versent",
-      "lead": "Les bouteilles PEHD et les bidons D-jug contiennent la plupart des nettoyants et bien des lubrifiants. Voici ceux déjà passés sur notre ligne, et nos deux façons de les remplir.",
+      "lead": "Les bouteilles [PEHD](/glossary#hdpe) et les bidons D-jug contiennent la plupart des nettoyants et bien des lubrifiants. Voici ceux déjà passés sur notre ligne, et nos deux façons de les remplir.",
       "sections": [
         {
           "h2": "Bouteilles et bidons déjà remplis",
@@ -640,8 +640,8 @@
         {
           "h2": "Au poids ou au niveau",
           "body": [
-            "Le remplissage pondéral met le même poids de produit dans chaque contenant. Il convient au produit vendu au poids, et à celui qui mousse, dont le niveau se lit mal tant que la mousse n’est pas retombée.",
-            "Le remplissage au niveau amène chaque contenant à la même hauteur visible. Une rangée remplie au niveau paraît égale en tablette, ce qui compte quand l’acheteur compare deux bouteilles voisines.",
+            "Le [remplissage pondéral](/glossary#weigh-fill) met le même poids de produit dans chaque contenant. Il convient au produit vendu au poids, et à celui qui mousse, dont le niveau se lit mal tant que la mousse n’est pas retombée.",
+            "Le [remplissage au niveau](/glossary#fill-to-line) amène chaque contenant à la même hauteur visible. Une rangée remplie au niveau paraît égale en tablette, ce qui compte quand l’acheteur compare deux bouteilles voisines.",
             "Le choix revient au produit, pas à nous. On vous dira laquelle on retiendrait, et pourquoi."
           ]
         },
@@ -672,7 +672,7 @@
     "pails": {
       "eyebrow": "Contenants : seaux",
       "h1": "Des seaux pour les produits épais, lourds et industriels",
-      "lead": "Seaux de plastique, seaux de métal et contenants Ropak : c’est là que vont les produits épais, comme les scellants, les revêtements, les pâtes et les lubrifiants vendus au seau.",
+      "lead": "Seaux de plastique, seaux de métal et contenants [Ropak](/glossary#ropak) : c’est là que vont les produits épais, comme les scellants, les revêtements, les pâtes et les lubrifiants vendus au seau.",
       "sections": [
         {
           "h2": "Les seaux déjà remplis",
@@ -691,7 +691,7 @@
           "h2": "Remplir un produit épais",
           "body": [
             "Un produit épais se remplit et se place lentement. Une pâte ne se nivelle pas seule comme un liquide, et la surface trompe qui juge le remplissage à l’œil.",
-            "C’est là que le remplissage pondéral fait ses preuves : la balance lit le même poids, quelle que soit l’allure de la surface."
+            "C’est là que le [remplissage pondéral](/glossary#weigh-fill) fait ses preuves : la balance lit le même poids, quelle que soit l’allure de la surface."
           ]
         },
         {
@@ -726,7 +726,7 @@
         {
           "h2": "Les trousses déjà assemblées",
           "body": [
-            "Des trousses de détail sont déjà passées chez nous. La liste reste courte exprès : c’est son contenu qui définit une trousse, et aucune ne se ressemble."
+            "Des [trousses](/glossary#kitting) de détail sont déjà passées chez nous. La liste reste courte exprès : c’est son contenu qui définit une trousse, et aucune ne se ressemble."
           ],
           "slot": "containers"
         },
@@ -1051,7 +1051,7 @@
         {
           "h2": "Chez nous",
           "body": [
-            "Quand c’est la ligne elle-même qui est pleine, le surplus sort du bâtiment. {bn} le prend : remplissage, étiquetage, trousses et emballage, et mélange à façon quand le produit doit être fabriqué avant d’être emballé."
+            "Quand c’est la ligne elle-même qui est pleine, le surplus sort du bâtiment. {bn} le prend : remplissage, étiquetage, [trousses](/glossary#kitting) et emballage, et mélange à façon quand le produit doit être fabriqué avant d’être emballé."
           ],
           "slot": "bottleneck"
         },

@@ -31,7 +31,9 @@ const copyText = (route: string, locale: "fr" | "en") =>
     .flatMap((ns) => strings(get(tree(locale), ns)))
     .join(" ")
     .replace(/\{ss\}/g, services.secondShift.name[locale])
-    .replace(/\{bn\}/g, services.bottleneck.name[locale]);
+    .replace(/\{bn\}/g, services.bottleneck.name[locale])
+    // A link's target is not copy a reader sees; keep the label only.
+    .replace(/\[([^\]]+)\]\([^)]*\)/g, "$1");
 
 const captures = loadCaptures()
   .filter((c) => routes.length === 0 || routes.includes(c.route))

@@ -281,11 +281,11 @@
       "items": [
         {
           "q": "What is a {ss}, exactly?",
-          "a": "A production shift VKC runs on your line, on a shift your plant doesn’t cover. Our lead hand directs it and our crew does the work; our QC sheets and production log document what ran. You buy the output, priced per unit or per shift, not the time."
+          "a": "A production shift VKC runs on your line, on a shift your plant doesn’t cover. Our [lead hand](/glossary#lead-hand) directs it and our crew does the work; our QC sheets and production log document what ran. You buy the output, priced per unit or per shift, not the time."
         },
         {
           "q": "What does {bn} cover?",
-          "a": "Filling, labelling, kitting and packing at our facility, plus toll blending to your formula when the product has to be made before it is packed. It is the overflow your line can’t absorb, handled under one roof."
+          "a": "Filling, labelling, [kitting](/glossary#kitting) and packing at our facility, plus toll blending to your formula when the product has to be made before it is packed. It is the overflow your line can’t absorb, handled under one roof."
         },
         {
           "q": "Which products do you take?",
@@ -293,7 +293,7 @@
         },
         {
           "q": "What do you need to quote?",
-          "a": "Four things: the product and how it pours, the container with its closure and label, the size and rhythm of the runs, and the date the first one ships. A safety data sheet helps."
+          "a": "Four things: the product and how it pours, the container with its closure and label, the size and rhythm of the runs, and the date the first one ships. A [safety data sheet](/glossary#safety-data-sheet) helps."
         },
         {
           "q": "How is the work priced?",
@@ -410,7 +410,7 @@
         {
           "h2": "You buy output",
           "body": [
-            "A {ss} is a production shift that VKC runs for you. Before it starts, we agree on what it has to produce: the product, the container, the specification and the count. Then we run it, and what comes back to you is finished, packed product and the record of how it was made.",
+            "A {ss} is a production shift that VKC runs for you. Before it starts, we agree on what it has to produce: the product, the container, the [specification](/glossary#specification) and the count. Then we run it, and what comes back to you is finished, packed product and the record of how it was made.",
             "That is why it is priced per unit or per shift. The price follows the output, because the output is what you are buying."
           ]
         },
@@ -423,9 +423,9 @@
             {
               "heading": "VKC",
               "items": [
-                "Our lead hand directs the shift and makes the calls on the floor from start to finish.",
+                "Our [lead hand](/glossary#lead-hand) directs the shift and makes the calls on the floor from start to finish.",
                 "Our crew does the work, from the first container to the last case.",
-                "Our QC sheets and production log document the shift."
+                "Our [QC sheets](/glossary#qc-sheet) and production log document the shift."
               ]
             },
             {
@@ -440,7 +440,7 @@
         {
           "h2": "What the records are for",
           "body": [
-            "Every {ss} is documented on our QC sheets and in our production log. Together they are the written account of the shift: what ran, and how it was checked.",
+            "Every {ss} is documented on our QC sheets and in our [production log](/glossary#production-log). Together they are the written account of the shift: what ran, and how it was checked.",
             "If a question comes up about a lot the next morning, the answer is on paper rather than in someone’s memory."
           ]
         },
@@ -545,7 +545,7 @@
         "items": [
           {
             "q": "What do we send you to start?",
-            "a": "The product, or the formula if it still has to be made; the empty containers with their closures; the labels; and the spec the filled unit has to meet, with a safety data sheet if the product has one. If any of those is still being decided, say so, and the quote waits for it rather than guessing."
+            "a": "The product, or the formula if it still has to be made; the empty containers with their closures; the labels; and the spec the filled unit has to meet, with a [safety data sheet](/glossary#safety-data-sheet) if the product has one. If any of those is still being decided, say so, and the quote waits for it rather than guessing."
           },
           {
             "q": "How do you check that each container holds the right amount?",
@@ -553,7 +553,7 @@
           },
           {
             "q": "Can you label and pack, or only fill?",
-            "a": "All of it, under one quote: filling, labelling, kitting when a product ships with components, and packing so the pallet leaves ready for the truck. You can also send only the step your line is short on, and keep the rest in house."
+            "a": "All of it, under one quote: filling, labelling, [kitting](/glossary#kitting) when a product ships with components, and packing so the pallet leaves ready for the truck. You can also send only the step your line is short on, and keep the rest in house."
           },
           {
             "q": "What if the product is not made yet?",
@@ -570,7 +570,7 @@
         {
           "h2": "What toll blending means",
           "body": [
-            "Toll blending means we mix your product to your formula and your specification. The formula is yours; the work of making the batch is ours.",
+            "Toll blending means we mix your product to your formula and your [specification](/glossary#specification). The formula is yours; the work of making the batch is ours.",
             "The word is an old one: a toll is the fee paid to have your own material processed by someone else. You pay for the processing, and the product stays yours.",
             "It suits a product that sells well enough to need more batches than you want to make yourself, or a new product you want made before you invest in equipment of your own."
           ]
@@ -628,7 +628,7 @@
     "bottlesAndJugs": {
       "eyebrow": "Containers: bottles and jugs",
       "h1": "Bottles and jugs for products that pour",
-      "lead": "HDPE bottles and D-jugs carry most cleaners and many lubricants. Here are the ones that have already been through our line, and the two ways we fill them.",
+      "lead": "[HDPE](/glossary#hdpe) bottles and D-jugs carry most cleaners and many lubricants. Here are the ones that have already been through our line, and the two ways we fill them.",
       "sections": [
         {
           "h2": "Bottles and jugs we have run",
@@ -640,15 +640,15 @@
         {
           "h2": "Weigh-fill or fill-to-line",
           "body": [
-            "Weigh-fill puts the same weight of product in every container. It suits a product sold by weight, and a product that foams, where the level is hard to read until the foam settles.",
-            "Fill-to-line brings every container to the same visible level. A row of bottles filled to the line looks even on a shelf, which matters when a buyer compares one bottle with the one beside it.",
+            "[Weigh-fill](/glossary#weigh-fill) puts the same weight of product in every container. It suits a product sold by weight, and a product that foams, where the level is hard to read until the foam settles.",
+            "[Fill-to-line](/glossary#fill-to-line) brings every container to the same visible level. A row of bottles filled to the line looks even on a shelf, which matters when a buyer compares one bottle with the one beside it.",
             "Which one fits is usually the product’s call, not ours. We’ll tell you which one we would use, and why."
           ]
         },
         {
           "h2": "The closure and the label",
           "body": [
-            "A bottle is only finished once it is closed and labelled. So when you ask for a quote, the closure and the label are part of the question: what they are, who supplies them, and whether we are the ones putting them on."
+            "A bottle is only finished once it is closed and labelled. So when you ask for a quote, the [closure](/glossary#closure) and the label are part of the question: what they are, who supplies them, and whether we are the ones putting them on."
           ]
         },
         {
@@ -672,7 +672,7 @@
     "pails": {
       "eyebrow": "Containers: pails",
       "h1": "Pails for thick, heavy and industrial products",
-      "lead": "Plastic pails, metal pails and Ropak containers are where thick products usually go: sealers, coatings, pastes, and lubricants sold by the pail.",
+      "lead": "Plastic pails, metal pails and [Ropak](/glossary#ropak) containers are where thick products usually go: sealers, coatings, pastes, and lubricants sold by the pail.",
       "sections": [
         {
           "h2": "Pails we have run",
@@ -691,7 +691,7 @@
           "h2": "Filling a thick product",
           "body": [
             "Thick products fill slowly and settle slowly. A paste doesn’t level itself in a pail the way a liquid does, so the surface can mislead anyone reading the fill by eye.",
-            "That is where weigh-fill earns its place: the scale reads the same weight whatever the surface looks like."
+            "That is where [weigh-fill](/glossary#weigh-fill) earns its place: the scale reads the same weight whatever the surface looks like."
           ]
         },
         {
@@ -720,7 +720,7 @@
         {
           "h2": "What kitting means",
           "body": [
-            "Kitting means bringing separate components together in one package that sells as a single unit. The components can be filled products, accessories such as a brush or a cloth, and printed pieces such as an instruction sheet."
+            "[Kitting](/glossary#kitting) means bringing separate components together in one package that sells as a single unit. The components can be filled products, accessories such as a brush or a cloth, and printed pieces such as an instruction sheet."
           ]
         },
         {
@@ -876,7 +876,7 @@
         {
           "h2": "Solvent or water, and the sheet that says so",
           "body": [
-            "Solvent or water is the first question, and the safety data sheet answers most of the rest. It decides what can run, how the product is handled and how it is stored, so send it before the sample rather than after."
+            "Solvent or water is the first question, and the [safety data sheet](/glossary#safety-data-sheet) answers most of the rest. It decides what can run, how the product is handled and how it is stored, so send it before the sample rather than after."
           ]
         },
         {
@@ -1051,7 +1051,7 @@
         {
           "h2": "At our facility",
           "body": [
-            "When the line itself is full, the overflow leaves the building. {bn} takes it: filling, labelling, kitting and packing, and toll blending when the product has to be made before it is packed. One quote covers the lot."
+            "When the line itself is full, the overflow leaves the building. {bn} takes it: filling, labelling, [kitting](/glossary#kitting) and packing, and toll blending when the product has to be made before it is packed. One quote covers the lot."
           ],
           "slot": "bottleneck"
         },
@@ -1149,7 +1149,7 @@
         {
           "h2": "Not on the list?",
           "body": [
-            "The three trades are where VKC is set up, not a fence around what it will look at. A product that behaves like one of them, water-based, oil-based or reactive, is worth a conversation. Send the safety data sheet and say how it pours."
+            "The three trades are where VKC is set up, not a fence around what it will look at. A product that behaves like one of them, water-based, oil-based or reactive, is worth a conversation. Send the [safety data sheet](/glossary#safety-data-sheet) and say how it pours."
           ]
         },
         {

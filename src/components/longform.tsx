@@ -7,14 +7,10 @@ import { Pictogram } from "@/components/pictograms";
 import { RelatedPages } from "@/components/related-pages";
 import { SceneCover, SceneGalleries } from "@/components/scene";
 import { getCopy } from "@/lib/i18n";
+import { resolveInlineHref } from "@/lib/inline-links";
 import { ROUTE_PICTO } from "@/lib/related";
 import { uniqueSlugs } from "@/lib/slug";
-import {
-  localizedPath,
-  pathnames,
-  type AppPathname,
-  type Locale,
-} from "@/i18n/pathnames";
+import type { AppPathname, Locale } from "@/i18n/pathnames";
 
 export interface SectionCopy {
   h2: string;
@@ -35,7 +31,10 @@ export interface PageCopy {
 
 const LINK = /\[([^\]]+)\]\((\/[^)]*)\)/g;
 
-/** Inline `[label](/internal/route)` → a localized link. Plain text otherwise. */
+/**
+ * Inline `[label](/internal/route)` or `[label](/glossary#key)` → a localized
+ * link (lib/inline-links.ts decides). An unknown target renders as plain text.
+ */
 export function Inline({ text, locale }: { text: string; locale: Locale }) {
   const parts: ReactNode[] = [];
   let last = 0;
@@ -43,10 +42,10 @@ export function Inline({ text, locale }: { text: string; locale: Locale }) {
     const [whole, label, target] = match;
     const index = match.index ?? 0;
     if (index > last) parts.push(text.slice(last, index));
-    const known = target in pathnames;
+    const href = resolveInlineHref(locale, target);
     parts.push(
-      known ? (
-        <Link key={index} href={localizedPath(locale, target as AppPathname)}>
+      href ? (
+        <Link key={index} href={href}>
           {label}
         </Link>
       ) : (
