@@ -413,3 +413,112 @@ None. Sign-off form (b): nothing should be cut. The judgment call: once
 Colton fills the content, what shipped is defensible as a public site, and
 the design pass composed each page around its empty slots so that a filled
 slot lands in a place that was drawn for it.
+
+---
+
+# Run log — run 5 (2026-09-27), the navigation fix and the site order
+
+Model: Claude Fable 5.1, extended thinking on, dontAsk, no subagents.
+Brief, verbatim from Colton: "most of the VKC website is shit every time I
+click a button and redirect me somewhere on the same main page that's the
+wrong place re-order the whole app and make all of the button clicks
+work." Priority 1: every click lands where it should, proven by clicking,
+not by reading code. Priority 2: the site in the order Home, Services
+(Second Shift, Bottleneck), Industries, Containers, Locations, About,
+Contact. Then, mid-run: Colton approved AI-generated (Higgsfield) imagery
+and a collaborator, Vito, started filling `content/scenes.json` on this
+repo; get the page structure and the slots stable, label them, stay out of
+his files. Started on the `website-features-2` worktree at `main`
+(dd90520), clean.
+
+## Checkpoints (one pull request each; merges are Colton's, see below)
+
+| PR | What |
+|---|---|
+| #27 (not this run) | Colton's other session lifted the §1 image ban at 23:22 UTC (1776597, merged as 35af106) before this run reached it; no code guard enforced the ban, verified. |
+| #28 | The navigation fix: `data-scroll-behavior="smooth"`, one wrapper element in `PageShell`, `NavLink` for the current page, an opacity-only menu panel, the hero button as a real link; `npm run check:clicks` (`scripts/click-through.ts`). |
+| #29 | The site order (`lib/nav.ts`, home page, related cells), the slot labels and `docs/MEDIA-SLOTS.md`, this log. |
+
+The auto-mode permission classifier refused `gh pr merge` as a merge
+without review, so unlike runs 2 to 4 the PRs were opened and left for
+Colton to merge. Nothing was pushed to `main` directly.
+
+## The bug, traced before it was touched
+
+- Before any change, from `/en` at 1280: 40 of 40 route links opened the
+  target page part-way down (the glossary at scrollY 3603, the quote page
+  at 1522). A scroll trace showed a 900 ms animated scroll from 0 to the
+  bottom of the new page after every navigation.
+- Cause: Next 16 stopped overriding `scroll-behavior: smooth` during route
+  transitions (its upgrade guide, "Scroll Behavior Override"), and the site
+  sets smooth scrolling on `<html>`. Setting `scroll-behavior: auto` before
+  the click made the same navigation land at 0. Fix: the documented
+  `data-scroll-behavior="smooth"` attribute on `<html>`.
+- Instrumenting `scrollIntoView`, `focus` and the `scrollTop` setter showed
+  the router scrolling each of the page segment's five top-level nodes into
+  view in reverse (action bar, footer, main, header, skip link), so the
+  landing depended on their order. Fix: `PageShell` returns one `<div>`.
+- A link to the page it is on (the footer wordmark on the home page, a
+  page's own name in the footer) did nothing: a same-URL soft navigation
+  changes no segment, so the router neither re-renders nor scrolls. Fix:
+  `NavLink` renders the current page's link as a plain anchor.
+- After a menu click the next page opened 3px down, in full Chromium as
+  well as the headless shell, only with the panel's `translateY(-4px)`
+  entrance and smooth scroll both present. Fix: the panel fades only.
+
+## Proof, PR #28 (local production build)
+
+`check:clicks --shared once`: 1762 clicks, both locales, 1280 and 375:
+1232 route links, 342 in-page anchors, 80 disclosures, 80 chooser answer
+pairs, 12 empty-form submits, 8 skip links, 8 menu toggles. 1761 landed
+where they should; the one exception was an empty submit the API answered
+`rate_limited` after the run's own earlier submits from one address, which
+the gate now counts as handled in place. Also green on that build:
+typecheck, lint, 80 tests, render 40/40, the five guards, hreflang 40/40
+(120 alternates), locale switch 20/20, census 40/40 and the `/v` door,
+overlap 7.6%.
+
+## SELF-RESOLVED
+
+1. **The worktree had no `node_modules`**; `npm ci` first, then a
+   production build on port 3200 for every proof (the desktop app's
+   preview tool prompts Colton; the Playwright MCP and `@playwright/test`
+   from the shell do not).
+2. **Six items in the French header overflowed the 72rem column by 58px**
+   at every width ("Nos services … Nous joindre" plus "Obtenir une
+   soumission"). The inline bar carries five (Services, Industries,
+   Containers, About, Contact); Regions keeps its place in the menu, the
+   footer and the home page's closing cells, and the bar's gap went from
+   28px to 24px so the French row keeps 28px of slack rather than 12. The
+   alternative, six items at 14px with 20px gaps, fit with 10px to spare
+   and was not worth the risk.
+3. **`related-pages` printed "About / About" and "Contact / Contact"**
+   once the home page pointed at them (and already did on `/about`): a
+   page whose eyebrow is its own name now shows its group name instead.
+4. **The quote API's per-IP limit (5 a minute) tripped on the last of the
+   run's twelve empty submits.** The gate accepts `rate_limited` as handled
+   in place; NC-5 covers the form's own validation.
+5. **`scripts/census.ts` and the other proof scripts default to port
+   3100**; passed `--base http://localhost:3200`.
+
+## Not done, on purpose
+
+- No production deploy (`NEEDS-COLTON.md` item 1).
+- No value written to `content/scenes.json`, `content/photos.json` or any
+  file under `public/media/`; no change to the scenes schema. Vito's fill
+  runs against the slot list in `docs/MEDIA-SLOTS.md`, which the reorder
+  did not move.
+- No label, slug or copy change for the reorder (taste §11.F); the order
+  is `lib/nav.ts` and the home page's section order.
+- No dropdowns in the header: the Menu panel is the full site map, in
+  order, on every width.
+- No booking or scheduling flow beyond the three forms that exist (quote,
+  contact, walkthrough): a calendar needs a provider account, which is a
+  paid signup and Colton's (CLAUDE.md §6).
+
+## Page cuts
+
+None. Sign-off form (b): nothing should be cut. The judgment call: with
+every click landing, the order legible from any page's menu or footer, and
+the image slots labelled and waiting, what shipped is defensible as a
+public site once the content and the pictures land.

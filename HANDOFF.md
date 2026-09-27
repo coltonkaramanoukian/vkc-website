@@ -1,6 +1,25 @@
-HANDOFF: 2026-09-27 — `main` holds runs 1–4 (PRs #1–#23): every page built in FR and EN, the run 4 design pass merged, every gate green on a local build, nothing deployed since run 1; next is Colton's list in `NEEDS-COLTON.md`, then whatever a real reader on a real phone says.
+HANDOFF: 2026-09-27 — `main` holds runs 1–4 plus the image-ban lift (#27); run 5 is two open PRs, #28 (every click lands at the top, `check:clicks` gate) and #29 (the site order, slot labels, `docs/MEDIA-SLOTS.md`), for Colton to merge; Vito is filling `content/scenes.json` against the slot list; nothing deployed since run 1.
 
 # Handoff
+
+## Run 5 (2026-09-27): navigation and order
+
+- Every route link opened its page part-way down (Next 16 + the site's
+  smooth scroll); PR #28 fixes it and adds `npm run check:clicks`, which
+  clicks every link and control on every page in both locales at 1280 and
+  375 and asserts where each lands. Run it after any change to chrome,
+  links or scroll behaviour. `docs/RUN-LOG.md` run 5 has the trace.
+- The site order is `src/lib/nav.ts` (Services, Industries, Containers,
+  Regions, Company); the menu, footer, inline bar and the home page follow
+  it (PR #29). The inline bar carries five of the six: see
+  `docs/DESIGN-DECISIONS.md` §13 for why Montréal is not in it.
+- **AI-generated imagery is permitted** (CLAUDE.md §1, amended by Colton,
+  PR #27). Vito is filling the thirteen covers and two galleries;
+  `docs/MEDIA-SLOTS.md` is the contract (positions, sizes, files, checks).
+  A build run stays out of `content/scenes.json`, `public/media/` and the
+  scenes schema; render changes go in `src/components/scene.tsx` only.
+- The auto-mode permission classifier refuses `gh pr merge` (merge without
+  review). Open the PR, report it, and let Colton merge.
 
 ## Where the build stands
 

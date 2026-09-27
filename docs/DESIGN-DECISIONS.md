@@ -478,3 +478,41 @@ labels, the copy and every guard where they were.
   the browser's disc, the one place the default marker still showed. The
   footer's tagline is set at display size, so the page's first and last
   words are the same words at the same weight.
+
+## 13. Run 5 decisions (2026-09-27, the navigation fix and the site order)
+
+- **One order, everywhere it is listed.** `lib/nav.ts` is the order:
+  Services (Second Shift, then the two Bottleneck pages), Industries,
+  Containers, Regions, Company (About, Contact, quote, glossary, privacy).
+  The Menu panel, the footer, the header's inline bar and the home page's
+  sections follow it; the home page ends on three ruled cells (Montréal,
+  About, Contact), the pages that end the order, before the negative band.
+- **Five items inline, not six.** The French row with Montréal plus the
+  French quote button overflows the 72rem column by 58px at every width.
+  The bar carries Services, Industries, Containers, About, Contact; Regions
+  keeps its place in the menu, the footer and the closing cells. Shrinking
+  the bar to 14px would have fit with 10px to spare, and a nav that fits by
+  ten pixels is a nav that wraps on someone's machine.
+- **A related cell's eyebrow is never its own name.** About's eyebrow is
+  "About"; the cell shows the group instead ("Company" / "L'entreprise"),
+  so the small line says where the page lives and the large line says what
+  it is.
+- **The hero's secondary button is a link, not an anchor.** "The two
+  services" now opens the Services hub. A same-page anchor on the one
+  button that says "services" was the literal shape of Colton's complaint.
+- **The menu panel fades only.** Its 4px drop, with the html smooth scroll,
+  left the next page 3px down after a menu click (RUN-LOG run 5). Nothing
+  else about the panel changed.
+- **One wrapper element around the page.** The app router scrolls a route
+  segment's top-level nodes into view one by one after a navigation; with
+  five nodes the landing depended on their order. `PageShell` returns one
+  `<div data-page>` and the router scrolls one thing.
+- **Media slots are labelled by id.** The Preview placeholder prints
+  `SCENE <id> (<aspect>): <intent>`, `GALLERY <id>: <intent>` and
+  `PHOTO <id>: <intent>`, so a fill run maps a file to a slot by reading
+  the page. `docs/MEDIA-SLOTS.md` is the slot list with positions and
+  sizes; the manifest's shape did not change.
+- **Four gallery tiles sit two by two.** `Math.min(count, 3)` columns put a
+  fourth tile alone on a second row; `data-count` now carries the real
+  count and the CSS gives four a 2x2 grid (frontend-design: a grid has as
+  many cells as it has content).
