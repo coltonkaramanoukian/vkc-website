@@ -26,8 +26,28 @@ export const COPY_NAMESPACES: Record<string, string[]> = {
   "/quote": ["meta.quote", "quote", "form"],
   // The contact page embeds the form as shared furniture (data-shared), so
   // its copy is its own prose only; the form strings are the quote page's.
-  "/contact": ["meta.contact", "pages.contact"],
+  // The details placard's row names (phone, email, address, hours) render
+  // once contact.json has a value; they are copy, the values are content.
+  "/contact": ["meta.contact", "pages.contact", "common.contact"],
 };
+/**
+ * The common.specLabels keys each route's SpecGrid renders once
+ * content/capabilities.json is filled (the title row plus one label per spec
+ * the page asks for). They are copy the reader sees, so the ±10% gate counts
+ * them; the values themselves are content data and are not counted.
+ */
+export const SPEC_LABEL_KEYS: Record<string, string[]> = {
+  "/services/second-shift": ["crewSize", "shiftsOffered", "minimumCommitment", "insurance"],
+  "/services/contract-packaging": [
+    "minimumRunSize", "maximumRunSize", "fillSizesOffered", "viscosityRange", "leadTime",
+    "fillers", "cappers", "tijLidPrinters", "scales",
+  ],
+  "/services/toll-blending": ["blendingBatchSizes", "viscosityRange", "leadTime"],
+  "/containers/bottles-and-jugs": ["fillSizesOffered", "viscosityRange", "fillers", "cappers"],
+  "/containers/pails": ["fillSizesOffered", "viscosityRange", "scales", "tijLidPrinters"],
+  "/containers/kits": ["minimumRunSize", "leadTime"],
+};
+
 /** /containers/bottles-and-jugs → bottlesAndJugs (the message + page key). */
 export function pageKeyFor(route: string): string {
   const last = route.split("/").filter(Boolean).pop() ?? "";
@@ -35,7 +55,10 @@ export function pageKeyFor(route: string): string {
 }
 
 export function namespacesFor(route: string, pageKey = pageKeyFor(route)): string[] {
-  return COPY_NAMESPACES[route] ?? [`meta.${pageKey}`, `pages.${pageKey}`];
+  const own = COPY_NAMESPACES[route] ?? [`meta.${pageKey}`, `pages.${pageKey}`];
+  const specs = SPEC_LABEL_KEYS[route];
+  const specNamespaces = specs ? ["title", ...specs].map((key) => `common.specLabels.${key}`) : [];
+  return [...own, ...specNamespaces];
 }
 
 export function copyLength(locale: "en" | "fr", namespaces: string[]): number {

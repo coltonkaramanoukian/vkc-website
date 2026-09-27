@@ -387,3 +387,14 @@ silently widening the rule.
   medians moved from 96 to 95–98 with LCP 2.4 s against 2.3 s. The
   render-blocking round trip is cheaper than the bytes. Do not "fix" the
   render-blocking stylesheet this way.
+- **The ±10% gate counts the SpecGrid labels and the contact row names.**
+  Audit round two's last confirmed finding (both skeptics, after the
+  handoff was drafted): `scripts/lib/copy-ratio.ts` measured a service or
+  container page without the `common.specLabels` strings its SpecGrid
+  renders once `capabilities.json` is filled, and `/contact` without the
+  `common.contact` row names its placard renders once `contact.json` is.
+  Each route now lists exactly the label keys it asks for (`SPEC_LABEL_KEYS`,
+  tested), so the gate measures what the page will show, not less. The
+  corrected measurement put `/containers/pails` at 1.102: the French lead
+  repeated "seaux" ("seaux de plastique, seaux de métal") and now reads
+  "seaux de plastique, de métal", 1.098. Run 4, 2026-09-27.
