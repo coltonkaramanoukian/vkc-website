@@ -51,7 +51,7 @@ export default async function SecondShiftPage({ params }: Props) {
       }
       after={
         <>
-          <Faq locale={locale} eyebrow={tf("eyebrow")} heading={tf("heading")} items={faq} id="second-shift-faq" />
+          <Faq locale={locale} heading={tf("heading")} items={faq} id="second-shift-faq" />
           <ServiceJsonLd
             locale={locale}
             route="/services/second-shift"

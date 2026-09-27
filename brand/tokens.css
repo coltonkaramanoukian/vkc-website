@@ -47,3 +47,33 @@
     --vkc-on-qc: #0e1330;
   }
 }
+
+/*
+ * Negative print. A block set in the other scheme's tokens: a label printed
+ * in reverse, the way a warning label is. The six colours swap as a set, so
+ * everything inside (text, rules, the one accent) keeps its contrast. One
+ * block per page at most; on this site it is the closing call to action.
+ */
+.vkc-negative {
+  --vkc-floor: #111316;
+  --vkc-label: #1a1d22;
+  --vkc-ink: #e8eaee;
+  --vkc-graphite: #a2a9b4;
+  --vkc-hairline: #343a43;
+  --vkc-qc: #9caeff;
+  --vkc-on-qc: #0e1330;
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  .vkc-negative {
+    --vkc-floor: #edeff2;
+    --vkc-label: #ffffff;
+    --vkc-ink: #15171a;
+    --vkc-graphite: #525964;
+    --vkc-hairline: #c7ccd3;
+    --vkc-qc: #1f33a6;
+    --vkc-on-qc: #ffffff;
+    color-scheme: light;
+  }
+}

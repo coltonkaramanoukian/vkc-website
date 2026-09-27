@@ -76,8 +76,7 @@ export default async function ContactPage({ params }: Props) {
 
       <div className="wrap grid gap-12 pt-10 lg:grid-cols-[minmax(0,1fr)_22rem] lg:gap-16">
         <section aria-labelledby="contact-form-heading" className="placard p-5 sm:p-8 lg:p-10">
-          <p className="eyebrow">{t("pages.contact.formEyebrow")}</p>
-          <h2 id="contact-form-heading" className="mt-3">
+          <h2 id="contact-form-heading">
             {t("pages.contact.formHeading")}
           </h2>
           <p className="mt-2 max-w-[52ch] text-graphite">{t("pages.contact.formIntro")}</p>
@@ -89,8 +88,8 @@ export default async function ContactPage({ params }: Props) {
 
         <aside className="space-y-8 lg:sticky lg:top-24 lg:self-start">
           {rows.length > 0 && <Placard title={t("pages.contact.detailsHeading")} headingLevel="h2" fields={rows} />}
-          <div>
-            <p className="eyebrow">{t("pages.contact.afterHeading")}</p>
+          <div className={rows.length > 0 ? "border-t border-hairline pt-6" : ""}>
+            <p className="field-name">{t("pages.contact.afterHeading")}</p>
             <ol className="mt-3 space-y-3">
               {after.map((step) => (
                 <li key={step} className="border-l-[3px] border-ink pl-4">

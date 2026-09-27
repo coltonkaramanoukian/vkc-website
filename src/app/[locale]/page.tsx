@@ -1,18 +1,19 @@
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { setRequestLocale } from "next-intl/server";
 import { ClientList } from "@/components/client-list";
+import { ContainerLabel } from "@/components/container-label";
 import { CtaActions, CtaBand } from "@/components/cta-band";
 import { DemoVideo } from "@/components/demo-video";
 import { Faq } from "@/components/faq";
 import { HeroGauge } from "@/components/hero-gauge";
+import { Manifest, type ManifestItem } from "@/components/manifest";
 import { PageShell } from "@/components/page-shell";
 import { PhotoRow } from "@/components/photo";
 import { SceneCover, SceneGalleries } from "@/components/scene";
-import { Pictogram, type PictogramName } from "@/components/pictograms";
+import type { PictogramName } from "@/components/pictograms";
 import { ServiceChooserSection } from "@/components/service-chooser-section";
 import { ServicePlacards } from "@/components/service-placards";
-import { containersIn, fillMethods, site, tagline, type ContainerGroup } from "@/lib/content";
+import { site, tagline } from "@/lib/content";
 import { getCopy } from "@/lib/i18n";
 import { pageMetadata } from "@/lib/seo";
 import type { FaqItem } from "@/lib/structured-data";
@@ -26,18 +27,20 @@ export async function generateMetadata({ params }: Props) {
   return pageMetadata(locale, "/", "home", { absoluteTitle: true });
 }
 
-const CONTAINER_GROUPS: { group: ContainerGroup; route: AppPathname; label: string; picto: PictogramName }[] = [
-  { group: "bottles-and-jugs", route: "/containers/bottles-and-jugs", label: "bottlesAndJugs", picto: "jug" },
-  { group: "pails", route: "/containers/pails", label: "pails", picto: "pail" },
-  { group: "kits", route: "/containers/kits", label: "kits", picto: "kit" },
-];
-
 const INDUSTRIES: { route: AppPathname; label: string; key: string; picto: PictogramName }[] = [
   { route: "/industries/cleaners", label: "cleaners", key: "cleaners", picto: "spray" },
   { route: "/industries/lubricants", label: "lubricants", key: "lubricants", picto: "oilcan" },
   { route: "/industries/sealers-and-coatings", label: "sealersCoatings", key: "sealersCoatings", picto: "roller" },
 ];
 
+/**
+ * The home page reads as one pallet label after another, on the floor.
+ * Layout families, each used once: the hero (tagline beside the gauge), two
+ * service placards, the chooser, one label with three fields (containers),
+ * manifest rows (industries), ticked steps, a ruled statement, the FAQ, and
+ * the negative band. Two eyebrows on the page: the hero's and "straight
+ * talk", where the label is information, not furniture.
+ */
 export default async function HomePage({ params }: Props) {
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
@@ -45,15 +48,21 @@ export default async function HomePage({ params }: Props) {
   const { t, raw } = await getCopy(locale);
   const steps = raw<{ title: string; body: string }[]>("home.steps");
   const faq = raw<FaqItem[]>("home.faq.items");
+  const industries: ManifestItem[] = INDUSTRIES.map(({ route, label, key, picto }) => ({
+    href: localizedPath(locale, route),
+    title: t(`common.nav.${label}`),
+    body: t(`home.industries.${key}`),
+    picto,
+  }));
 
   return (
     <PageShell locale={locale} route="/">
       {/* Hero: the tagline, and the tagline drawn. */}
-      <section className="wrap pb-14 pt-10 sm:pt-16 lg:pb-20 lg:pt-20">
-        <div className="grid items-end gap-10 xl:grid-cols-[minmax(0,8fr)_minmax(0,4fr)] xl:gap-14">
+      <section className="wrap pb-12 pt-10 sm:pt-14 lg:pb-16 xl:pt-16">
+        <div className="grid items-end gap-12 xl:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] xl:gap-16">
           <div>
             <p className="eyebrow">{t("home.eyebrow")}</p>
-            <h1 className="hero-title mt-4 max-w-[20ch] xl:text-[3.75rem]">{tagline(locale)}</h1>
+            <h1 className="hero-title mt-5 max-w-[18ch]">{tagline(locale)}</h1>
             <p className="lead mt-6">{t("home.sub")}</p>
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <CtaActions locale={locale} />
@@ -62,7 +71,7 @@ export default async function HomePage({ params }: Props) {
               </a>
             </div>
           </div>
-          <div className="xl:justify-self-end">
+          <div className="max-w-[36rem] xl:max-w-none xl:justify-self-end">
             <HeroGauge locale={locale} label={t("home.gaugeAlt")} />
           </div>
         </div>
@@ -78,10 +87,9 @@ export default async function HomePage({ params }: Props) {
         <hr className="fill-rule" />
       </div>
 
-      {/* The two services. */}
+      {/* The two services: two labels. */}
       <section id="services" className="wrap section scroll-mt-4" aria-labelledby="services-heading">
         <div className="section-head">
-          <p className="eyebrow">{t("home.servicesEyebrow")}</p>
           <h2 id="services-heading">{t("home.servicesHeading")}</h2>
           <p className="text-graphite">{t("home.servicesIntro")}</p>
         </div>
@@ -99,68 +107,39 @@ export default async function HomePage({ params }: Props) {
         <hr className="fill-rule" />
       </div>
 
-      {/* Containers: the families that have run, one label per group. */}
+      {/* Containers: one label, three fields. */}
       <section className="wrap section" aria-labelledby="containers-heading">
         <div className="section-head">
-          <p className="eyebrow">{t("home.containersEyebrow")}</p>
           <h2 id="containers-heading">{t("home.containersHeading")}</h2>
           <p>{t("home.containersIntro")}</p>
         </div>
-        <ul className="mt-8 grid gap-5 md:grid-cols-3">
-          {CONTAINER_GROUPS.map(({ group, route, label, picto }) => (
-            <li key={group}>
-              <Link href={localizedPath(locale, route)} className="placard placard-link h-full">
-                <div className="flex items-start justify-between gap-4 border-b-[1.5px] border-ink px-5 py-4">
-                  <h3 className="placard-title text-[1.375rem]">{t(`common.nav.${label}`)}</h3>
-                  <Pictogram name={picto} />
-                </div>
-                <ul className="px-5 py-4 font-mono text-[0.9375rem] leading-relaxed">
-                  {containersIn(group).map((family) => (
-                    <li key={family.id}>{family.name[locale]}</li>
-                  ))}
-                </ul>
-              </Link>
-            </li>
-          ))}
-        </ul>
-        <p className="mt-5">
-          <span className="field-name mr-3">{t("common.fields.fillMethods")}</span>
-          {fillMethods.map((m) => m.name[locale]).join(", ")}
-        </p>
+        <div className="mt-8">
+          <ContainerLabel locale={locale} />
+        </div>
       </section>
 
       <div className="wrap">
         <hr className="fill-rule" />
       </div>
 
-      {/* Industries. */}
+      {/* Industries: a manifest, not more boxes. */}
       <section className="wrap section" aria-labelledby="industries-heading">
         <div className="section-head">
-          <p className="eyebrow">{t("home.industriesEyebrow")}</p>
           <h2 id="industries-heading">{t("home.industriesHeading")}</h2>
           <p>{t("home.industriesIntro")}</p>
         </div>
-        <ul className="mt-8 grid gap-5 md:grid-cols-3">
-          {INDUSTRIES.map(({ route, label, key, picto }) => (
-            <li key={route}>
-              <Link href={localizedPath(locale, route)} className="placard placard-link flex h-full flex-col p-5">
-                <Pictogram name={picto} />
-                <h3 className="placard-title mt-5 text-[1.375rem]">{t(`common.nav.${label}`)}</h3>
-                <p className="mt-2 text-graphite">{t(`home.industries.${key}`)}</p>
-              </Link>
-            </li>
-          ))}
-        </ul>
+        <div className="mt-8">
+          <Manifest items={industries} />
+        </div>
       </section>
 
       <div className="wrap">
         <hr className="fill-rule" />
       </div>
 
-      {/* How a first job starts. */}
+      {/* How a first job starts: three ticked steps. */}
       <section className="wrap section" aria-labelledby="steps-heading">
         <div className="section-head">
-          <p className="eyebrow">{t("home.stepsEyebrow")}</p>
           <h2 id="steps-heading">{t("home.stepsHeading")}</h2>
         </div>
         <ol className="steps mt-8" style={{ "--steps": 3 } as React.CSSProperties}>
@@ -173,7 +152,7 @@ export default async function HomePage({ params }: Props) {
         </ol>
       </section>
 
-      {/* Straight talk. */}
+      {/* Straight talk: the one ruled statement on the page. */}
       <section className="wrap section-tight" aria-labelledby="plain-heading">
         <div className="grid gap-6 border-y border-hairline py-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] lg:gap-12">
           <div className="section-head">
@@ -184,7 +163,7 @@ export default async function HomePage({ params }: Props) {
         </div>
       </section>
 
-      <Faq locale={locale} eyebrow={t("home.faq.eyebrow")} heading={t("home.faq.heading")} items={faq} />
+      <Faq locale={locale} heading={t("home.faq.heading")} items={faq} />
 
       <ClientList heading={t("common.clientsHeading")} />
       <CtaBand locale={locale} />

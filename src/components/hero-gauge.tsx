@@ -3,14 +3,15 @@ import type { Locale } from "@/i18n/pathnames";
 
 /**
  * The tagline, drawn: two outlined containers, "yours" and "ours", filled to
- * one shared fill line. The fill rises once when the page opens (CSS, behind
- * prefers-reduced-motion); the drawing is the brand's one graphic device, not
- * a photo (§1). Captions are the two services' names and where each runs,
- * from content/services.json.
+ * one shared fill line and standing on one floor line. The fill rises once
+ * when the page opens (CSS, behind prefers-reduced-motion); the drawing is
+ * the brand's one graphic device, not a photo (§1). Captions are the two
+ * services' names and where each runs, from content/services.json.
  */
 const BODY =
   "M40 80Q40 60 60 60H90V26H150V60H180Q200 60 200 80V292Q200 312 180 312H60Q40 312 40 292Z";
 const LINE_Y = 134;
+const FLOOR_Y = 315;
 
 function Container({ id, x, late }: { id: string; x: number; late?: boolean }) {
   return (
@@ -41,12 +42,15 @@ export function HeroGauge({ locale, label }: { locale: Locale; label: string }) 
   const ss = services.secondShift;
   const bn = services.bottleneck;
   return (
-    <figure className="w-full max-w-[34rem]">
-      <svg viewBox="0 0 480 320" role="img" aria-label={label} className="block w-full text-ink">
+    <figure className="hero-gauge w-full">
+      <svg viewBox="0 0 480 322" role="img" aria-label={label} className="block w-full text-ink">
         {/* One line for both containers: the hairline the tick sits on. */}
         <path d={`M0 ${LINE_Y}H480`} stroke="var(--vkc-hairline)" strokeWidth="1.5" />
         <Container id="gauge-yours" x={0} />
         <Container id="gauge-ours" x={240} late />
+        {/* The floor both stand on, ruled like every section: hairline and tick. */}
+        <path d={`M0 ${FLOOR_Y}H480`} stroke="var(--vkc-hairline)" strokeWidth="1.5" />
+        <path d={`M0 ${FLOOR_Y}H48`} stroke="currentColor" strokeWidth="3" strokeLinecap="butt" />
       </svg>
       <figcaption className="mt-3 grid grid-cols-2 gap-4">
         <div className="pl-[8%]">

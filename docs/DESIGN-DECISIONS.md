@@ -398,3 +398,72 @@ silently widening the rule.
   corrected measurement put `/containers/pails` at 1.102: the French lead
   repeated "seaux" ("seaux de plastique, seaux de métal") and now reads
   "seaux de plastique, de métal", 1.098. Run 4, 2026-09-27.
+
+## 12. Run 4 decisions (2026-09-27, the design pass)
+
+Read against the three design skills (taste, frontend-design, scroll-craft)
+with the site screenshotted at 1280 and 375 in both languages before a line
+changed. The site read as variance 3 / motion 2 / density 5; the pass moves
+it to 5 / 4 / 5 and leaves the tokens, the two faces, the slugs, the nav
+labels, the copy and every guard where they were.
+
+- **The audit, in one line each.** An eyebrow above every section (eight on
+  the home page); the same three-equal-placard grid used three times on the
+  home page and again as "related" on every page; the hero gauge rendered
+  at 300 by 200 pixels in a corner; the shift bar's load-time animation ran
+  below the fold where nobody saw it; the closing call to action was one
+  more placard among placards; the longform hero's pictogram floated small.
+- **Boldness spent in one place: the fill line is the spine.** The header
+  now carries its own fill rule (a tick at the content's left edge, in line
+  with every section tick below it) and, where `animation-timeline: scroll()`
+  is supported, the rule fills from the tick to the content's right edge as
+  the page is read. It is a progress line made of the brand's one device,
+  CSS only, and under reduced motion only the tick stands. The section tick
+  now draws over a quarter of the viewport's travel (`entry 0% cover 25%`)
+  instead of two pixels. The shift bar fills on `view()` as it enters
+  (`entry 0% cover 40%`; the track is `overflow: clip`, because `hidden`
+  would make it the scroll container the timeline measures against).
+  Verified in numbers: below the fold the bar's transform is `scaleX(0)`,
+  at mid-viewport `scaleX(1)`, under reduced motion `none`.
+- **The hero.** Seven columns to five from `xl`, the gauge fills its column
+  (about 450 by 300 pixels at 1280), and both containers stand on a floor
+  line ruled like every section (hairline and tick) inside the drawing. The
+  title is 4rem from `xl`, measured so both English sentences hold their
+  own line and the French runs three, never four.
+- **Placards hold facts; rules point somewhere.** The three container groups
+  are one label with three fields side by side (`ContainerLabel`, on the home
+  page and the containers hub); industries and hub pages are ruled manifest
+  rows (`Manifest`); "where this leads next" is three ruled cells under one
+  hairline. The two service placards, the chooser, the split panels and the
+  spec grid keep their boxes, because each is a fact.
+- **Eyebrows are information, not furniture.** Two on the home page (the
+  hero's and "Straight talk"); one per longform page (the hero's); the quote
+  form's three legends keep theirs because each opens a group. The message
+  keys the removed eyebrows read from stay in both files: they still feed
+  the related cells and the copy-ratio gate, which measures messages, not
+  render. The compare table, the chooser, the FAQ and "keep reading" lost
+  theirs.
+- **The closing band prints in negative.** `.vkc-negative` in
+  `brand/tokens.css` re-points the six colour tokens to the other scheme's
+  values, so the band is the darkest thing on a light page and the lightest
+  on a dark one, and the accent button inside it keeps AA. Once per page, on
+  purpose, and it is the last thing before the footer: the ending holds
+  instead of trailing into a footer.
+- **What was tried and removed.** The band's text column was capped in `ch`
+  of the body font, which wrapped "Dites-nous" at its hyphen into four
+  lines; the cap is now on the heading in its own font. A concrete pour-line
+  texture behind the hero (`.floor-lines`, shipped unused since run 1) was
+  considered and left unused: a hairline grid drawn to make a page feel
+  designed is decoration, and the floor is already the page.
+- **scroll-craft, applied without its pipeline.** The skill's asset step
+  (generated stills and clips) is closed by CLAUDE.md §1, and its page
+  grammar assumes one scroll film; this is nineteen routes of spec-sheet
+  prose. What carries over: one engineered device, chosen for the brand
+  (the fill), varied by span (header, section, bar), no scroll cue, no
+  counter, and an ending that resolves. The self-authored brief a later
+  media run would read is `docs/SCROLL-BRIEF.md`.
+- **Playwright MCP is the proof surface.** Every page at 1280 and 375, both
+  locales, light and dark, plus viewport captures at scroll positions for
+  the scroll-driven pieces (a full-page capture reports a scroll timeline
+  at its top-of-page state, so it cannot prove them). The desktop app's
+  Preview Start prompt is never triggered.

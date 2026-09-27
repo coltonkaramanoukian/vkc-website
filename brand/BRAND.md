@@ -98,7 +98,24 @@ request. It is `aria-hidden`: the link around it carries the name.
   label in the corner, and it never plays under `prefers-reduced-motion`. No
   text baked into an image; the caption is set in the mono field face.
 - Motion: one easing, CSS only, and only where it draws the fill rule. The
-  fill-rule tick advances as a section scrolls into view, the header rule
-  settles when the page scrolls, the hero gauge and shift bar fill once on
-  load. Everything sits behind `prefers-reduced-motion: reduce`. No fade-slide
-  entrances, no parallax, no per-element timers (run 2, DESIGN-DECISIONS §10).
+  fill-rule tick draws as a section scrolls into view, the header's own rule
+  fills from its tick to the content's right edge as the page is read, the
+  shift bar fills as it scrolls into view, and the hero gauge fills once on
+  load. Everything sits behind `prefers-reduced-motion: reduce`, where the
+  header keeps only its tick. No fade-slide entrances, no parallax, no
+  per-element timers, no JavaScript in any of it (run 2, DESIGN-DECISIONS
+  §10; run 4, §12).
+- Negative print: one block per page may be set in the other scheme's tokens
+  (`.vkc-negative` in `tokens.css`), the way a warning label prints white on
+  black. The six colours swap as a set, so the accent, the rules and the text
+  keep their contrast inside it. On this site it is the closing call to
+  action, and nothing else.
+- Placards hold facts; rules point somewhere. A set of pages is offered as
+  ruled rows (a manifest) or ruled cells, never as a grid of boxes. A group
+  of facts that belong together prints as one label with several fields
+  side by side (the container families), not as several labels.
+- Eyebrows are information, not furniture. The page hero carries one; a
+  section carries one only when the mono label says something the heading
+  does not ("Straight talk"). The fill rule opens a section; the eyebrow's
+  tick does not repeat it. The quote form's three legends keep theirs: each
+  opens a group of the form, which is a label of its own.

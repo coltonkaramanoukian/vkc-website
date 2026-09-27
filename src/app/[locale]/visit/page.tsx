@@ -87,8 +87,7 @@ export default async function VisitPage({ params }: Props) {
 
       <section id="book" className="wrap mt-14 scroll-mt-24" aria-labelledby="book-heading">
         <div className="placard p-5 sm:p-8">
-          <p className="eyebrow">{t("visit.formEyebrow")}</p>
-          <h2 id="book-heading" className="mt-3">
+          <h2 id="book-heading">
             {t("visit.formHeading")}
           </h2>
           <p className="mt-2 max-w-[52ch] text-graphite">{t("visit.formIntro")}</p>

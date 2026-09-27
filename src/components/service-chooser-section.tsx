@@ -15,7 +15,6 @@ export async function ServiceChooserSection({ locale }: { locale: Locale }) {
     <section className="wrap section-tight" aria-labelledby="chooser-heading">
       <div className="placard p-5 sm:p-8 lg:p-10">
         <div className="section-head">
-          <p className="eyebrow">{t("eyebrow")}</p>
           <h2 id="chooser-heading">{t("heading")}</h2>
           <p className="text-graphite">{t("intro")}</p>
         </div>
