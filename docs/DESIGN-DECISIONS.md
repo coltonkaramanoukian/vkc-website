@@ -356,3 +356,15 @@ silently widening the rule.
 - **Captures now include the Twitter and `og:image:alt` tags**, so every
   guard scans them (a blind spot the constitution auditor found; the text is
   the same title and description, but a guard should not have to assume so).
+- **Copy links into the glossary by key, not by anchor.** A message writes
+  `[QC sheets](/glossary#qc-sheet)` in English and `[feuilles CQ](/glossary#qc-sheet)`
+  in French; `lib/glossary-links.ts` maps the key to that language's own
+  term and its anchor (`#qc-sheet` on `/en/glossary`, `#feuille-cq` on
+  `/fr/lexique`), and a test checks every key names a real entry in both
+  files and that every entry has a key. `lib/inline-links.ts` resolves the
+  target for `Inline`; an unknown key or route renders as plain text, so a
+  typo cannot ship a dead link. First plain mention per page only, in body
+  paragraphs, FAQ answers and leads: never a heading, never metadata, never
+  the glossary itself, never a page's own subject. The overlap and ratio
+  measurements strip link targets and keep labels, so the links change no
+  reader-visible text and no gate.
