@@ -91,8 +91,8 @@ try {
   // refuses ("choice") must land on the <select>, not only on text inputs.
   const quotePage = await browser.newPage({ viewport: { width: 390, height: 844 } });
   await quotePage.goto(`${configured.base}/en/quote`, { waitUntil: "networkidle" });
-  await quotePage.fill("#quote-company", "NC5 Select Co");
-  await quotePage.fill("#quote-name", "Test");
+  await quotePage.fill("#quote-company", "Select Co");
+  await quotePage.fill("#quote-name", "Tester");
   await quotePage.fill("#quote-email", "test@example.com");
   await quotePage.check('#quote-form input[name="service"][value="bottleneck"]');
   await quotePage.fill("#quote-product", "degreaser");
@@ -111,10 +111,12 @@ try {
     const select = document.querySelector<HTMLSelectElement>("#quote-viscosity");
     const described = select?.getAttribute("aria-describedby") ?? "";
     const message = described ? (document.getElementById(described)?.textContent?.trim() ?? "") : "";
-    return { described, message, focused: document.activeElement?.id ?? "" };
+    const invalid = Array.from(document.querySelectorAll('#quote-form [aria-invalid="true"]')).map((el) => el.id);
+    return { described, message, invalid, focused: document.activeElement?.id ?? "" };
   });
-  record("(f) rejected select", marked.described === "quote-viscosity-error" && marked.message.length > 0 && marked.focused === "quote-viscosity",
-    `aria-describedby="${marked.described}" → "${marked.message}"; focus on #${marked.focused}`);
+  // Only the select is rejected, so it is also the first invalid field and takes focus.
+  record("(f) rejected select", marked.described === "quote-viscosity-error" && marked.message.length > 0 && marked.invalid.join() === "quote-viscosity" && marked.focused === "quote-viscosity",
+    `invalid fields: [${marked.invalid.join(", ")}]; aria-describedby="${marked.described}" → "${marked.message}"; focus on #${marked.focused}`);
   await browser.close();
 } finally {
   await stopServer(configured.child);

@@ -61,6 +61,9 @@ function webp(bytes: Buffer): ImageSize | null {
     return positive(1 + bytes.readUIntLE(24, 3), 1 + bytes.readUIntLE(27, 3), "webp");
   }
   if (chunk === "VP8 ") {
+    // Lossy: the key-frame header stores the actual width and height in 14
+    // bits each (RFC 6386 §9.1; libwebp VP8GetInfo reads them as-is). Only
+    // VP8L and VP8X store size minus one, so no +1 here.
     if (bytes[23] !== 0x9d || bytes[24] !== 0x01 || bytes[25] !== 0x2a) return null;
     return positive(bytes.readUInt16LE(26) & 0x3fff, bytes.readUInt16LE(28) & 0x3fff, "webp");
   }

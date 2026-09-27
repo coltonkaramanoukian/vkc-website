@@ -1,6 +1,12 @@
 import { approvedClients } from "@/lib/content";
 import { localImageSize } from "@/lib/local-image";
 
+/** Width and height attributes from the logo file's header; nothing when it cannot be read. */
+function logoBox(src: string): { width: number; height: number } | Record<string, never> {
+  const size = localImageSize(src);
+  return size ? { width: size.width, height: size.height } : {};
+}
+
 /** D3. Approved clients only; an empty list renders no section at all. */
 export function ClientList({ heading }: { heading: string }) {
   const clients = approvedClients();
@@ -18,7 +24,7 @@ export function ClientList({ heading }: { heading: string }) {
               <img
                 src={client.logo}
                 alt={client.name}
-                {...(localImageSize(client.logo) ?? {})}
+                {...logoBox(client.logo)}
                 className="h-10 w-auto"
                 loading="lazy"
                 decoding="async"

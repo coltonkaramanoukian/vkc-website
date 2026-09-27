@@ -25,7 +25,8 @@ export function loadCaptures(dir = ".render"): PageCapture[] {
 /** Every string a visitor or crawler can read on the page. */
 export function readableText(c: PageCapture): string {
   const ld = c.jsonLd.join(" ");
-  const { description, ogTitle, ogDescription, ogImageAlt, twitterTitle, twitterDescription, twitterImageAlt } = c.meta;
+  // Defaults: a capture written before these tags were recorded still loads.
+  const { description, ogTitle, ogDescription, ogImageAlt = "", twitterTitle = "", twitterDescription = "", twitterImageAlt = "" } = c.meta;
   return [c.title, description, ogTitle, ogDescription, ogImageAlt, twitterTitle, twitterDescription, twitterImageAlt, ld, c.bodyText, c.attrText].join(" \n ");
 }
 
