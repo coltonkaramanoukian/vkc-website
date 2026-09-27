@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { setRequestLocale } from "next-intl/server";
-import { ContainerGroupCards } from "@/components/hub-cards";
+import { ContainerLabel } from "@/components/container-label";
 import { LongformPage } from "@/components/longform";
 import { pageMetadata } from "@/lib/seo";
 import { isLocale } from "@/i18n/pathnames";
@@ -22,7 +22,7 @@ export default async function ContainersHubPage({ params }: Props) {
       locale={locale}
       route="/containers"
       pageKey="containers"
-      slots={{ groups: <ContainerGroupCards locale={locale} /> }}
+      slots={{ groups: <ContainerLabel locale={locale} /> }}
     />
   );
 }

@@ -62,12 +62,12 @@ export default async function QuotePage({ params }: Props) {
 
         <aside className="space-y-8 lg:sticky lg:top-24 lg:self-start">
           <div>
-            <p className="eyebrow">{t("quote.nextHeading")}</p>
-            <p className="mt-3">{t("quote.next")}</p>
+            <p className="field-name">{t("quote.nextHeading")}</p>
+            <p className="mt-2">{t("quote.next")}</p>
           </div>
-          <div>
-            <p className="eyebrow">{t("quote.helpsHeading")}</p>
-            <ul className="mt-3">
+          <div className="border-t border-hairline pt-6">
+            <p className="field-name">{t("quote.helpsHeading")}</p>
+            <ul className="mt-2">
               {helps.map((item) => (
                 <li key={item} className="placard-row border-hairline py-2.5 first:border-t">
                   {item}
@@ -75,9 +75,9 @@ export default async function QuotePage({ params }: Props) {
               ))}
             </ul>
           </div>
-          <div>
-            <p className="eyebrow">{t("quote.dataHeading")}</p>
-            <p className="mt-3 text-graphite">
+          <div className="border-t border-hairline pt-6">
+            <p className="field-name">{t("quote.dataHeading")}</p>
+            <p className="mt-2 text-graphite">
               {t("quote.data")}{" "}
               <Link href={localizedPath(locale, "/privacy")}>{t("common.nav.privacy")}</Link>
             </p>

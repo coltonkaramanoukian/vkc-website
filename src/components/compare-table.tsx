@@ -29,8 +29,7 @@ export async function CompareTable({ locale }: { locale: Locale }) {
   const bn = services.bottleneck;
   return (
     <div className="compare" data-guard="second-shift">
-      <p className="eyebrow">{copy.eyebrow}</p>
-      <h3 id="compare-heading" className="mt-3 text-[1.375rem] sm:text-[1.5rem]">
+      <h3 id="compare-heading" className="text-[1.375rem] sm:text-[1.5rem]">
         {copy.heading}
       </h3>
       <table className="mt-5" aria-labelledby="compare-heading">

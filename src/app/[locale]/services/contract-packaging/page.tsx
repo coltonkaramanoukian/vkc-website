@@ -49,7 +49,7 @@ export default async function ContractPackagingPage({ params }: Props) {
       }}
       after={
         <>
-          <Faq locale={locale} eyebrow={tf("eyebrow")} heading={tf("heading")} items={faq} id="contract-packaging-faq" />
+          <Faq locale={locale} heading={tf("heading")} items={faq} id="contract-packaging-faq" />
           <ServiceJsonLd
             locale={locale}
             route="/services/contract-packaging"

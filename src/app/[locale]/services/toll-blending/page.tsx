@@ -35,7 +35,7 @@ export default async function TollBlendingPage({ params }: Props) {
       hero={<PhotoRow ids={["toll-blending-batch"]} locale={locale} />}
       after={
         <>
-          <Faq locale={locale} eyebrow={tf("eyebrow")} heading={tf("heading")} items={faq} id="toll-blending-faq" />
+          <Faq locale={locale} heading={tf("heading")} items={faq} id="toll-blending-faq" />
           <ServiceJsonLd
             locale={locale}
             route="/services/toll-blending"

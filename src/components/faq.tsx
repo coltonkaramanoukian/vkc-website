@@ -10,13 +10,11 @@ import type { Locale } from "@/i18n/pathnames";
  */
 export function Faq({
   locale,
-  eyebrow,
   heading,
   items,
   id = "faq",
 }: {
   locale: Locale;
-  eyebrow: string;
   heading: string;
   items: FaqItem[];
   id?: string;
@@ -25,7 +23,6 @@ export function Faq({
     <section className="wrap section" aria-labelledby={`${id}-heading`}>
       <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] lg:gap-12">
         <div className="section-head">
-          <p className="eyebrow">{eyebrow}</p>
           <h2 id={`${id}-heading`}>{heading}</h2>
         </div>
         <div>

@@ -21,14 +21,22 @@ export async function CtaActions({ locale }: { locale: Locale }) {
   );
 }
 
+/**
+ * The closing call to action, printed in negative: the page's one reversed
+ * label, so the last thing on every page is also the darkest (or, in dark
+ * mode, the lightest). Tokens swap as a set (brand/tokens.css .vkc-negative),
+ * so the accent, the rules and the text keep their contrast inside it.
+ */
 export async function CtaBand({ locale }: { locale: Locale }) {
   const { t } = await getCopy(locale, "common");
   return (
     <section className="wrap mt-20" aria-labelledby="cta-band-heading" data-shared="cta">
-      <div className="placard flex flex-col gap-5 p-6 sm:p-8 md:flex-row md:items-center md:justify-between">
-        <div>
-          <h2 id="cta-band-heading">{t("ctaBand.heading")}</h2>
-          <p className="mt-2 text-graphite">{t("ctaBand.body")}</p>
+      <div className="band-negative vkc-negative flex flex-col gap-7 p-7 sm:p-10 md:flex-row md:items-end md:justify-between md:gap-12 lg:p-14">
+        <div className="min-w-0 md:max-w-[36rem]">
+          <h2 id="cta-band-heading" className="band-heading max-w-[18ch]">
+            {t("ctaBand.heading")}
+          </h2>
+          <p className="mt-3 max-w-[48ch] text-graphite text-[1.0625rem] sm:text-[1.125rem]">{t("ctaBand.body")}</p>
         </div>
         <CtaActions locale={locale} />
       </div>
