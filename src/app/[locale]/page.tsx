@@ -49,10 +49,10 @@ export default async function HomePage({ params }: Props) {
     <PageShell locale={locale} route="/">
       {/* Hero: the tagline, and the tagline drawn. */}
       <section className="wrap pb-14 pt-10 sm:pt-16 lg:pb-20 lg:pt-20">
-        <div className="grid items-end gap-10 xl:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] xl:gap-14">
+        <div className="grid items-end gap-10 xl:grid-cols-[minmax(0,8fr)_minmax(0,4fr)] xl:gap-14">
           <div>
             <p className="eyebrow">{t("home.eyebrow")}</p>
-            <h1 className="hero-title mt-4 max-w-[20ch]">{tagline(locale)}</h1>
+            <h1 className="hero-title mt-4 max-w-[20ch] xl:text-[3.75rem]">{tagline(locale)}</h1>
             <p className="lead mt-6">{t("home.sub")}</p>
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <CtaActions locale={locale} />
