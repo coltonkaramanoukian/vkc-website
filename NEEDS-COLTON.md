@@ -140,6 +140,32 @@ scene lands in a composed place rather than an afterthought:
   line only, everything behind reduced motion) covers media too. A clip is a
   still that happens to move; it is not a transition.
 
+## 9. Client quotes and case studies (social proof)
+
+The home page has an "In their words" section built and waiting. It renders
+**nothing** on the live site until `content/clients.json` has an approved
+client with a quote or case study written in both languages (fields in
+`docs/CONTENT-INTAKE.md`, under clients.json). No agent may write a quote,
+name or logo: each one needs the client's written yes.
+
+What you need to supply, per client:
+
+- their written permission to be named (that is what `approved: true` means);
+- a logo file, if you want the logo rather than the name (put it under
+  `public/photos/` and point `logo` at it);
+- the quote in English and in French, the person's name, and optionally their
+  title; and/or a short paragraph on what VKC ran for them, in both languages.
+
+**Before you approve the first client, rewrite two sentences.** The home
+"Straight talk" block (`home.plain.body`) and the about page ("What won't be
+written here") both say the site shows no client logos. `npm test` fails the
+moment a client is approved while either sentence still says that (a
+negative control proved it red with an injected client, then green after the
+revert).
+
+To see the empty slots laid out, run the `dev-placeholders` launch config
+(port 3201); the live site never shows them.
+
 ## Things that look like problems and are not
 
 - **Lighthouse best-practices 96 on a local build.** The only failing audit is

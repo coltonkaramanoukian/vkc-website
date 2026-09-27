@@ -136,6 +136,23 @@ Ships as `[]`, which renders no section at all. Each entry is
 `approved: true` means they said yes, in writing, to being named on this site.
 NC-1 proves an unapproved name never reaches the build.
 
+Two optional fields per entry feed the "In their words" section on the home
+page. Neither renders unless the entry is `approved: true` AND both languages
+are written; a half-filled quote renders nothing.
+
+```
+content/clients.json:[n].quote.text.en   the person's words, in English
+content/clients.json:[n].quote.text.fr   their words in French, written, not machine-translated
+content/clients.json:[n].quote.name      the named person (required for a quote to show)
+content/clients.json:[n].quote.role.en   optional, e.g. their title
+content/clients.json:[n].quote.role.fr   optional, both languages or neither
+content/clients.json:[n].caseStudy.en    a short paragraph: what VKC ran for them
+content/clients.json:[n].caseStudy.fr    the same, written in French
+```
+
+A quote is still copy on the site: `guard:claims`, `guard:numbers` and, if it
+names Second Shift, `guard:staffing` all read it.
+
 ## scenes.json (covers and galleries — the media manifest)
 
 Thirteen slots (one per page) and two galleries, all empty. Each slot has an
