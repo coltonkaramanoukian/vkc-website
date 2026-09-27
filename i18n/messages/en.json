@@ -461,6 +461,32 @@
         "yours": "Your shifts",
         "ours": "{ss}",
         "caption": "The day as your plant runs it: the shifts you cover, and the one VKC runs for you."
+      },
+      "faq": {
+        "eyebrow": "Questions",
+        "heading": "Before the first shift",
+        "items": [
+          {
+            "q": "Who makes the calls on the floor during the shift?",
+            "a": "Our lead hand. From the first container to the last case, the shift is directed by our lead hand and run by our crew; the product, the line and the specification stay yours, and so does the last word on what the output has to be."
+          },
+          {
+            "q": "What do we get back the next morning?",
+            "a": "Finished, packed product, counted, and the paperwork for the shift: our QC sheets and production log, filled in as it ran. If a lot needs explaining later, the explanation is already written down."
+          },
+          {
+            "q": "Does someone from our plant need to be there?",
+            "a": "That is your call, not a condition. The shift does not depend on it: our lead hand directs it and our crew does the work on your line either way. Come and watch the first one if you want to see how it runs."
+          },
+          {
+            "q": "Which shift gets quoted?",
+            "a": "The one your plant does not run. Say which on the form; the quote is made for that shift, per unit or per shift, and the walkthrough confirms what the line can do in it."
+          },
+          {
+            "q": "How is this different from adding people to our own roster?",
+            "a": "You are not buying time on your floor; you are buying the shift’s output. The people on the line are VKC’s, directed by our lead hand, and what you pay for is what comes off the line, per unit or per shift, with the record to match. Nothing about how the shift is run lands on your desk."
+          }
+        ]
       }
     },
     "contractPackaging": {
@@ -507,7 +533,29 @@
             "When the first run has to ship."
           ]
         }
-      ]
+      ],
+      "faq": {
+        "eyebrow": "Questions",
+        "heading": "Before the first fill",
+        "items": [
+          {
+            "q": "What do we send you to start?",
+            "a": "The product, or the formula if it still has to be made; the empty containers with their closures; the labels; and the spec the filled unit has to meet, with a safety data sheet if the product has one. If any of those is still being decided, say so, and the quote waits for it rather than guessing."
+          },
+          {
+            "q": "How do you check that each container holds the right amount?",
+            "a": "By one of two fill methods, chosen for the product: weigh-fill, where the fill is set by weight, or fill-to-line, where it is set by the mark on the container. Which one applies is part of the quote."
+          },
+          {
+            "q": "Can you label and pack, or only fill?",
+            "a": "All of it, under one quote: filling, labelling, kitting when a product ships with components, and packing so the pallet leaves ready for the truck. You can also send only the step your line is short on, and keep the rest in house."
+          },
+          {
+            "q": "What if the product is not made yet?",
+            "a": "Then it starts with [toll blending](/services/toll-blending): the batch is made here to your formula, and the fill follows in the same building. One quote covers both steps."
+          }
+        ]
+      }
     },
     "tollBlending": {
       "eyebrow": "{bn}: toll blending",
@@ -548,7 +596,29 @@
             "How it should be packed, if we are packing it too."
           ]
         }
-      ]
+      ],
+      "faq": {
+        "eyebrow": "Questions",
+        "heading": "Before the first batch",
+        "items": [
+          {
+            "q": "Whose formula is it?",
+            "a": "Yours. Toll blending is making your product to your formula; the formula stays yours to change, and the batch is made to it as written. What we need from it is enough to price and run the work."
+          },
+          {
+            "q": "Can the batch be filled here too?",
+            "a": "Yes: that is the point of doing both at one facility. A batch made here goes straight into bottles, jugs, pails or kits, with one quote for the blend and the fill together."
+          },
+          {
+            "q": "How is a blend priced?",
+            "a": "On the batch as described: what goes into it, how it has to be mixed and checked, its size and how often it comes around. Change any of those and the number changes with it."
+          },
+          {
+            "q": "Which products do you blend?",
+            "a": "The same trades the fill line runs: cleaners and degreasers, lubricants and greases, sealers, coatings and colourants. A product close to one of those is worth asking about; how it behaves in the mixer decides it."
+          }
+        ]
+      }
     },
     "bottlesAndJugs": {
       "eyebrow": "Containers: bottles and jugs",
@@ -991,9 +1061,42 @@
           "h2": "Which one, and when",
           "body": [
             "A plant whose equipment sits idle on a shift it doesn’t run wants {ss}. A plant whose line is full wants {bn}. A product that isn’t made yet wants toll blending first. The two questions below sort it out, and a walkthrough settles anything they can’t."
-          ]
+          ],
+          "slot": "compare"
         }
-      ]
+      ],
+      "compare": {
+        "eyebrow": "Side by side",
+        "heading": "The two services, row by row, on one label",
+        "rowsLabel": "What differs",
+        "rows": [
+          {
+            "label": "Where",
+            "ss": "Your plant, your line",
+            "bn": "Our facility, our line"
+          },
+          {
+            "label": "What you send",
+            "ss": "Nothing: the product stays on your line",
+            "bn": "The product or its formula, plus the containers, closures and labels"
+          },
+          {
+            "label": "Who runs it",
+            "ss": "Our lead hand directs the shift; our crew does the work",
+            "bn": "Our crew, on our own line at our facility"
+          },
+          {
+            "label": "What comes back",
+            "ss": "The shift’s output, packed, documented on our QC sheets and production log",
+            "bn": "Filled, labelled, kitted and packed product, ready to ship"
+          },
+          {
+            "label": "How it is priced",
+            "ss": "Per unit or per shift",
+            "bn": "Quoted on the job: product, container, count and date"
+          }
+        ]
+      }
     },
     "containers": {
       "eyebrow": "Containers",

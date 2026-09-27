@@ -3,6 +3,7 @@ import { setRequestLocale } from "next-intl/server";
 import { HubCards } from "@/components/hub-cards";
 import { LongformPage } from "@/components/longform";
 import { ServiceChooserSection } from "@/components/service-chooser-section";
+import { CompareTable } from "@/components/compare-table";
 import { BottleneckPlacard, SecondShiftPlacard } from "@/components/service-placards";
 import { getCopy } from "@/lib/i18n";
 import { pageMetadata } from "@/lib/seo";
@@ -62,6 +63,7 @@ export default async function ServicesHubPage({ params }: Props) {
             ]}
           />
         ),
+        compare: <CompareTable locale={locale} />,
       }}
       after={<ServiceChooserSection locale={locale} />}
     />
