@@ -20,6 +20,7 @@ export const metadata: Metadata = {
   title: { template: `%s | ${site.brandName}`, default: site.brandName },
   applicationName: site.brandName,
   formatDetection: { telephone: false, email: false, address: false },
+  twitter: { card: "summary_large_image" },
 };
 
 export const viewport: Viewport = {

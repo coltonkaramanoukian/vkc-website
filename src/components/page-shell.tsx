@@ -23,7 +23,7 @@ export async function PageShell({
       <main id="main" data-route={route}>
         {children}
       </main>
-      <SiteFooter locale={locale} />
+      <SiteFooter locale={locale} route={route} />
     </>
   );
 }

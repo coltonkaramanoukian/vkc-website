@@ -13,10 +13,24 @@
   --font-mono: var(--font-plex-mono), var(--vkc-font-mono);
 }
 
+/* ---- Motion tokens ---------------------------------------------------------
+   One easing, two durations. Motion exists only where it explains something
+   (a line filling, a panel opening, a state changing); never as an entrance. */
+:root {
+  --vkc-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --vkc-dur: 200ms;
+  --vkc-dur-slow: 900ms;
+  --vkc-header-h: 4rem;
+  --vkc-qc-hover: color-mix(in srgb, var(--vkc-qc) 86%, var(--vkc-ink));
+  --vkc-qc-tint: color-mix(in srgb, var(--vkc-qc) 7%, var(--vkc-label));
+  --vkc-floor-deep: color-mix(in srgb, var(--vkc-floor) 88%, var(--vkc-ink));
+}
+
 @layer base {
   html {
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
+    scroll-padding-top: calc(var(--vkc-header-h) + 1rem);
   }
 
   body {
@@ -27,24 +41,26 @@
     font-size: 1.0625rem;
     line-height: 1.6;
     text-rendering: optimizeLegibility;
+    font-feature-settings: "kern", "liga", "ss01";
   }
 
   :where(h1, h2, h3) {
     font-stretch: var(--vkc-stretch-display);
-    line-height: 1.08;
-    letter-spacing: -0.01em;
+    line-height: 1.06;
+    letter-spacing: -0.015em;
     overflow-wrap: break-word;
     hyphens: manual;
     text-wrap: balance;
   }
 
   h1 {
-    font-size: clamp(2rem, 1.35rem + 3.4vw, 3.5rem);
+    font-size: clamp(2.25rem, 1.4rem + 4.2vw, 4.5rem);
     font-weight: 800;
+    letter-spacing: -0.02em;
   }
 
   h2 {
-    font-size: clamp(1.5rem, 1.2rem + 1.6vw, 2.25rem);
+    font-size: clamp(1.625rem, 1.2rem + 2vw, 2.625rem);
     font-weight: 760;
   }
 
@@ -63,6 +79,7 @@
     text-decoration-line: underline;
     text-decoration-thickness: 1px;
     text-underline-offset: 0.2em;
+    transition: text-decoration-thickness var(--vkc-dur) var(--vkc-ease);
   }
 
   a:hover {
@@ -77,6 +94,14 @@
   ::selection {
     background: var(--vkc-qc);
     color: var(--vkc-on-qc);
+  }
+
+  summary {
+    cursor: pointer;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
   }
 }
 
@@ -96,6 +121,12 @@
     }
   }
 
+  @media (min-width: 1024px) {
+    .wrap {
+      padding-inline: 32px;
+    }
+  }
+
   .prose-measure {
     max-width: var(--vkc-measure);
   }
@@ -104,8 +135,32 @@
     margin-top: 1em;
   }
 
+  .lead {
+    font-size: clamp(1.125rem, 1rem + 0.5vw, 1.3125rem);
+    line-height: 1.5;
+    max-width: 58ch;
+  }
+
+  /* A page section: consistent vertical rhythm site-wide. */
+  .section {
+    padding-block: clamp(3.5rem, 2.5rem + 4vw, 6.5rem);
+  }
+
+  .section-tight {
+    padding-block: clamp(2.5rem, 2rem + 2vw, 4rem);
+  }
+
+  /* Section head: eyebrow, heading, intro. */
+  .section-head {
+    display: grid;
+    gap: 0.75rem;
+    max-width: 44rem;
+  }
+
   /* The fill line: a hairline with a short heavy tick at the left, like the
-     fill-to-line mark moulded into a jug. Used as the section divider. */
+     fill-to-line mark moulded into a jug. Used as the section divider. The
+     tick draws itself as the rule scrolls into view (scroll-driven, CSS only;
+     static where unsupported or when motion is reduced). */
   .fill-rule {
     height: 3px;
     border: 0;
@@ -113,6 +168,16 @@
     background:
       linear-gradient(var(--vkc-ink), var(--vkc-ink)) left center / 3rem 3px no-repeat,
       linear-gradient(var(--vkc-hairline), var(--vkc-hairline)) center / 100% 1px no-repeat;
+  }
+
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      .fill-rule {
+        animation: fill-tick linear both;
+        animation-timeline: view();
+        animation-range: entry 0% entry 70%;
+      }
+    }
   }
 
   /* Field name, as printed on a pallet label. Sentence case, never all caps. */
@@ -123,6 +188,28 @@
     line-height: 1.4;
     letter-spacing: 0.01em;
     color: var(--vkc-graphite);
+  }
+
+  /* Eyebrow: a field name with the fill tick in front, opening a block. */
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: var(--font-plex-mono), var(--vkc-font-mono);
+    font-weight: 500;
+    font-size: 0.8125rem;
+    line-height: 1.4;
+    letter-spacing: 0.01em;
+    color: var(--vkc-graphite);
+  }
+
+  .eyebrow::before {
+    content: "";
+    display: inline-block;
+    width: 1.5rem;
+    height: 3px;
+    background: var(--vkc-ink);
+    flex: none;
   }
 
   /* The label: a bordered placard with a field grid. Square, no shadow. */
@@ -136,28 +223,77 @@
     border-top: 1px solid var(--vkc-hairline);
   }
 
-  /* Buttons: text only, no appended arrows. */
+  /* A placard the reader can act on: the whole label is the link. */
+  .placard-link {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+    transition:
+      border-color var(--vkc-dur) var(--vkc-ease),
+      background-color var(--vkc-dur) var(--vkc-ease);
+  }
+
+  .placard-link:hover,
+  .placard-link:focus-visible {
+    border-color: var(--vkc-qc);
+    background: var(--vkc-qc-tint);
+  }
+
+  .placard-link:hover .placard-title,
+  .placard-link:focus-visible .placard-title {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.15em;
+  }
+
+  .placard-link .placard-cta {
+    color: var(--vkc-qc);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+  }
+
+  /* Buttons: text only, no appended arrows. Hover inverts like a label's
+     negative print; press settles by a pixel. */
   .btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     min-height: 48px;
-    padding: 0.75rem 1.25rem;
+    padding: 0.75rem 1.375rem;
     border-radius: var(--vkc-radius);
     font-weight: 650;
     font-stretch: 106%;
     line-height: 1.2;
     text-decoration: none;
     border: var(--vkc-border) solid transparent;
+    cursor: pointer;
+    transition:
+      background-color var(--vkc-dur) var(--vkc-ease),
+      color var(--vkc-dur) var(--vkc-ease),
+      border-color var(--vkc-dur) var(--vkc-ease),
+      transform var(--vkc-dur) var(--vkc-ease);
+  }
+
+  .btn:active {
+    transform: translateY(1px);
+  }
+
+  .btn:disabled {
+    opacity: 0.6;
+    cursor: wait;
   }
 
   .btn-primary {
     background: var(--vkc-qc);
     color: var(--vkc-on-qc);
+    border-color: var(--vkc-qc);
   }
 
-  .btn-primary:hover {
-    text-decoration: underline;
+  .btn-primary:hover,
+  .btn-primary:focus-visible {
+    background: var(--vkc-qc-hover);
+    border-color: var(--vkc-qc-hover);
   }
 
   .btn-secondary {
@@ -166,7 +302,193 @@
     border-color: var(--vkc-ink);
   }
 
-  /* Form fields */
+  .btn-secondary:hover,
+  .btn-secondary:focus-visible {
+    background: var(--vkc-ink);
+    color: var(--vkc-label);
+  }
+
+  .btn-lg {
+    min-height: 56px;
+    padding: 0.875rem 1.75rem;
+    font-size: 1.0625rem;
+  }
+
+  /* Text links inside chrome (nav, footer): ink, underline on hover only. */
+  .chrome-link {
+    color: var(--vkc-ink);
+    text-decoration: none;
+  }
+
+  .chrome-link:hover,
+  .chrome-link:focus-visible,
+  .chrome-link[aria-current="page"] {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.25em;
+  }
+
+  /* ---- Header ------------------------------------------------------------ */
+
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    background: var(--vkc-label);
+    border-bottom: 1px solid var(--vkc-hairline);
+  }
+
+  @supports (animation-timeline: scroll()) {
+    .site-header {
+      animation: header-settle linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 120px;
+    }
+  }
+
+  .header-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    height: var(--vkc-header-h);
+  }
+
+  /* The menu: a <details> so it works without JavaScript. The panel drops
+     the full width of the viewport under the header, label-white, and lists
+     every group of the site as label rows. */
+  .menu {
+    position: static;
+  }
+
+  .menu-summary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    min-height: 44px;
+    padding: 0 0.5rem;
+    font-family: var(--font-plex-mono), var(--vkc-font-mono);
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--vkc-ink);
+    list-style: none;
+    user-select: none;
+    border-radius: var(--vkc-radius);
+  }
+
+  /* Two fill lines as the glyph; they meet as one when the menu is open. */
+  .menu-glyph {
+    position: relative;
+    display: inline-block;
+    width: 1.125rem;
+    height: 0.75rem;
+    flex: none;
+  }
+
+  .menu-glyph::before,
+  .menu-glyph::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: currentColor;
+    transition:
+      transform var(--vkc-dur) var(--vkc-ease),
+      top var(--vkc-dur) var(--vkc-ease);
+  }
+
+  .menu-glyph::before {
+    top: 1px;
+  }
+
+  .menu-glyph::after {
+    top: 9px;
+  }
+
+  .menu[open] .menu-glyph::before {
+    top: 5px;
+    transform: rotate(45deg);
+  }
+
+  .menu[open] .menu-glyph::after {
+    top: 5px;
+    transform: rotate(-45deg);
+  }
+
+  .menu-panel {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: var(--vkc-header-h);
+    max-height: calc(100dvh - var(--vkc-header-h));
+    overflow-y: auto;
+    background: var(--vkc-label);
+    border-bottom: var(--vkc-border) solid var(--vkc-ink);
+    z-index: 40;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .menu[open] .menu-panel {
+      animation: panel-open var(--vkc-dur) var(--vkc-ease) both;
+    }
+  }
+
+  .menu-group {
+    border-top: 1px solid var(--vkc-hairline);
+    padding-block: 1rem;
+  }
+
+  @media (min-width: 1024px) {
+    .menu-group {
+      border-top: 0;
+      border-left: 1px solid var(--vkc-hairline);
+      padding: 0 0 0 1.25rem;
+    }
+
+    .menu-group:first-child {
+      border-left: 0;
+      padding-left: 0;
+    }
+  }
+
+  .menu-link {
+    display: block;
+    padding: 0.4rem 0;
+    color: var(--vkc-ink);
+    text-decoration: none;
+    font-size: 1.0625rem;
+  }
+
+  .menu-link:hover,
+  .menu-link:focus-visible,
+  .menu-link[aria-current="page"] {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.25em;
+  }
+
+  /* ---- Hero fill gauge --------------------------------------------------- */
+  /* Two outlined containers, "yours" and "ours", filled to one shared line.
+     The fill rises once when the page opens; static under reduced motion. */
+  .gauge-fill {
+    transform-origin: 50% 100%;
+    transform: scaleY(1);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .gauge-fill {
+      animation: gauge-rise var(--vkc-dur-slow) var(--vkc-ease) both;
+      animation-delay: 240ms;
+    }
+
+    .gauge-fill-late {
+      animation-delay: 420ms;
+    }
+  }
+
+  /* ---- Forms ------------------------------------------------------------- */
+
   .field-input {
     width: 100%;
     min-height: 48px;
@@ -176,10 +498,51 @@
     border: var(--vkc-border) solid var(--vkc-graphite);
     border-radius: var(--vkc-radius);
     font: inherit;
+    transition: border-color var(--vkc-dur) var(--vkc-ease);
+  }
+
+  .field-input:hover {
+    border-color: var(--vkc-ink);
   }
 
   .field-input:focus-visible {
     border-color: var(--vkc-qc);
+    outline-offset: 0;
+  }
+
+  .field-input[aria-invalid="true"] {
+    border-color: var(--vkc-qc);
+    border-width: 2px;
+  }
+
+  /* A choice card: a placard that holds a radio. The whole label is the hit
+     area; a checked card takes the accent border and a faint tint. */
+  .choice {
+    display: flex;
+    gap: 0.875rem;
+    padding: 0.875rem 1rem;
+    background: var(--vkc-label);
+    border: var(--vkc-border) solid var(--vkc-ink);
+    border-radius: var(--vkc-radius);
+    cursor: pointer;
+    transition:
+      border-color var(--vkc-dur) var(--vkc-ease),
+      background-color var(--vkc-dur) var(--vkc-ease);
+  }
+
+  .choice:hover {
+    border-color: var(--vkc-qc);
+  }
+
+  .choice:has(input:checked) {
+    border-color: var(--vkc-qc);
+    background: var(--vkc-qc-tint);
+    box-shadow: inset 0 0 0 1px var(--vkc-qc);
+  }
+
+  .choice:has(input:focus-visible) {
+    outline: 3px solid var(--vkc-qc);
+    outline-offset: 2px;
   }
 
   /* "Shift to cover" appears only when Second Shift is picked; CSS-only so it
@@ -200,6 +563,109 @@
     height: 1px;
     overflow: hidden;
   }
+
+  /* ---- Disclosure (FAQ) -------------------------------------------------- */
+
+  .disclosure {
+    border-top: 1px solid var(--vkc-hairline);
+  }
+
+  .disclosure:last-child {
+    border-bottom: 1px solid var(--vkc-hairline);
+  }
+
+  .disclosure-summary {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.125rem 0;
+    font-weight: 700;
+    font-size: 1.125rem;
+    line-height: 1.3;
+    list-style: none;
+    color: var(--vkc-ink);
+  }
+
+  .disclosure-summary:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.2em;
+  }
+
+  /* The marker: a fill tick that turns into a plus, then a minus when open. */
+  .disclosure-mark {
+    position: relative;
+    flex: none;
+    width: 1rem;
+    height: 1rem;
+    align-self: center;
+  }
+
+  .disclosure-mark::before,
+  .disclosure-mark::after {
+    content: "";
+    position: absolute;
+    background: currentColor;
+    transition: transform var(--vkc-dur) var(--vkc-ease);
+  }
+
+  .disclosure-mark::before {
+    left: 0;
+    right: 0;
+    top: 7px;
+    height: 2px;
+  }
+
+  .disclosure-mark::after {
+    top: 0;
+    bottom: 0;
+    left: 7px;
+    width: 2px;
+  }
+
+  .disclosure[open] .disclosure-mark::after {
+    transform: scaleY(0);
+  }
+
+  .disclosure-body {
+    padding: 0 0 1.25rem;
+    max-width: var(--vkc-measure);
+  }
+
+  /* ---- Steps ------------------------------------------------------------- */
+  /* An ordered process drawn as a line with ticks, no numerals: the number
+     guard allows only digits that trace to content/ (§1). */
+  .steps {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .steps {
+      grid-template-columns: repeat(var(--steps, 3), minmax(0, 1fr));
+      gap: 2rem;
+    }
+  }
+
+  .step {
+    position: relative;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--vkc-hairline);
+  }
+
+  /* The same tick as the fill rule: the step opens like a section does. */
+  .step::before {
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: 0;
+    width: 3rem;
+    height: 3px;
+    background: var(--vkc-ink);
+  }
+
+  /* ---- Misc -------------------------------------------------------------- */
 
   /* Preview-only placeholder for a missing photo. Never rendered in production. */
   .vkc-photo-placeholder {
@@ -233,10 +699,93 @@
   .skip-link:focus {
     top: 8px;
   }
+
+  /* The floor grid: a faint sealed-concrete pour line behind the hero. */
+  .floor-lines {
+    background-image: linear-gradient(
+      to right,
+      color-mix(in srgb, var(--vkc-hairline) 55%, transparent) 1px,
+      transparent 1px
+    );
+    background-size: 8rem 100%;
+    background-position: left top;
+  }
+
+  /* Pictograms: line drawings in the manner of a label's handling marks. */
+  .picto {
+    width: 2.75rem;
+    height: 2.75rem;
+    color: var(--vkc-ink);
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.75;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+}
+
+/* ---- Keyframes (unlayered so they are always found) ------------------------ */
+
+@keyframes fill-tick {
+  from {
+    background-size:
+      0 3px,
+      100% 1px;
+  }
+  to {
+    background-size:
+      3rem 3px,
+      100% 1px;
+  }
+}
+
+@keyframes header-settle {
+  to {
+    border-bottom-color: var(--vkc-ink);
+  }
+}
+
+@keyframes panel-open {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes gauge-rise {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
 }
 
 @media (prefers-reduced-motion: no-preference) {
   html {
     scroll-behavior: smooth;
+  }
+}
+
+@media print {
+  .site-header,
+  .site-footer,
+  .skip-link,
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+  }
+
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.85em;
   }
 }
