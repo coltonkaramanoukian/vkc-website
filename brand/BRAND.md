@@ -92,6 +92,11 @@ request. It is `aria-hidden`: the link around it carries the name.
 - Sentence case everywhere, including buttons and eyebrows. No ALL-CAPS.
 - No "→" appended to buttons, no middle-dot meta strings, no fade-slide
   entrances, no accented word inside a headline.
+- Media sits inside the label rule (1.5px ink, 2px corner) and covers its
+  box; the box is reserved by its aspect ratio so nothing shifts. A video is a
+  silent loop with a still of the same shot as its poster, a Play / Pause
+  label in the corner, and it never plays under `prefers-reduced-motion`. No
+  text baked into an image; the caption is set in the mono field face.
 - Motion: one easing, CSS only, and only where it draws the fill rule. The
   fill-rule tick advances as a section scrolls into view, the header rule
   settles when the page scrolls, the hero gauge and shift bar fill once on

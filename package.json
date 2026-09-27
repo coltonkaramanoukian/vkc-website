@@ -25,7 +25,8 @@
     "first-load-js": "node scripts/first-load-js.ts",
     "overlap": "node scripts/overlap.ts --copy",
     "overlap:rendered": "node scripts/overlap.ts",
-    "guard:claims": "node scripts/guard-claims.ts"
+    "guard:claims": "node scripts/guard-claims.ts",
+    "guard:media": "node scripts/guard-media.ts"
   },
   "dependencies": {
     "@vercel/analytics": "2.0.1",

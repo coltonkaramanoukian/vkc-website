@@ -5,6 +5,7 @@ import { CtaActions, CtaBand } from "@/components/cta-band";
 import { PageShell } from "@/components/page-shell";
 import { Pictogram } from "@/components/pictograms";
 import { RelatedPages } from "@/components/related-pages";
+import { SceneCover, SceneGalleries } from "@/components/scene";
 import { getCopy } from "@/lib/i18n";
 import { ROUTE_PICTO } from "@/lib/related";
 import { uniqueSlugs } from "@/lib/slug";
@@ -139,6 +140,9 @@ export async function LongformPage({
         </div>
       </section>
 
+      {/* The page's cover (content/scenes.json): nothing until the slot is filled. */}
+      <SceneCover route={route} locale={locale} className="wrap mb-8" />
+
       {page.sections.length > 2 && (
         <nav aria-label={t("common.onThisPage")} className="wrap">
           <ol className="jump-nav">
@@ -180,6 +184,7 @@ export async function LongformPage({
         </section>
       ))}
 
+      <SceneGalleries route={route} locale={locale} />
       {after}
       <div className="mt-14">
         <RelatedPages locale={locale} route={route} />

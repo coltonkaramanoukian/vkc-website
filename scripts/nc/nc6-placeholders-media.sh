@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # NC-6: (a) placeholder marker only when NEXT_PUBLIC_SHOW_PLACEHOLDERS=1, and no empty
 # photo wrappers otherwise; (b) a <video> only when media.json has a source;
-# (c) every img/video src stays inside /photos/, /video/, /qr/ or /brand/.
+# (c) every img/video src stays inside /photos/, /video/, /media/, /qr/ or /brand/.
 # content/media.json is RESERVED: the injection is restored on every exit path.
 set -uo pipefail
 cd "$(dirname "$0")/../.."
@@ -34,5 +34,5 @@ echo "<video in en/visit.html: $(grep -o '<video' .next/server/app/en/visit.html
 echo "## (c) every <img src> / <video src> / <source src> in the build"
 srcs=$(html | xargs grep -ohE '<(img|video|source)[^>]* src="[^"]*"' | grep -oE 'src="[^"]*"' | sort | uniq -c)
 echo "${srcs:-  (none: the pages ship no <img>, <video> or <source> elements)}"
-bad=$(echo "$srcs" | grep -oE 'src="[^"]*"' | grep -vE 'src="/(photos|video|qr|brand)/' || true)
-[ -z "$bad" ] && echo "PASS: nothing points outside /photos/ /video/ /qr/ /brand/" || { echo "FAIL:"; echo "$bad"; }
+bad=$(echo "$srcs" | grep -oE 'src="[^"]*"' | grep -vE 'src="/(photos|video|media|qr|brand)/' || true)
+[ -z "$bad" ] && echo "PASS: nothing points outside /photos/ /video/ /media/ /qr/ /brand/" || { echo "FAIL:"; echo "$bad"; }

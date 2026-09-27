@@ -100,7 +100,7 @@ for (const url of urls) {
       videoSrcs: Array.from(document.querySelectorAll("video, video source")).map((v) => v.getAttribute("src") ?? ""),
       videoPreloads: Array.from(document.querySelectorAll("video")).map((v) => v.getAttribute("preload") ?? ""),
       placeholderCount: document.querySelectorAll(".vkc-photo-placeholder").length,
-      emptyPhotoWrappers: Array.from(document.querySelectorAll("figure")).filter((f) => !f.querySelector("img")).length,
+      emptyPhotoWrappers: Array.from(document.querySelectorAll("figure")).filter((f) => !f.querySelector("img, video")).length,
     };
   });
   const record: PageCapture = { locale: url.locale, route: url.route, path: url.path, status, ...capture };

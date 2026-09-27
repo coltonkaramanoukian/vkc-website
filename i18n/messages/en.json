@@ -83,7 +83,11 @@
     "breadcrumb": "You are here",
     "onThisPage": "On this page",
     "related": "Keep reading",
-    "relatedHeading": "Where this leads next"
+    "relatedHeading": "Where this leads next",
+    "media": {
+      "play": "Play the video",
+      "pause": "Pause the video"
+    }
   },
   "services": {
     "ss": {

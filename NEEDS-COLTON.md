@@ -6,7 +6,7 @@ Each item says what is missing, where it goes, and what appears once it is done.
 
 ## 1. Ship run 2 to production
 
-`main` is seven pull requests (#1–#7) past the production build. Production only
+`main` is past the production build by every run 2 and run 3 pull request. Production only
 deploys through `vercel --prod` (`vercel.json` disables auto-deploy of `main`),
 and pushing a public site is your call, not an agent's.
 
@@ -79,6 +79,40 @@ must not take.
 
 `content/media.json` is reserved for the video run; the demo video slot on
 `/visit` renders nothing until that run fills it.
+
+## 8. Higgsfield: where generated media plugs in
+
+Built in run 3 (2026-09-27), nothing filled. The seam is one file and one
+folder:
+
+- **`content/scenes.json`** — thirteen covers (one per page, each with an
+  `intent` line and an `aspect`) and two galleries (home, about). Set `kind`
+  (`image` or `video`), `src`, `alt.en`, `alt.fr`; a video also needs `poster`.
+  Optional `caption` and a `portrait` variant for phones.
+- **`public/media/`** — where the files go. Paths in the manifest start with
+  `/media/`. Budgets: image 600 kB, poster 300 kB, video 12 MB. Prefer `.webp`
+  or `.avif` for stills and `.mp4` (H.264, silent) for loops; keep loops short.
+- **`npm run guard:media`** before every build: it fails on a missing file, a
+  wrong extension, a video without a poster, or alt missing in either
+  language. NC-10 (`scripts/nc/nc10-media.sh`) shows it failing and passing.
+- Preview the slots before filling them: `dev-placeholders` in
+  `.claude/launch.json` (or `NEXT_PUBLIC_SHOW_PLACEHOLDERS=1 npm run dev`)
+  draws every empty slot as a dashed box with its intent.
+
+Two things only you can do first:
+
+1. **Amend CLAUDE.md §1.** It reads "No stock, generated or third-party
+   imagery". Generated covers need that line changed (for example: "generated
+   media renders only from `content/scenes.json`, marked as such where it
+   appears"). A run will not loosen §1 on its own.
+2. **Decide what a generated scene may depict.** The `intent` lines describe
+   a floor, containers and equipment with nobody identifiable and no customer
+   branding. Anything showing a real customer's plant or product needs their
+   written OK (`photos.json` has the same rule).
+
+Not built, on purpose: no Higgsfield API call, no upload endpoint, no CMS.
+Generated files are committed like any other asset and go live with the next
+`vercel --prod`.
 
 ## Things that look like problems and are not
 
