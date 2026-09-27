@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { LocaleSwitch } from "@/components/locale-switch";
+import { NavMenu } from "@/components/nav-menu";
 import { Wordmark } from "@/components/wordmark";
-import { site } from "@/lib/content";
+import { contact, site, telHref } from "@/lib/content";
 import { getCopy } from "@/lib/i18n";
 import { navGroups, primaryNav } from "@/lib/nav";
 import { localizedPath, type AppPathname, type Locale } from "@/i18n/pathnames";
@@ -9,10 +10,48 @@ import { localizedPath, type AppPathname, type Locale } from "@/i18n/pathnames";
 export async function SiteHeader({ locale, route }: { locale: Locale; route: AppPathname }) {
   const { t } = await getCopy(locale, "common");
   const href = (r: AppPathname) => localizedPath(locale, r);
+  const phoneHref = telHref(contact.phone);
+
+  const panel = (
+    <div className="menu-panel">
+      <nav aria-label={t("footerNav")} className="wrap py-6 lg:py-8">
+        <div className="grid gap-2 lg:grid-cols-5 lg:gap-8">
+          {navGroups.map((group) => (
+            <div key={group.key} className="menu-group">
+              <p className="field-name mb-1">{t(`groups.${group.key}`)}</p>
+              <ul>
+                {group.items.map((item) => (
+                  <li key={item.route}>
+                    <Link
+                      href={href(item.route)}
+                      className="menu-link"
+                      aria-current={item.route === route ? "page" : undefined}
+                    >
+                      {t(`nav.${item.label}`)}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+        <div className="mt-6 flex flex-wrap items-center gap-3 border-t border-hairline pt-6 sm:hidden">
+          <Link href={href("/quote")} className="btn btn-primary">
+            {t("cta.quote")}
+          </Link>
+          {contact.phone && phoneHref && (
+            <a href={phoneHref} className="btn btn-secondary">
+              {t("cta.call", { phone: contact.phone })}
+            </a>
+          )}
+        </div>
+      </nav>
+    </div>
+  );
 
   return (
-    <header className="border-b border-hairline bg-label">
-      <div className="wrap flex h-16 items-center justify-between gap-3">
+    <header className="site-header">
+      <div className="wrap header-bar">
         <Link
           href={href("/")}
           aria-label={`${site.brandName}, ${t("home")}`}
@@ -22,13 +61,13 @@ export async function SiteHeader({ locale, route }: { locale: Locale; route: App
         </Link>
 
         <nav aria-label={t("primaryNav")} className="hidden lg:block">
-          <ul className="flex items-center gap-6 text-[0.9375rem]">
+          <ul className="flex items-center gap-7 text-[0.9375rem]">
             {primaryNav.map((item) => (
               <li key={item.route}>
                 <Link
                   href={href(item.route)}
                   aria-current={item.route === route ? "page" : undefined}
-                  className="text-ink no-underline hover:underline aria-[current=page]:underline"
+                  className="chrome-link"
                 >
                   {t(`nav.${item.label}`)}
                 </Link>
@@ -37,36 +76,10 @@ export async function SiteHeader({ locale, route }: { locale: Locale; route: App
           </ul>
         </nav>
 
-        <div className="flex items-center gap-1 sm:gap-2">
+        <div className="flex items-center gap-1 sm:gap-3">
           <LocaleSwitch locale={locale} route={route} />
-          <details className="relative lg:hidden">
-            <summary className="flex min-h-[44px] cursor-pointer list-none items-center px-2 font-mono text-sm font-medium text-ink [&::-webkit-details-marker]:hidden">
-              {t("menu")}
-            </summary>
-            <nav
-              aria-label={t("primaryNav")}
-              className="placard absolute right-0 z-40 mt-2 w-[min(20rem,calc(100vw-2rem))] p-4"
-            >
-              {navGroups.map((group) => (
-                <div key={group.key} className="mb-3 last:mb-0">
-                  <p className="field-name">{t(`groups.${group.key}`)}</p>
-                  <ul className="mt-1">
-                    {group.items.map((item) => (
-                      <li key={item.route}>
-                        <Link
-                          href={href(item.route)}
-                          className="block py-1.5 text-ink no-underline hover:underline"
-                        >
-                          {t(`nav.${item.label}`)}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </nav>
-          </details>
-          <Link href={href("/quote")} className="btn btn-primary ml-1 hidden sm:inline-flex">
+          <NavMenu label={t("menu")} panel={panel} />
+          <Link href={href("/quote")} className="btn btn-primary hidden sm:inline-flex">
             {t("cta.quote")}
           </Link>
         </div>
