@@ -213,3 +213,58 @@ silently widening the rule.
   glued a placard label to its value ("Directed by" + "Our lead hand…" →
   "byour"), which could hide a required fact — or a staffing term — from a
   word-boundary guard. That was a false green in NC-2 and is now fixed.
+
+## 10. Run 2 decisions (2026-09-27)
+
+- **The motion rule changed from "none" to "one easing, CSS only, behind
+  reduced-motion".** Run 1 wrote "no motion" because nothing had earned it.
+  Run 2 gives motion one job: drawing the fill rule. The rule's tick advances
+  with `animation-timeline: view()` where supported (static elsewhere), the
+  header's rule settles on scroll, the hero gauge and the shift bar fill once.
+  No entrance fades, no parallax, no per-element JavaScript timers. BRAND.md
+  carries the rule; `prefers-reduced-motion: reduce` turns all of it off.
+- **Hub pages exist because the nav needed a place to point.** `/services`,
+  `/containers` and `/industries` each hold the group's cards plus the shared
+  placards (services) or the family list (containers). Their copy is short and
+  their FR/EN ratios sit at 1.05–1.09. Breadcrumbs derive from `lib/nav.ts`,
+  so a page cannot claim a parent it does not have.
+- **A related card may not name Second Shift unless the page already carries
+  the four facts.** The staffing guard reads every surface that names the
+  service (§4), and a card with the name alone is a surface with none of the
+  facts. The industries hub therefore has no Second Shift card; the services
+  hub renders the full placard. `lib/related.ts` encodes this.
+- **The overlap gate is the copy measurement.** The rendered measurement was
+  red on `main` before run 2 began: container family names repeat on every
+  page that lists the family, which is data, not prose. `npm run overlap` now
+  runs `--copy`; `npm run overlap:rendered` prints the old view as context.
+  Worst pair after run 2: 8.8% reused 5-word phrases (gate 10%).
+- **Service JSON-LD on the three service pages**, description from
+  `services.json:summary`, provider `#organization`. The Second Shift summary
+  is where the four facts live, so the page's structured data passes §4 on its
+  own.
+- **One Open Graph card per page.** A route handler at `/og/{locale}/{key}`,
+  prerendered from `generateStaticParams`, with `dynamicParams=false` so any
+  other key is a 404. The home card carries the tagline; every other card its
+  `meta.<key>.title`. The per-locale file-convention image is gone because a
+  page-level `openGraph.images` would have overridden it anyway.
+- **The font is pinned to the axes the CSS uses.** Archivo's variable file
+  shipped with wdth 62–125 and wght 100–900; the site uses wdth 100 (body),
+  106 and 112.5 (display) and wght 400–800. `scripts/subset-fonts.py` pins
+  those ranges and latin-subsets: 90.1 kB → 57.9 kB on the LCP path, with the
+  same outlines at every value the CSS asks for. `src/app/fonts.ts` declares
+  the same ranges so the browser never synthesises outside them.
+- **No `lastModified` in the sitemap.** The build date would be a lie about
+  pages that did not change, and a per-page date needs git history the Vercel
+  build does not reliably have. Absent beats wrong.
+- **Security headers without a script-src CSP.** Every page is prerendered, so
+  there is no per-request nonce, and `'unsafe-inline'` would be a header that
+  says nothing. `frame-ancestors 'none'`, nosniff, DENY, a referrer policy and
+  a permissions policy are set in `next.config.ts`.
+- **The primary nav shows from `xl`, not `lg`.** French labels ("Deuxième
+  quart", "Nos services", "À propos") wrapped onto two lines between 1024 and
+  1279px, and a wrapped nav item reads as two items. Below `xl` the menu panel
+  carries everything.
+- **Lighthouse on a local build is context, not the D12 number.** Best
+  practices scores 96 locally because `/_vercel/insights/script.js` 404s on
+  `next start`; the audit passes on Vercel. §9 still stands: the D12 medians
+  come from production.

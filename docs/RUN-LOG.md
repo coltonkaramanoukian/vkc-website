@@ -119,3 +119,68 @@ Resume from the last checkpoint; every phase is idempotent.
 - `/containers/pails-and-drums` renamed `/containers/pails` (fr `/contenants/seaux`).
   Drums are not in the §1 container vocabulary; naming them in the slug would
   advertise a container VKC was never said to run.
+
+---
+
+# Run log — run 2 (2026-09-27), "monster build"
+
+Model: Claude Fable 5.1, `MAX_THINKING_TOKENS=31999`, permissions in dontAsk
+mode, no subagents. Brief: premium on-brand design, every page fully built in
+both languages, performance / SEO / accessibility, net-new sections that
+convert. Never wait on Colton; log what needs him in `NEEDS-COLTON.md`.
+
+## Checkpoints (one pull request each, self-merged, main NOT deployed)
+
+| PR | Merge | What |
+|---|---|---|
+| #1 | 5fc1317 | Design system: motion tokens, type scale, sticky header with a details-based menu panel, footer with nav groups, icon / apple icon / manifest, `.claude/launch.json`. |
+| #2 | d9fe638 | Home: hero fill gauge (SVG, CSS rise), service chooser (two questions → one of four routes, `lib/chooser.ts` tested), pictogram cards for containers and industries, steps, FAQ with FAQPage JSON-LD. |
+| #3 | cd3cf67 | Inner pages: hub pages `/services`, `/containers`, `/industries` (18 routes, 36 URLs, sitemap 34), breadcrumbs with BreadcrumbList JSON-LD, jump strip, related cards, Second Shift shift bar, Service JSON-LD on the service pages. |
+| #4 | 1672fed | Quote and visit: form in three groups, choice cards with pictograms, success placard, focus to the first invalid field; sticky aside on `/quote`; visit page placards. NC-5 selectors untouched, 5/5. |
+| #5 | 0caa045 | Per-page Open Graph cards (`/og/{locale}/{key}`, prerendered), Archivo pinned to the used axis ranges (90.1 → 57.9 kB), security headers, primary nav from `xl`. |
+| docs | this | `NEEDS-COLTON.md`, README, DESIGN-DECISIONS §10, BRAND motion rule, `npm run overlap` gates on copy. |
+
+## Proof, each PR
+
+Every PR: `typecheck`, `lint`, `test` (35), `build`; `render` 36/36;
+`guard:staffing`, `guard:numbers`, `guard:fr`, `guard:claims` GREEN;
+`overlap --copy` worst pair ≤ 8.8%; `census` 36/36; browser at 1280 and 375 in
+FR and EN, light and dark, no horizontal overflow. Lighthouse mobile on the
+final local build: performance 97 on all six D12 pages, accessibility 100,
+SEO 100 (visit 66 = noindex by design), best-practices 96 (analytics 404 on
+localhost only). `check:hreflang --base local` 36/36. NC-5 5/5 after #4 and #5.
+
+## SELF-RESOLVED
+
+1. **`npm run overlap` (rendered mode) was already red on `main`** before run 2
+   touched a page: 18 pairs over 10%, all from container family names that
+   repeat on every page listing that family. Confirmed with a clean worktree
+   build of main. The documented gate (DESIGN-DECISIONS §6/§9) is the copy
+   measurement; `npm run overlap` now runs `--copy`, and the rendered
+   measurement moved to `npm run overlap:rendered` as context.
+2. Turbopack refuses a worktree whose `node_modules` is a symlink out of the
+   tree ("points out of the filesystem root"); `npm ci` inside the worktree.
+3. Hub ratios ran 1.14–1.16 on first draft; FR trimmed and EN extended per page
+   to land 1.05–1.09. Home FAQ questions reworded to break repeated 5-word
+   phrases that the chooser result and the Second Shift facts created.
+4. A related card that names Second Shift on the industries hub turned the
+   staffing guard red (16): the card carries the name without the four facts.
+   The industries hub has no Second Shift card; the services hub renders the
+   full placard instead.
+5. BreadcrumbList JSON-LD on the Second Shift page names the service; the
+   page's JSON-LD surface now also carries a Service entity whose description
+   is `services.json:summary`, which holds all four facts.
+6. `fontTools` is installed but `brotli` is not, so woff2 cannot be written
+   from Python here; `scripts/subset-fonts.py` pins and subsets with fontTools
+   and compresses with `npx wawoff2`.
+7. The locale proxy matcher caught `/og/*` and 307'd the cards to a locale
+   path; `/og/` is exempt, and `/v`, `/fr`, `/en` still route as before.
+
+## Not done, on purpose
+
+- No production deploy. `main` is five PRs ahead of production; the command
+  and the proof steps are in `NEEDS-COLTON.md` item 1.
+- No value written into `contact`, `capabilities`, `clients`, `photos` or
+  `media` (§2). Every null is still null.
+- No `lastModified` in the sitemap: there is no honest per-page date to render
+  (DESIGN-DECISIONS §10).

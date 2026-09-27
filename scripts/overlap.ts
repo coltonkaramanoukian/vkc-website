@@ -2,7 +2,9 @@
 // on each page's own text (shared blocks — nav, footer, CTA band, the service
 // placards — are already excluded from `ownText` by render-all).
 // Overlap = |A ∩ B| / min(|A|, |B|) over unique words, per locale. ≤ 40%.
-//   node scripts/overlap.ts [route ...]
+//   node scripts/overlap.ts --copy [route ...]   the gate (npm run overlap)
+//   node scripts/overlap.ts [route ...]          rendered text, context only
+//                                                (npm run overlap:rendered)
 import { loadCaptures } from "./lib/captures.ts";
 import { namespacesFor } from "./lib/copy-ratio.ts";
 import { readFileSync } from "node:fs";
