@@ -1,4 +1,5 @@
 import { contact, site } from "@/lib/content";
+import { serializeJsonLd } from "@/lib/structured-data";
 
 /**
  * D10. Organization + LocalBusiness. Contact facts come ONLY from
@@ -52,7 +53,11 @@ export function buildJsonLd(): Record<string, unknown> {
   };
 }
 
+/** Any structured-data block; `<` is escaped so a value can never close the tag. */
+export function JsonLdScript({ data }: { data: Record<string, unknown> }) {
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(data) }} />;
+}
+
 export function JsonLd() {
-  const json = JSON.stringify(buildJsonLd()).replace(/</g, "\\u003c");
-  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: json }} />;
+  return <JsonLdScript data={buildJsonLd()} />;
 }

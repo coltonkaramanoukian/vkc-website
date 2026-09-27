@@ -163,12 +163,64 @@
   "home": {
     "eyebrow": "Contract packaging and toll blending, greater Montreal",
     "sub": "VKC Packaging runs a shift on your line, or takes your overflow onto ours. Contract filling, packaging and toll blending for makers of cleaners, lubricants, sealers, coatings and colourants in greater Montreal.",
-    "servicesHeading": "Two services",
+    "heroSecondary": "The two services",
+    "gaugeAlt": "Two containers filled to the same line: {ss} at your plant, {bn} at our facility",
+    "servicesEyebrow": "Two services",
+    "servicesHeading": "Your line, or ours",
     "servicesIntro": "One runs at your plant, on your own equipment. The other runs at ours.",
+    "chooser": {
+      "eyebrow": "Which one fits",
+      "heading": "Which one fits your plant?",
+      "intro": "Two questions, one click each. The answer points at one of the two services, or at a walkthrough of your line.",
+      "pressure": {
+        "label": "Where is the pressure?",
+        "shifts": "The line has room. The shifts don’t.",
+        "line": "The line is full, and orders keep arriving.",
+        "blend": "The product isn’t made yet. It needs blending first."
+      },
+      "want": {
+        "label": "What do you want back?",
+        "ownLine": "Finished, documented output off my own line.",
+        "delivered": "Finished, packed product from your facility.",
+        "unsure": "Not sure yet."
+      },
+      "resultLabel": "Our read",
+      "reset": "Start over",
+      "results": {
+        "secondShift": {
+          "title": "{ss}, at your plant",
+          "body": "Our lead hand directs the shift from the floor. Our crew does the work on your equipment. Our QC sheets and production log document the result, and it is priced per unit or per shift.",
+          "link": "How {ss} works"
+        },
+        "bottleneck": {
+          "title": "{bn}, at our facility",
+          "body": "Send us the overflow. We fill, label, kit and pack it here, and it comes back ready to ship.",
+          "link": "Contract packaging"
+        },
+        "tollBlending": {
+          "title": "{bn}: toll blending first",
+          "body": "We make the batch to your formula at our facility, then fill and pack it on the same site if you need that too.",
+          "link": "Toll blending"
+        },
+        "walkthrough": {
+          "title": "Let’s walk your line first",
+          "body": "A full line and output off your own equipment don’t usually go together. A walkthrough shows which of the two services fits, or whether both do. Ask, and we come and look.",
+          "link": "Ask for a walkthrough"
+        }
+      }
+    },
+    "containersEyebrow": "Containers",
     "containersHeading": "Containers we have run",
     "containersIntro": "These container families have already run through VKC. The list says what we know, not how many units we can run: that depends on the product and the job.",
+    "industriesEyebrow": "Industries",
     "industriesHeading": "Where we focus",
     "industriesIntro": "Liquids and pastes that have to be filled cleanly and counted right: cleaners, lubricants, sealers, coatings and colourants.",
+    "industries": {
+      "cleaners": "Degreasers, floor and glass cleaners, industrial soaps: mostly water, plus something that foams as soon as it is poured.",
+      "lubricants": "Motor and machine oils, hydraulic and cutting fluids, greases: sold by the litre or by the pail, and slow to leave the nozzle.",
+      "sealersCoatings": "Sealers, paints, protective coatings, tints and colourants: products that skin, settle or set on their own schedule."
+    },
+    "stepsEyebrow": "How it starts",
     "stepsHeading": "How a first job starts",
     "steps": [
       {
@@ -183,7 +235,46 @@
         "title": "The work runs",
         "body": "On a {ss}, our lead hand directs the shift and our crew does the work. With {bn}, your product runs at our facility."
       }
-    ]
+    ],
+    "plain": {
+      "eyebrow": "Straight talk",
+      "heading": "What you won’t read on this site",
+      "body": "No certifications, no capacity figures, no client logos. Nothing here is a number you have to take on trust: the figures that matter are the ones in your quote, worked out from the product, the container and the run in front of us. Ask, and you get the figure."
+    },
+    "faq": {
+      "eyebrow": "Questions",
+      "heading": "What a plant manager asks first",
+      "items": [
+        {
+          "q": "What is a {ss}, exactly?",
+          "a": "A production shift VKC runs on your line, on a shift your plant doesn’t cover. Our lead hand directs it and our crew does the work; our QC sheets and production log document what ran. You buy the output, priced per unit or per shift, not the time."
+        },
+        {
+          "q": "What does {bn} cover?",
+          "a": "Filling, labelling, kitting and packing at our facility, plus toll blending to your formula when the product has to be made before it is packed. It is the overflow your line can’t absorb, handled under one roof."
+        },
+        {
+          "q": "Which products do you take?",
+          "a": "Liquids and pastes from a handful of trades: cleaners, lubricants, sealers, coatings and colourants. If yours is close to one of those, ask; the container usually decides it."
+        },
+        {
+          "q": "What do you need to quote?",
+          "a": "Four things: the product and how it pours, the container with its closure and label, the size and rhythm of the runs, and the date the first one ships. A safety data sheet helps."
+        },
+        {
+          "q": "How is the work priced?",
+          "a": "{ss} is priced per unit or per shift. {bn} work is quoted on the job you describe: the product, the container, the count and the date. There is no rate card, because no two jobs run the same."
+        },
+        {
+          "q": "Can you come and look before quoting?",
+          "a": "Yes. For {ss} a walkthrough of your line is how the quote gets made, since the shift is priced against what is actually on your floor. It is often the shorter path for {bn} work too."
+        },
+        {
+          "q": "What happens to what I send through the form?",
+          "a": "It becomes one email to VKC, used to answer you. There is no database behind this site and no second copy: no advertising cookies, no trackers, nothing stored anywhere but the inbox it lands in."
+        }
+      ]
+    }
   },
   "visit": {
     "heading": "Two ways VKC takes pressure off your plant",
