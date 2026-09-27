@@ -881,6 +881,38 @@
     }
   }
 
+  /* ---- Action bar (phones) ----------------------------------------------- */
+  /* The next step, fixed to the bottom of a small screen: quote, and the
+     phone when there is one. Gone from `sm`, where the header carries it. */
+  .action-bar {
+    position: fixed;
+    inset-inline: 0;
+    bottom: 0;
+    z-index: 30;
+    display: flex;
+    gap: 0.75rem;
+    padding: 0.75rem var(--vkc-gutter) calc(0.75rem + env(safe-area-inset-bottom, 0px));
+    background: var(--vkc-label);
+    border-top: var(--vkc-border) solid var(--vkc-ink);
+  }
+
+  .action-bar .btn {
+    flex: 1 1 0;
+    min-width: 0;
+    padding-inline: 0.75rem;
+  }
+
+  .action-bar-spacer {
+    height: calc(4.5rem + env(safe-area-inset-bottom, 0px));
+  }
+
+  @media (min-width: 640px) {
+    .action-bar,
+    .action-bar-spacer {
+      display: none;
+    }
+  }
+
   /* ---- Misc -------------------------------------------------------------- */
 
   /* Preview-only placeholder for a missing photo. Never rendered in production. */

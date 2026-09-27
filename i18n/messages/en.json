@@ -87,7 +87,8 @@
     "media": {
       "play": "Play the video",
       "pause": "Pause the video"
-    }
+    },
+    "actionBar": "Next step"
   },
   "services": {
     "ss": {

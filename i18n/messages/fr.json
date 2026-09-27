@@ -87,7 +87,8 @@
     "media": {
       "play": "Lire la vidéo",
       "pause": "Mettre la vidéo en pause"
-    }
+    },
+    "actionBar": "La suite, en un geste"
   },
   "services": {
     "ss": {

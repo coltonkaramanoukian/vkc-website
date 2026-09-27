@@ -24,6 +24,7 @@ npm run build && npx next start -p 3100
 npm run render         # captures every page into .render/
 npm run guard:staffing && npm run guard:numbers && npm run guard:fr && npm run guard:claims
 npm run guard:media   # content/scenes.json + photos.json against public/
+npm run a11y -- --base http://localhost:3100 --self-check   # axe over every URL at 375 and 1280
 npm run overlap        # reused-sentence gate on the copy
 npm run test && npm run typecheck && npm run lint
 node scripts/nc/nc5-quote-form.ts   # the form, end to end, against a mock
