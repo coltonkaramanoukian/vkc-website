@@ -213,7 +213,12 @@ async function clickSubmit(page: Page, target: Locator, from: string): Promise<P
     status = (await form.getAttribute("data-form-status")) ?? "timeout";
   }
   const stayed = new URL(page.url()).pathname === from;
-  const ok = status === "invalid" && stayed;
+  // "invalid" is the answer to an empty form. "rate_limited" is the API's
+  // per-IP limit tripping after this run's own earlier submits; the click was
+  // still handled in place, which is what this gate checks (NC-5 covers the
+  // form's own validation).
+  const handled = status === "invalid" || status === "rate_limited";
+  const ok = handled && stayed;
   return {
     kind: "submit",
     expected: "invalid (empty form), same page",
