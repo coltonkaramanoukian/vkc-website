@@ -1,0 +1,253 @@
+{
+  "_note": "NULL AT BIRTH (CLAUDE.md §2): Colton, or the Higgsfield run he connects, fills this file. Every slot renders NOTHING until `kind` and `src` are set. Files live under /public/media/. `npm run guard:media` proves the file before a build. CLAUDE.md §1 bans generated imagery today; amending that line is Colton's, not a run's.",
+  "slots": [
+    {
+      "id": "home-cover",
+      "page": "/",
+      "intent": "The cover strip under the home hero: a filling line running, containers passing the fill head, the fill line visible on a container. Silent, no text baked in, nobody identifiable.",
+      "aspect": "21/9",
+      "kind": null,
+      "src": null,
+      "poster": null,
+      "alt": {
+        "en": null,
+        "fr": null
+      },
+      "caption": {
+        "en": null,
+        "fr": null
+      },
+      "portrait": null
+    },
+    {
+      "id": "second-shift-cover",
+      "page": "/services/second-shift",
+      "intent": "A line at a customer's plant in the evening, lights on, the line moving. No customer branding.",
+      "aspect": "16/9",
+      "kind": null,
+      "src": null,
+      "poster": null,
+      "alt": {
+        "en": null,
+        "fr": null
+      },
+      "caption": {
+        "en": null,
+        "fr": null
+      },
+      "portrait": null
+    },
+    {
+      "id": "contract-packaging-cover",
+      "page": "/services/contract-packaging",
+      "intent": "Filling at VKC's facility: a jug under a fill head, cases being packed behind it.",
+      "aspect": "16/9",
+      "kind": null,
+      "src": null,
+      "poster": null,
+      "alt": {
+        "en": null,
+        "fr": null
+      },
+      "caption": {
+        "en": null,
+        "fr": null
+      },
+      "portrait": null
+    },
+    {
+      "id": "toll-blending-cover",
+      "page": "/services/toll-blending",
+      "intent": "A blend in a mixing vessel, paddle turning, seen from above the rim.",
+      "aspect": "16/9",
+      "kind": null,
+      "src": null,
+      "poster": null,
+      "alt": {
+        "en": null,
+        "fr": null
+      },
+      "caption": {
+        "en": null,
+        "fr": null
+      },
+      "portrait": null
+    },
+    {
+      "id": "bottles-and-jugs-cover",
+      "page": "/containers/bottles-and-jugs",
+      "intent": "HDPE bottles and D-jugs in a row on a conveyor, unlabelled.",
+      "aspect": "16/9",
+      "kind": null,
+      "src": null,
+      "poster": null,
+      "alt": {
+        "en": null,
+        "fr": null
+      },
+      "caption": {
+        "en": null,
+        "fr": null
+      },
+      "portrait": null
+    },
+    {
+      "id": "pails-cover",
+      "page": "/containers/pails",
+      "intent": "Plastic and metal pails stacked on a pallet, lids on, no labels.",
+      "aspect": "16/9",
+      "kind": null,
+      "src": null,
+      "poster": null,
+      "alt": {
+        "en": null,
+        "fr": null
+      },
+      "caption": {
+        "en": null,
+        "fr": null
+      },
+      "portrait": null
+    },
+    {
+      "id": "kits-cover",
+      "page": "/containers/kits",
+      "intent": "Kit components laid out in a grid beside the finished box.",
+      "aspect": "16/9",
+      "kind": null,
+      "src": null,
+      "poster": null,
+      "alt": {
+        "en": null,
+        "fr": null
+      },
+      "caption": {
+        "en": null,
+        "fr": null
+      },
+      "portrait": null
+    },
+    {
+      "id": "cleaners-cover",
+      "page": "/industries/cleaners",
+      "intent": "Trigger-spray bottles being capped, unlabelled.",
+      "aspect": "16/9",
+      "kind": null,
+      "src": null,
+      "poster": null,
+      "alt": {
+        "en": null,
+        "fr": null
+      },
+      "caption": {
+        "en": null,
+        "fr": null
+      },
+      "portrait": null
+    },
+    {
+      "id": "lubricants-cover",
+      "page": "/industries/lubricants",
+      "intent": "Oil being weigh-filled into a pail, the scale readout out of frame.",
+      "aspect": "16/9",
+      "kind": null,
+      "src": null,
+      "poster": null,
+      "alt": {
+        "en": null,
+        "fr": null
+      },
+      "caption": {
+        "en": null,
+        "fr": null
+      },
+      "portrait": null
+    },
+    {
+      "id": "sealers-and-coatings-cover",
+      "page": "/industries/sealers-and-coatings",
+      "intent": "A thick coating filling a metal pail to the line.",
+      "aspect": "16/9",
+      "kind": null,
+      "src": null,
+      "poster": null,
+      "alt": {
+        "en": null,
+        "fr": null
+      },
+      "caption": {
+        "en": null,
+        "fr": null
+      },
+      "portrait": null
+    },
+    {
+      "id": "montreal-cover",
+      "page": "/locations/montreal",
+      "intent": "A pallet of finished cases at a dock door, daylight, no address visible.",
+      "aspect": "16/9",
+      "kind": null,
+      "src": null,
+      "poster": null,
+      "alt": {
+        "en": null,
+        "fr": null
+      },
+      "caption": {
+        "en": null,
+        "fr": null
+      },
+      "portrait": null
+    },
+    {
+      "id": "about-cover",
+      "page": "/about",
+      "intent": "The floor from the mezzanine: line, pallets, sealed concrete. Nobody identifiable.",
+      "aspect": "16/9",
+      "kind": null,
+      "src": null,
+      "poster": null,
+      "alt": {
+        "en": null,
+        "fr": null
+      },
+      "caption": {
+        "en": null,
+        "fr": null
+      },
+      "portrait": null
+    },
+    {
+      "id": "visit-cover",
+      "page": "/visit",
+      "intent": "The thirty-second version of the floor, for a phone held in one hand: portrait first.",
+      "aspect": "16/9",
+      "kind": null,
+      "src": null,
+      "poster": null,
+      "alt": {
+        "en": null,
+        "fr": null
+      },
+      "caption": {
+        "en": null,
+        "fr": null
+      },
+      "portrait": null
+    }
+  ],
+  "galleries": [
+    {
+      "id": "home-floor",
+      "page": "/",
+      "intent": "Three to six stills of the floor: a container at the fill head, a pallet, a QC sheet on a clipboard, a case being closed. No customer labels.",
+      "items": []
+    },
+    {
+      "id": "about-floor",
+      "page": "/about",
+      "intent": "The place and the trade, not the people: equipment, containers, records.",
+      "items": []
+    }
+  ]
+}

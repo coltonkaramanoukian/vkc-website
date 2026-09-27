@@ -32,6 +32,13 @@ into it. Exact schema, shipped all-null:
   may point outside `/photos/`, `/video/`, `/qr/` or `/brand/`. Self-hosted
   only: no YouTube, no Vimeo (D11).
 
+## Not this file: generated covers and galleries
+
+`content/media.json` is the demo video only. Covers, ambient loops and
+gallery stills — the Higgsfield output — go in `content/scenes.json`, one
+slot per page and two galleries, with files under `public/media/`. The rules
+and the guard are in `docs/CONTENT-INTAKE.md` and `NEEDS-COLTON.md`.
+
 ## Brand and type
 
 | Path | What it is |

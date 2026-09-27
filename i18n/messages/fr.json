@@ -83,7 +83,11 @@
     "breadcrumb": "Vous êtes ici",
     "onThisPage": "Sur cette page",
     "related": "À lire ensuite",
-    "relatedHeading": "Où ça mène"
+    "relatedHeading": "Où ça mène",
+    "media": {
+      "play": "Lire la vidéo",
+      "pause": "Mettre la vidéo en pause"
+    }
   },
   "services": {
     "ss": {

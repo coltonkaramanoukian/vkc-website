@@ -8,6 +8,7 @@ import { Faq } from "@/components/faq";
 import { HeroGauge } from "@/components/hero-gauge";
 import { PageShell } from "@/components/page-shell";
 import { PhotoRow } from "@/components/photo";
+import { SceneCover, SceneGalleries } from "@/components/scene";
 import { Pictogram, type PictogramName } from "@/components/pictograms";
 import { ServiceChooserSection } from "@/components/service-chooser-section";
 import { ServicePlacards } from "@/components/service-placards";
@@ -67,6 +68,8 @@ export default async function HomePage({ params }: Props) {
         </div>
       </section>
 
+      {/* The cover strip (content/scenes.json) and the demo video (content/media.json). */}
+      <SceneCover route="/" locale={locale} preload className="wrap mb-10" />
       <div className="wrap">
         <DemoVideo locale={locale} label={site.brandName} />
       </div>
@@ -87,6 +90,8 @@ export default async function HomePage({ params }: Props) {
         </div>
         <PhotoRow ids={["home-second-shift", "home-bottleneck"]} locale={locale} className="mt-5" />
       </section>
+
+      <SceneGalleries route="/" locale={locale} className="!mt-0" />
 
       <ServiceChooserSection locale={locale} />
 

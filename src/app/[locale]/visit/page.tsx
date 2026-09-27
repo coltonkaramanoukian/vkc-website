@@ -5,6 +5,7 @@ import { DemoVideo } from "@/components/demo-video";
 import { PageShell } from "@/components/page-shell";
 import { Pictogram } from "@/components/pictograms";
 import { QuoteFormSection } from "@/components/quote-form-section";
+import { SceneCover } from "@/components/scene";
 import { contact, services, site, telHref } from "@/lib/content";
 import { getCopy } from "@/lib/i18n";
 import { pageMetadata } from "@/lib/seo";
@@ -49,6 +50,7 @@ export default async function VisitPage({ params }: Props) {
       <div className="wrap">
         <DemoVideo locale={locale} label={site.brandName} />
       </div>
+      <SceneCover route="/visit" locale={locale} preload className="wrap mt-6" />
 
       <div className="wrap">
         <hr className="fill-rule" />

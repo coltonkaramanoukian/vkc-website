@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { localized, photoSlot } from "@/lib/content";
 import type { Locale } from "@/i18n/pathnames";
 
@@ -20,17 +21,26 @@ export function Photo({
   if (!slot) return null;
 
   if (slot.src) {
+    const alt = localized(slot.alt, locale) ?? "";
+    // With width and height on the slot, next/image reserves the box and serves
+    // sized, modern formats. Without them, a plain <img> (it shifts layout while
+    // it loads; guard:media says so). See docs/CONTENT-INTAKE.md.
+    const sized = typeof slot.width === "number" && typeof slot.height === "number";
     return (
       <figure className={className}>
-        {/* Plain img: src is a /photos/… path Colton adds; see docs/CONTENT-INTAKE.md. */}
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={slot.src}
-          alt={localized(slot.alt, locale) ?? ""}
-          loading="lazy"
-          decoding="async"
-          className="h-auto w-full border-[1.5px] border-ink"
-        />
+        {sized ? (
+          <Image
+            src={slot.src}
+            alt={alt}
+            width={slot.width}
+            height={slot.height}
+            sizes="(min-width: 1152px) 560px, (min-width: 768px) 50vw, 100vw"
+            className="h-auto w-full border-[1.5px] border-ink"
+          />
+        ) : (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={slot.src} alt={alt} loading="lazy" decoding="async" className="h-auto w-full border-[1.5px] border-ink" />
+        )}
       </figure>
     );
   }

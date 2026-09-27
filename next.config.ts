@@ -21,6 +21,15 @@ const nextConfig: NextConfig = {
   },
   // ~ has its own package-lock.json; pin the workspace root to this repo.
   turbopack: { root: process.cwd() },
+  // next/image serves content/scenes.json media only (photos.json renders a
+  // plain <img>). Next 16 requires the qualities list to be explicit.
+  images: {
+    qualities: [75],
+    localPatterns: [
+      { pathname: "/media/**", search: "" },
+      { pathname: "/photos/**", search: "" },
+    ],
+  },
   // OG cards read brand fonts from disk at build time.
   outputFileTracingIncludes: {
     "/og/[locale]/[key]": ["./brand/fonts/ttf/static/*.ttf"],

@@ -70,6 +70,9 @@ export interface PhotoSlot {
   intent: string;
   src: string | null;
   alt: Localized;
+  /** Optional intrinsic size; with both set the photo renders through next/image. */
+  width?: number;
+  height?: number;
 }
 
 export interface DemoMedia {

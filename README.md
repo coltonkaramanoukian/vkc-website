@@ -8,7 +8,8 @@ to enforce one of its sections.
 
 | Where | What |
 |---|---|
-| `content/*.json` | Every fact on the site. Null renders nothing. Four files are Colton's alone (`docs/CONTENT-INTAKE.md`). |
+| `content/*.json` | Every fact on the site. Null renders nothing. Five files are Colton's alone (`docs/CONTENT-INTAKE.md`); `scenes.json` is the media manifest. |
+| `public/media/` | Where the files `content/scenes.json` points at live. Empty until filled. |
 | `i18n/messages/{fr,en}.json` | All prose. French is written as French, not translated. |
 | `brand/` | Tokens, fonts, wordmark, `BRAND.md`. |
 | `guard/` | Phrase-sets and allowlists the guards read. |
@@ -22,6 +23,7 @@ npm run dev            # http://localhost:3000 (or the .claude/launch.json confi
 npm run build && npx next start -p 3100
 npm run render         # captures every page into .render/
 npm run guard:staffing && npm run guard:numbers && npm run guard:fr && npm run guard:claims
+npm run guard:media   # content/scenes.json + photos.json against public/
 npm run overlap        # reused-sentence gate on the copy
 npm run test && npm run typecheck && npm run lint
 node scripts/nc/nc5-quote-form.ts   # the form, end to end, against a mock

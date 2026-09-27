@@ -272,6 +272,9 @@
     font-stretch: 106%;
     line-height: 1.2;
     text-decoration: none;
+    /* A button label is one line: "Obtenir une soumission" wrapped in the
+       header at xl and read as two buttons. */
+    white-space: nowrap;
     border: var(--vkc-border) solid transparent;
     cursor: pointer;
     transition:
@@ -781,6 +784,100 @@
       transform-origin: left center;
       animation: gauge-rise-x var(--vkc-dur-slow) var(--vkc-ease) both;
       animation-delay: 200ms;
+    }
+  }
+
+  /* ---- Scenes (content/scenes.json) --------------------------------------- */
+  /* A media slot: the box is reserved by its aspect ratio before any file
+     arrives, framed like a label (ink rule, die-cut corner). Images cover the
+     frame; a video is a muted loop with its poster underneath. */
+  .scene {
+    width: 100%;
+  }
+
+  .scene-frame {
+    position: relative;
+    aspect-ratio: var(--scene-aspect, 16 / 9);
+    overflow: hidden;
+    background: var(--vkc-floor-deep);
+    border: var(--vkc-border) solid var(--vkc-ink);
+    border-radius: var(--vkc-radius);
+  }
+
+  .scene-frame.vkc-photo-placeholder {
+    min-height: 0;
+  }
+
+  .scene-media {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* The pause control: a label stuck to the frame's corner, mono like a field name. */
+  .scene-toggle {
+    position: absolute;
+    right: 0.75rem;
+    bottom: 0.75rem;
+    min-height: 44px;
+    padding: 0.5rem 0.875rem;
+    background: var(--vkc-label);
+    color: var(--vkc-ink);
+    border: var(--vkc-border) solid var(--vkc-ink);
+    border-radius: var(--vkc-radius);
+    font-family: var(--font-plex-mono), var(--vkc-font-mono);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    cursor: pointer;
+  }
+
+  .scene-toggle:hover,
+  .scene-toggle:focus-visible {
+    background: var(--vkc-ink);
+    color: var(--vkc-label);
+  }
+
+  /* A gallery: tiles that scroll sideways and snap on a phone, a grid from md. */
+  .gallery {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 0.25rem;
+  }
+
+  .gallery::-webkit-scrollbar {
+    display: none;
+  }
+
+  .gallery > li {
+    flex: 0 0 85%;
+    scroll-snap-align: start;
+  }
+
+  @media (min-width: 768px) {
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(var(--gallery-cols, 3), minmax(0, 1fr));
+      gap: 1.25rem;
+      overflow: visible;
+    }
+
+    .gallery[data-count="1"] {
+      --gallery-cols: 1;
+    }
+
+    .gallery[data-count="2"] {
+      --gallery-cols: 2;
+    }
+
+    .gallery > li {
+      flex: none;
     }
   }
 

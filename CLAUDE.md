@@ -50,7 +50,7 @@ Three classes of file. Pages render from them; prose lives in
 | Class | Files | Who writes |
 |---|---|---|
 | Seeded | `containers.json`, `services.json`, `taglines.json`, `site.json` | the build run; Colton edits |
-| NULL AT BIRTH | `contact.json`, `capabilities.json`, `clients.json`, `photos.json` | **Colton only** |
+| NULL AT BIRTH | `contact.json`, `capabilities.json`, `clients.json`, `photos.json`, `scenes.json` | **Colton only** (`scenes.json`: Colton, or the Higgsfield run he connects) |
 | Reserved | `media.json` | **the video run only** |
 
 - An agent writing a value into a NULL-AT-BIRTH or reserved file is a KILL,
@@ -58,6 +58,11 @@ Three classes of file. Pages render from them; prose lives in
 - Message files are deliberately NOT under `content/`: the number guard allows
   any number found in `content/`, so prose must not live there.
 - `docs/CONTENT-INTAKE.md` lists every null as `file:field`.
+- `scenes.json` is the media manifest (covers and galleries, image or video).
+  `npm run guard:media` (NC-10) proves every `src` exists under `public/media/`,
+  is typed, sized, under budget and described in both languages. §1's ban on
+  generated imagery still stands: filling `scenes.json` with generated media
+  needs that line amended first, by Colton.
 
 ## §3 FR IS NOT A TRANSLATION OF EN
 

@@ -4,9 +4,28 @@ import { readdirSync, readFileSync } from "node:fs";
 import { buildAllowedNumbers, findInventedNumbers } from "../guard/lib.ts";
 import { loadCaptures, readableText } from "./lib/captures.ts";
 
+// content/scenes.json is a media manifest: its aspect ratios ("16/9"), ids and
+// intent notes never reach a reader, so they must not widen the allowed set.
+// Only the text a reader can meet — alt and caption — counts as content.
+const readerVisible = (file: string, value: unknown): unknown => {
+  if (file !== "scenes.json") return value;
+  const texts: unknown[] = [];
+  const walk = (node: unknown): void => {
+    if (Array.isArray(node)) node.forEach(walk);
+    else if (node && typeof node === "object") {
+      for (const [key, child] of Object.entries(node as Record<string, unknown>)) {
+        if (key === "alt" || key === "caption") texts.push(child);
+        else walk(child);
+      }
+    }
+  };
+  walk(value);
+  return texts;
+};
+
 const contentValues = readdirSync("content")
   .filter((f) => f.endsWith(".json"))
-  .map((f) => JSON.parse(readFileSync(`content/${f}`, "utf8")) as unknown);
+  .map((f) => readerVisible(f, JSON.parse(readFileSync(`content/${f}`, "utf8")) as unknown));
 const allowlist = (
   JSON.parse(readFileSync("guard/number-allowlist.json", "utf8")) as { values: { value: string }[] }
 ).values.map((v) => v.value);
