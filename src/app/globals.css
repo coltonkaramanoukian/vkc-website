@@ -1363,14 +1363,16 @@
   }
 }
 
+/* Opacity only. The 4px drop it used to have, with the html smooth
+   scroll, left the next page 3px down after a menu click: Chrome carried
+   a smooth-scroll adjustment from the closing panel onto the new route
+   (run 5, docs/RUN-LOG.md). */
 @keyframes panel-open {
   from {
     opacity: 0;
-    transform: translateY(-4px);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
   }
 }
 

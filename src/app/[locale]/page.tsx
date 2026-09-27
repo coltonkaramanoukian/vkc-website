@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { setRequestLocale } from "next-intl/server";
 import { ClientList } from "@/components/client-list";
@@ -67,9 +68,9 @@ export default async function HomePage({ params }: Props) {
             <p className="lead mt-6">{t("home.sub")}</p>
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <CtaActions locale={locale} />
-              <a href="#services" className="btn btn-secondary">
+              <Link href={localizedPath(locale, "/services")} className="btn btn-secondary">
                 {t("home.heroSecondary")}
-              </a>
+              </Link>
             </div>
           </div>
           <div className="max-w-[36rem] xl:max-w-none xl:justify-self-end">

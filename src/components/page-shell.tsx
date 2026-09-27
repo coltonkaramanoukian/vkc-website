@@ -15,8 +15,13 @@ export async function PageShell({
   children: ReactNode;
 }) {
   const { t } = await getCopy(locale, "common");
+  // One element, not a fragment: after a client-side navigation the app
+  // router scrolls the route segment's top-level nodes into view one by one
+  // (footer before main before header), and where that lands depends on
+  // their order and timing. With a single wrapper it scrolls one thing, and
+  // the new page opens at the top every time (run 5, docs/RUN-LOG.md).
   return (
-    <>
+    <div data-page={route}>
       <a href="#main" className="skip-link">
         {t("skip")}
       </a>
@@ -26,6 +31,6 @@ export async function PageShell({
       </main>
       <SiteFooter locale={locale} route={route} />
       <ActionBar locale={locale} route={route} />
-    </>
+    </div>
   );
 }

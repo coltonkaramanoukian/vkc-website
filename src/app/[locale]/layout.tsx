@@ -44,6 +44,10 @@ export default async function LocaleLayout({
   return (
     <html
       lang={locale === "fr" ? "fr-CA" : "en-CA"}
+      // Next 16 no longer turns off CSS smooth scrolling while it scrolls a
+      // new route to the top; without this attribute a click from anywhere
+      // opened the next page part-way down (run 5 nav fix, docs/RUN-LOG.md).
+      data-scroll-behavior="smooth"
       className={`${archivo.variable} ${plexMono.variable}`}
     >
       <body className="min-h-screen antialiased">
