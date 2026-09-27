@@ -77,6 +77,31 @@ export function buildContactPageJsonLd(facts: { name: string; url: string; organ
   };
 }
 
+export interface DefinedTermEntry {
+  term: string;
+  definition: string;
+  /** Fragment on the glossary page, e.g. "weigh-fill". */
+  slug: string;
+}
+
+/** schema.org DefinedTermSet for the glossary: every definition, plain text, anchored to its entry. */
+export function buildDefinedTermSetJsonLd(facts: { name: string; url: string; terms: DefinedTermEntry[] }): Record<string, unknown> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "DefinedTermSet",
+    "@id": `${facts.url}#terms`,
+    name: facts.name,
+    url: facts.url,
+    hasDefinedTerm: facts.terms.map((entry) => ({
+      "@type": "DefinedTerm",
+      name: entry.term,
+      description: plainText(entry.definition),
+      url: `${facts.url}#${entry.slug}`,
+      inDefinedTermSet: { "@id": `${facts.url}#terms` },
+    })),
+  };
+}
+
 /** JSON for a <script type="application/ld+json">: `<` escaped so a value can never close the tag. */
 export function serializeJsonLd(data: Record<string, unknown>): string {
   return JSON.stringify(data).replace(/</g, "\\u003c");

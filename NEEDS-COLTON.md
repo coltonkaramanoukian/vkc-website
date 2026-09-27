@@ -128,4 +128,4 @@ Generated files are committed like any other asset and go live with the next
 - **`npm run check:hreflang` against production is red until item 1 ships.**
   It fetches the alternates from production, which does not yet have the
   hub pages or `/contact`. Against a local build (`--base http://localhost:3100`)
-  it is 38/38.
+  it is 40/40.
