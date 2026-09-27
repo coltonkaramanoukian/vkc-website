@@ -4,7 +4,7 @@ import { getCopy } from "@/lib/i18n";
 import { localizedPath, type AppPathname, type Locale } from "@/i18n/pathnames";
 
 /** Pages whose main content already is the form: the bar would point at itself. */
-const WITHOUT_BAR: readonly AppPathname[] = ["/quote", "/visit"];
+const WITHOUT_BAR: readonly AppPathname[] = ["/quote", "/visit", "/contact"];
 
 /**
  * The phone's next step: a fixed bar at the bottom of small screens with

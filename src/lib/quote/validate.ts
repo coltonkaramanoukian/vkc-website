@@ -3,7 +3,7 @@
 export const SERVICES = ["second-shift", "bottleneck", "unsure"] as const;
 export const SHIFTS = ["evenings", "nights", "weekends", "unsure"] as const;
 export const VISCOSITIES = ["water-thin", "pourable", "thick", "paste", "unsure"] as const;
-export const SOURCES = ["quote", "visit"] as const;
+export const SOURCES = ["quote", "visit", "contact"] as const;
 export const LOCALES = ["fr", "en"] as const;
 export const CONTAINER_EXTRAS = ["other", "unsure"] as const;
 

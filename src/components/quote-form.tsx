@@ -10,8 +10,12 @@ export interface QuoteFormLabels {
   [key: string]: string;
 }
 
+export type FormSource = "quote" | "visit" | "contact";
+
 export interface QuoteFormProps {
   mode: "full" | "short";
+  /** Which page sent it; the email's first line carries it. Defaults by mode. */
+  source?: FormSource;
   locale: "fr" | "en";
   labels: QuoteFormLabels;
   containers: { id: string; name: string }[];
@@ -38,11 +42,11 @@ const SERVICE_PICTO: Record<"second-shift" | "bottleneck" | "unsure", PictogramN
  * as label cards, one submit. Ids are `<source>-<field>` and the two live
  * regions keep their data attributes: NC-5 drives this form by them.
  */
-export function QuoteForm({ mode, locale, labels: l, containers, phone, privacyHref }: QuoteFormProps) {
+export function QuoteForm({ mode, source: sourceProp, locale, labels: l, containers, phone, privacyHref }: QuoteFormProps) {
   const [status, setStatus] = useState<Status>("idle");
   const [errors, setErrors] = useState<Record<string, ErrorCode>>({});
   const formRef = useRef<HTMLFormElement>(null);
-  const source = mode === "short" ? "visit" : "quote";
+  const source: FormSource = sourceProp ?? (mode === "short" ? "visit" : "quote");
   const id = (name: string) => `${source}-${name}`;
 
   // After a rejected submit, put the keyboard on the first field that needs fixing.
@@ -295,7 +299,7 @@ export function QuoteForm({ mode, locale, labels: l, containers, phone, privacyH
 
       <div className="space-y-4 border-t border-hairline pt-6">
         <button type="submit" className="btn btn-primary btn-lg w-full sm:w-auto" disabled={status === "sending"}>
-          {mode === "short" ? l.submitVisit : l.submitQuote}
+          {source === "contact" ? l.submitContact : mode === "short" ? l.submitVisit : l.submitQuote}
         </button>
         {/* Two live regions, always mounted, so announcements are reliable. */}
         <p role="status" className="min-h-[1.5em] font-semibold" data-quote-status={isProblem ? "" : status}>

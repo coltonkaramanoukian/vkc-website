@@ -1,17 +1,9 @@
 import Link from "next/link";
 import { Wordmark } from "@/components/wordmark";
-import { contact, site, tagline, telHref } from "@/lib/content";
+import { addressLine, contact, site, tagline, telHref } from "@/lib/content";
 import { getCopy } from "@/lib/i18n";
 import { navGroups } from "@/lib/nav";
 import { localizedPath, otherLocale, type AppPathname, type Locale } from "@/i18n/pathnames";
-
-function addressLine(): string | null {
-  const { street, city, province, postalCode, country } = contact.address;
-  const parts = [street, city, province, postalCode, country].filter(
-    (part): part is string => typeof part === "string" && part.trim() !== "",
-  );
-  return parts.length > 0 ? parts.join(", ") : null;
-}
 
 export async function SiteFooter({ locale, route }: { locale: Locale; route: AppPathname }) {
   const { t } = await getCopy(locale, "common");

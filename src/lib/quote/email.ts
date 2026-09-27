@@ -50,9 +50,10 @@ export function composeQuoteEmail(
   ];
   if (request.notes) lines.push("", "Notes:", request.notes);
 
-  const origin = request.source === "visit" ? "visit page" : "quote page";
+  const origin = `${request.source} page`;
+  const kind = request.source === "contact" ? "Message" : "Quote request";
   return {
-    subject: `Quote request: ${request.company} (${SERVICE_LABEL[request.service]}, ${origin})`,
+    subject: `${kind}: ${request.company} (${SERVICE_LABEL[request.service]}, ${origin})`,
     text: lines.join("\n"),
     replyTo: request.email,
   };

@@ -53,6 +53,7 @@ export const pathnames = {
     en: "/locations/montreal",
   },
   "/about": { fr: "/a-propos", en: "/about" },
+  "/contact": { fr: "/nous-joindre", en: "/contact" },
   "/quote": { fr: "/soumission", en: "/quote" },
   "/privacy": { fr: "/confidentialite", en: "/privacy" },
 } as const;

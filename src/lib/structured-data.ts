@@ -66,6 +66,17 @@ export function buildServiceJsonLd(facts: ServiceFacts): Record<string, unknown>
   };
 }
 
+/** schema.org ContactPage: names the page and points at the organization. Contact facts stay in the Organization block. */
+export function buildContactPageJsonLd(facts: { name: string; url: string; organizationId: string }): Record<string, unknown> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    name: facts.name,
+    url: facts.url,
+    about: { "@id": facts.organizationId },
+  };
+}
+
 /** JSON for a <script type="application/ld+json">: `<` escaped so a value can never close the tag. */
 export function serializeJsonLd(data: Record<string, unknown>): string {
   return JSON.stringify(data).replace(/</g, "\\u003c");

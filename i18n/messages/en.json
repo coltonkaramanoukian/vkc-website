@@ -23,7 +23,8 @@
       "privacy": "Privacy",
       "services": "Services",
       "containers": "Containers",
-      "industries": "Industries"
+      "industries": "Industries",
+      "contact": "Contact"
     },
     "groups": {
       "services": "Services",
@@ -182,6 +183,10 @@
     "industries": {
       "title": "Industries: cleaners, lubricants, sealers and coatings",
       "description": "Contract filling and toll blending for the trades VKC Packaging is set up for: cleaners, lubricants, sealers, coatings and colourants, and what changes at the line for each."
+    },
+    "contact": {
+      "title": "Contact VKC Packaging",
+      "description": "How to reach VKC Packaging for contract filling, packaging and toll blending in greater Montreal, and what to say to get a useful first answer."
     }
   },
   "home": {
@@ -383,7 +388,8 @@
     "groupJob": "The job",
     "groupNotes": "Anything else",
     "sentHeading": "Request sent",
-    "sentNext": "We answer by phone or by email, using what you left us. If walking your line together makes sense, we propose a time."
+    "sentNext": "We answer by phone or by email, using what you left us. If walking your line together makes sense, we propose a time.",
+    "submitContact": "Send the message"
   },
   "notFound": {
     "heading": "This page does not exist.",
@@ -1045,6 +1051,23 @@
           ]
         }
       ]
+    },
+    "contact": {
+      "eyebrow": "Contact",
+      "h1": "Reach VKC",
+      "leadDetails": "Phone, email or the form below: use whichever you have to hand. A line about the product and where it is stuck is enough to start, and the rest comes out in the call.",
+      "leadFormOnly": "The form below reaches VKC by email. A line about the product and where it is stuck is enough to start, and the rest comes out in the call.",
+      "detailsHeading": "Where to reach us",
+      "formEyebrow": "Write to us",
+      "formHeading": "Describe the situation",
+      "formIntro": "A company, a name, one way to reach you back, and which service you are asking about. The rest can wait for the call.",
+      "afterHeading": "After you send it",
+      "after": [
+        "Your message becomes one email in VKC’s inbox. Nothing is stored on this site.",
+        "Someone reads it the same working day it lands and calls or writes back, using the contact you left.",
+        "If the answer depends on your floor, we propose a date to walk through it together."
+      ],
+      "quoteNote": "Ready to talk numbers? The longer form asks about the product, its container and the run size: [Get a quote](/quote)."
     }
   }
 }

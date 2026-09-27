@@ -268,3 +268,41 @@ silently widening the rule.
   practices scores 96 locally because `/_vercel/insights/script.js` 404s on
   `next start`; the audit passes on Vercel. §9 still stands: the D12 medians
   come from production.
+
+## 11. Run 3 decisions (2026-09-27, continued)
+
+- **A media manifest, not a media file.** `content/scenes.json` is where
+  generated covers and gallery stills land (one cover per page, two
+  galleries), NULL AT BIRTH like the photo slots. The components reserve
+  each box by aspect ratio, serve images through `next/image` and play a
+  video only as a muted, in-view loop with a Play / Pause label; under
+  `prefers-reduced-motion` the poster stands. `guard:media` (NC-10) is the
+  gate, and `guard:numbers` reads only `alt` and `caption` from the file, so
+  an aspect ratio such as "16/9" never widens the number allowlist. CLAUDE.md
+  §1 still bans generated imagery; the seam exists, the rule change is
+  Colton's (NEEDS-COLTON item 8).
+- **A phone gets a bottom action bar.** Below `sm` the header carries no
+  quote button, so a prospect on a phone saw no call to action until the
+  hero. The bar is fixed at the bottom, last in tab order, absent on the
+  pages whose content is the form (`/quote`, `/visit`, `/contact`).
+- **Error boundaries carry their own four strings.** `lib/error-copy.ts` is
+  the one exception to "prose lives in i18n/messages": a boundary may be
+  the thing that failed to load messages. No facts, no numbers.
+- **Accessibility is measured, not asserted.** `npm run a11y` runs axe over
+  every URL at 375 and 1280 with the WCAG 2.x and best-practice tags; the
+  allowlist ships empty and `--self-check` proves the scan turns red on an
+  injected defect.
+- **`/contact` exists, and it is thin on purpose until `contact.json` is
+  filled.** A prospect looks for "Contact" in a nav before "Get a quote", and
+  a search for the company name plus "contact" wants a page. It carries the
+  details placard (phone, email, address, hours: each row only once it has a
+  value), a short form whose email is labelled `source=contact`, and three
+  "after you send it" lines. Its lead has two variants: with details on the
+  page, and without. It is not a second quote page: the long form stays on
+  `/quote`, which the contact page links to. ContactPage JSON-LD points at
+  the Organization block; contact facts stay there, in one place.
+- **A related card may point at the quote page.** `RelatedPages` looked up
+  every eyebrow under `pages.<key>`; the quote page keeps its copy under
+  `quote.*`, so a card for it threw at render. The lookup now falls back to
+  `<key>.eyebrow`. Found by the new error boundary doing its job on the
+  first render of `/contact`.
