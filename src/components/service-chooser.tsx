@@ -8,6 +8,7 @@ export interface ChooserCopy {
   pressure: { label: string } & Record<Pressure, string>;
   want: { label: string } & Record<Want, string>;
   resultLabel: string;
+  resultEmpty: string;
   reset: string;
   results: Record<Recommendation, { title: string; body: string; link: string }>;
 }
@@ -77,7 +78,8 @@ export function ServiceChooser({ copy, hrefs }: { copy: ChooserCopy; hrefs: Reco
             </p>
           </div>
         ) : (
-          <div className="flex min-h-[10rem] items-end border-l-[3px] border-hairline pl-4">
+          <div className="flex min-h-[10rem] flex-col justify-between gap-6 border-l-[3px] border-hairline pl-4">
+            <p className="max-w-[28ch] text-graphite">{copy.resultEmpty}</p>
             <div className="h-[3px] w-12 bg-hairline" aria-hidden="true" />
           </div>
         )}

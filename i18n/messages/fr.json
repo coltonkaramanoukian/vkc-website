@@ -219,6 +219,7 @@
         "unsure": "Je ne sais pas encore."
       },
       "resultLabel": "Notre lecture",
+      "resultEmpty": "Répondez aux deux questions : le service qui convient s’affiche ici.",
       "reset": "Recommencer",
       "results": {
         "secondShift": {

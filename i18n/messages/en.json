@@ -219,6 +219,7 @@
         "unsure": "Not sure yet."
       },
       "resultLabel": "Our read",
+      "resultEmpty": "Answer both questions and the service that fits shows up here.",
       "reset": "Start over",
       "results": {
         "secondShift": {
