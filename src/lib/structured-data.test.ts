@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { buildBreadcrumbJsonLd, buildFaqJsonLd, buildServiceJsonLd, serializeJsonLd } from "./structured-data.ts";
+import { buildBreadcrumbJsonLd, buildDefinedTermSetJsonLd, buildFaqJsonLd, buildServiceJsonLd, serializeJsonLd } from "./structured-data.ts";
 
 describe("buildFaqJsonLd", () => {
   it("emits one Question per item with the answer text", () => {
@@ -56,5 +56,24 @@ describe("buildServiceJsonLd", () => {
 describe("serializeJsonLd", () => {
   it("escapes the one character that could close the script tag", () => {
     assert.equal(serializeJsonLd({ a: "</script>" }), '{"a":"\\u003c/script>"}');
+  });
+});
+
+describe("buildDefinedTermSetJsonLd", () => {
+  it("anchors every term to the page and strips inline links from definitions", () => {
+    const data = buildDefinedTermSetJsonLd({
+      name: "Glossary",
+      url: "https://example.test/en/glossary",
+      terms: [
+        { term: "Weigh-fill", definition: "Filling to a target weight. See [pails](/containers/pails).", slug: "weigh-fill" },
+        { term: "Lot", definition: "One batch.", slug: "lot" },
+      ],
+    });
+    const terms = data.hasDefinedTerm as { name: string; description: string; url: string }[];
+    assert.equal(data["@type"], "DefinedTermSet");
+    assert.equal(terms.length, 2);
+    assert.equal(terms[0].url, "https://example.test/en/glossary#weigh-fill");
+    assert.equal(terms[0].description, "Filling to a target weight. See pails.");
+    assert.equal(terms[1].name, "Lot");
   });
 });

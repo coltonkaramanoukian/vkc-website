@@ -306,3 +306,23 @@ silently widening the rule.
   `quote.*`, so a card for it threw at render. The lookup now falls back to
   `<key>.eyebrow`. Found by the new error boundary doing its job on the
   first render of `/contact`.
+- **Service FAQs and a side-by-side table are copy, not facts.** Each service
+  page ends on four or five questions a plant manager asks before the first
+  shift, fill or batch, and `/services` carries a five-row table of what
+  differs between the two services. Every answer is written from the
+  service's own definition; no answer states a number, a client, a lead time
+  or a certification. The FAQ block renders FAQPage JSON-LD from the same
+  items a reader sees. The table is the third Second Shift surface on
+  `/services`, so it carries all four facts in its own cells.
+- **`/glossary` (`/lexique`) defines the trade's words, alphabetically per
+  language.** Twenty-two terms: the two fill methods, the four kinds of
+  record and role the Second Shift facts name (lead hand, QC sheet,
+  production log, shift), the container families and the words a quote form
+  asks for (viscosity, closure, specification, lot, safety data sheet).
+  Each locale sorts by its own collator, so the French order is French and
+  the letter strip differs between the two pages; the term list is authored
+  separately in each language, not translated. The "Second Shift" and
+  "Deuxième quart" entries carry all four §4 facts because a glossary that
+  names the service is a surface that mentions it. The same entries feed a
+  `DefinedTermSet` with one `DefinedTerm` per entry, anchored to the entry's
+  id, so a crawler reads what a reader reads. No digits anywhere on the page.

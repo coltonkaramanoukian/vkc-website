@@ -24,7 +24,8 @@
       "services": "Nos services",
       "containers": "Contenants",
       "industries": "Secteurs",
-      "contact": "Nous joindre"
+      "contact": "Nous joindre",
+      "glossary": "Lexique"
     },
     "groups": {
       "services": "Nos services",
@@ -187,6 +188,10 @@
     "contact": {
       "title": "Joindre VKC Packaging",
       "description": "Comment joindre VKC Packaging pour du remplissage, du conditionnement ou du mélange à façon dans le Grand Montréal, et quoi dire pour obtenir une première réponse utile."
+    },
+    "glossary": {
+      "title": "Lexique du remplissage et du conditionnement",
+      "description": "Les mots de ce site et d’un plancher de remplissage, définis comme le métier les emploie : remplissage au niveau, remplissage pondéral, mélange à façon, trousses, chef d’équipe, feuille CQ et plus."
     }
   },
   "home": {
@@ -1171,6 +1176,102 @@
         "Si la réponse dépend de votre plancher, on propose une date pour en faire le tour ensemble."
       ],
       "quoteNote": "Prêt à parler chiffres? Le formulaire long demande le produit, son contenant et le volume : [Obtenir une soumission](/quote)."
+    },
+    "glossary": {
+      "eyebrow": "Lexique",
+      "h1": "Les mots du plancher",
+      "lead": "Chaque terme employé sur ce site, défini comme le métier l’emploie. Quand un terme a sa propre page, la définition y renvoie.",
+      "lettersLabel": "Par lettre",
+      "terms": [
+        {
+          "term": "Assemblage de trousses",
+          "def": "Réunir des composants séparés, comme une bouteille remplie, un applicateur et un feuillet, en un seul emballage vendu comme une unité. Sur ce site, [trousses](/containers/kits) désigne les trousses de détail."
+        },
+        {
+          "term": "Bidon D-jug",
+          "def": "Un bidon de plastique à épaules carrées, poignée moulée dans le corps : la forme sous laquelle bien des nettoyants et des lubrifiants se vendent. Il se remplit comme une bouteille et se palettise comme une caisse."
+        },
+        {
+          "term": "Changement de format",
+          "def": "Tout ce qui se passe sur une ligne entre la dernière unité d’un produit et la première bonne unité du suivant : vider, nettoyer, changer les pièces, régler la dose. Une courte production, c’est surtout du changement de format."
+        },
+        {
+          "term": "Chef d’équipe",
+          "def": "La personne qui dirige un quart sur le plancher : répartit le travail, prend les décisions, signe les papiers. Sur un Deuxième quart, le chef d’équipe est celui de VKC."
+        },
+        {
+          "term": "Conditionnement à forfait",
+          "def": "Remplir et emballer le produit d’une autre entreprise, selon sa spécification, dans l’installation du conditionneur. Chez VKC, c’est le volet remplissage de [{bn}](/services/contract-packaging)."
+        },
+        {
+          "term": "Deuxième quart",
+          "def": "Le nom que VKC donne au quart de production qu’elle fait rouler dans l’usine d’un client, sur sa ligne, pendant un quart que l’usine ne couvre pas. Notre chef d’équipe dirige le quart, notre équipe fait le travail, nos feuilles CQ et notre registre de production le documentent, et c’est facturé à l’unité ou au quart. Voir [{ss}](/services/second-shift)."
+        },
+        {
+          "term": "Fermeture",
+          "def": "Ce qui scelle le contenant : bouchon, couvercle, obturateur, pompe ou gâchette. Elle se chiffre avec le contenant, parce qu’elle décide de la façon de remplir et de fermer sur la ligne."
+        },
+        {
+          "term": "Feuille CQ",
+          "def": "La feuille où s’inscrivent les vérifications faites pendant une production : doses, fermetures, étiquettes, comptes, aux intervalles que la spécification demande. Le contrôle de la qualité, écrit au moment où il se fait."
+        },
+        {
+          "term": "Fiche de données de sécurité",
+          "def": "Le document qui décrit les dangers, la manipulation et l’entreposage d’un produit. Envoyez-la avec tout produit qui en a une; on la lit avant de lire le produit."
+        },
+        {
+          "term": "Goulot",
+          "def": "L’étape la plus lente d’une usine, celle que toutes les autres attendent : le goulot d’étranglement. Aussi le col d’une bouteille. Le service de surplus de VKC tient son nom des deux lectures : [{bn}](/services/contract-packaging)."
+        },
+        {
+          "term": "Ligne de remplissage",
+          "def": "Le repère sur un contenant qui indique le niveau voulu, et, sur un plancher, la ligne qui remplit les contenants. Le slogan de ce site se lit dans les deux sens, exprès."
+        },
+        {
+          "term": "Lot",
+          "def": "Un ensemble de produit fabriqué ou rempli d’un coup et consigné sous un même identifiant, pour que tout ce qui le concerne remonte au registre de cette production."
+        },
+        {
+          "term": "Mélange à façon",
+          "def": "Fabriquer un produit selon une formule qui appartient au client, dans l’installation du mélangeur, contre des frais de transformation. La formule reste au client. Voir [mélange à façon](/services/toll-blending)."
+        },
+        {
+          "term": "PEHD",
+          "def": "Polyéthylène haute densité, le plastique rigide dont sont soufflés la plupart des bouteilles et des bidons industriels."
+        },
+        {
+          "term": "Quart",
+          "def": "Un bloc continu de production sur une ligne, en général la journée de travail d’une équipe. Une usine qui roule un seul quart laisse sa ligne dormir le reste de la journée."
+        },
+        {
+          "term": "Registre de production",
+          "def": "Le journal d’un quart ou d’une production : ce qui a été fait, quand, sur quelle ligne, en quelle quantité, et ce qui s’est passé en route. Avec la feuille CQ, c’est le compte rendu écrit du travail."
+        },
+        {
+          "term": "Remplissage au niveau",
+          "def": "Remplir un contenant jusqu’à ce que le produit atteigne sa ligne de remplissage, plutôt qu’à un poids cible. L’une des deux méthodes de remplissage nommées sur les pages de contenants."
+        },
+        {
+          "term": "Remplissage pondéral",
+          "def": "Remplir un contenant jusqu’à un poids cible plutôt que jusqu’à un repère, pour que chaque unité contienne la même quantité de produit, peu importe la forme du contenant. L’autre des deux méthodes."
+        },
+        {
+          "term": "Ropak",
+          "def": "Nom commercial d’un seau de plastique carré et empilable à couvercle à pression, utilisé là où les seaux ronds gaspillent l’espace de la palette. Parmi les familles de seaux passées chez VKC."
+        },
+        {
+          "term": "Seau",
+          "def": "Un contenant ouvert sur le dessus, avec couvercle et anse, en plastique ou en métal, pour les produits trop épais ou trop volumineux pour une bouteille : scellants, revêtements, graisses. Voir [seaux](/containers/pails)."
+        },
+        {
+          "term": "Spécification",
+          "def": "Ce que l’unité finie doit être : la dose, le serrage de la fermeture, la position de l’étiquette, le compte par caisse, les tolérances. Elle appartient au client; la production se mesure contre elle."
+        },
+        {
+          "term": "Viscosité",
+          "def": "L’épaisseur d’un liquide, ou sa résistance à couler. C’est la première question d’un remplisseur, parce qu’elle décide de la méthode et de la vitesse."
+        }
+      ]
     }
   }
 }

@@ -24,7 +24,8 @@
       "services": "Services",
       "containers": "Containers",
       "industries": "Industries",
-      "contact": "Contact"
+      "contact": "Contact",
+      "glossary": "Glossary"
     },
     "groups": {
       "services": "Services",
@@ -187,6 +188,10 @@
     "contact": {
       "title": "Contact VKC Packaging",
       "description": "How to reach VKC Packaging for contract filling, packaging and toll blending in greater Montreal, and what to say to get a useful first answer."
+    },
+    "glossary": {
+      "title": "Glossary of filling and packaging terms",
+      "description": "The words used on this site and on a filling floor, defined the way the trade uses them: fill-to-line, weigh-fill, toll blending, kitting, lead hand, QC sheet and more."
     }
   },
   "home": {
@@ -1171,6 +1176,102 @@
         "If the answer depends on your floor, we propose a date to walk through it together."
       ],
       "quoteNote": "Ready to talk numbers? The longer form asks about the product, its container and the run size: [Get a quote](/quote)."
+    },
+    "glossary": {
+      "eyebrow": "Glossary",
+      "h1": "The words on the floor",
+      "lead": "Every term this site uses, defined the way the trade uses it, in plain words. Where a term has a page of its own, the definition points there so the page can do the explaining.",
+      "lettersLabel": "By letter",
+      "terms": [
+        {
+          "term": "Bottleneck",
+          "def": "The slowest step in a plant, the one every other step waits on, however fast the rest may be. Also the neck of a bottle, the narrow part the product passes through. VKC’s overflow service takes its name from both readings: [{bn}](/services/contract-packaging)."
+        },
+        {
+          "term": "Changeover",
+          "def": "Everything that happens on a line between the last unit of one product and the first good unit of the next: emptying, cleaning, swapping parts, resetting the fill. A short run is mostly changeover."
+        },
+        {
+          "term": "Closure",
+          "def": "Whatever seals the container: a cap, a lid, a plug, a pump or a trigger. It is quoted with the container, because it decides how the container is filled and closed on the line."
+        },
+        {
+          "term": "Contract packaging",
+          "def": "Filling and packing another company’s product, to that company’s specification, at the packager’s facility. Also called co-packing. At VKC it is the fill side of [{bn}](/services/contract-packaging)."
+        },
+        {
+          "term": "D-jug",
+          "def": "A square-shouldered plastic jug with the handle moulded into the body, the shape many cleaners and lubricants are sold in. Filled like a bottle, palletized like a case."
+        },
+        {
+          "term": "Fill line",
+          "def": "The mark on a container that shows the intended level, and, on a floor, the line that fills the containers. The tagline of this site reads both ways on purpose."
+        },
+        {
+          "term": "Fill-to-line",
+          "def": "Filling a container until the product reaches its fill line, rather than to a target weight. One of the two fill methods listed on the container pages."
+        },
+        {
+          "term": "HDPE",
+          "def": "High-density polyethylene, the stiff, opaque plastic most industrial bottles and jugs are blow-moulded from. It takes most cleaners and lubricants without complaint, which is why it is the default."
+        },
+        {
+          "term": "Kitting",
+          "def": "Assembling separate components, such as a filled bottle, an applicator and a leaflet, into one package that sells as a single unit. [Kits](/containers/kits) on this site means consumer kits."
+        },
+        {
+          "term": "Lead hand",
+          "def": "The person on the floor who directs a shift: assigns the work, sets the pace, makes the calls when something drifts, signs the paperwork at the end. On a Second Shift, the lead hand is VKC’s, not the plant’s."
+        },
+        {
+          "term": "Lot",
+          "def": "One batch of product made or filled together and recorded under one identifier, so that anything about it, a complaint or a question, can be traced back to the record of that run."
+        },
+        {
+          "term": "Pail",
+          "def": "An open-top container with a lid and a bail handle, in plastic or metal, for the products too thick or too bulky for a bottle: sealers, coatings, greases. See [pails](/containers/pails)."
+        },
+        {
+          "term": "Production log",
+          "def": "The running record of a shift or a run: what was made, when, on which line, in what quantity, and what happened along the way. With the QC sheet, it is the written account of the work."
+        },
+        {
+          "term": "QC sheet",
+          "def": "The sheet on which the checks made during a run are recorded: fills, closures, labels, counts, at the intervals the specification calls for. Quality control, written down as it happens."
+        },
+        {
+          "term": "Ropak",
+          "def": "A trade name for a square, stackable plastic pail with a snap-on lid, used where round pails waste pallet space. Listed among the pail families VKC has run."
+        },
+        {
+          "term": "Safety data sheet",
+          "def": "The document that describes a product’s hazards, its handling and its storage, in a set format. Send it with any product that has one; it is read before the product is, and it decides how the product is stored on arrival."
+        },
+        {
+          "term": "Second Shift",
+          "def": "VKC’s name for a production shift it runs at a customer’s plant, on the customer’s line, on a shift the plant does not cover. Our lead hand directs the shift, our crew does the work, our QC sheets and production log document it, and it is priced per unit or per shift. See [{ss}](/services/second-shift)."
+        },
+        {
+          "term": "Shift",
+          "def": "One continuous block of production on a line, usually one crew’s working day. A plant that runs one shift leaves its line idle for the rest of the day, which is the gap Second Shift exists to fill."
+        },
+        {
+          "term": "Specification",
+          "def": "What the finished unit has to be: the fill, the closure torque, the label position, the count per case, the tolerances. The spec is the customer’s; the run is measured against it."
+        },
+        {
+          "term": "Toll blending",
+          "def": "Making a product to a formula the customer owns, at the blender’s facility, for a processing fee. The formula stays the customer’s. See [toll blending](/services/toll-blending)."
+        },
+        {
+          "term": "Viscosity",
+          "def": "How thick a liquid is, or how much it resists flowing. It is the first thing a filler asks about, because it decides the fill method, the nozzle and the speed of the line."
+        },
+        {
+          "term": "Weigh-fill",
+          "def": "Filling a container to a target weight rather than to a line, so that every unit carries the same amount of product whatever the container’s shape. The other of the two fill methods."
+        }
+      ]
     }
   }
 }

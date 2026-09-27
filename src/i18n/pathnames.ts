@@ -54,6 +54,7 @@ export const pathnames = {
   },
   "/about": { fr: "/a-propos", en: "/about" },
   "/contact": { fr: "/nous-joindre", en: "/contact" },
+  "/glossary": { fr: "/lexique", en: "/glossary" },
   "/quote": { fr: "/soumission", en: "/quote" },
   "/privacy": { fr: "/confidentialite", en: "/privacy" },
 } as const;
