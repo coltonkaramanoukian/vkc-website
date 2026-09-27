@@ -1,13 +1,14 @@
 import localFont from "next/font/local";
 
-// Self-hosted OFL fonts (brand/BRAND.md). Latin subset covers French.
+// Self-hosted OFL fonts (brand/BRAND.md). Latin subset covers French. The
+// axes are pinned to the ranges the CSS uses (scripts/subset-fonts.py).
 export const archivo = localFont({
   src: "../../brand/fonts/web/Archivo-latin-wdth-wght.woff2",
   variable: "--font-archivo",
-  weight: "100 900",
+  weight: "400 800",
   style: "normal",
   display: "swap",
-  declarations: [{ prop: "font-stretch", value: "62% 125%" }],
+  declarations: [{ prop: "font-stretch", value: "100% 112.5%" }],
   fallback: ["system-ui", "Arial", "sans-serif"],
 });
 
