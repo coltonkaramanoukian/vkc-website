@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
-    "test": "node --test \"guard/*.test.ts\" \"src/lib/**/*.test.ts\"",
+    "test": "node --test \"guard/*.test.ts\" \"src/lib/**/*.test.ts\" \"scripts/lib/*.test.ts\"",
     "brand:sync": "node scripts/sync-wordmark.ts",
     "qr": "node scripts/qr.ts",
     "render": "node scripts/render-all.ts",

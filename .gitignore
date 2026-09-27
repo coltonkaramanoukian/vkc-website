@@ -47,3 +47,6 @@ next-env.d.ts
 /.render-draft/
 /.render-prod/
 /.render-local/
+
+# Playwright MCP session logs
+.playwright-mcp/
