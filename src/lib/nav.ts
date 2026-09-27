@@ -14,6 +14,12 @@ export interface NavGroup {
   items: NavItem[];
 }
 
+/**
+ * The site's order, everywhere it is listed (menu, footer, primary nav):
+ * Services (Second Shift, then the two Bottleneck pages), Industries,
+ * Containers, Regions, then the company pages with Contact before the
+ * rest. Colton's brief of 2026-09-27; the labels and slugs did not change.
+ */
 export const navGroups: NavGroup[] = [
   {
     key: "services",
@@ -22,15 +28,6 @@ export const navGroups: NavGroup[] = [
       { route: "/services/second-shift", label: "secondShift" },
       { route: "/services/contract-packaging", label: "contractPackaging" },
       { route: "/services/toll-blending", label: "tollBlending" },
-    ],
-  },
-  {
-    key: "containers",
-    hub: "/containers",
-    items: [
-      { route: "/containers/bottles-and-jugs", label: "bottlesAndJugs" },
-      { route: "/containers/pails", label: "pails" },
-      { route: "/containers/kits", label: "kits" },
     ],
   },
   {
@@ -43,6 +40,15 @@ export const navGroups: NavGroup[] = [
     ],
   },
   {
+    key: "containers",
+    hub: "/containers",
+    items: [
+      { route: "/containers/bottles-and-jugs", label: "bottlesAndJugs" },
+      { route: "/containers/pails", label: "pails" },
+      { route: "/containers/kits", label: "kits" },
+    ],
+  },
+  {
     key: "regions",
     items: [{ route: "/locations/montreal", label: "montreal" }],
   },
@@ -50,21 +56,27 @@ export const navGroups: NavGroup[] = [
     key: "company",
     items: [
       { route: "/about", label: "about" },
-      { route: "/glossary", label: "glossary" },
       { route: "/contact", label: "contact" },
       { route: "/quote", label: "quote" },
+      { route: "/glossary", label: "glossary" },
       { route: "/privacy", label: "privacy" },
     ],
   },
 ];
 
-/** Shown inline in the header on wide screens. */
+/**
+ * Shown inline in the header from xl, in the site's order. Five of the six
+ * groups: with Montréal the French row plus the French quote button
+ * overflow the 72rem column by 58px at every width (measured 2026-09-27),
+ * and the labels are not for shrinking. Regions keeps its place in the
+ * menu, the footer and the home page's closing cells.
+ */
 export const primaryNav: NavItem[] = [
-  { route: "/services/second-shift", label: "secondShift" },
   { route: "/services", label: "services" },
-  { route: "/containers", label: "containers" },
   { route: "/industries", label: "industries" },
+  { route: "/containers", label: "containers" },
   { route: "/about", label: "about" },
+  { route: "/contact", label: "contact" },
 ];
 
 /** The group a route belongs to, if any. */

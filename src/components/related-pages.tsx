@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Pictogram } from "@/components/pictograms";
 import { getCopy } from "@/lib/i18n";
-import { navLabelKey, pageKeyFor } from "@/lib/nav";
+import { groupOf, navLabelKey, pageKeyFor } from "@/lib/nav";
 import { RELATED, ROUTE_PICTO } from "@/lib/related";
 import { localizedPath, type AppPathname, type Locale } from "@/i18n/pathnames";
 
@@ -24,7 +24,11 @@ export async function RelatedPages({ locale, route }: { locale: Locale; route: A
     const isHub = ["/services", "/containers", "/industries"].includes(target);
     const title = isHub ? t(`common.groups.${labelKey}`) : t(`common.nav.${labelKey}`);
     const key = pageKeyFor(target);
-    const eyebrow = pages[key]?.eyebrow ?? t(`${key}.eyebrow`);
+    const pageEyebrow = pages[key]?.eyebrow ?? t(`${key}.eyebrow`);
+    // A page whose eyebrow is its own name (About, Contact) would print the
+    // name twice; its group name says where it lives instead.
+    const group = groupOf(target);
+    const eyebrow = pageEyebrow === title && group ? t(`common.groups.${group.key}`) : pageEyebrow;
     return { target, title, eyebrow, picto: ROUTE_PICTO[target] ?? "clipboard" };
   });
 

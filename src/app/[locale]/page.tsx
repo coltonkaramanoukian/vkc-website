@@ -11,6 +11,7 @@ import { HeroGauge } from "@/components/hero-gauge";
 import { Manifest, type ManifestItem } from "@/components/manifest";
 import { PageShell } from "@/components/page-shell";
 import { PhotoRow } from "@/components/photo";
+import { RelatedPages } from "@/components/related-pages";
 import { SceneCover, SceneGalleries } from "@/components/scene";
 import type { PictogramName } from "@/components/pictograms";
 import { ServiceChooserSection } from "@/components/service-chooser-section";
@@ -36,12 +37,15 @@ const INDUSTRIES: { route: AppPathname; label: string; key: string; picto: Picto
 ];
 
 /**
- * The home page reads as one pallet label after another, on the floor.
- * Layout families, each used once: the hero (tagline beside the gauge), two
- * service placards, the chooser, one label with three fields (containers),
- * manifest rows (industries), ticked steps, a ruled statement, the FAQ, and
- * the negative band. Two eyebrows on the page: the hero's and "straight
- * talk", where the label is information, not furniture.
+ * The home page reads as one pallet label after another, on the floor, in
+ * the site's order (lib/nav.ts): the two services, the chooser, the
+ * industries, the containers, how a job starts, straight talk, the FAQ,
+ * then who VKC works for and the three pages that close the site (where it
+ * works, who it is, how to reach it). Layout families, each used once: the
+ * hero (tagline beside the gauge), two service placards, the chooser,
+ * manifest rows (industries), one label with three fields (containers),
+ * ticked steps, a ruled statement, the FAQ, ruled cells, and the negative
+ * band. Two eyebrows on the page: the hero's and "straight talk".
  */
 export default async function HomePage({ params }: Props) {
   const { locale } = await params;
@@ -79,7 +83,7 @@ export default async function HomePage({ params }: Props) {
         </div>
       </section>
 
-      {/* The cover strip (content/scenes.json) and the demo video (content/media.json). */}
+      {/* The cover strip (content/scenes.json, slot home-cover) and the demo video (content/media.json). */}
       <SceneCover route="/" locale={locale} preload className="wrap mb-10" />
       <div className="wrap">
         <DemoVideo locale={locale} label={site.brandName} />
@@ -89,7 +93,7 @@ export default async function HomePage({ params }: Props) {
         <hr className="fill-rule" />
       </div>
 
-      {/* The two services: two labels. */}
+      {/* Services: the two labels. */}
       <section id="services" className="wrap section scroll-mt-4" aria-labelledby="services-heading">
         <div className="section-head">
           <h2 id="services-heading">{t("home.servicesHeading")}</h2>
@@ -101,24 +105,10 @@ export default async function HomePage({ params }: Props) {
         <PhotoRow ids={["home-second-shift", "home-bottleneck"]} locale={locale} className="mt-5" />
       </section>
 
+      {/* The floor gallery (content/scenes.json, gallery home-floor). */}
       <SceneGalleries route="/" locale={locale} className="!mt-0" />
 
       <ServiceChooserSection locale={locale} />
-
-      <div className="wrap">
-        <hr className="fill-rule" />
-      </div>
-
-      {/* Containers: one label, three fields. */}
-      <section className="wrap section" aria-labelledby="containers-heading">
-        <div className="section-head">
-          <h2 id="containers-heading">{t("home.containersHeading")}</h2>
-          <p>{t("home.containersIntro")}</p>
-        </div>
-        <div className="mt-8">
-          <ContainerLabel locale={locale} />
-        </div>
-      </section>
 
       <div className="wrap">
         <hr className="fill-rule" />
@@ -132,6 +122,21 @@ export default async function HomePage({ params }: Props) {
         </div>
         <div className="mt-8">
           <Manifest items={industries} />
+        </div>
+      </section>
+
+      <div className="wrap">
+        <hr className="fill-rule" />
+      </div>
+
+      {/* Containers: one label, three fields. */}
+      <section className="wrap section" aria-labelledby="containers-heading">
+        <div className="section-head">
+          <h2 id="containers-heading">{t("home.containersHeading")}</h2>
+          <p>{t("home.containersIntro")}</p>
+        </div>
+        <div className="mt-8">
+          <ContainerLabel locale={locale} />
         </div>
       </section>
 
@@ -169,6 +174,11 @@ export default async function HomePage({ params }: Props) {
 
       <ClientStories locale={locale} heading={t("common.storiesHeading")} />
       <ClientList heading={t("common.clientsHeading")} />
+
+      {/* Where this leads next: Montreal, About, Contact, the end of the site's order. */}
+      <div className="mt-14">
+        <RelatedPages locale={locale} route="/" />
+      </div>
       <CtaBand locale={locale} />
     </PageShell>
   );

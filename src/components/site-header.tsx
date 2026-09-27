@@ -69,7 +69,7 @@ export async function SiteHeader({ locale, route }: { locale: Locale; route: App
 
         {/* xl, not lg: the French labels need the room, and a wrapped nav item reads as two. */}
         <nav aria-label={t("primaryNav")} className="hidden xl:block">
-          <ul className="flex items-center gap-7 text-[0.9375rem] whitespace-nowrap">
+          <ul className="flex items-center gap-6 text-[0.9375rem] whitespace-nowrap">
             {primaryNav.map((item) => (
               <li key={item.route}>
                 <NavLink href={href(item.route)} current={item.route === route} className="chrome-link">
