@@ -23,7 +23,8 @@
     "proof:parity": "node scripts/proof-parity.ts",
     "lighthouse": "node scripts/lighthouse.ts",
     "first-load-js": "node scripts/first-load-js.ts",
-    "overlap": "node scripts/overlap.ts",
+    "overlap": "node scripts/overlap.ts --copy",
+    "overlap:rendered": "node scripts/overlap.ts",
     "guard:claims": "node scripts/guard-claims.ts"
   },
   "dependencies": {

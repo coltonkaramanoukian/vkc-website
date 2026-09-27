@@ -1,36 +1,31 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# vkc-website
 
-## Getting Started
+Public, bilingual (FR/EN) marketing site for VKC Packaging. Next.js App Router
+with next-intl, deployed to Vercel. No database, no auth, no CMS.
 
-First, run the development server:
+Start with `CLAUDE.md`: it is the constitution, and every guard below exists
+to enforce one of its sections.
+
+| Where | What |
+|---|---|
+| `content/*.json` | Every fact on the site. Null renders nothing. Four files are Colton's alone (`docs/CONTENT-INTAKE.md`). |
+| `i18n/messages/{fr,en}.json` | All prose. French is written as French, not translated. |
+| `brand/` | Tokens, fonts, wordmark, `BRAND.md`. |
+| `guard/` | Phrase-sets and allowlists the guards read. |
+| `scripts/` | Guards, proofs, negative controls (`scripts/nc/`). |
+| `docs/` | Design decisions, run logs, content intake, domain steps. |
+| `NEEDS-COLTON.md` | What only Colton can do. |
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install            # also installs the pre-push guard
+npm run dev            # http://localhost:3000 (or the .claude/launch.json configs)
+npm run build && npx next start -p 3100
+npm run render         # captures every page into .render/
+npm run guard:staffing && npm run guard:numbers && npm run guard:fr && npm run guard:claims
+npm run overlap        # reused-sentence gate on the copy
+npm run test && npm run typecheck && npm run lint
+node scripts/nc/nc5-quote-form.ts   # the form, end to end, against a mock
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Production deploys only through `vercel --prod` (`vercel.json` turns off
+auto-deploy of `main`). A deploy is proven, not assumed: CLAUDE.md §6.

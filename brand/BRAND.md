@@ -92,4 +92,8 @@ request. It is `aria-hidden`: the link around it carries the name.
 - Sentence case everywhere, including buttons and eyebrows. No ALL-CAPS.
 - No "→" appended to buttons, no middle-dot meta strings, no fade-slide
   entrances, no accented word inside a headline.
-- Motion: none beyond the browser's own focus and hover states.
+- Motion: one easing, CSS only, and only where it draws the fill rule. The
+  fill-rule tick advances as a section scrolls into view, the header rule
+  settles when the page scrolls, the hero gauge and shift bar fill once on
+  load. Everything sits behind `prefers-reduced-motion: reduce`. No fade-slide
+  entrances, no parallax, no per-element timers (run 2, DESIGN-DECISIONS §10).
