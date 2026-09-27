@@ -26,8 +26,12 @@ npm run guard:staffing && npm run guard:numbers && npm run guard:fr && npm run g
 npm run guard:media   # content/scenes.json + photos.json against public/
 npm run a11y -- --base http://localhost:3100 --self-check   # axe over every URL at 375 and 1280
 npm run overlap        # reused-sentence gate on the copy
+npm run check:hreflang -- --base http://localhost:3100    # every alternate resolves
+npm run check:locale-switch -- --base http://localhost:3100
+npm run lighthouse -- --base http://localhost:3100        # medians, six pages, three runs
 npm run test && npm run typecheck && npm run lint
 node scripts/nc/nc5-quote-form.ts   # the form, end to end, against a mock
+bash scripts/nc/nc10-media.sh       # guard:media red on two injections, green after
 ```
 
 Production deploys only through `vercel --prod` (`vercel.json` turns off

@@ -186,3 +186,114 @@ localhost only). `check:hreflang --base local` 36/36. NC-5 5/5 after #4 and #5.
   `media` (§2). Every null is still null.
 - No `lastModified` in the sitemap: there is no honest per-page date to render
   (DESIGN-DECISIONS §10).
+
+---
+
+# Run log — run 3 (2026-09-27), "keep going"
+
+Model: Claude Fable 5.1, `MAX_THINKING_TOKENS=31999`, dontAsk, no subagents.
+Brief: continue the monster build; media-ready seams for a later Higgsfield
+run (not the integration); prove every change in a real browser at 1280 and
+375 in FR and EN; never wait on Colton. Started by recovering state: eight
+PRs merged, nothing uncommitted, nothing to revert.
+
+## Checkpoints (one pull request each, self-merged, main NOT deployed)
+
+| PR | Merge | What |
+|---|---|---|
+| #9 | b33f65a | Media seams: `content/scenes.json` (NULL AT BIRTH, thirteen covers, two galleries), `lib/scenes/` validator (17 tests), `Scene` / `SceneCover` / `SceneGalleries`, `AmbientVideo` (poster stands under reduced motion or save-data, plays only in view, always has a pause), `guard:media` + NC-10, next/image budgets, `.btn` no longer wraps. |
+| #10 | 3086772 | Phone action bar (quote + call, absent on the form pages), `error.tsx` / `global-error.tsx` with their own four strings, `npm run a11y` (axe, every URL, 375 and 1280, `--self-check`). |
+| #11 | 000910c | `/contact` / `/nous-joindre`: details placard (rows only with a value), short form labelled `source=contact`, ContactPage JSON-LD; related-card fallback for the quote page. |
+| #12 | 9340602 | FAQs on the three service pages (FAQPage JSON-LD) and a five-row side-by-side table on `/services` that is itself a Second Shift surface. |
+| #13 | 51f2ad2 | `/glossary` / `/lexique`: twenty-two terms per language, each list authored natively and sorted by its own collator, DefinedTermSet JSON-LD, `tag` pictogram. |
+| #14 | — | This close-out: run log, NEEDS-COLTON refresh, README, final proofs. |
+
+## Proof, each PR
+
+Every PR: `typecheck`, `lint`, `test` (53 → 54), `build`; `render` 38/38 →
+40/40; `guard:staffing` (58 Second Shift surfaces at the end),
+`guard:numbers`, `guard:fr`, `guard:claims`, `guard:media` GREEN; `overlap`
+worst pair ≤ 7.4% phrases; `census`; `check:hreflang --base local` 40/40;
+`check:locale-switch` 20 pairs; `a11y` 80 scans, 0 violations; browser at
+1280 and 375 in FR and EN through the desktop app's own pane. NC-5 5/5 after
+#11 (the form gained a third source). NC-6 and NC-10 red → green after #9.
+The media seam was proven with injected test files (a recorded webm, two
+PNGs), then the files were deleted and the manifest restored to null: the
+loop plays in view, pauses out of view, the toggle flips `aria-pressed`,
+FR labels render, the gallery snaps at 375, the portrait variant swaps on a
+phone, and under `reducedMotion: "reduce"` the video sits at 0 with "Play
+the video" showing. Final re-run from the clone after PR #13: NC-5 5/5, NC-6
+pass (placeholders only behind the flag, no `img`/`video` outside the allowed
+prefixes), NC-10 red → green with the manifest byte-identical after.
+
+Lighthouse (mobile, three runs, medians) on the final local build served
+from the scratchpad clone (see SELF-RESOLVED 12): performance 96 on all six
+D12 pages, accessibility 100, SEO 100 (`/visit` 66 = noindex by design),
+best-practices 96 (the `/_vercel/insights/script.js` 404 that only exists off
+Vercel). A first pass against the Desktop-served build read performance 100
+with accessibility 96 and best-practices 96: that server was answering 500 on
+its CSS after the access drop, so the page was measured unstyled. Discarded.
+
+## SELF-RESOLVED
+
+1. `react-hooks/set-state-in-effect` on the ambient video: the component kept
+   an "ambient" state set from an effect. Removed the state; the toggle is
+   always rendered and reduced motion simply returns before observing.
+2. **NC-10 ran while a manual injection was in flight on an untracked
+   `content/scenes.json`**, so `git checkout --` had nothing to restore and
+   the two injections stacked. Recovered by resetting every slot to null;
+   NC-10 now copies the file to `mktemp` first and proves the restore with
+   `cmp`. Lesson, written down: never run a negative control concurrently
+   with a hand injection of the same file.
+3. `guard:numbers` accepted every string in `scenes.json`, so aspect ratios
+   ("16/9", "21/9") widened the allowed set. Only `alt` and `caption` count now.
+4. Playwright's bundled ffmpeg has no `lavfi`, so test media came from a
+   Playwright `recordVideo` session and screenshots, not from a filter graph.
+5. "Obtenir une soumission" in the FR header wrapped to two lines at 1280
+   (pre-existing). `.btn { white-space: nowrap }`, verified at 48 px.
+6. Next 16 refuses a second `next dev` in one directory; the placeholder
+   server (3201) and the plain one (3200) take turns.
+7. `@next/next/no-html-link-for-pages` in `global-error.tsx`: `next/link`.
+8. `@axe-core/playwright` came in with a caret; pinned to `4.13.0` like the
+   other tooling.
+9. `RelatedPages` read every eyebrow under `pages.<key>`; the quote page's
+   copy lives under `quote.*`, so a card pointing at it threw. Fallback to
+   `<key>.eyebrow`. The new error boundary reported it on the first render.
+10. `overlap` went red on `/contact` vs `/quote` (66%) through shared form
+    labels. The form is site furniture: `data-shared="form"` on the wrapper
+    and `form` left out of the contact page's copy namespaces. 0% after.
+11. FR/EN ratio drifted past 1.10 on `/services/contract-packaging` (1.118)
+    and `/services` (1.114) once the FAQ and table copy landed, and on the
+    glossary's first draft (1.139). EN extended and FR trimmed per page;
+    1.074, 1.089 and 1.029 after.
+12. **macOS revoked the desktop app's access to `~/Desktop` mid-run**, right
+    as the final Lighthouse pass started: every read under the repo path
+    returned `EPERM`, sandboxed or not, while `~/Documents` and `/private/tmp`
+    stayed readable. Nothing in the tree was lost: the Desktop checkout was
+    clean on `main` at 51f2ad2 (PR #13 merged and pulled) when access
+    dropped. The close-out finished from a fresh `gh repo clone` of the same
+    private remote in the session's scratchpad. §5's identity check is the
+    remote (`coltonkaramanoukian/vkc-website`), which held; the path check
+    could not be satisfied and the reason is this line. The Desktop checkout
+    needs a `git pull` to pick up PR #14.
+
+## Not done, on purpose
+
+- No production deploy (`NEEDS-COLTON.md` item 1). `main` is fourteen PRs
+  past production.
+- No value in `contact`, `capabilities`, `clients`, `photos`, `scenes` or
+  `media`. Every null is still null; the two negative-control injections
+  were reverted in the same step and proven byte-identical.
+- No Higgsfield call, upload path or CMS: the seam is a manifest and a
+  folder (`NEEDS-COLTON.md` item 8). CLAUDE.md §1 still bans generated
+  imagery; changing that is Colton's.
+- No component tests: the pure logic (scenes validator, chooser, slug,
+  structured data, quote email) is under `node --test`; the pages are
+  proven by render, guards, axe and the browser.
+
+## Page cuts
+
+None. Every page that exists should exist once the content is filled:
+`/contact` is thin until `contact.json` has a value but is honest about it
+(form-only lead), and `/glossary` states no fact about VKC beyond the two
+service definitions, which carry the §4 facts. Nothing should be cut.
