@@ -1,0 +1,4 @@
+{
+  "_note": "Axe rule ids the a11y gate may ignore, each with the reason. Empty means every violation is red. A line here is a decision, not a convenience: say why the rule does not apply, and which page.",
+  "rules": []
+}

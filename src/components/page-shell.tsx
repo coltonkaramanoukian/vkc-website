@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { ActionBar } from "@/components/action-bar";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { getCopy } from "@/lib/i18n";
@@ -24,6 +25,7 @@ export async function PageShell({
         {children}
       </main>
       <SiteFooter locale={locale} route={route} />
+      <ActionBar locale={locale} route={route} />
     </>
   );
 }

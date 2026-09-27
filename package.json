@@ -26,7 +26,8 @@
     "overlap": "node scripts/overlap.ts --copy",
     "overlap:rendered": "node scripts/overlap.ts",
     "guard:claims": "node scripts/guard-claims.ts",
-    "guard:media": "node scripts/guard-media.ts"
+    "guard:media": "node scripts/guard-media.ts",
+    "a11y": "node scripts/a11y.ts"
   },
   "dependencies": {
     "@vercel/analytics": "2.0.1",
@@ -38,6 +39,7 @@
     "resend": "6.28.1"
   },
   "devDependencies": {
+    "@axe-core/playwright": "4.13.0",
     "@playwright/test": "1.63.0",
     "@tailwindcss/postcss": "4.3.3",
     "@types/node": "20.19.43",
