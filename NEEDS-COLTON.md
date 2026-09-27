@@ -4,9 +4,10 @@ Everything the site is waiting on that an agent must not do. Run 2
 (2026-09-27) kept building past each of these; nothing below blocks the code.
 Each item says what is missing, where it goes, and what appears once it is done.
 
-## 1. Ship run 2 to production
+## 1. Ship runs 2 and 3 to production
 
-`main` is past the production build by every run 2 and run 3 pull request. Production only
+`main` is past the production build by every run 2 and run 3 pull request
+(fourteen in all: design system through `/glossary`). Production only
 deploys through `vercel --prod` (`vercel.json` disables auto-deploy of `main`),
 and pushing a public site is your call, not an agent's.
 
@@ -127,5 +128,5 @@ Generated files are committed like any other asset and go live with the next
   `docs/DESIGN-DECISIONS.md` §10.
 - **`npm run check:hreflang` against production is red until item 1 ships.**
   It fetches the alternates from production, which does not yet have the
-  hub pages or `/contact`. Against a local build (`--base http://localhost:3100`)
-  it is 40/40.
+  hub pages, `/contact` or `/glossary`. Against a local build
+  (`--base http://localhost:3100`) it is 40/40.
