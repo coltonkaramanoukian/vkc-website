@@ -28,8 +28,12 @@ Every fact on the site is either supplied by Colton or visibly absent.
   `approved: true`. The file ships as `[]`; an empty file renders no section.
 - No pricing, no dollar amounts. "Priced per unit or per shift" describes how
   Second Shift is billed; it is not a price.
-- No stock, generated or third-party imagery; no scraping (not SCI's site, not
-  anyone's). Photos render only from `content/photos.json`.
+- AI-generated imagery (Higgsfield) is PERMITTED (Colton, 2026-09-27). It
+  renders only through `content/scenes.json` (§2) and must not depict a fact
+  the site cannot otherwise state (§1: no invented certifications, equipment
+  counts, client logos, etc.). Still no stock or third-party imagery; no
+  scraping (not SCI's site, not anyone's). Real photos render only from
+  `content/photos.json`.
 - Guard: `npm run guard:numbers` (NC-3). Every digit-run in rendered text must
   come from `content/*.json` or `guard/number-allowlist.json` (each line
   justified in `docs/DESIGN-DECISIONS.md`). Red on a clean tree = a number was
@@ -60,9 +64,9 @@ Three classes of file. Pages render from them; prose lives in
 - `docs/CONTENT-INTAKE.md` lists every null as `file:field`.
 - `scenes.json` is the media manifest (covers and galleries, image or video).
   `npm run guard:media` (NC-10) proves every `src` exists under `public/media/`,
-  is typed, sized, under budget and described in both languages. §1's ban on
-  generated imagery still stands: filling `scenes.json` with generated media
-  needs that line amended first, by Colton.
+  is typed, sized, under budget and described in both languages. Generated
+  (Higgsfield) media is permitted here per §1 (amended by Colton,
+  2026-09-27).
 
 ## §3 FR IS NOT A TRANSLATION OF EN
 
