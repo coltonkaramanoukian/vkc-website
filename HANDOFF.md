@@ -34,11 +34,13 @@ HANDOFF: 2026-09-27 — `main` holds runs 1–3 (PRs #1–#18): every page built
    media seam is `content/scenes.json` + `public/media/`, Colton's to fill),
    §4 on every Second Shift surface. Every change still goes through the
    gate chain below.
-2. **One unverified audit finding** (skeptics did not finish before this
-   handoff): `scripts/lib/copy-ratio.ts` `COPY_NAMESPACES` may omit
-   `common.specLabels` for the three service routes and `common.contact` for
-   `/contact`. Check whether those namespaces carry page copy a reader sees;
-   if yes, add them and re-run `guard:fr` and `overlap`.
+2. **One confirmed audit finding, not yet fixed** (both skeptics confirmed
+   it after this handoff was drafted): `scripts/lib/copy-ratio.ts`
+   `COPY_NAMESPACES` omits `common.specLabels` for the three service routes
+   (their SpecGrid labels render once `capabilities.json` is filled, so the
+   ±10% gate would measure less than the page shows) and, low, `common.contact`
+   for `/contact`. Add them, re-run `guard:fr` and `overlap`, and note it in
+   DESIGN-DECISIONS §11.
 3. **Snippet lengths**: twelve titles are still over 70 characters (mostly
    FR, suffix included) and one description over 180 (FR Second Shift,
    which keeps its four §4 facts on purpose). Polish, not a defect.
