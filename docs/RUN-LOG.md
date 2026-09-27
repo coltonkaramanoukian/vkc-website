@@ -322,3 +322,94 @@ None. Every page that exists should exist once the content is filled:
 `/contact` is thin until `contact.json` has a value but is honest about it
 (form-only lead), and `/glossary` states no fact about VKC beyond the two
 service definitions, which carry the §4 facts. Nothing should be cut.
+
+---
+
+# Run log — run 4 (2026-09-27), the design pass
+
+Model: Claude Fable 5.1, `MAX_THINKING_TOKENS=31999`, dontAsk, no subagents.
+Brief: make the site genuinely world-class with the newly installed design
+skills (taste, frontend-design, scroll-craft), verify through the Playwright
+MCP at 1280 and 375 in FR and EN, keep every gate green, leave the
+Higgsfield seams clean, one PR per coherent chunk. Started on the
+`website-design` worktree at `main` (d2c5448), clean.
+
+## Checkpoints (one pull request each, self-merged, main NOT deployed)
+
+| PR | Merge | What |
+|---|---|---|
+| #20 | 3975928 | The last open audit finding: the copy-ratio gate counts each route's SpecGrid labels (`SPEC_LABEL_KEYS`, tested; the test glob now covers `scripts/lib`) and `/contact`'s row names. The corrected measure caught `/containers/pails` at 1.102; one French lead trimmed to 1.098. |
+| #21 | d2b6b43 | The design pass. Header fill rule that fills with scroll; section ticks draw over a quarter viewport; shift bar fills on `view()`; hero seven-to-five with the gauge at column width on a ruled floor; `ContainerLabel` (one label, three fields), `Manifest` rows, ruled related cells; eyebrows down to two on home and one per page; the negative closing band (`.vkc-negative`); BRAND.md rules; DESIGN-DECISIONS §12; `docs/SCROLL-BRIEF.md`. |
+| #22 | — | Polish: eleven titles under 70 characters, zero em dashes in copy, tick list markers, footer tagline at display size, NEEDS-COLTON seam placements. |
+| #23 | — | Close-out: this section, HANDOFF.md. |
+
+## Proof, each PR
+
+Every PR: `typecheck`, `lint`, `test` (64 → 68), `build`; `render` 40/40;
+`guard:staffing` (58 surfaces), `guard:numbers`, `guard:fr`, `guard:claims`,
+`guard:media` GREEN; `overlap` worst pair 7.6% phrases; `check:hreflang`
+40/40; `check:locale-switch` 20 pairs; `a11y --self-check` 80 scans, 0
+violations, the injected defect caught; `census` 3/3. Lighthouse mobile,
+three runs, medians, on the local build after #21 and after #22:
+performance 96 on all six D12 pages, accessibility 100, best-practices 96
+(the `/_vercel/insights` 404 off Vercel), SEO 100 (`/visit` 66, noindex by
+design). Unchanged from the run 3 baseline; LCP medians 2.8 s with a
+2.3–3.2 s spread across runs under simulated throttling.
+
+Visual proof through the Playwright MCP: every route at 1280 and 375, FR and
+EN, light and dark, menu open, 404, before (baseline set) and after each
+PR. The scroll-driven pieces were measured, not eyeballed: shift bar
+`scaleX(0)` below the fold, `scaleX(1)` at mid-viewport, `none` under
+reduced motion; header fill 0 → 0.16 → 1 with scroll, absent under reduced
+motion; section tick 0 → 48px on entry.
+
+## SELF-RESOLVED
+
+1. **The negative band's heading wrapped "Dites-nous" at its hyphen into
+   four lines.** Its width cap was `max-w-[30ch]` on the wrapper, and `ch`
+   there is the body font's zero, about 280px. The cap moved onto the
+   heading in its own font.
+2. **A full-page capture showed the shift bar empty after the change to
+   `view()`.** Chromium's full-page capture reports scroll timelines at
+   their top-of-page state; a viewport capture at a real scroll position
+   showed it full, and the transform was read back in numbers. The
+   handoff records the trap.
+3. **The shift bar's track was `overflow: hidden`.** A hidden overflow is a
+   scroll container, and a `view()` timeline on the segment would have
+   measured against the track instead of the viewport. Now `overflow: clip`.
+4. **The header's pseudo-elements had to sit on the header, not the bar.**
+   The menu panel is absolutely positioned against the header to take the
+   full viewport width; a `position: relative` on the bar would have shrunk
+   the panel to the page column. The tick's left edge is computed from the
+   page max and the wrap padding instead, now a token (`--vkc-wrap-pad`).
+5. **The section tick drew over two pixels.** `animation-range: entry 0%
+   entry 70%` on a 3px element is a step, not a draw. It is `entry 0% cover
+   25%` now: a hand's worth of scroll.
+6. **Captures taken during a smooth scroll drew the sticky header
+   mid-animation.** Not a layout bug: instant scroll (or reduced motion)
+   read the header at `top: 0`. Recorded in the handoff.
+7. **The corrected ratio gate turned red on `/containers/pails` (1.102).**
+   The gate was right; the French lead repeated a word. 1.098 after.
+
+## Not done, on purpose
+
+- No production deploy (`NEEDS-COLTON.md` item 1).
+- No value in any NULL-AT-BIRTH or reserved file. Every null is still null.
+- No Higgsfield call, upload path or CMS; no generated media of any kind
+  (CLAUDE.md §1). The scroll-craft asset pipeline was not run for that
+  reason; its page-grammar thinking was applied without it, and the brief
+  it would have started from is `docs/SCROLL-BRIEF.md`, self-authored.
+- No JavaScript motion. Every moving thing is CSS behind reduced motion,
+  as BRAND.md requires; no Motion, no GSAP, no scroll listener.
+- No change to slugs, nav labels, tokens, faces or copy voice (taste §11.F).
+- The longform sidehead layout stays on every section: the page is a spec
+  sheet and the variation lives in the objects inside it.
+- `.floor-lines` stays unused: a texture drawn to make a page feel designed
+  is decoration, and the floor is already the page.
+
+## Page cuts
+
+None. Sign-off form (b): nothing should be cut. The judgment call: once
+Colton fills the content, what shipped is defensible as a public site, and
+the design pass composed each page around its empty slots so that a filled
+slot lands in a place that was drawn for it.
