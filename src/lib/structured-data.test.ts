@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { buildBreadcrumbJsonLd, buildFaqJsonLd, serializeJsonLd } from "./structured-data.ts";
+import { buildBreadcrumbJsonLd, buildFaqJsonLd, buildServiceJsonLd, serializeJsonLd } from "./structured-data.ts";
 
 describe("buildFaqJsonLd", () => {
   it("emits one Question per item with the answer text", () => {
@@ -36,6 +36,20 @@ describe("buildBreadcrumbJsonLd", () => {
         [2, "Pails", undefined],
       ],
     );
+  });
+});
+
+describe("buildServiceJsonLd", () => {
+  it("carries the summary verbatim and points at the organization", () => {
+    const json = buildServiceJsonLd({
+      name: "Second Shift",
+      description: "Our lead hand directs the shift.",
+      url: "https://x.test/en/services/second-shift",
+      providerId: "https://x.test/#organization",
+    });
+    assert.equal(json["@type"], "Service");
+    assert.equal(json.description, "Our lead hand directs the shift.");
+    assert.deepEqual(json.provider, { "@id": "https://x.test/#organization" });
   });
 });
 

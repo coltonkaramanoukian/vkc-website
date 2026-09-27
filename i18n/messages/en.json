@@ -20,7 +20,10 @@
       "montreal": "Montreal",
       "about": "About",
       "quote": "Get a quote",
-      "privacy": "Privacy"
+      "privacy": "Privacy",
+      "services": "Services",
+      "containers": "Containers",
+      "industries": "Industries"
     },
     "groups": {
       "services": "Services",
@@ -76,7 +79,11 @@
       "officer": "Privacy contact",
       "name": "Name",
       "role": "Role"
-    }
+    },
+    "breadcrumb": "You are here",
+    "onThisPage": "On this page",
+    "related": "Keep reading",
+    "relatedHeading": "Where this leads next"
   },
   "services": {
     "ss": {
@@ -158,6 +165,18 @@
     "privacy": {
       "title": "Privacy",
       "description": "What this site collects, where it goes, and what it does not do: no trackers, no advertising cookies, no mailing list."
+    },
+    "services": {
+      "title": "Services: a shift on your line, or your overflow on ours",
+      "description": "The two ways VKC Packaging adds output for a plant in greater Montreal: a production shift run on your own line, or contract packaging and toll blending at our facility."
+    },
+    "containers": {
+      "title": "Containers: bottles and jugs, pails, kits",
+      "description": "The container families that have run through VKC Packaging, how each one gets filled, by weight or to the line, and what to send for a quote."
+    },
+    "industries": {
+      "title": "Industries: cleaners, lubricants, sealers and coatings",
+      "description": "Contract filling and toll blending for the trades VKC Packaging is set up for: cleaners, lubricants, sealers, coatings and colourants, and what changes at the line for each."
     }
   },
   "home": {
@@ -419,7 +438,12 @@
             "A launch or a large order needs extra output for a while."
           ]
         }
-      ]
+      ],
+      "shiftBar": {
+        "yours": "Your shifts",
+        "ours": "{ss}",
+        "caption": "The day as your plant runs it: the shifts you cover, and the one VKC runs for you."
+      }
     },
     "contractPackaging": {
       "eyebrow": "{bn}: contract packaging",
@@ -910,6 +934,102 @@
           "h2": "If this changes",
           "body": [
             "If what this site does with your information changes — a new form, a tracker, anything that collects more than it collects today — this page changes with it. The change gets written here rather than left to be noticed."
+          ]
+        }
+      ]
+    },
+    "services": {
+      "eyebrow": "Services",
+      "h1": "Two ways to add output without adding a line",
+      "lead": "Either we run a shift on your line, or your overflow runs on ours. Everything VKC does is one of those two, and the pages below say how each one works, who does what, and what it is priced on.",
+      "cards": {
+        "secondShift": "A production shift run on your own line, bought by the output.",
+        "contractPackaging": "The fill: your product goes into its containers at our facility.",
+        "tollBlending": "The batch: your formula, made here before it is filled."
+      },
+      "sections": [
+        {
+          "h2": "At your plant",
+          "body": [
+            "The line is yours and already paid for; the shift is the one your plant doesn’t run. {ss} puts that equipment back to work on that shift, as a service you buy by the output. The label below says who does what."
+          ],
+          "slot": "secondShift"
+        },
+        {
+          "h2": "At our facility",
+          "body": [
+            "When the line itself is full, the overflow leaves the building. {bn} takes it: filling, labelling, kitting and packing, and toll blending when the product has to be made before it is packed. One quote covers the lot."
+          ],
+          "slot": "bottleneck"
+        },
+        {
+          "h2": "Three pages, two services",
+          "body": [
+            "{bn} is two pages because it is two jobs. [Contract packaging](/services/contract-packaging) is the fill: the product exists and needs to get into containers. [Toll blending](/services/toll-blending) is the batch: the formula is yours, and we make the product before it is filled."
+          ],
+          "slot": "pages"
+        },
+        {
+          "h2": "Which one, and when",
+          "body": [
+            "A plant whose equipment sits idle on a shift it doesn’t run wants {ss}. A plant whose line is full wants {bn}. A product that isn’t made yet wants toll blending first. The two questions below sort it out, and a walkthrough settles anything they can’t."
+          ]
+        }
+      ]
+    },
+    "containers": {
+      "eyebrow": "Containers",
+      "h1": "The containers that have been through our line",
+      "lead": "Three families: bottles and jugs, pails, and kits. Each page lists what we have run, how it gets filled, and what to send us so a quote means something on the first reply.",
+      "sections": [
+        {
+          "h2": "Three families",
+          "body": [
+            "The split follows the product. What pours goes in bottles and jugs. What is thick, heavy or sold to a trade goes in pails. What is sold as a set becomes a kit."
+          ],
+          "slot": "groups"
+        },
+        {
+          "h2": "Two ways to fill",
+          "body": [
+            "Every container on this site gets filled one of two ways. By weight, when the scale is the truth: a product sold by the kilogram, or one whose foam hides the level. To the line, when the eye is: a shelf row that has to look even. The product decides, and each container page says which way it usually goes."
+          ]
+        },
+        {
+          "h2": "If yours isn’t here",
+          "body": [
+            "The lists are a record, not a limit. A container we haven’t run is a question, not a refusal: send its name, its size and its closure, or a sample, and we will say whether it fits our line and how we would fill it."
+          ]
+        }
+      ]
+    },
+    "industries": {
+      "eyebrow": "Industries",
+      "h1": "Liquids and pastes, from a handful of trades",
+      "lead": "Cleaners, lubricants, sealers, coatings and colourants. They fill differently, they are checked differently, and each page says what changes at the line for that trade, and what to send before we quote it.",
+      "cards": {
+        "cleaners": "Water that foams. The fill slows or goes by weight, and the concentrate and the ready-to-use are two different runs.",
+        "lubricants": "Slow, clinging, and heavier cold than warm. Filling by weight when the label has to be exact, and a clean line between products.",
+        "sealersCoatings": "A clock in every pail. Skinning, settling and pot life set the schedule; colour is a specification, checked from the first container to the last."
+      },
+      "sections": [
+        {
+          "h2": "Why the trade matters at a filling line",
+          "body": [
+            "The same filler behaves differently with a foaming cleaner, a clinging oil and a coating that skins over. Knowing the trade before the first container goes under the head is what decides how the fill is set up, and how it is checked."
+          ],
+          "slot": "trades"
+        },
+        {
+          "h2": "Not on the list?",
+          "body": [
+            "The three trades are where VKC is set up, not a fence around what it will look at. A product that behaves like one of them, water-based, oil-based or reactive, is worth a conversation. Send the safety data sheet and say how it pours."
+          ]
+        },
+        {
+          "h2": "One thing every trade sends first",
+          "body": [
+            "The safety data sheet. It says what the product is, how it is handled and how it is stored, and it answers half the questions a quote would otherwise have to ask. Send it before the sample."
           ]
         }
       ]

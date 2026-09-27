@@ -1,8 +1,13 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { Breadcrumbs } from "@/components/breadcrumbs";
 import { CtaActions, CtaBand } from "@/components/cta-band";
 import { PageShell } from "@/components/page-shell";
+import { Pictogram } from "@/components/pictograms";
+import { RelatedPages } from "@/components/related-pages";
 import { getCopy } from "@/lib/i18n";
+import { ROUTE_PICTO } from "@/lib/related";
+import { uniqueSlugs } from "@/lib/slug";
 import {
   localizedPath,
   pathnames,
@@ -84,10 +89,11 @@ function SectionBody({ section, locale }: { section: SectionCopy; locale: Locale
 }
 
 /**
- * The shared page frame for every long-form page: hero (eyebrow, h1, lead,
- * "Get a quote" + phone), then sections separated by the fill line. Sections
- * come from i18n/messages/<locale>.json → pages.<pageKey>; page-specific
- * components are passed in as named slots.
+ * The shared page frame for every long-form page: breadcrumbs, hero (eyebrow,
+ * h1, lead, "Get a quote" + phone, the page's pictogram), a jump strip of the
+ * page's sections, then sections separated by the fill line, related pages
+ * and the CTA band. Copy comes from i18n/messages/<locale>.json →
+ * pages.<pageKey>; page-specific components are passed in as named slots.
  */
 export async function LongformPage({
   locale,
@@ -105,26 +111,50 @@ export async function LongformPage({
   /** Rendered after the sections (e.g. a SpecGrid that is null when empty). */
   after?: ReactNode;
 }) {
-  const { raw } = await getCopy(locale);
+  const { t, raw } = await getCopy(locale);
   const page = raw<PageCopy>(`pages.${pageKey}`);
+  const ids = uniqueSlugs(page.sections.map((section) => section.h2));
+  const picto = ROUTE_PICTO[route];
 
   return (
     <PageShell locale={locale} route={route}>
-      <section className="wrap pb-10 pt-10 sm:pt-14">
-        <p className="field-name">{page.eyebrow}</p>
-        <h1 className="mt-3 max-w-[22ch]">{page.h1}</h1>
-        <p className="mt-5 max-w-[60ch] text-[1.125rem]">
-          <Inline text={page.lead} locale={locale} />
-        </p>
-        <div className="mt-7">
-          <CtaActions locale={locale} />
+      <section className="wrap pb-10 pt-6 sm:pt-8">
+        <Breadcrumbs locale={locale} route={route} />
+        <div className="mt-8 grid items-end gap-8 sm:mt-10 lg:grid-cols-[minmax(0,1fr)_auto]">
+          <div>
+            <p className="eyebrow">{page.eyebrow}</p>
+            <h1 className="mt-4 max-w-[22ch]">{page.h1}</h1>
+            <p className="lead mt-5">
+              <Inline text={page.lead} locale={locale} />
+            </p>
+            <div className="mt-7">
+              <CtaActions locale={locale} />
+            </div>
+          </div>
+          {picto && (
+            <div className="hidden lg:block">
+              <Pictogram name={picto} className="page-picto" />
+            </div>
+          )}
         </div>
       </section>
 
-      {hero && <div className="wrap">{hero}</div>}
+      {page.sections.length > 2 && (
+        <nav aria-label={t("common.onThisPage")} className="wrap">
+          <ol className="jump-nav">
+            {page.sections.map((section, index) => (
+              <li key={section.h2}>
+                <a href={`#${ids[index]}`}>{section.h2}</a>
+              </li>
+            ))}
+          </ol>
+        </nav>
+      )}
 
-      {page.sections.map((section) => (
-        <section key={section.h2} className="wrap mt-14">
+      {hero && <div className="wrap mt-8">{hero}</div>}
+
+      {page.sections.map((section, index) => (
+        <section key={section.h2} id={ids[index]} className="wrap mt-14 scroll-mt-24">
           <hr className="fill-rule mb-8" />
           <div className="grid gap-4 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:gap-10">
             <h2>{section.h2}</h2>
@@ -151,6 +181,9 @@ export async function LongformPage({
       ))}
 
       {after}
+      <div className="mt-14">
+        <RelatedPages locale={locale} route={route} />
+      </div>
       <CtaBand locale={locale} />
     </PageShell>
   );

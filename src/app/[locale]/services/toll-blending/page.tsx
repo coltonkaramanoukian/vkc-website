@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { setRequestLocale } from "next-intl/server";
 import { LongformPage } from "@/components/longform";
 import { PhotoRow } from "@/components/photo";
+import { ServiceJsonLd } from "@/components/service-json-ld";
 import { SpecGrid } from "@/components/spec-grid";
 import { capabilities } from "@/lib/content";
 import { getCopy } from "@/lib/i18n";
@@ -29,15 +30,22 @@ export default async function TollBlendingPage({ params }: Props) {
       pageKey="tollBlending"
       hero={<PhotoRow ids={["toll-blending-batch"]} locale={locale} />}
       after={
-        <SpecGrid
-          locale={locale}
-          title={t("title")}
-          rows={[
-            { label: t("blendingBatchSizes"), value: c.blendingBatchSizes },
-            { label: t("viscosityRange"), value: c.viscosityRange },
-            { label: t("leadTime"), value: c.leadTime },
-          ]}
-        />
+        <>
+          <ServiceJsonLd
+            locale={locale}
+            route="/services/toll-blending"
+            service="bottleneck"
+          />
+          <SpecGrid
+            locale={locale}
+            title={t("title")}
+            rows={[
+              { label: t("blendingBatchSizes"), value: c.blendingBatchSizes },
+              { label: t("viscosityRange"), value: c.viscosityRange },
+              { label: t("leadTime"), value: c.leadTime },
+            ]}
+          />
+        </>
       }
     />
   );

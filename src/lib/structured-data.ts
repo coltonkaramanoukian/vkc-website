@@ -45,6 +45,27 @@ export function buildBreadcrumbJsonLd(crumbs: Crumb[]): Record<string, unknown> 
   };
 }
 
+export interface ServiceFacts {
+  name: string;
+  /** The service summary from content/services.json: for Second Shift it carries all four facts (§4). */
+  description: string;
+  url: string;
+  providerId: string;
+}
+
+/** schema.org Service for a service page; the description is content, never copy. */
+export function buildServiceJsonLd(facts: ServiceFacts): Record<string, unknown> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: facts.name,
+    serviceType: facts.name,
+    description: facts.description,
+    url: facts.url,
+    provider: { "@id": facts.providerId },
+  };
+}
+
 /** JSON for a <script type="application/ld+json">: `<` escaped so a value can never close the tag. */
 export function serializeJsonLd(data: Record<string, unknown>): string {
   return JSON.stringify(data).replace(/</g, "\\u003c");
