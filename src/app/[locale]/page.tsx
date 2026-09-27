@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { setRequestLocale } from "next-intl/server";
 import { ClientList } from "@/components/client-list";
+import { ClientStories } from "@/components/client-stories";
 import { ContainerLabel } from "@/components/container-label";
 import { CtaActions, CtaBand } from "@/components/cta-band";
 import { DemoVideo } from "@/components/demo-video";
@@ -165,6 +166,7 @@ export default async function HomePage({ params }: Props) {
 
       <Faq locale={locale} heading={t("home.faq.heading")} items={faq} />
 
+      <ClientStories locale={locale} heading={t("common.storiesHeading")} />
       <ClientList heading={t("common.clientsHeading")} />
       <CtaBand locale={locale} />
     </PageShell>

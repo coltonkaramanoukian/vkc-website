@@ -62,6 +62,10 @@ export interface Client {
   approved: boolean;
   logo?: string | null;
   url?: string | null;
+  /** Colton only, with the client's written yes: the words and who said them. */
+  quote?: { text: Localized; name: string; role?: Localized | null } | null;
+  /** Colton only: what VKC ran for this client, in both languages. */
+  caseStudy?: Localized | null;
 }
 
 export interface PhotoSlot {
@@ -110,6 +114,11 @@ export const containerFamilies: ContainerFamily[] =
   containersJson.families as ContainerFamily[];
 export const fillMethods: { id: string; name: LocalizedText }[] =
   containersJson.fillMethods;
+
+/** Every entry, typed; callers filter on approved (see client-stories.ts). */
+export function clientsForDisplay(): readonly Client[] {
+  return clientsJson as Client[];
+}
 
 /** D3: only entries with approved === true (strictly) are ever rendered. */
 export function approvedClients(): Client[] {
