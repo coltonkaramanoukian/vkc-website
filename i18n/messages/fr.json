@@ -163,12 +163,64 @@
   "home": {
     "eyebrow": "Conditionnement à forfait et mélange à façon, Grand Montréal",
     "sub": "VKC Packaging fait rouler un quart sur votre ligne ou prend votre surplus sur la sienne. Remplissage, conditionnement et mélange à façon pour fabricants de nettoyants, lubrifiants, scellants, revêtements et colorants du Grand Montréal.",
-    "servicesHeading": "Deux services",
+    "heroSecondary": "Les deux services",
+    "gaugeAlt": "Deux contenants remplis jusqu’à la même ligne : {ss} dans votre usine, {bn} chez nous",
+    "servicesEyebrow": "Deux services",
+    "servicesHeading": "Votre ligne, ou la nôtre",
     "servicesIntro": "L’un roule dans votre usine, sur votre équipement. L’autre, chez nous.",
+    "chooser": {
+      "eyebrow": "Lequel vous convient",
+      "heading": "Lequel convient à votre usine?",
+      "intro": "Deux questions, un clic chacune. La réponse pointe vers un des deux services, ou vers une visite de votre ligne.",
+      "pressure": {
+        "label": "Où est la pression?",
+        "shifts": "La ligne a de la place. Pas les quarts.",
+        "line": "La ligne est pleine, et les commandes continuent d’entrer.",
+        "blend": "Le produit n’est pas encore fabriqué. Il faut d’abord le mélanger."
+      },
+      "want": {
+        "label": "Qu’est-ce que vous voulez recevoir?",
+        "ownLine": "Une production finie et documentée, de ma propre ligne.",
+        "delivered": "Du produit fini et emballé, livré de chez vous.",
+        "unsure": "Je ne sais pas encore."
+      },
+      "resultLabel": "Notre lecture",
+      "reset": "Recommencer",
+      "results": {
+        "secondShift": {
+          "title": "{ss}, dans votre usine",
+          "body": "Sur le plancher, notre chef d’équipe dirige le quart. Notre équipe fait le travail sur votre équipement. Nos feuilles CQ et notre registre de production documentent le résultat, facturé à l’unité ou au quart.",
+          "link": "Comment fonctionne le {ss}"
+        },
+        "bottleneck": {
+          "title": "{bn}, chez nous",
+          "body": "Envoyez-nous le surplus. On le remplit, l’étiquette, l’assemble et l’emballe ici; il revient prêt à expédier.",
+          "link": "Conditionnement à forfait"
+        },
+        "tollBlending": {
+          "title": "{bn} : le mélange d’abord",
+          "body": "On fabrique le lot selon votre formule chez nous, puis on le remplit et l’emballe sur place au besoin.",
+          "link": "Mélange à façon"
+        },
+        "walkthrough": {
+          "title": "Visitons d’abord votre ligne",
+          "body": "Une ligne pleine et une production tirée de votre propre équipement vont rarement ensemble. Une visite dira lequel des deux services convient, ou si c’est les deux. Demandez, on vient voir.",
+          "link": "Demander une visite"
+        }
+      }
+    },
+    "containersEyebrow": "Contenants",
     "containersHeading": "Les contenants qu’on connaît",
     "containersIntro": "Ces contenants sont déjà passés chez VKC. La liste dit ce qu’on connaît, pas combien d’unités on peut produire : ça dépend du produit et du travail.",
+    "industriesEyebrow": "Secteurs",
     "industriesHeading": "Nos secteurs",
     "industriesIntro": "Des liquides et des pâtes à remplir proprement et à compter juste : nettoyants, lubrifiants, scellants, revêtements et colorants.",
+    "industries": {
+      "cleaners": "Dégraissants, nettoyants à planchers et à vitres, savons industriels : surtout de l’eau, et ça mousse dès qu’on verse.",
+      "lubricants": "Huiles, fluides hydrauliques et de coupe, graisses : vendus au litre ou au seau, et lents à quitter le bec.",
+      "sealersCoatings": "Scellants, peintures, revêtements, teintes et colorants : des produits qui font une peau, décantent ou prennent selon leur propre horloge."
+    },
+    "stepsEyebrow": "Le départ",
     "stepsHeading": "Les débuts d’un mandat",
     "steps": [
       {
@@ -183,7 +235,46 @@
         "title": "Le travail roule",
         "body": "Pendant un {ss}, notre chef d’équipe dirige le quart et notre équipe fait le travail. Avec {bn}, votre produit passe chez nous."
       }
-    ]
+    ],
+    "plain": {
+      "eyebrow": "Sans détour",
+      "heading": "Ce que vous ne lirez pas ici",
+      "body": "Aucune certification, aucun chiffre de capacité, aucun logo de client. Rien ici n’est à prendre sur parole : les chiffres qui comptent sont ceux de votre soumission, établis d’après votre produit, votre contenant et votre production. Demandez, et vous les aurez."
+    },
+    "faq": {
+      "eyebrow": "Vos questions",
+      "heading": "Ce qu’un directeur d’usine demande en premier",
+      "items": [
+        {
+          "q": "C’est quoi, un {ss}, au juste?",
+          "a": "Un quart que VKC fait rouler sur votre ligne quand votre usine ne le couvre pas. Notre chef d’équipe dirige, notre équipe fait le travail, et nos feuilles CQ et notre registre de production documentent ce qui a roulé. Vous achetez la production, facturée à l’unité ou au quart, pas le temps."
+        },
+        {
+          "q": "Que couvre {bn}?",
+          "a": "Remplissage, étiquetage, trousses et emballage chez nous, plus le mélange à façon selon votre formule quand le produit doit d’abord être fabriqué. Le surplus que votre ligne n’absorbe pas, traité sous un même toit."
+        },
+        {
+          "q": "Quels produits prenez-vous?",
+          "a": "Des liquides et des pâtes issus d’une poignée de métiers : nettoyants, lubrifiants, scellants, revêtements et colorants. Si le vôtre s’en approche, demandez."
+        },
+        {
+          "q": "De quoi avez-vous besoin pour chiffrer?",
+          "a": "Quatre choses : le produit et comment il coule, le contenant avec sa fermeture et son étiquette, la taille et le rythme des productions, et la date de la première expédition. Une fiche de données de sécurité aide."
+        },
+        {
+          "q": "Comment le travail est-il facturé?",
+          "a": "Le {ss} est facturé à l’unité ou au quart. Le travail {bn} est chiffré selon le mandat décrit : le produit, le contenant, la quantité et la date. Pas de grille tarifaire : deux mandats ne roulent jamais pareil."
+        },
+        {
+          "q": "Pouvez-vous venir voir avant de chiffrer?",
+          "a": "Oui. Pour le {ss}, la soumission se fait à partir d’une visite de votre ligne, puisque le quart se chiffre sur ce qui est vraiment sur votre plancher. C’est souvent le chemin le plus court pour un mandat {bn} aussi."
+        },
+        {
+          "q": "Qu’arrive-t-il à ce que j’envoie par le formulaire?",
+          "a": "Ça devient un seul courriel à VKC, qui sert à vous répondre. Ni base de données derrière ce site, ni deuxième copie : aucun témoin publicitaire, aucun traceur, rien de gardé ailleurs que dans la boîte de réception."
+        }
+      ]
+    }
   },
   "visit": {
     "heading": "Deux façons d’alléger votre usine",
