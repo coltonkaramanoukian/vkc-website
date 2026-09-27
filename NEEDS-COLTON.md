@@ -4,38 +4,48 @@ Everything the site is waiting on that an agent must not do. Run 2
 (2026-09-27) kept building past each of these; nothing below blocks the code.
 Each item says what is missing, where it goes, and what appears once it is done.
 
-## 1. Ship runs 2 and 3 to production
+## 1. Production: where it lives and how it moves
 
-`main` is past the production build by every run 2 and run 3 pull request
-(the checkpoint tables in `docs/RUN-LOG.md` list them). Production only
-deploys through `vercel --prod` (`vercel.json` disables auto-deploy of `main`),
-and pushing a public site is your call, not an agent's.
+**Live:** https://vkc-website-wz5a.vercel.app, Vercel project `vkc-website-wz5a`
+(created 2026-09-27). Its first production deploy is commit `c175c6e` (main as
+of run 4). The §6 SHA check passed, and `/fr`, `/en` and `/v` return 200.
 
-```bash
-cd "$HOME/Desktop/vkc-website" && git checkout main && git pull
-npm run build && vercel --prod
-```
+- `vercel.json` disables git deploys of `main`, so **merging a PR does not
+  deploy**. Production moves only when you run:
 
-Then the §6 proof: `vercel inspect <url>` SHA equals `git rev-parse HEAD`;
-`npm run proof:parity -- --prod https://vkc-website-zeta.vercel.app`;
-`npm run census -- --base https://vkc-website-zeta.vercel.app`;
-`npm run lighthouse` (it measures production by default).
+  ```bash
+  cd "$HOME/Desktop/vkc-website" && git checkout main && git pull
+  vercel link --yes --project vkc-website-wz5a
+  npm run build && vercel --prod
+  ```
 
-## 2. The quote form cannot send yet
+- The main checkout's `.vercel/project.json` still points at the **old**
+  project `vkc-website` (vkc-website-zeta.vercel.app, an older build). Run the
+  `vercel link` line above once, then delete the old project in the Vercel
+  dashboard if you no longer want it.
+- Merged pull requests since `c175c6e` are not live until the next `vercel --prod`.
 
-The form works end to end (NC-5 proves it against a mock) but production has
-no email provider. Until the three variables are set on Vercel the form shows
-"Email is not set up on this site yet" and nothing is lost silently, but
-nothing is delivered either.
+## 2. Quote form email: wired, and one real send left to prove
 
-| Variable | What it is |
-|---|---|
-| `RESEND_API_KEY` | A Resend API key (resend.com, free tier is enough for a quote form) |
-| `QUOTE_TO_EMAIL` | The inbox that receives requests |
-| `QUOTE_FROM_EMAIL` | A sender on a domain verified in Resend |
+The form posts to `/api/quote`, which sends through Resend. The three
+variables are now set on `vkc-website-wz5a` for Production and Preview:
+`RESEND_API_KEY`, `QUOTE_TO_EMAIL`, `QUOTE_FROM_EMAIL`. Checked in production
+on 2026-09-27: an empty POST returns `400 invalid` with field errors, so the
+route is live. No real request has been sent by an agent, because that would
+put an email in your inbox without your say.
 
-Set them with `vercel env add <NAME> production`, then redeploy. Signing up for
-Resend is a signup an agent must not do (CLAUDE.md §6).
+To prove delivery: submit the form on `/en/quote` once with your own details
+and confirm the email arrives. If it doesn't, check two things.
+- `QUOTE_FROM_EMAIL` must be on a domain verified in Resend; if it isn't, the
+  form shows "could not send" and the Vercel function log says `send_failed`.
+- The function log (Vercel, project `vkc-website-wz5a`, Logs) records every
+  attempt as `sent`, `invalid`, `honeypot`, `rate_limited`,
+  `email_not_configured` or `send_failed`, with no personal details.
+
+**Analytics** is Vercel Web Analytics, enabled on the project and verified in
+production: the script and a page-view beacon load from a first-party path,
+with no cookies and nothing in browser storage. That is what `/privacy` says
+("Cookies and measurement"). Numbers appear in Vercel, under Analytics.
 
 ## 3. Content that renders nothing until you fill it
 
