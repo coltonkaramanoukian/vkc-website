@@ -116,7 +116,7 @@
     },
     "visit": {
       "title": "Two ways VKC takes pressure off your plant",
-      "description": "A production shift run on your own line, or your overflow filled and packed at our facility: the two ways VKC Packaging adds output for a plant in greater Montreal, and a quick way to book a walkthrough of your line."
+      "description": "A production shift run on your own line, or your overflow filled and packed at our facility: two ways VKC Packaging adds output, and a quick way to book a walkthrough."
     },
     "quote": {
       "title": "Get a quote",
@@ -143,7 +143,7 @@
     },
     "pails": {
       "title": "Pail filling: plastic, metal and Ropak pails",
-      "description": "Contract filling of plastic pails, metal pails and Ropak containers for sealers, coatings, pastes and lubricants, by weight or to the line. Get a quote from VKC Packaging."
+      "description": "Contract filling of plastic pails, metal pails and Ropak containers for sealers, coatings, pastes and lubricants, by weight or to the line."
     },
     "kits": {
       "title": "Kitting and kit assembly for consumer products",
@@ -377,7 +377,7 @@
     "submitVisit": "Book a walkthrough",
     "sending": "Sending…",
     "sent": "Thank you. Your request reached VKC and we will get back to you.",
-    "unconfigured": "Email is not set up on this site yet, so your request was not sent. Please call us.",
+    "unconfigured": "Email is not set up on this site yet, so your request was not sent. Please try again later.",
     "unconfiguredPhone": "Email is not set up on this site yet, so your request was not sent. Please call us at {phone}.",
     "error": "Something went wrong and your request was not sent. Please try again, or call us.",
     "rateLimited": "Too many requests from this connection. Wait a minute, then try again.",

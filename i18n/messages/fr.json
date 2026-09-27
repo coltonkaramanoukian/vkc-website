@@ -116,7 +116,7 @@
     },
     "visit": {
       "title": "Deux façons d’alléger votre usine",
-      "description": "Un quart de production sur votre propre ligne, ou votre surplus rempli et conditionné chez nous : les deux façons dont VKC Packaging ajoute de la production, et une façon rapide de réserver une visite."
+      "description": "Un quart de production sur votre propre ligne, ou votre surplus rempli et conditionné chez nous : deux façons d’ajouter de la production, et une visite facile à réserver."
     },
     "quote": {
       "title": "Obtenir une soumission",
@@ -130,7 +130,7 @@
       "description": "Un deuxième quart de production dans votre usine. Notre chef d’équipe dirige le quart, notre équipe fait le travail, et nos feuilles CQ et notre registre de production le documentent. Facturé à l’unité ou au quart."
     },
     "contractPackaging": {
-      "title": "Conditionnement à forfait et remplissage de liquides, Grand Montréal",
+      "title": "Conditionnement à forfait et remplissage, Grand Montréal",
       "description": "Sous-traitance d’emballage pour liquides et pâtes. Envoyez-nous le surplus que votre ligne n’absorbe pas : on le remplit, l’étiquette, l’assemble en trousses et l’emballe."
     },
     "tollBlending": {
@@ -143,7 +143,7 @@
     },
     "pails": {
       "title": "Remplissage de seaux : plastique, métal et Ropak",
-      "description": "Remplissage à forfait de seaux de plastique, de seaux de métal et de contenants Ropak pour scellants, revêtements, pâtes et lubrifiants, au poids ou au niveau. Soumission chez VKC Packaging."
+      "description": "Remplissage à forfait de seaux de plastique, de seaux de métal et de contenants Ropak pour scellants, revêtements, pâtes et lubrifiants, au poids ou au niveau."
     },
     "kits": {
       "title": "Assemblage de trousses pour produits de consommation",
@@ -162,7 +162,7 @@
       "description": "Remplissage et mélange à façon de scellants, revêtements et colorants, en seaux de plastique et de métal ou assemblés en trousses. Soumission chez VKC Packaging."
     },
     "montreal": {
-      "title": "Remplissage et conditionnement pour les usines du Grand Montréal",
+      "title": "Remplissage et conditionnement, usines du Grand Montréal",
       "description": "VKC Packaging remplit, emballe, assemble et mélange à façon pour les usines du Grand Montréal. Envoyez le surplus que votre ligne n’absorbe pas, ou demandez une visite."
     },
     "about": {
@@ -174,8 +174,8 @@
       "description": "Ce que ce site recueille, où ça va, et ce qu’il ne fait pas : aucun traceur, aucun témoin publicitaire, aucune liste d’envoi."
     },
     "services": {
-      "title": "Services : un quart sur votre ligne, ou votre surplus sur la nôtre",
-      "description": "Les deux façons dont VKC Packaging ajoute de la production à une usine du Grand Montréal : un quart de production sur votre propre ligne, ou le conditionnement à forfait et le mélange à façon chez nous."
+      "title": "Services : un quart chez vous, ou votre surplus chez nous",
+      "description": "Deux façons d’ajouter de la production à une usine du Grand Montréal : un quart de production sur votre ligne, ou le conditionnement à forfait et le mélange à façon chez VKC."
     },
     "containers": {
       "title": "Contenants : bouteilles et bidons, seaux, trousses",
@@ -183,7 +183,7 @@
     },
     "industries": {
       "title": "Secteurs : nettoyants, lubrifiants, scellants et revêtements",
-      "description": "Remplissage à forfait et mélange à façon pour les métiers auxquels VKC Packaging est adapté : nettoyants, lubrifiants, scellants, revêtements et colorants, et ce qui change à la ligne pour chacun."
+      "description": "Remplissage à forfait et mélange à façon pour nettoyants, lubrifiants, scellants, revêtements et colorants, et ce qui change à la ligne pour chacun."
     },
     "contact": {
       "title": "Joindre VKC Packaging",
@@ -191,7 +191,7 @@
     },
     "glossary": {
       "title": "Lexique du remplissage et du conditionnement",
-      "description": "Les mots de ce site et d’un plancher de remplissage, définis comme le métier les emploie : remplissage au niveau, remplissage pondéral, mélange à façon, trousses, chef d’équipe, feuille CQ et plus."
+      "description": "Les mots de ce site et d’un plancher de remplissage, définis comme le métier les emploie : remplissage au niveau ou pondéral, mélange à façon, chef d’équipe, feuille CQ et plus."
     }
   },
   "home": {
@@ -377,7 +377,7 @@
     "submitVisit": "Réserver une visite",
     "sending": "Envoi…",
     "sent": "Merci. Votre demande est arrivée chez VKC; on vous revient.",
-    "unconfigured": "Le courriel n’est pas encore configuré sur ce site : votre demande n’est pas partie. Appelez-nous.",
+    "unconfigured": "Le courriel n’est pas encore configuré sur ce site : votre demande n’est pas partie. Réessayez plus tard.",
     "unconfiguredPhone": "Le courriel n’est pas encore configuré sur ce site : votre demande n’est pas partie. Appelez-nous au {phone}.",
     "error": "Un problème est survenu : votre demande n’est pas partie. Réessayez ou appelez-nous.",
     "rateLimited": "Trop de demandes depuis cette connexion. Attendez une minute et réessayez.",
