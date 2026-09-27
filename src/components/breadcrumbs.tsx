@@ -15,16 +15,15 @@ export async function Breadcrumbs({ locale, route }: { locale: Locale; route: Ap
   const { t } = await getCopy(locale, "common");
   const group = groupOf(route);
   const labelKey = navLabelKey(route);
+  // A route outside the nav (the QR landing page) has no trail to show.
+  if (route === "/" || (!labelKey && group?.hub !== route)) return null;
 
   const trail: { route: AppPathname; label: string }[] = [{ route: "/", label: t("home") }];
   if (group?.hub && group.hub !== route) trail.push({ route: group.hub, label: t(`groups.${group.key}`) });
-  if (route !== "/") {
-    trail.push({
-      route,
-      label: group?.hub === route ? t(`groups.${group.key}`) : labelKey ? t(`nav.${labelKey}`) : t("home"),
-    });
-  }
-  if (trail.length < 2) return null;
+  trail.push({
+    route,
+    label: group?.hub === route ? t(`groups.${group.key}`) : t(`nav.${labelKey}`),
+  });
 
   const crumbs: Crumb[] = trail.map((item) => ({
     name: item.label,

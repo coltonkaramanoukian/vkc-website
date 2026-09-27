@@ -303,11 +303,12 @@
     "ssLink": "More on {ss}",
     "bnLink": "More on {bn}",
     "formHeading": "Book a walkthrough",
-    "formIntro": "Leave a name and a way to reach you, and we will set a time to walk through your plant together."
+    "formIntro": "Leave a name and a way to reach you, and we will set a time to walk through your plant together.",
+    "formEyebrow": "Next step"
   },
   "quote": {
     "heading": "Get a quote",
-    "lead": "Tell us about the product and the job. The more we know up front, the more useful our first answer will be.",
+    "lead": "Tell us about the product and the job. The more we know up front, the more useful our first answer will be, and the fewer questions we need to ask.",
     "nextHeading": "What happens next",
     "next": "Your request goes to VKC by email. We reply by phone or by email, whichever you leave us, and if a walkthrough of your line makes sense, we set one up.",
     "helpsHeading": "What helps us quote",
@@ -319,7 +320,8 @@
       "For {ss}: the shift you want covered"
     ],
     "dataHeading": "What happens to this information",
-    "data": "The form sends what you type to VKC by email so we can answer you. This site keeps no database and no copy of your request."
+    "data": "The form sends what you type to VKC by email so we can answer you. This site keeps no database and no copy of your request.",
+    "eyebrow": "Quote"
   },
   "form": {
     "required": "required",
@@ -371,7 +373,12 @@
     "errChoice": "Choose one of the options.",
     "errLength": "This is too long.",
     "privacy": "What you send goes to VKC by email so we can answer you. This site keeps no copy.",
-    "privacyLink": "Privacy"
+    "privacyLink": "Privacy",
+    "groupYou": "About you",
+    "groupJob": "The job",
+    "groupNotes": "Anything else",
+    "sentHeading": "Request sent",
+    "sentNext": "We answer by phone or by email, using what you left us. If walking your line together makes sense, we propose a time."
   },
   "notFound": {
     "heading": "This page does not exist.",

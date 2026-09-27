@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
+import { Pictogram, type PictogramName } from "@/components/pictograms";
 
 type Status = "idle" | "sending" | "sent" | "unconfigured" | "error" | "rate_limited" | "invalid";
 type ErrorCode = "required" | "email" | "contact" | "choice" | "length";
@@ -26,11 +27,29 @@ const ERROR_LABEL: Record<ErrorCode, string> = {
   length: "errLength",
 };
 
+const SERVICE_PICTO: Record<"second-shift" | "bottleneck" | "unsure", PictogramName> = {
+  "second-shift": "plant",
+  bottleneck: "facility",
+  unsure: "clipboard",
+};
+
+/**
+ * The quote form: three groups (you, the job, anything else), radio choices
+ * as label cards, one submit. Ids are `<source>-<field>` and the two live
+ * regions keep their data attributes: NC-5 drives this form by them.
+ */
 export function QuoteForm({ mode, locale, labels: l, containers, phone, privacyHref }: QuoteFormProps) {
   const [status, setStatus] = useState<Status>("idle");
   const [errors, setErrors] = useState<Record<string, ErrorCode>>({});
+  const formRef = useRef<HTMLFormElement>(null);
   const source = mode === "short" ? "visit" : "quote";
   const id = (name: string) => `${source}-${name}`;
+
+  // After a rejected submit, put the keyboard on the first field that needs fixing.
+  useEffect(() => {
+    if (status !== "invalid") return;
+    formRef.current?.querySelector<HTMLElement>('[aria-invalid="true"]')?.focus();
+  }, [status, errors]);
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -69,7 +88,7 @@ export function QuoteForm({ mode, locale, labels: l, containers, phone, privacyH
 
   const fieldError = (name: string) =>
     errors[name] ? (
-      <p id={id(`${name}-error`)} className="mt-1 text-sm font-semibold text-qc">
+      <p id={id(`${name}-error`)} className="mt-1.5 text-sm font-semibold text-qc">
         {l[ERROR_LABEL[errors[name]]]}
       </p>
     ) : null;
@@ -82,7 +101,7 @@ export function QuoteForm({ mode, locale, labels: l, containers, phone, privacyH
   const text = (
     name: string,
     label: string,
-    opts: { required?: boolean; type?: string; autoComplete?: string; hint?: string } = {},
+    opts: { required?: boolean; type?: string; autoComplete?: string; hint?: string; inputMode?: "tel" | "email" | "text" } = {},
   ) => (
     <div>
       <label htmlFor={id(name)} className="block font-semibold">
@@ -98,14 +117,57 @@ export function QuoteForm({ mode, locale, labels: l, containers, phone, privacyH
         id={id(name)}
         name={name}
         type={opts.type ?? "text"}
+        inputMode={opts.inputMode}
         autoComplete={opts.autoComplete}
         required={opts.required}
         aria-invalid={errors[name] ? true : undefined}
         aria-describedby={describedBy(name, Boolean(opts.hint))}
-        className="field-input mt-1"
+        className="field-input mt-1.5"
       />
       {fieldError(name)}
     </div>
+  );
+
+  const select = (name: string, label: string, options: ReactNode) => (
+    <div>
+      <label htmlFor={id(name)} className="block font-semibold">
+        {label}
+      </label>
+      <select id={id(name)} name={name} defaultValue="" className="field-input mt-1.5">
+        {options}
+      </select>
+      {fieldError(name)}
+    </div>
+  );
+
+  const group = (title: string, children: ReactNode) => (
+    <fieldset className="form-group">
+      <legend className="eyebrow">{title}</legend>
+      <div className="space-y-5">{children}</div>
+    </fieldset>
+  );
+
+  const serviceChoice = (value: "second-shift" | "bottleneck" | "unsure", label: string, hint?: string) => (
+    <label className="choice" data-guard={value === "second-shift" ? "second-shift" : undefined}>
+      <input
+        type="radio"
+        name="service"
+        value={value}
+        className="mt-1.5 size-5 shrink-0 accent-qc"
+        aria-describedby={hint ? id(`${value}-hint`) : undefined}
+      />
+      <span className="flex min-w-0 flex-1 gap-4">
+        <span className="min-w-0 flex-1">
+          <span className="block font-semibold">{label}</span>
+          {hint && (
+            <span id={id(`${value}-hint`)} className="mt-0.5 block text-sm text-graphite">
+              {hint}
+            </span>
+          )}
+        </span>
+        <Pictogram name={SERVICE_PICTO[value]} className="hidden shrink-0 sm:block" />
+      </span>
+    </label>
   );
 
   const statusMessage: Partial<Record<Status, string>> = {
@@ -120,145 +182,134 @@ export function QuoteForm({ mode, locale, labels: l, containers, phone, privacyH
 
   return (
     <form
+      ref={formRef}
       id={`${source}-form`}
       action="/api/quote"
       method="post"
       onSubmit={onSubmit}
       noValidate
-      className="space-y-6"
+      className="space-y-9"
       data-form-mode={mode}
       data-form-status={status}
     >
       <input type="hidden" name="source" value={source} />
       <input type="hidden" name="locale" value={locale} />
 
-      <div className="grid gap-5 sm:grid-cols-2">
-        {text("company", l.company, { required: true, autoComplete: "organization" })}
-        {text("name", l.name, { required: true, autoComplete: "name" })}
-        {mode === "full" ? (
-          <>
-            {text("email", l.email, { type: "email", autoComplete: "email" })}
-            {text("phone", l.phone, { type: "tel", autoComplete: "tel" })}
-          </>
-        ) : (
-          text("contact", l.contact, { required: true, autoComplete: "on" })
-        )}
-      </div>
-
-      <fieldset aria-describedby={describedBy("service")}>
-        <legend className="font-semibold">
-          {l.service}
-          <span className="field-name ml-2">({l.required})</span>
-        </legend>
-        <div className="mt-2 space-y-2">
-          <div data-guard="second-shift" className="placard px-4 py-3">
-            <label className="flex gap-3">
-              <input type="radio" name="service" value="second-shift" className="mt-1.5 size-5 accent-qc" aria-describedby={id("ss-hint")} />
-              <span>
-                <span className="font-semibold">{l.serviceSs}</span>
-                <span id={id("ss-hint")} className="block text-sm text-graphite">
-                  {l.ssHint}
-                </span>
-              </span>
-            </label>
-          </div>
-          <div className="placard px-4 py-3">
-            <label className="flex gap-3">
-              <input type="radio" name="service" value="bottleneck" className="mt-1.5 size-5 accent-qc" aria-describedby={id("bn-hint")} />
-              <span>
-                <span className="font-semibold">{l.serviceBn}</span>
-                <span id={id("bn-hint")} className="block text-sm text-graphite">
-                  {l.bnHint}
-                </span>
-              </span>
-            </label>
-          </div>
-          <div className="placard px-4 py-3">
-            <label className="flex gap-3">
-              <input type="radio" name="service" value="unsure" className="mt-1.5 size-5 accent-qc" />
-              <span className="font-semibold">{l.serviceUnsure}</span>
-            </label>
-          </div>
-        </div>
-        {fieldError("service")}
-      </fieldset>
-
-      {mode === "full" && (
-        <>
-          <fieldset className="shift-field">
-            <legend className="font-semibold">{l.shift}</legend>
-            <div className="mt-2 flex flex-wrap gap-x-6 gap-y-2">
-              {(["evenings", "nights", "weekends", "unsure"] as const).map((value) => (
-                <label key={value} className="flex min-h-[44px] items-center gap-2">
-                  <input type="radio" name="shift" value={value} className="size-5 accent-qc" />
-                  {l[`shift${value[0].toUpperCase()}${value.slice(1)}`]}
-                </label>
-              ))}
-            </div>
-          </fieldset>
-
-          <div className="grid gap-5 sm:grid-cols-2">
-            {text("product", l.product, { hint: l.productHint })}
-            <div>
-              <label htmlFor={id("viscosity")} className="block font-semibold">
-                {l.viscosity}
-              </label>
-              <select id={id("viscosity")} name="viscosity" defaultValue="" className="field-input mt-1">
-                <option value="">{l.containerChoose}</option>
-                <option value="water-thin">{l.viscosityWater}</option>
-                <option value="pourable">{l.viscosityPourable}</option>
-                <option value="thick">{l.viscosityThick}</option>
-                <option value="paste">{l.viscosityPaste}</option>
-                <option value="unsure">{l.viscosityUnsure}</option>
-              </select>
-              {fieldError("viscosity")}
-            </div>
-            <div>
-              <label htmlFor={id("container")} className="block font-semibold">
-                {l.container}
-              </label>
-              <select id={id("container")} name="container" defaultValue="" className="field-input mt-1">
-                <option value="">{l.containerChoose}</option>
-                {containers.map((c) => (
-                  <option key={c.id} value={c.id}>
-                    {c.name}
-                  </option>
-                ))}
-                <option value="other">{l.containerOther}</option>
-                <option value="unsure">{l.containerUnsure}</option>
-              </select>
-              {fieldError("container")}
-            </div>
-            {text("units", l.units)}
-            {text("timeline", l.timeline, { hint: l.timelineHint })}
-          </div>
-        </>
+      {group(
+        l.groupYou,
+        <div className="grid gap-5 sm:grid-cols-2">
+          {text("company", l.company, { required: true, autoComplete: "organization" })}
+          {text("name", l.name, { required: true, autoComplete: "name" })}
+          {mode === "full" ? (
+            <>
+              {text("email", l.email, { type: "email", autoComplete: "email", inputMode: "email" })}
+              {text("phone", l.phone, { type: "tel", autoComplete: "tel", inputMode: "tel" })}
+            </>
+          ) : (
+            text("contact", l.contact, { required: true, autoComplete: "on" })
+          )}
+        </div>,
       )}
 
-      <div>
-        <label htmlFor={id("notes")} className="block font-semibold">
-          {l.notes}
-        </label>
-        <textarea id={id("notes")} name="notes" rows={4} className="field-input mt-1" />
-        {fieldError("notes")}
-      </div>
+      {group(
+        l.groupJob,
+        <>
+          <fieldset aria-describedby={describedBy("service")}>
+            <legend className="font-semibold">
+              {l.service}
+              <span className="field-name ml-2">({l.required})</span>
+            </legend>
+            <div className="mt-2 grid gap-2">
+              {serviceChoice("second-shift", l.serviceSs, l.ssHint)}
+              {serviceChoice("bottleneck", l.serviceBn, l.bnHint)}
+              {serviceChoice("unsure", l.serviceUnsure)}
+            </div>
+            {fieldError("service")}
+          </fieldset>
+
+          {mode === "full" && (
+            <>
+              <fieldset className="shift-field">
+                <legend className="font-semibold">{l.shift}</legend>
+                <div className="mt-2 flex flex-wrap gap-2">
+                  {(["evenings", "nights", "weekends", "unsure"] as const).map((value) => (
+                    <label key={value} className="choice items-center px-4 py-2.5">
+                      <input type="radio" name="shift" value={value} className="size-5 accent-qc" />
+                      <span className="font-semibold">{l[`shift${value[0].toUpperCase()}${value.slice(1)}`]}</span>
+                    </label>
+                  ))}
+                </div>
+              </fieldset>
+
+              <div className="grid gap-5 sm:grid-cols-2">
+                {text("product", l.product, { hint: l.productHint })}
+                {select(
+                  "viscosity",
+                  l.viscosity,
+                  <>
+                    <option value="">{l.containerChoose}</option>
+                    <option value="water-thin">{l.viscosityWater}</option>
+                    <option value="pourable">{l.viscosityPourable}</option>
+                    <option value="thick">{l.viscosityThick}</option>
+                    <option value="paste">{l.viscosityPaste}</option>
+                    <option value="unsure">{l.viscosityUnsure}</option>
+                  </>,
+                )}
+                {select(
+                  "container",
+                  l.container,
+                  <>
+                    <option value="">{l.containerChoose}</option>
+                    {containers.map((c) => (
+                      <option key={c.id} value={c.id}>
+                        {c.name}
+                      </option>
+                    ))}
+                    <option value="other">{l.containerOther}</option>
+                    <option value="unsure">{l.containerUnsure}</option>
+                  </>,
+                )}
+                {text("units", l.units)}
+                {text("timeline", l.timeline, { hint: l.timelineHint })}
+              </div>
+            </>
+          )}
+        </>,
+      )}
+
+      {group(
+        l.groupNotes,
+        <div>
+          <label htmlFor={id("notes")} className="block font-semibold">
+            {l.notes}
+          </label>
+          <textarea id={id("notes")} name="notes" rows={4} className="field-input mt-1.5" />
+          {fieldError("notes")}
+        </div>,
+      )}
 
       <div className="hp-field" aria-hidden="true">
         <label htmlFor={id("website")}>{l.honeypot}</label>
         <input id={id("website")} name="website" type="text" tabIndex={-1} autoComplete="off" />
       </div>
 
-      <div className="space-y-3">
-        <button type="submit" className="btn btn-primary w-full sm:w-auto" disabled={status === "sending"}>
+      <div className="space-y-4 border-t border-hairline pt-6">
+        <button type="submit" className="btn btn-primary btn-lg w-full sm:w-auto" disabled={status === "sending"}>
           {mode === "short" ? l.submitVisit : l.submitQuote}
         </button>
         {/* Two live regions, always mounted, so announcements are reliable. */}
-        <p role="status" className="min-h-[1.5em]" data-quote-status={isProblem ? "" : status}>
+        <p role="status" className="min-h-[1.5em] font-semibold" data-quote-status={isProblem ? "" : status}>
           {isProblem ? "" : (statusMessage[status] ?? "")}
         </p>
         <p role="alert" className="font-semibold text-qc" data-quote-problem={isProblem ? status : ""}>
           {isProblem ? statusMessage[status] : ""}
         </p>
+        {status === "sent" && (
+          <div className="placard p-5" data-quote-sent>
+            <p className="field-name">{l.sentHeading}</p>
+            <p className="mt-2">{l.sentNext}</p>
+          </div>
+        )}
         <p className="text-sm text-graphite">
           {l.privacy} <a href={privacyHref}>{l.privacyLink}</a>
         </p>

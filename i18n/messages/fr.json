@@ -303,7 +303,8 @@
     "ssLink": "Le {ss} en détail",
     "bnLink": "{bn} en détail",
     "formHeading": "Réserver une visite",
-    "formIntro": "Laissez un nom et un moyen de vous joindre; on fixera un moment pour faire le tour de votre usine."
+    "formIntro": "Laissez un nom et un moyen de vous joindre; on fixe un moment pour visiter votre usine.",
+    "formEyebrow": "Prochaine étape"
   },
   "quote": {
     "heading": "Obtenir une soumission",
@@ -319,7 +320,8 @@
       "Pour le {ss} : le quart à couvrir"
     ],
     "dataHeading": "Ce qu’on fait de ces renseignements",
-    "data": "Le formulaire envoie ce que vous inscrivez à VKC par courriel, pour qu’on puisse vous répondre. Ce site n’a pas de base de données et ne garde aucune copie."
+    "data": "Le formulaire envoie ce que vous inscrivez à VKC par courriel, pour qu’on puisse vous répondre. Ce site n’a ni base de données ni copie de votre demande.",
+    "eyebrow": "Soumission"
   },
   "form": {
     "required": "obligatoire",
@@ -371,7 +373,12 @@
     "errChoice": "Choisissez une option.",
     "errLength": "Trop long.",
     "privacy": "Ce que vous envoyez va à VKC par courriel pour qu’on vous réponde. Ce site n’en garde aucune copie.",
-    "privacyLink": "Confidentialité"
+    "privacyLink": "Confidentialité",
+    "groupYou": "Vous",
+    "groupJob": "Le travail",
+    "groupNotes": "Autre chose",
+    "sentHeading": "Demande envoyée",
+    "sentNext": "On vous répond par téléphone ou courriel, avec ce que vous avez laissé. Si faire le tour de votre ligne a du sens, on propose une date."
   },
   "notFound": {
     "heading": "Cette page n’existe pas.",
