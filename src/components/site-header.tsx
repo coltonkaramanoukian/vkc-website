@@ -70,8 +70,9 @@ export async function SiteHeader({ locale, route }: { locale: Locale; route: App
           <Wordmark className="h-[17px] w-auto sm:h-5" />
         </Link>
 
-        <nav aria-label={t("primaryNav")} className="hidden lg:block">
-          <ul className="flex items-center gap-7 text-[0.9375rem]">
+        {/* xl, not lg: the French labels need the room, and a wrapped nav item reads as two. */}
+        <nav aria-label={t("primaryNav")} className="hidden xl:block">
+          <ul className="flex items-center gap-7 text-[0.9375rem] whitespace-nowrap">
             {primaryNav.map((item) => (
               <li key={item.route}>
                 <Link

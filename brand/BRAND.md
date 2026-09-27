@@ -50,7 +50,7 @@ Other tokens: `--vkc-border: 1.5px` (a printed label's rule weight, not 1px),
 
 | File | Face | Licence |
 |---|---|---|
-| `brand/fonts/web/Archivo-latin-wdth-wght.woff2` | Archivo variable (wdth 62–125, wght 100–900), latin subset | `brand/fonts/OFL-Archivo.txt` |
+| `brand/fonts/web/Archivo-latin-wdth-wght.woff2` | Archivo variable pinned to the ranges the site uses (wdth 100–112.5, wght 400–800), latin subset; rebuilt by `scripts/subset-fonts.py` | `brand/fonts/OFL-Archivo.txt` |
 | `brand/fonts/web/IBMPlexMono-latin-500.woff2` | IBM Plex Mono 500, latin subset | `brand/fonts/OFL-IBMPlexMono.txt` |
 | `brand/fonts/web/IBMPlexMono-latin-400.woff2` | IBM Plex Mono 400 (not currently loaded) | same |
 | `brand/fonts/ttf/Archivo[wdth,wght].ttf` | Archivo variable, full | same as Archivo |

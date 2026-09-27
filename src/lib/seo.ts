@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { absoluteUrl, site } from "@/lib/content";
 import { getCopy } from "@/lib/i18n";
+import { OG_SIZE, ogImagePath } from "@/lib/og-keys";
 import {
   localizedPath,
   noindexRoutes,
@@ -34,6 +35,7 @@ export async function pageMetadata(
   const description = t(`${key}.description`);
   const url = absoluteUrl(localizedPath(locale, route));
   const noindex = noindexRoutes.includes(route);
+  const images = [{ url: ogImagePath(locale, key), ...OG_SIZE, alt: title }];
 
   return {
     title: absoluteTitle ? { absolute: title } : title,
@@ -47,7 +49,9 @@ export async function pageMetadata(
       siteName: site.brandName,
       locale: locale === "fr" ? "fr_CA" : "en_CA",
       alternateLocale: [locale === "fr" ? "en_CA" : "fr_CA"],
+      images,
     },
+    twitter: { card: "summary_large_image", title, description, images },
     robots: noindex ? { index: false, follow: true } : { index: true, follow: true },
   };
 }
