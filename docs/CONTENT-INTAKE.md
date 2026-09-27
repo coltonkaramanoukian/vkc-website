@@ -25,7 +25,7 @@ after a render to prove nothing you added contradicts a guard.
 | `contact.json:privacyOfficer.*` | The privacy-contact placard on `/privacy`, which is empty today |
 | `capabilities.json:*` | The Specifications placard on the matching service or container page |
 | `clients.json` | The "Who we work for" section on `/about` — **only** for entries with `approved: true` |
-| `photos.json:src` + `alt` | The photo in that page's slot (see the `intent` note on each slot). Add `width` and `height` too and it renders through `next/image` (sized, no layout shift) |
+| `photos.json:src` + `alt` | The photo in that page's slot (see the `intent` note on each slot). It renders through `next/image` (sized, no layout shift): the size is read from the file's header (PNG, JPEG, GIF, WebP), or from `width` and `height` if you add them |
 | `scenes.json:slots[n]` | The page's cover: a still or a silent loop under the page head (home: under the hero, before the demo video) |
 | `scenes.json:galleries[n].items` | A row of tiles on the home page (after the two services) or on `/about` (after the sections) |
 

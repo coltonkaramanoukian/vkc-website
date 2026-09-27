@@ -50,7 +50,11 @@ for (const route of ROUTES) {
   for (const locale of locales) {
     const path = localizedPath(locale, route);
     const html = await fetchText(base + path);
-    const srcs = [...html.matchAll(/<script[^>]+src="([^"]+)"/g)].map((m) => m[1]);
+    // A noModule script is the legacy-browser polyfill bundle: a modern
+    // browser never requests it, so it is not part of the first load.
+    const srcs = [...html.matchAll(/<script([^>]+)src="([^"]+)"([^>]*)>/g)]
+      .filter((m) => !/\bnoModule\b/i.test(m[1] + m[3]))
+      .map((m) => m[2]);
     let gzip = 0;
     let raw = 0;
     for (const src of new Set(srcs)) {

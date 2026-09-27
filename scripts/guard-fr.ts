@@ -1,4 +1,5 @@
 // NC-4 / D15: FR IS NOT A TRANSLATION OF EN.
+//   0. French punctuation: U+00A0 before a colon, nothing before ; ! ?.
 //   1. A FR message value identical to EN (after resolving {ss}/{bn}) is a
 //      defect unless its key is in i18n/identical-allowlist.json.
 //   2. Per page, FR copy is within ±10% of EN in characters. The GATE is the
@@ -53,6 +54,20 @@ for (const [key, frValue] of frFlat) {
     failures.push(`identical FR/EN value at "${key}": ${JSON.stringify(frValue)}`);
   }
 }
+// French punctuation, the way the file is written everywhere else: an
+// espace insécable before the colon, nothing before ; ! ? (Québec usage).
+// A plain space before a colon lets the colon wrap to the next line alone.
+const PLAIN_SPACE_COLON = / :/;
+const SPACE_BEFORE_MARK = /[\s\u00a0\u202f][;!?]/;
+for (const [key, frValue] of frFlat) {
+  if (PLAIN_SPACE_COLON.test(frValue)) {
+    failures.push(`plain space before a colon at "${key}" (use an espace insécable, U+00A0): ${JSON.stringify(frValue)}`);
+  }
+  if (SPACE_BEFORE_MARK.test(frValue)) {
+    failures.push(`space before ; ! or ? at "${key}" (Québec usage puts nothing there): ${JSON.stringify(frValue)}`);
+  }
+}
+
 const missingInFr = [...enFlat.keys()].filter((k) => !frFlat.has(k));
 const missingInEn = [...frFlat.keys()].filter((k) => !enFlat.has(k));
 for (const k of missingInFr) failures.push(`key missing in fr.json: ${k}`);

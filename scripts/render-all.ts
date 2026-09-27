@@ -12,7 +12,16 @@ export interface PageCapture {
   path: string;
   status: number;
   title: string;
-  meta: { description: string; ogTitle: string; ogDescription: string; robots: string };
+  meta: {
+    description: string;
+    ogTitle: string;
+    ogDescription: string;
+    ogImageAlt: string;
+    twitterTitle: string;
+    twitterDescription: string;
+    twitterImageAlt: string;
+    robots: string;
+  };
   canonical: string | null;
   alternates: { hreflang: string; href: string }[];
   jsonLd: string[];
@@ -81,6 +90,10 @@ for (const url of urls) {
         description: meta('meta[name="description"]'),
         ogTitle: meta('meta[property="og:title"]'),
         ogDescription: meta('meta[property="og:description"]'),
+        ogImageAlt: meta('meta[property="og:image:alt"]'),
+        twitterTitle: meta('meta[name="twitter:title"]'),
+        twitterDescription: meta('meta[name="twitter:description"]'),
+        twitterImageAlt: meta('meta[name="twitter:image:alt"]'),
         robots: meta('meta[name="robots"]'),
       },
       canonical: document.querySelector<HTMLLinkElement>('link[rel="canonical"]')?.href ?? null,

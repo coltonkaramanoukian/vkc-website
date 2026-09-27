@@ -1,5 +1,6 @@
 import Image from "next/image";
-import { localized, photoSlot } from "@/lib/content";
+import { localized, photoSlot, type PhotoSlot } from "@/lib/content";
+import { localImageSize } from "@/lib/local-image";
 import type { Locale } from "@/i18n/pathnames";
 
 const SHOW_PLACEHOLDERS = process.env.NEXT_PUBLIC_SHOW_PLACEHOLDERS === "1";
@@ -22,18 +23,19 @@ export function Photo({
 
   if (slot.src) {
     const alt = localized(slot.alt, locale) ?? "";
-    // With width and height on the slot, next/image reserves the box and serves
-    // sized, modern formats. Without them, a plain <img> (it shifts layout while
-    // it loads; guard:media says so). See docs/CONTENT-INTAKE.md.
-    const sized = typeof slot.width === "number" && typeof slot.height === "number";
+    // With a size, next/image reserves the box and serves sized, modern
+    // formats. The size comes from the slot when Colton typed one, else from
+    // the file's own header. Only a format we cannot read falls back to a
+    // plain <img>, which shifts layout while it loads (guard:media says so).
+    const size = photoSize(slot);
     return (
       <figure className={className}>
-        {sized ? (
+        {size ? (
           <Image
             src={slot.src}
             alt={alt}
-            width={slot.width}
-            height={slot.height}
+            width={size.width}
+            height={size.height}
             sizes="(min-width: 1152px) 560px, (min-width: 768px) 50vw, 100vw"
             className="h-auto w-full border-[1.5px] border-ink"
           />
@@ -54,6 +56,14 @@ export function Photo({
   }
 
   return null;
+}
+
+/** The slot's declared size, else the size read from the file; null when neither is known. */
+function photoSize(slot: PhotoSlot): { width: number; height: number } | null {
+  if (typeof slot.width === "number" && typeof slot.height === "number") {
+    return { width: slot.width, height: slot.height };
+  }
+  return slot.src ? localImageSize(slot.src) : null;
 }
 
 /** True when a slot would render anything (a photo, or a Preview placeholder). */

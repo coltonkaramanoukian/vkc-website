@@ -26,7 +26,6 @@ export function AmbientVideo({
 }) {
   const ref = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(false);
-  const [paused, setPaused] = useState(false);
 
   useEffect(() => {
     const video = ref.current;
@@ -54,11 +53,9 @@ export function AmbientVideo({
     if (!video) return;
     if (video.paused) {
       delete video.dataset.paused;
-      setPaused(false);
       video.play().catch(() => undefined);
     } else {
       video.dataset.paused = "1";
-      setPaused(true);
       video.pause();
     }
   };
@@ -78,7 +75,7 @@ export function AmbientVideo({
         onPlaying={() => setPlaying(true)}
         onPause={() => setPlaying(false)}
       />
-      <button type="button" className="scene-toggle" onClick={toggle} aria-pressed={paused}>
+      <button type="button" className="scene-toggle" onClick={toggle}>
         {playing ? pauseLabel : playLabel}
       </button>
     </>

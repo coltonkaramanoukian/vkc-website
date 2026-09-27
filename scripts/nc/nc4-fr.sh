@@ -19,6 +19,18 @@ PY
 expect red npm run -s guard:fr
 
 echo
+echo "=== NC-4 step 1b: revert, then put a plain space before a colon in pages.privacy.lead (fr)"
+revert_messages
+python3 - <<'PY'
+import json
+fr=json.load(open('i18n/messages/fr.json'))
+lead=fr['pages']['privacy']['lead']
+fr['pages']['privacy']['lead']=lead.replace(' :', ' :', 1) if ' :' in lead else lead + ' Note : rien.'
+open('i18n/messages/fr.json','w').write(json.dumps(fr,ensure_ascii=False,indent=2)+'\n')
+PY
+expect red npm run -s guard:fr
+
+echo
 echo "=== NC-4 step 2: revert (expect GREEN)"
 revert_messages
 expect green npm run -s guard:fr

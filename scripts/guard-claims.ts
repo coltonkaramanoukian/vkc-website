@@ -7,7 +7,7 @@
 //   node scripts/guard-claims.ts
 import { readFileSync } from "node:fs";
 import { findStaffingTerms, type StaffingTerms } from "../guard/lib.ts";
-import { loadCaptures } from "./lib/captures.ts";
+import { loadCaptures, readableText } from "./lib/captures.ts";
 import { expectedPageCount } from "./lib/routes.ts";
 
 interface Claim {
@@ -51,7 +51,7 @@ console.log(
 );
 
 for (const capture of captures.sort((a, b) => a.path.localeCompare(b.path))) {
-  const text = `${capture.title} ${capture.meta.description} ${capture.meta.ogTitle} ${capture.meta.ogDescription} ${capture.bodyText} ${capture.attrText} ${capture.jsonLd.join(" ")}`;
+  const text = readableText(capture);
   for (const hit of findStaffingTerms(text, terms, capture.locale)) {
     if (isDenial(hit.excerpt, hit.term, capture.locale)) {
       denials += 1;

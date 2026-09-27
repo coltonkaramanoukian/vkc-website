@@ -116,7 +116,7 @@
     },
     "visit": {
       "title": "Deux façons d’alléger votre usine",
-      "description": "Les deux services de VKC Packaging, et une façon rapide de réserver une visite de votre ligne."
+      "description": "Un quart de production sur votre propre ligne, ou votre surplus rempli et conditionné chez nous : les deux façons dont VKC Packaging ajoute de la production, et une façon rapide de réserver une visite."
     },
     "quote": {
       "title": "Obtenir une soumission",
@@ -174,16 +174,16 @@
       "description": "Ce que ce site recueille, où ça va, et ce qu’il ne fait pas : aucun traceur, aucun témoin publicitaire, aucune liste d’envoi."
     },
     "services": {
-      "title": "Services : un quart sur votre ligne, ou votre surplus sur la nôtre",
-      "description": "Les deux façons dont VKC Packaging ajoute de la production à une usine du Grand Montréal : un quart de production sur votre propre ligne, ou le conditionnement à forfait et le mélange à façon chez nous."
+      "title": "Services : un quart sur votre ligne, ou votre surplus sur la nôtre",
+      "description": "Les deux façons dont VKC Packaging ajoute de la production à une usine du Grand Montréal : un quart de production sur votre propre ligne, ou le conditionnement à forfait et le mélange à façon chez nous."
     },
     "containers": {
-      "title": "Contenants : bouteilles et bidons, seaux, trousses",
+      "title": "Contenants : bouteilles et bidons, seaux, trousses",
       "description": "Les familles de contenants passées chez VKC Packaging, comment chacune se remplit, au poids ou au niveau, et quoi envoyer pour une soumission."
     },
     "industries": {
-      "title": "Secteurs : nettoyants, lubrifiants, scellants et revêtements",
-      "description": "Remplissage à forfait et mélange à façon pour les métiers auxquels VKC Packaging est adapté : nettoyants, lubrifiants, scellants, revêtements et colorants, et ce qui change à la ligne pour chacun."
+      "title": "Secteurs : nettoyants, lubrifiants, scellants et revêtements",
+      "description": "Remplissage à forfait et mélange à façon pour les métiers auxquels VKC Packaging est adapté : nettoyants, lubrifiants, scellants, revêtements et colorants, et ce qui change à la ligne pour chacun."
     },
     "contact": {
       "title": "Joindre VKC Packaging",
@@ -191,14 +191,14 @@
     },
     "glossary": {
       "title": "Lexique du remplissage et du conditionnement",
-      "description": "Les mots de ce site et d’un plancher de remplissage, définis comme le métier les emploie : remplissage au niveau, remplissage pondéral, mélange à façon, trousses, chef d’équipe, feuille CQ et plus."
+      "description": "Les mots de ce site et d’un plancher de remplissage, définis comme le métier les emploie : remplissage au niveau, remplissage pondéral, mélange à façon, trousses, chef d’équipe, feuille CQ et plus."
     }
   },
   "home": {
     "eyebrow": "Conditionnement à forfait et mélange à façon, Grand Montréal",
     "sub": "VKC Packaging fait rouler un quart sur votre ligne ou prend votre surplus sur la sienne. Remplissage, conditionnement et mélange à façon pour fabricants de nettoyants, lubrifiants, scellants, revêtements et colorants du Grand Montréal.",
     "heroSecondary": "Les deux services",
-    "gaugeAlt": "Deux contenants remplis jusqu’à la même ligne : {ss} dans votre usine, {bn} chez nous",
+    "gaugeAlt": "Deux contenants remplis jusqu’à la même ligne : {ss} dans votre usine, {bn} chez nous",
     "servicesEyebrow": "Deux services",
     "servicesHeading": "Votre ligne, ou la nôtre",
     "servicesIntro": "L’un roule dans votre usine, sur votre équipement. L’autre, chez nous.",
@@ -232,7 +232,7 @@
           "link": "Conditionnement à forfait"
         },
         "tollBlending": {
-          "title": "{bn} : le mélange d’abord",
+          "title": "{bn} : le mélange d’abord",
           "body": "On fabrique le lot selon votre formule chez nous, puis on le remplit et l’emballe sur place au besoin.",
           "link": "Mélange à façon"
         },
@@ -250,9 +250,9 @@
     "industriesHeading": "Nos secteurs",
     "industriesIntro": "Des liquides et des pâtes à remplir proprement et à compter juste : nettoyants, lubrifiants, scellants, revêtements et colorants.",
     "industries": {
-      "cleaners": "Dégraissants, nettoyants à planchers et à vitres, savons industriels : surtout de l’eau, et ça mousse dès qu’on verse.",
-      "lubricants": "Huiles, fluides hydrauliques et de coupe, graisses : vendus au litre ou au seau, et lents à quitter le bec.",
-      "sealersCoatings": "Scellants, peintures, revêtements, teintes et colorants : des produits qui font une peau, décantent ou prennent selon leur propre horloge."
+      "cleaners": "Dégraissants, nettoyants à planchers et à vitres, savons industriels : surtout de l’eau, et ça mousse dès qu’on verse.",
+      "lubricants": "Huiles, fluides hydrauliques et de coupe, graisses : vendus au litre ou au seau, et lents à quitter le bec.",
+      "sealersCoatings": "Scellants, peintures, revêtements, teintes et colorants : des produits qui font une peau, décantent ou prennent selon leur propre horloge."
     },
     "stepsEyebrow": "Le départ",
     "stepsHeading": "Les débuts d’un mandat",
@@ -273,7 +273,7 @@
     "plain": {
       "eyebrow": "Sans détour",
       "heading": "Ce que vous ne lirez pas ici",
-      "body": "Aucune certification, aucun chiffre de capacité, aucun logo de client. Rien ici n’est à prendre sur parole : les chiffres qui comptent sont ceux de votre soumission, établis d’après votre produit, votre contenant et votre production. Demandez, et vous les aurez."
+      "body": "Aucune certification, aucun chiffre de capacité, aucun logo de client. Rien ici n’est à prendre sur parole : les chiffres qui comptent sont ceux de votre soumission, établis d’après votre produit, votre contenant et votre production. Demandez, et vous les aurez."
     },
     "faq": {
       "eyebrow": "Vos questions",
@@ -289,15 +289,15 @@
         },
         {
           "q": "Quels produits prenez-vous?",
-          "a": "Des liquides et des pâtes issus d’une poignée de métiers : nettoyants, lubrifiants, scellants, revêtements et colorants. Si le vôtre s’en approche, demandez."
+          "a": "Des liquides et des pâtes issus d’une poignée de métiers : nettoyants, lubrifiants, scellants, revêtements et colorants. Si le vôtre s’en approche, demandez."
         },
         {
           "q": "De quoi avez-vous besoin pour chiffrer?",
-          "a": "Quatre choses : le produit et comment il coule, le contenant avec sa fermeture et son étiquette, la taille et le rythme des productions, et la date de la première expédition. Une fiche de données de sécurité aide."
+          "a": "Quatre choses : le produit et comment il coule, le contenant avec sa fermeture et son étiquette, la taille et le rythme des productions, et la date de la première expédition. Une fiche de données de sécurité aide."
         },
         {
           "q": "Comment le travail est-il facturé?",
-          "a": "Le {ss} est facturé à l’unité ou au quart. Le travail {bn} est chiffré selon le mandat décrit : le produit, le contenant, la quantité et la date. Pas de grille tarifaire : deux mandats ne roulent jamais pareil."
+          "a": "Le {ss} est facturé à l’unité ou au quart. Le travail {bn} est chiffré selon le mandat décrit : le produit, le contenant, la quantité et la date. Pas de grille tarifaire : deux mandats ne roulent jamais pareil."
         },
         {
           "q": "Pouvez-vous venir voir avant de chiffrer?",
@@ -305,7 +305,7 @@
         },
         {
           "q": "Qu’arrive-t-il à ce que j’envoie par le formulaire?",
-          "a": "Ça devient un seul courriel à VKC, qui sert à vous répondre. Ni base de données derrière ce site, ni deuxième copie : aucun témoin publicitaire, aucun traceur, rien de gardé ailleurs que dans la boîte de réception."
+          "a": "Ça devient un seul courriel à VKC, qui sert à vous répondre. Ni base de données derrière ce site, ni deuxième copie : aucun témoin publicitaire, aucun traceur, rien de gardé ailleurs que dans la boîte de réception."
         }
       ]
     }
@@ -465,7 +465,7 @@
       "shiftBar": {
         "yours": "Vos quarts",
         "ours": "{ss}",
-        "caption": "La journée de votre usine : les quarts que vous couvrez, et celui que VKC fait rouler."
+        "caption": "La journée de votre usine : les quarts que vous couvrez, et celui que VKC fait rouler."
       },
       "faq": {
         "eyebrow": "Vos questions",
@@ -477,11 +477,11 @@
           },
           {
             "q": "Qu’est-ce qu’on retrouve le lendemain matin?",
-            "a": "Du produit fini, emballé, compté, et les papiers du quart : nos feuilles CQ et notre registre de production, remplis au fur et à mesure. Si un lot demande une explication plus tard, elle est déjà écrite."
+            "a": "Du produit fini, emballé, compté, et les papiers du quart : nos feuilles CQ et notre registre de production, remplis au fur et à mesure. Si un lot demande une explication plus tard, elle est déjà écrite."
           },
           {
             "q": "Faut-il que quelqu’un de chez nous soit présent?",
-            "a": "C’est votre choix, pas une condition. Le quart n’en dépend pas : notre chef d’équipe le dirige et notre équipe fait le travail sur votre ligne dans tous les cas. Venez voir le premier si vous voulez le voir rouler."
+            "a": "C’est votre choix, pas une condition. Le quart n’en dépend pas : notre chef d’équipe le dirige et notre équipe fait le travail sur votre ligne dans tous les cas. Venez voir le premier si vous voulez le voir rouler."
           },
           {
             "q": "Quel quart est chiffré?",
@@ -545,19 +545,19 @@
         "items": [
           {
             "q": "Qu’est-ce qu’on vous envoie pour commencer?",
-            "a": "Le produit, ou la formule s’il reste à fabriquer; les contenants vides et leur fermeture; les étiquettes; et la spécification à respecter. Si un élément n’est pas encore fixé, dites-le : la soumission attendra plutôt que de deviner."
+            "a": "Le produit, ou la formule s’il reste à fabriquer; les contenants vides et leur fermeture; les étiquettes; et la spécification à respecter. Si un élément n’est pas encore fixé, dites-le : la soumission attendra plutôt que de deviner."
           },
           {
             "q": "Comment vérifiez-vous que chaque contenant a la bonne quantité?",
-            "a": "Par l’une de deux méthodes, selon le produit : le remplissage pondéral, où la dose est fixée par le poids, ou le remplissage au niveau, où elle est fixée par le repère du contenant. La méthode retenue fait partie de la soumission."
+            "a": "Par l’une de deux méthodes, selon le produit : le remplissage pondéral, où la dose est fixée par le poids, ou le remplissage au niveau, où elle est fixée par le repère du contenant. La méthode retenue fait partie de la soumission."
           },
           {
             "q": "Vous étiquetez et emballez, ou vous remplissez seulement?",
-            "a": "Tout, dans une seule soumission : le remplissage, l’étiquetage, les trousses quand un produit part avec des composants, et l’emballage pour que la palette sorte prête. Vous pouvez aussi n’envoyer que l’étape qui manque à votre ligne."
+            "a": "Tout, dans une seule soumission : le remplissage, l’étiquetage, les trousses quand un produit part avec des composants, et l’emballage pour que la palette sorte prête. Vous pouvez aussi n’envoyer que l’étape qui manque à votre ligne."
           },
           {
             "q": "Et si le produit n’est pas encore fabriqué?",
-            "a": "Alors ça commence par le [mélange à façon](/services/toll-blending) : le lot est fabriqué ici selon votre formule, et le remplissage suit dans le même bâtiment. Une seule soumission couvre les deux étapes."
+            "a": "Alors ça commence par le [mélange à façon](/services/toll-blending) : le lot est fabriqué ici selon votre formule, et le remplissage suit dans le même bâtiment. Une seule soumission couvre les deux étapes."
           }
         ]
       }
@@ -616,11 +616,11 @@
           },
           {
             "q": "Comment un mélange est-il chiffré?",
-            "a": "Sur le lot tel que décrit : ce qui entre dedans, comment il doit être mélangé et vérifié, sa taille et sa fréquence. Changez l’un de ces éléments et le chiffre bouge avec."
+            "a": "Sur le lot tel que décrit : ce qui entre dedans, comment il doit être mélangé et vérifié, sa taille et sa fréquence. Changez l’un de ces éléments et le chiffre bouge avec."
           },
           {
             "q": "Quels produits mélangez-vous?",
-            "a": "Les mêmes métiers que la ligne de remplissage : nettoyants et dégraissants, lubrifiants et graisses, scellants, revêtements et colorants. Un produit proche de ceux-là vaut la question; c’est son comportement dans le mélangeur qui tranche."
+            "a": "Les mêmes métiers que la ligne de remplissage : nettoyants et dégraissants, lubrifiants et graisses, scellants, revêtements et colorants. Un produit proche de ceux-là vaut la question; c’est son comportement dans le mélangeur qui tranche."
           }
         ]
       }
@@ -1037,8 +1037,8 @@
       "lead": "Ou bien on fait rouler un quart sur votre ligne, ou bien votre surplus roule sur la nôtre. Tout ce que fait VKC tient dans l’une de ces deux formules; les pages ci-dessous disent comment chacune fonctionne.",
       "cards": {
         "secondShift": "Un quart de production sur votre propre ligne, acheté à la production.",
-        "contractPackaging": "Le remplissage : votre produit entre dans ses contenants, chez nous.",
-        "tollBlending": "Le lot : votre formule, fabriquée ici avant d’être remplie."
+        "contractPackaging": "Le remplissage : votre produit entre dans ses contenants, chez nous.",
+        "tollBlending": "Le lot : votre formule, fabriquée ici avant d’être remplie."
       },
       "sections": [
         {
@@ -1051,14 +1051,14 @@
         {
           "h2": "Chez nous",
           "body": [
-            "Quand c’est la ligne elle-même qui est pleine, le surplus sort du bâtiment. {bn} le prend : remplissage, étiquetage, trousses et emballage, et mélange à façon quand le produit doit être fabriqué avant d’être emballé."
+            "Quand c’est la ligne elle-même qui est pleine, le surplus sort du bâtiment. {bn} le prend : remplissage, étiquetage, trousses et emballage, et mélange à façon quand le produit doit être fabriqué avant d’être emballé."
           ],
           "slot": "bottleneck"
         },
         {
           "h2": "Trois pages, deux services",
           "body": [
-            "{bn} occupe deux pages parce que c’est deux travaux. Le [conditionnement à forfait](/services/contract-packaging), c’est le remplissage : le produit existe et doit entrer dans ses contenants. Le [mélange à façon](/services/toll-blending), c’est le lot : la formule est à vous, et on fabrique le produit avant de le remplir."
+            "{bn} occupe deux pages parce que c’est deux travaux. Le [conditionnement à forfait](/services/contract-packaging), c’est le remplissage : le produit existe et doit entrer dans ses contenants. Le [mélange à façon](/services/toll-blending), c’est le lot : la formule est à vous, et on fabrique le produit avant de le remplir."
           ],
           "slot": "pages"
         },
@@ -1082,7 +1082,7 @@
           },
           {
             "label": "Ce que vous envoyez",
-            "ss": "Rien : le produit reste sur votre ligne",
+            "ss": "Rien : le produit reste sur votre ligne",
             "bn": "Le produit ou sa formule, les contenants, fermetures et étiquettes"
           },
           {
@@ -1098,7 +1098,7 @@
           {
             "label": "Comment c’est facturé",
             "ss": "À l’unité ou au quart",
-            "bn": "Chiffré sur le mandat : produit, contenant, quantité, date"
+            "bn": "Chiffré sur le mandat : produit, contenant, quantité, date"
           }
         ]
       }
@@ -1106,7 +1106,7 @@
     "containers": {
       "eyebrow": "Contenants",
       "h1": "Les contenants passés sur notre ligne",
-      "lead": "Trois familles : bouteilles et bidons, seaux, et trousses. Chaque page dit ce qu’on a rempli, comment ça se remplit, et quoi nous envoyer pour une soumission qui veut dire quelque chose.",
+      "lead": "Trois familles : bouteilles et bidons, seaux, et trousses. Chaque page dit ce qu’on a rempli, comment ça se remplit, et quoi nous envoyer pour une soumission qui veut dire quelque chose.",
       "sections": [
         {
           "h2": "Trois familles",
@@ -1118,13 +1118,13 @@
         {
           "h2": "Deux façons de remplir",
           "body": [
-            "Chaque contenant de ce site se remplit d’une de deux façons. Au poids, quand la balance dit vrai : un produit vendu au kilo, ou dont la mousse cache le niveau. Au niveau, quand c’est l’œil qui compte : une rangée en tablette qui doit paraître égale. Le produit décide, et chaque page dit de quel côté il penche."
+            "Chaque contenant de ce site se remplit d’une de deux façons. Au poids, quand la balance dit vrai : un produit vendu au kilo, ou dont la mousse cache le niveau. Au niveau, quand c’est l’œil qui compte : une rangée en tablette qui doit paraître égale. Le produit décide, et chaque page dit de quel côté il penche."
           ]
         },
         {
           "h2": "Si le vôtre n’y est pas",
           "body": [
-            "Les listes sont un registre, pas une limite. Un contenant qu’on n’a pas encore rempli est une question, pas un refus : envoyez son nom, son format et sa fermeture, ou un échantillon, et on vous dira s’il convient."
+            "Les listes sont un registre, pas une limite. Un contenant qu’on n’a pas encore rempli est une question, pas un refus : envoyez son nom, son format et sa fermeture, ou un échantillon, et on vous dira s’il convient."
           ]
         }
       ]
@@ -1163,7 +1163,7 @@
     "contact": {
       "eyebrow": "Nous joindre",
       "h1": "Joindre VKC",
-      "leadDetails": "Par téléphone, par courriel ou par le formulaire plus bas : prenez ce que vous avez sous la main. Une ligne sur le produit et sur ce qui accroche suffit pour commencer.",
+      "leadDetails": "Par téléphone, par courriel ou par le formulaire plus bas : prenez ce que vous avez sous la main. Une ligne sur le produit et sur ce qui accroche suffit pour commencer.",
       "leadFormOnly": "Le formulaire plus bas arrive chez VKC par courriel. Une ligne sur le produit et sur ce qui accroche suffit pour commencer.",
       "detailsHeading": "Où nous trouver",
       "formEyebrow": "Écrivez-nous",
@@ -1175,7 +1175,7 @@
         "Quelqu’un le lit et vous rappelle ou vous répond, selon la coordonnée laissée.",
         "Si la réponse dépend de votre plancher, on propose une date pour en faire le tour ensemble."
       ],
-      "quoteNote": "Prêt à parler chiffres? Le formulaire long demande le produit, son contenant et le volume : [Obtenir une soumission](/quote)."
+      "quoteNote": "Prêt à parler chiffres? Le formulaire long demande le produit, son contenant et le volume : [Obtenir une soumission](/quote)."
     },
     "glossary": {
       "eyebrow": "Lexique",
@@ -1189,15 +1189,15 @@
         },
         {
           "term": "Bidon D-jug",
-          "def": "Un bidon de plastique à épaules carrées, poignée moulée dans le corps : la forme sous laquelle bien des nettoyants et des lubrifiants se vendent. Il se remplit comme une bouteille et se palettise comme une caisse."
+          "def": "Un bidon de plastique à épaules carrées, poignée moulée dans le corps : la forme sous laquelle bien des nettoyants et des lubrifiants se vendent. Il se remplit comme une bouteille et se palettise comme une caisse."
         },
         {
           "term": "Changement de format",
-          "def": "Tout ce qui se passe sur une ligne entre la dernière unité d’un produit et la première bonne unité du suivant : vider, nettoyer, changer les pièces, régler la dose. Une courte production, c’est surtout du changement de format."
+          "def": "Tout ce qui se passe sur une ligne entre la dernière unité d’un produit et la première bonne unité du suivant : vider, nettoyer, changer les pièces, régler la dose. Une courte production, c’est surtout du changement de format."
         },
         {
           "term": "Chef d’équipe",
-          "def": "La personne qui dirige un quart sur le plancher : répartit le travail, prend les décisions, signe les papiers. Sur un Deuxième quart, le chef d’équipe est celui de VKC."
+          "def": "La personne qui dirige un quart sur le plancher : répartit le travail, prend les décisions, signe les papiers. Sur un Deuxième quart, le chef d’équipe est celui de VKC."
         },
         {
           "term": "Conditionnement à forfait",
@@ -1209,11 +1209,11 @@
         },
         {
           "term": "Fermeture",
-          "def": "Ce qui scelle le contenant : bouchon, couvercle, obturateur, pompe ou gâchette. Elle se chiffre avec le contenant, parce qu’elle décide de la façon de remplir et de fermer sur la ligne."
+          "def": "Ce qui scelle le contenant : bouchon, couvercle, obturateur, pompe ou gâchette. Elle se chiffre avec le contenant, parce qu’elle décide de la façon de remplir et de fermer sur la ligne."
         },
         {
           "term": "Feuille CQ",
-          "def": "La feuille où s’inscrivent les vérifications faites pendant une production : doses, fermetures, étiquettes, comptes, aux intervalles que la spécification demande. Le contrôle de la qualité, écrit au moment où il se fait."
+          "def": "La feuille où s’inscrivent les vérifications faites pendant une production : doses, fermetures, étiquettes, comptes, aux intervalles que la spécification demande. Le contrôle de la qualité, écrit au moment où il se fait."
         },
         {
           "term": "Fiche de données de sécurité",
@@ -1221,7 +1221,7 @@
         },
         {
           "term": "Goulot",
-          "def": "L’étape la plus lente d’une usine, celle que toutes les autres attendent : le goulot d’étranglement. Aussi le col d’une bouteille. Le service de surplus de VKC tient son nom des deux lectures : [{bn}](/services/contract-packaging)."
+          "def": "L’étape la plus lente d’une usine, celle que toutes les autres attendent : le goulot d’étranglement. Aussi le col d’une bouteille. Le service de surplus de VKC tient son nom des deux lectures : [{bn}](/services/contract-packaging)."
         },
         {
           "term": "Ligne de remplissage",
@@ -1245,7 +1245,7 @@
         },
         {
           "term": "Registre de production",
-          "def": "Le journal d’un quart ou d’une production : ce qui a été fait, quand, sur quelle ligne, en quelle quantité, et ce qui s’est passé en route. Avec la feuille CQ, c’est le compte rendu écrit du travail."
+          "def": "Le journal d’un quart ou d’une production : ce qui a été fait, quand, sur quelle ligne, en quelle quantité, et ce qui s’est passé en route. Avec la feuille CQ, c’est le compte rendu écrit du travail."
         },
         {
           "term": "Remplissage au niveau",
@@ -1261,11 +1261,11 @@
         },
         {
           "term": "Seau",
-          "def": "Un contenant ouvert sur le dessus, avec couvercle et anse, en plastique ou en métal, pour les produits trop épais ou trop volumineux pour une bouteille : scellants, revêtements, graisses. Voir [seaux](/containers/pails)."
+          "def": "Un contenant ouvert sur le dessus, avec couvercle et anse, en plastique ou en métal, pour les produits trop épais ou trop volumineux pour une bouteille : scellants, revêtements, graisses. Voir [seaux](/containers/pails)."
         },
         {
           "term": "Spécification",
-          "def": "Ce que l’unité finie doit être : la dose, le serrage de la fermeture, la position de l’étiquette, le compte par caisse, les tolérances. Elle appartient au client; la production se mesure contre elle."
+          "def": "Ce que l’unité finie doit être : la dose, le serrage de la fermeture, la position de l’étiquette, le compte par caisse, les tolérances. Elle appartient au client; la production se mesure contre elle."
         },
         {
           "term": "Viscosité",

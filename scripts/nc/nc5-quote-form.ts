@@ -5,6 +5,7 @@
 //   (c) RESEND_API_KEY unset → UI shows "email not configured", never success
 //   (d) sixth request in a minute from one IP → 429
 //   (e) visit-page submit → source=visit in the body sent to Resend
+//   (f) a value the API refuses on a <select> → aria-invalid, aria-describedby → the message, focus on it
 import { createServer, type IncomingMessage } from "node:http";
 import { chromium } from "@playwright/test";
 import { startServer, stopServer } from "../lib/server.ts";
@@ -85,6 +86,35 @@ try {
   console.log("   payload sent to Resend (e):", JSON.stringify(payload, null, 2).split("\n").join("\n   "));
   record("(e) visit source", Boolean(payload?.text?.startsWith("source=visit")),
     `UI: "${statusText?.trim()}"; body first line: "${payload?.text?.split("\n")[0]}"`);
+
+  // (f) a rejected select is marked, described and focused: a value the API
+  // refuses ("choice") must land on the <select>, not only on text inputs.
+  const quotePage = await browser.newPage({ viewport: { width: 390, height: 844 } });
+  await quotePage.goto(`${configured.base}/en/quote`, { waitUntil: "networkidle" });
+  await quotePage.fill("#quote-company", "NC5 Select Co");
+  await quotePage.fill("#quote-name", "Test");
+  await quotePage.fill("#quote-email", "test@example.com");
+  await quotePage.check('#quote-form input[name="service"][value="bottleneck"]');
+  await quotePage.fill("#quote-product", "degreaser");
+  await quotePage.evaluate(() => {
+    const select = document.querySelector<HTMLSelectElement>("#quote-viscosity");
+    if (!select) throw new Error("no #quote-viscosity on /en/quote");
+    const bogus = document.createElement("option");
+    bogus.value = "not-a-viscosity";
+    bogus.textContent = "bogus";
+    select.append(bogus);
+    select.value = "not-a-viscosity";
+  });
+  await quotePage.click('#quote-form button[type="submit"]');
+  await quotePage.waitForSelector('#quote-viscosity[aria-invalid="true"]', { timeout: 10_000 });
+  const marked = await quotePage.evaluate(() => {
+    const select = document.querySelector<HTMLSelectElement>("#quote-viscosity");
+    const described = select?.getAttribute("aria-describedby") ?? "";
+    const message = described ? (document.getElementById(described)?.textContent?.trim() ?? "") : "";
+    return { described, message, focused: document.activeElement?.id ?? "" };
+  });
+  record("(f) rejected select", marked.described === "quote-viscosity-error" && marked.message.length > 0 && marked.focused === "quote-viscosity",
+    `aria-describedby="${marked.described}" → "${marked.message}"; focus on #${marked.focused}`);
   await browser.close();
 } finally {
   await stopServer(configured.child);

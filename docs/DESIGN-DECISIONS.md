@@ -326,3 +326,33 @@ silently widening the rule.
   names the service is a surface that mentions it. The same entries feed a
   `DefinedTermSet` with one `DefinedTerm` per entry, anchored to the entry's
   id, so a crawler reads what a reader reads. No digits anywhere on the page.
+- **Audit round one (seven read-only auditors, two skeptics per finding).**
+  Nine defects confirmed, none against §1–§5; fixed in one PR:
+  the header's scroll-settle animation was the one animation not behind
+  `prefers-reduced-motion`; the quote form's select and textarea lacked
+  `aria-invalid` / `aria-describedby`, so an error on them was neither
+  announced nor focused (NC-5 now proves the select path, check (f)); a
+  non-JSON reply from the quote API was swallowed, now logged with its
+  status and mapped to the error state; the visit page's description named
+  neither service; forty-nine French colons had a plain space before them
+  while eighty-three had the espace insécable. Refuted and left alone: OG
+  image URLs are already absolute in the rendered head (`metadataBase`), and
+  the root `not-found.tsx` renders its own `html`/`body` on purpose because
+  the root layout is a pass-through.
+- **French punctuation is now a gate.** `guard:fr` fails on a plain space
+  before a colon and on any space before `;`, `!` or `?`, which is how the
+  file was already written everywhere else (Québec usage). NC-4 step 1b
+  shows it red.
+- **Photos and logos measure themselves.** `lib/image-size.ts` reads the
+  width and height from a PNG, JPEG, GIF or WebP header (tested on crafted
+  buffers); `lib/local-image.ts` applies it to a file under `public/` at
+  render. A photo slot renders through `next/image` with that size unless
+  `photos.json` states one; a client logo carries `width`/`height`
+  attributes. Nobody has to type dimensions into content, and a format the
+  parser does not read (AVIF) still falls back to a plain `<img>`.
+- **The video toggle has no `aria-pressed`.** Its label already changes
+  between play and pause; a pressed state on top of a changing label reads
+  as two contradictory signals.
+- **Captures now include the Twitter and `og:image:alt` tags**, so every
+  guard scans them (a blind spot the constitution auditor found; the text is
+  the same title and description, but a guard should not have to assume so).
