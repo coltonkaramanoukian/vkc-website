@@ -111,7 +111,7 @@
   },
   "meta": {
     "home": {
-      "title": "VKC Packaging — contract packaging and toll blending, greater Montreal",
+      "title": "VKC Packaging: contract packaging and toll blending, greater Montreal",
       "description": "Contract filling, packaging and toll blending for makers of cleaners, lubricants, sealers, coatings and colourants in greater Montreal. Get a quote from VKC Packaging."
     },
     "visit": {
@@ -130,7 +130,7 @@
       "description": "Second shift production at your plant. Our lead hand directs the shift, our crew does the work, and our QC sheets and production log document it. Priced per unit or per shift."
     },
     "contractPackaging": {
-      "title": "Contract packaging and liquid filling, greater Montreal",
+      "title": "Contract packaging, liquid filling, greater Montreal",
       "description": "VKC Packaging is a co-packer for liquids and pastes. Send the overflow your line can’t absorb: we fill, label, kit and pack it at our facility."
     },
     "tollBlending": {
@@ -158,11 +158,11 @@
       "description": "Liquid filling and toll blending for lubricants: oils, hydraulic and cutting fluids, greases, in jugs and pails. Get a quote from VKC Packaging."
     },
     "sealersAndCoatings": {
-      "title": "Contract packaging for sealers, coatings and colourants",
+      "title": "Contract packaging: sealers, coatings, colourants",
       "description": "Filling and toll blending for sealers, coatings and colourants, in plastic and metal pails or assembled into kits. Get a quote from VKC Packaging."
     },
     "montreal": {
-      "title": "Contract filling and packaging for greater Montreal plants",
+      "title": "Contract filling and packaging, greater Montreal",
       "description": "VKC Packaging fills, packs, kits and toll-blends for plants across greater Montreal. Send us the overflow your line can’t absorb, or ask us to walk your line."
     },
     "about": {
@@ -174,7 +174,7 @@
       "description": "What this site collects, where it goes, and what it does not do: no trackers, no advertising cookies, no mailing list."
     },
     "services": {
-      "title": "Services: a shift on your line, or your overflow on ours",
+      "title": "A shift on your line, or your overflow on ours",
       "description": "The two ways VKC Packaging adds output for a plant in greater Montreal: a production shift run on your own line, or contract packaging and toll blending at our facility."
     },
     "containers": {
@@ -182,7 +182,7 @@
       "description": "The container families that have run through VKC Packaging, how each one gets filled, by weight or to the line, and what to send for a quote."
     },
     "industries": {
-      "title": "Industries: cleaners, lubricants, sealers and coatings",
+      "title": "Cleaners, lubricants, sealers and coatings",
       "description": "Contract filling and toll blending for the trades VKC Packaging is set up for: cleaners, lubricants, sealers, coatings and colourants, and what changes at the line for each."
     },
     "contact": {
@@ -820,7 +820,7 @@
         {
           "h2": "Clean between products",
           "body": [
-            "A lubricant leaves a film behind. What ran before yours matters, and so does what follows it. Tell us what your product must not meet — a colour, an additive, a base oil — and we will work out the order and the cleanup with you."
+            "A lubricant leaves a film behind. What ran before yours matters, and so does what follows it. Tell us what your product must not meet (a colour, an additive, a base oil) and we will work out the order and the cleanup with you."
           ]
         },
         {
@@ -870,7 +870,7 @@
         {
           "h2": "Colour is a spec, not a preference",
           "body": [
-            "When colour is what your customer buys, the fill has to hold it from the first container to the last, and the next run has to match this one. Tell us how your colour is specified and how it is checked — a standard, a chip, a reading — and that becomes part of how the run is checked."
+            "When colour is what your customer buys, the fill has to hold it from the first container to the last, and the next run has to match this one. Tell us how your colour is specified and how it is checked (a standard, a chip, a reading) and that becomes part of how the run is checked."
           ]
         },
         {
@@ -953,7 +953,7 @@
           "h2": "What we do",
           "body": [
             "Two things, and they are the same trade seen from two sides. [{ss}](/services/second-shift) is a production shift we run at your plant, on your line, on a shift your plant doesn’t cover. [{bn}](/services/contract-packaging) is the overflow your line can’t absorb: filled, packed and blended at ours.",
-            "Everything else on this site — the containers, the industries, the fill methods — is a description of how those two get done."
+            "Everything else on this site (the containers, the industries, the fill methods) is a description of how those two get done."
           ],
           "slot": "services"
         },
@@ -967,7 +967,7 @@
         {
           "h2": "The two names",
           "body": [
-            "“{bn}” reads twice. A bottleneck is the slowest step in a plant, the one everything else waits on; a bottleneck is also the neck of the bottle we fill. French gives us the same pair for nothing — goulot is both — so the name works in either language without being translated.",
+            "“{bn}” reads twice. A bottleneck is the slowest step in a plant, the one everything else waits on; a bottleneck is also the neck of the bottle we fill. French gives us the same pair for nothing: goulot is both, so the name works in either language without being translated.",
             "“{ss}” means what it says: the shift after yours, run as a service rather than sold as time."
           ]
         },
@@ -1026,7 +1026,7 @@
         {
           "h2": "If this changes",
           "body": [
-            "If what this site does with your information changes — a new form, a tracker, anything that collects more than it collects today — this page changes with it. The change gets written here rather than left to be noticed."
+            "If what this site does with your information changes (a new form, a tracker, anything that collects more than it collects today), this page changes with it. The change gets written here rather than left to be noticed."
           ]
         }
       ]

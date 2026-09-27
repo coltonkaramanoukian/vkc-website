@@ -702,6 +702,29 @@
     max-width: var(--vkc-measure);
   }
 
+  /* ---- Tick list --------------------------------------------------------- */
+  /* A list marked with the fill tick, not a dot: the short rule the site
+     already uses to open a section, at list scale. */
+  .tick-list {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .tick-list > li {
+    position: relative;
+    padding-left: 1.5rem;
+  }
+
+  .tick-list > li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.7em;
+    width: 0.75rem;
+    height: 3px;
+    background: var(--vkc-ink);
+  }
+
   /* ---- Steps ------------------------------------------------------------- */
   /* An ordered process drawn as a line with ticks, no numerals: the number
      guard allows only digits that trace to content/ (§1). */
