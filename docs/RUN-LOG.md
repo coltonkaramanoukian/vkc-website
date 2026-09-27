@@ -277,6 +277,12 @@ its CSS after the access drop, so the page was measured unstyled. Discarded.
     could not be satisfied and the reason is this line. The Desktop checkout
     needs a `git pull` to pick up PR #14.
 
+13. **NC-4 restores the message files with `git checkout`**, so run on an
+    uncommitted tree it erased the very fixes it was meant to prove (the
+    French colons, the visit descriptions) and ended red. Same family as
+    item 2: a negative control that restores from git needs a committed
+    tree. Re-applied, committed, re-run green. Rule: commit, then run NCs.
+
 ## Not done, on purpose
 
 - No production deploy (`NEEDS-COLTON.md` item 1). `main` is fourteen PRs

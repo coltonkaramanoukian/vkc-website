@@ -42,6 +42,26 @@ const SERVICE_PICTO: Record<"second-shift" | "bottleneck" | "unsure", PictogramN
  * as label cards, one submit. Ids are `<source>-<field>` and the two live
  * regions keep their data attributes: NC-5 drives this form by them.
  */
+interface QuoteReply {
+  ok?: boolean;
+  code?: string;
+  errors?: Record<string, ErrorCode>;
+}
+
+/**
+ * The API answers JSON on every path it controls. Anything else (a gateway
+ * error page, a truncated body) is logged with its status and treated as an
+ * empty reply, which the caller maps to the generic error state.
+ */
+async function parseReply(response: Response): Promise<QuoteReply> {
+  try {
+    return (await response.json()) as QuoteReply;
+  } catch (error) {
+    console.error("[quote-form] reply was not JSON", { status: response.status, error: String(error) });
+    return {};
+  }
+}
+
 export function QuoteForm({ mode, source: sourceProp, locale, labels: l, containers, phone, privacyHref }: QuoteFormProps) {
   const [status, setStatus] = useState<Status>("idle");
   const [errors, setErrors] = useState<Record<string, ErrorCode>>({});
@@ -67,11 +87,7 @@ export function QuoteForm({ mode, source: sourceProp, locale, labels: l, contain
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify(body),
       });
-      const result = (await response.json().catch(() => ({}))) as {
-        ok?: boolean;
-        code?: string;
-        errors?: Record<string, ErrorCode>;
-      };
+      const result = await parseReply(response);
       if (response.ok && result.ok) {
         setStatus("sent");
         form.reset();
@@ -137,7 +153,14 @@ export function QuoteForm({ mode, source: sourceProp, locale, labels: l, contain
       <label htmlFor={id(name)} className="block font-semibold">
         {label}
       </label>
-      <select id={id(name)} name={name} defaultValue="" className="field-input mt-1.5">
+      <select
+        id={id(name)}
+        name={name}
+        defaultValue=""
+        aria-invalid={errors[name] ? true : undefined}
+        aria-describedby={describedBy(name)}
+        className="field-input mt-1.5"
+      >
         {options}
       </select>
       {fieldError(name)}
@@ -287,7 +310,14 @@ export function QuoteForm({ mode, source: sourceProp, locale, labels: l, contain
           <label htmlFor={id("notes")} className="block font-semibold">
             {l.notes}
           </label>
-          <textarea id={id("notes")} name="notes" rows={4} className="field-input mt-1.5" />
+          <textarea
+            id={id("notes")}
+            name="notes"
+            rows={4}
+            aria-invalid={errors.notes ? true : undefined}
+            aria-describedby={describedBy("notes")}
+            className="field-input mt-1.5"
+          />
           {fieldError("notes")}
         </div>,
       )}

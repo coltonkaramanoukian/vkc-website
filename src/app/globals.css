@@ -348,10 +348,12 @@
   }
 
   @supports (animation-timeline: scroll()) {
-    .site-header {
-      animation: header-settle linear both;
-      animation-timeline: scroll(root);
-      animation-range: 0 120px;
+    @media (prefers-reduced-motion: no-preference) {
+      .site-header {
+        animation: header-settle linear both;
+        animation-timeline: scroll(root);
+        animation-range: 0 120px;
+      }
     }
   }
 

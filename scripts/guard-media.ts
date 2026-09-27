@@ -50,7 +50,7 @@ for (const slot of photos) {
 console.log(
   `media guard: scenes.json ${counts.filledSlots}/${counts.slots} slots filled, ` +
     `${counts.galleryItems} gallery item(s) in ${counts.galleries} gallery(ies); photos.json ${filledPhotos}/${photos.length} filled` +
-    (unsizedPhotos > 0 ? ` (${unsizedPhotos} without width/height: rendered as a plain <img>, which shifts layout while it loads)` : ""),
+    (unsizedPhotos > 0 ? ` (${unsizedPhotos} without width/height in photos.json: measured from the file's header at render; only a format that cannot be read falls back to a plain <img>)` : ""),
 );
 
 if (issues.length > 0) {
