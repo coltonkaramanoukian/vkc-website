@@ -7,7 +7,7 @@ Each item says what is missing, where it goes, and what appears once it is done.
 ## 1. Ship runs 2 and 3 to production
 
 `main` is past the production build by every run 2 and run 3 pull request
-(fourteen in all: design system through `/glossary`). Production only
+(the checkpoint tables in `docs/RUN-LOG.md` list them). Production only
 deploys through `vercel --prod` (`vercel.json` disables auto-deploy of `main`),
 and pushing a public site is your call, not an agent's.
 

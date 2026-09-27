@@ -368,3 +368,22 @@ silently widening the rule.
   the glossary itself, never a page's own subject. The overlap and ratio
   measurements strip link targets and keep labels, so the links change no
   reader-visible text and no gate.
+- **Audit round two (six lenses: a Québec plant manager reading FR, an
+  English buyer on a phone, a keyboard-only walk, docs drift, an adversary
+  against the guards, a structured-data validator).** Confirmed and fixed:
+  the email-not-configured message told the visitor to call while
+  `contact.json` has no phone, so the no-phone variant now says to try
+  again later (the with-phone variant still names the number); titles and
+  descriptions that a search snippet would cut mid-thought were shortened
+  where §4 allowed (the Second Shift descriptions keep their four facts and
+  stay long); two hard-coded PR counts in the docs were replaced by a
+  pointer to the run-log tables. Refuted and left alone: the phone header
+  has no quote button because the phone action bar is the quote button;
+  the `details` menu needs no `aria-expanded`; hours and turnaround times
+  are absent because they are NULL AT BIRTH, not forgotten.
+- **`experimental.inlineCss` stays off (belongs with §9).** Measured on
+  2026-09-27: the flag inlines the stylesheet into the head and into the
+  RSC payload, so `/en` grew from 28 kB to 62 kB gzip and the Lighthouse
+  medians moved from 96 to 95–98 with LCP 2.4 s against 2.3 s. The
+  render-blocking round trip is cheaper than the bytes. Do not "fix" the
+  render-blocking stylesheet this way.

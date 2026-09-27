@@ -206,7 +206,11 @@ PRs merged, nothing uncommitted, nothing to revert.
 | #11 | 000910c | `/contact` / `/nous-joindre`: details placard (rows only with a value), short form labelled `source=contact`, ContactPage JSON-LD; related-card fallback for the quote page. |
 | #12 | 9340602 | FAQs on the three service pages (FAQPage JSON-LD) and a five-row side-by-side table on `/services` that is itself a Second Shift surface. |
 | #13 | 51f2ad2 | `/glossary` / `/lexique`: twenty-two terms per language, each list authored natively and sorted by its own collator, DefinedTermSet JSON-LD, `tag` pictogram. |
-| #14 | — | This close-out: run log, NEEDS-COLTON refresh, README, final proofs. |
+| #14 | e651205 | Close-out: run log, NEEDS-COLTON refresh, README, final proofs. |
+| #15 | 1477566 | Glossary ordering and letter groups as a pure, tested module (`lib/glossary.ts`). |
+| #16 | 2861af9 | Audit round one (seven read-only auditors, two skeptics per finding, then a three-lens adversarial review of the fix): header animation behind reduced motion, select/textarea aria + NC-5 (f), non-JSON reply logged, French colons + `guard:fr` punctuation rule + NC-4 step 1b, visit description, images measure themselves (`lib/image-size.ts`), captures include twitter/og:image:alt, `first-load-js` skips the noModule polyfill. |
+| #17 | 8136052 | Deep links from page copy into glossary entries by key (`lib/glossary-links.ts`, `lib/inline-links.ts`), 36 first mentions in both languages, overlap strips link targets. |
+| #18 | — | Audit round two (six new lenses): no-phone fallback message, over-long titles and descriptions trimmed, docs drift, this table. |
 
 ## Proof, each PR
 
@@ -274,8 +278,9 @@ its CSS after the access drop, so the page was measured unstyled. Discarded.
     dropped. The close-out finished from a fresh `gh repo clone` of the same
     private remote in the session's scratchpad. §5's identity check is the
     remote (`coltonkaramanoukian/vkc-website`), which held; the path check
-    could not be satisfied and the reason is this line. The Desktop checkout
-    needs a `git pull` to pick up PR #14.
+    could not be satisfied and the reason is this line. Access returned on
+    its own later in the run; the Desktop checkout was fast-forwarded to
+    `main` (clean tree) and the clone kept doing the work.
 
 13. **NC-4 restores the message files with `git checkout`**, so run on an
     uncommitted tree it erased the very fixes it was meant to prove (the
@@ -285,8 +290,8 @@ its CSS after the access drop, so the page was measured unstyled. Discarded.
 
 ## Not done, on purpose
 
-- No production deploy (`NEEDS-COLTON.md` item 1). `main` is fourteen PRs
-  past production.
+- No production deploy (`NEEDS-COLTON.md` item 1). `main` is every run 2
+  and run 3 PR past production (the tables above).
 - No value in `contact`, `capabilities`, `clients`, `photos`, `scenes` or
   `media`. Every null is still null; the two negative-control injections
   were reverted in the same step and proven byte-identical.
@@ -296,6 +301,20 @@ its CSS after the access drop, so the page was measured unstyled. Discarded.
 - No component tests: the pure logic (scenes validator, chooser, slug,
   structured data, quote email) is under `node --test`; the pages are
   proven by render, guards, axe and the browser.
+
+14. **`experimental.inlineCss` measured and left off.** It put the whole
+    stylesheet in the head and again in the inline RSC payload: `/en` went
+    from 28 kB to 62 kB gzip, medians 95–98 against 96, LCP 2.4 s against
+    2.3 s. The render-blocking insight cleared and nothing was gained.
+15. **Two audit rounds ran as workflows** (seven lenses, then six), every
+    finding refuted by two skeptics before it counted, and the fix commit
+    itself reviewed the same way. Round one: nine defects, none against
+    §1–§5. Round two: the no-phone fallback message, two stale PR counts in
+    the docs, and title/description lengths; the rest refuted (the details
+    menu already announces state, the phone CTA is the action bar, hours and
+    lead times are NULL AT BIRTH by design). Two review claims were wrong
+    and are recorded as such: VP8 lossy sizes are not off by one, and OG
+    image URLs are already absolute.
 
 ## Page cuts
 
