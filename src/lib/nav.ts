@@ -50,6 +50,7 @@ export const navGroups: NavGroup[] = [
     key: "company",
     items: [
       { route: "/about", label: "about" },
+      { route: "/contact", label: "contact" },
       { route: "/quote", label: "quote" },
       { route: "/privacy", label: "privacy" },
     ],

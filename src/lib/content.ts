@@ -141,6 +141,15 @@ export function photoSlot(id: string): PhotoSlot | undefined {
   return photos.find((slot) => slot.id === id);
 }
 
+/** The postal address as one line, or null while contact.json has none of it. */
+export function addressLine(): string | null {
+  const { street, city, province, postalCode, country } = contact.address;
+  const parts = [street, city, province, postalCode, country].filter(
+    (part): part is string => typeof part === "string" && part.trim() !== "",
+  );
+  return parts.length > 0 ? parts.join(", ") : null;
+}
+
 /** tel: href from the display phone string, or null when no phone is on file. */
 export function telHref(phone: string | null): string | null {
   if (!phone) return null;

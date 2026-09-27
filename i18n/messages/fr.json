@@ -23,7 +23,8 @@
       "privacy": "Confidentialité",
       "services": "Nos services",
       "containers": "Contenants",
-      "industries": "Secteurs"
+      "industries": "Secteurs",
+      "contact": "Nous joindre"
     },
     "groups": {
       "services": "Nos services",
@@ -182,6 +183,10 @@
     "industries": {
       "title": "Secteurs : nettoyants, lubrifiants, scellants et revêtements",
       "description": "Remplissage à forfait et mélange à façon pour les métiers auxquels VKC Packaging est adapté : nettoyants, lubrifiants, scellants, revêtements et colorants, et ce qui change à la ligne pour chacun."
+    },
+    "contact": {
+      "title": "Joindre VKC Packaging",
+      "description": "Comment joindre VKC Packaging pour du remplissage, du conditionnement ou du mélange à façon dans le Grand Montréal, et quoi dire pour obtenir une première réponse utile."
     }
   },
   "home": {
@@ -383,7 +388,8 @@
     "groupJob": "Le travail",
     "groupNotes": "Autre chose",
     "sentHeading": "Demande envoyée",
-    "sentNext": "On vous répond par téléphone ou courriel, avec ce que vous avez laissé. Si faire le tour de votre ligne a du sens, on propose une date."
+    "sentNext": "On vous répond par téléphone ou courriel, avec ce que vous avez laissé. Si faire le tour de votre ligne a du sens, on propose une date.",
+    "submitContact": "Envoyer le message"
   },
   "notFound": {
     "heading": "Cette page n’existe pas.",
@@ -1045,6 +1051,23 @@
           ]
         }
       ]
+    },
+    "contact": {
+      "eyebrow": "Nous joindre",
+      "h1": "Joindre VKC",
+      "leadDetails": "Par téléphone, par courriel ou par le formulaire plus bas : prenez ce que vous avez sous la main. Une ligne sur le produit et sur ce qui accroche suffit pour commencer.",
+      "leadFormOnly": "Le formulaire plus bas arrive chez VKC par courriel. Une ligne sur le produit et sur ce qui accroche suffit pour commencer.",
+      "detailsHeading": "Où nous trouver",
+      "formEyebrow": "Écrivez-nous",
+      "formHeading": "Décrivez la situation",
+      "formIntro": "Une entreprise, un nom, un moyen de vous rappeler et le service qui vous intéresse. Le reste peut attendre l’appel.",
+      "afterHeading": "Une fois envoyé",
+      "after": [
+        "Votre message devient un seul courriel dans la boîte de VKC. Rien n’est conservé sur ce site.",
+        "Quelqu’un le lit et vous rappelle ou vous répond, selon la coordonnée laissée.",
+        "Si la réponse dépend de votre plancher, on propose une date pour en faire le tour ensemble."
+      ],
+      "quoteNote": "Prêt à parler chiffres? Le formulaire long demande le produit, son contenant et le volume : [Obtenir une soumission](/quote)."
     }
   }
 }

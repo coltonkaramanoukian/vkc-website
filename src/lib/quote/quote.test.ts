@@ -100,6 +100,18 @@ describe("composeQuoteEmail", () => {
   });
 });
 
+describe("composeQuoteEmail (contact page)", () => {
+  it("labels a contact-page message as a message, not a quote request, and routes its source", () => {
+    const result = validateQuote({ source: "contact", locale: "fr", company: "Acme", name: "Sam", contact: "sam@example.com", service: "unsure" }, CONTAINERS);
+    assert.equal(result.ok, true);
+    if (!result.ok) return;
+    const email = composeQuoteEmail(result.data, (id) => id);
+    assert.equal(email.subject, "Message: Acme (Not sure yet, contact page)");
+    assert.equal(email.text.split("\n")[0], "source=contact locale=fr");
+    assert.equal(email.replyTo, "sam@example.com");
+  });
+});
+
 describe("rate limiter", () => {
   it("allows five per minute per key, then refuses until the window passes", () => {
     let clock = 0;

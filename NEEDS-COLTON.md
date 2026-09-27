@@ -42,8 +42,10 @@ Resend is a signup an agent must not do (CLAUDE.md §6).
 
 - **`content/contact.json`**: phone, email, address, hours, privacy officer.
   Phone is the one that changes the site most: "Call …" appears beside every
-  quote button, in the footer, on the quote and visit pages, and in the form's
-  fallback message.
+  quote button, in the footer, in the phone action bar, on the quote, visit
+  and contact pages, and in the form's fallback message. The `/contact` page
+  is form-only until this file has at least one of phone, email, address or
+  hours; then its details placard appears and its lead changes.
 - **`content/capabilities.json`**: run sizes, fill sizes, viscosity range,
   batch sizes, lead time, equipment, and the Second Shift crew / shifts /
   commitment / insurance lines. These are the ONLY numbers the site may print.
@@ -124,6 +126,6 @@ Generated files are committed like any other asset and go live with the next
   gate is the copy-mode measurement, `npm run overlap`, which is green. See
   `docs/DESIGN-DECISIONS.md` §10.
 - **`npm run check:hreflang` against production is red until item 1 ships.**
-  It fetches the alternates from production, which does not yet have the three
-  hub pages. Against a local build (`--base http://localhost:3100`) it is
-  36/36.
+  It fetches the alternates from production, which does not yet have the
+  hub pages or `/contact`. Against a local build (`--base http://localhost:3100`)
+  it is 38/38.

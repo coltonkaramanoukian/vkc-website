@@ -24,6 +24,9 @@ export const COPY_NAMESPACES: Record<string, string[]> = {
   "/": ["meta.home", "home", "services"],
   "/visit": ["meta.visit", "visit"],
   "/quote": ["meta.quote", "quote", "form"],
+  // The contact page embeds the form as shared furniture (data-shared), so
+  // its copy is its own prose only; the form strings are the quote page's.
+  "/contact": ["meta.contact", "pages.contact"],
 };
 /** /containers/bottles-and-jugs → bottlesAndJugs (the message + page key). */
 export function pageKeyFor(route: string): string {

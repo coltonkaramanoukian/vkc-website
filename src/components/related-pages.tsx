@@ -13,13 +13,17 @@ import { localizedPath, type AppPathname, type Locale } from "@/i18n/pathnames";
 export async function RelatedPages({ locale, route }: { locale: Locale; route: AppPathname }) {
   const targets = RELATED[route];
   if (!targets || targets.length === 0) return null;
-  const { t } = await getCopy(locale);
+  const { t, raw } = await getCopy(locale);
+  // Long-form pages keep their copy under pages.<key>; the quote page keeps
+  // its own namespace (quote.*). Either way the card wants the eyebrow.
+  const pages = raw<Record<string, { eyebrow?: string } | undefined>>("pages");
 
   const cards = targets.map((target) => {
     const labelKey = navLabelKey(target);
     const isHub = ["/services", "/containers", "/industries"].includes(target);
     const title = isHub ? t(`common.groups.${labelKey}`) : t(`common.nav.${labelKey}`);
-    const eyebrow = t(`pages.${pageKeyFor(target)}.eyebrow`);
+    const key = pageKeyFor(target);
+    const eyebrow = pages[key]?.eyebrow ?? t(`${key}.eyebrow`);
     return { target, title, eyebrow, picto: ROUTE_PICTO[target] ?? "clipboard" };
   });
 

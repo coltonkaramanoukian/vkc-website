@@ -17,6 +17,7 @@ export const ROUTE_PICTO: Partial<Record<AppPathname, PictogramName>> = {
   "/industries/sealers-and-coatings": "roller",
   "/locations/montreal": "plant",
   "/about": "clipboard",
+  "/contact": "phone",
   "/quote": "clipboard",
 };
 
@@ -41,6 +42,7 @@ export const RELATED: Partial<Record<AppPathname, AppPathname[]>> = {
   "/industries/lubricants": ["/containers/pails", "/containers/bottles-and-jugs", "/services/second-shift"],
   "/industries/sealers-and-coatings": ["/containers/pails", "/containers/kits", "/services/toll-blending"],
   "/locations/montreal": ["/services/second-shift", "/services/contract-packaging", "/about"],
-  "/about": ["/services", "/industries", "/locations/montreal"],
+  "/about": ["/services", "/industries", "/contact"],
+  "/contact": ["/quote", "/about", "/services"],
   "/privacy": ["/about", "/services", "/containers"],
 };
