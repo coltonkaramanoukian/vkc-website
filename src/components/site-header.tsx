@@ -18,7 +18,17 @@ export async function SiteHeader({ locale, route }: { locale: Locale; route: App
         <div className="grid gap-2 lg:grid-cols-5 lg:gap-8">
           {navGroups.map((group) => (
             <div key={group.key} className="menu-group">
-              <p className="field-name mb-1">{t(`groups.${group.key}`)}</p>
+              {group.hub ? (
+                <Link
+                  href={href(group.hub)}
+                  className="field-name mb-1 inline-block text-graphite no-underline hover:text-ink hover:underline"
+                  aria-current={group.hub === route ? "page" : undefined}
+                >
+                  {t(`groups.${group.key}`)}
+                </Link>
+              ) : (
+                <p className="field-name mb-1">{t(`groups.${group.key}`)}</p>
+              )}
               <ul>
                 {group.items.map((item) => (
                   <li key={item.route}>

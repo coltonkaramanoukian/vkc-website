@@ -15,7 +15,8 @@ export type PictogramName =
   | "roller"
   | "clipboard"
   | "plant"
-  | "facility";
+  | "facility"
+  | "blend";
 
 const PATHS: Record<PictogramName, string> = {
   // A bottle: cap, shoulders, a label band.
@@ -38,6 +39,8 @@ const PATHS: Record<PictogramName, string> = {
   plant: "M6 42V20l10-7v7l10-7v7l10-7v7l8-6v28M6 42h38M14 30h4v6h-4zM26 30h4v6h-4z",
   // Our facility: a flat-roofed building with a door.
   facility: "M8 42V16h32v26M8 42h32M22 42V30h6v12M14 22h4v4h-4zM28 22h4v4h-4z",
+  // Toll blending: a mixing vessel, its shaft and paddle.
+  blend: "M10 16h28v20a6 6 0 0 1-6 6H16a6 6 0 0 1-6-6zM24 6v22M17 28l7 4 7-4M20 6h8",
 };
 
 export function Pictogram({

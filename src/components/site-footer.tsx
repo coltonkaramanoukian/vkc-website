@@ -60,7 +60,15 @@ export async function SiteFooter({ locale, route }: { locale: Locale; route: App
         <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:col-span-5 lg:grid-cols-5">
           {navGroups.map((group) => (
             <nav key={group.key} aria-label={t(`groups.${group.key}`)}>
-              <h2 className="field-name">{t(`groups.${group.key}`)}</h2>
+              <h2 className="field-name">
+                {group.hub ? (
+                  <Link href={localizedPath(locale, group.hub)} className="chrome-link text-graphite">
+                    {t(`groups.${group.key}`)}
+                  </Link>
+                ) : (
+                  t(`groups.${group.key}`)
+                )}
+              </h2>
               <ul className="mt-2.5 space-y-2 text-[0.9375rem]">
                 {group.items.map((item) => (
                   <li key={item.route}>

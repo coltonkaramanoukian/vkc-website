@@ -671,6 +671,99 @@
     background: var(--vkc-ink);
   }
 
+  /* ---- Page furniture ---------------------------------------------------- */
+
+  /* The page's pictogram beside its title: a label's handling mark, large. */
+  .page-picto {
+    width: 7rem;
+    height: 7rem;
+    stroke-width: 1.25;
+  }
+
+  /* "On this page": the section headings as one mono strip; scrolls
+     sideways on a phone rather than wrapping into a wall. */
+  .jump-nav {
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    border-top: 1px solid var(--vkc-hairline);
+    border-bottom: 1px solid var(--vkc-hairline);
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .jump-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .jump-nav li {
+    flex: none;
+  }
+
+  .jump-nav a {
+    display: block;
+    padding: 0.75rem 1rem 0.75rem 0;
+    margin-right: 1rem;
+    font-family: var(--font-plex-mono), var(--vkc-font-mono);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--vkc-graphite);
+    text-decoration: none;
+    white-space: nowrap;
+    border-right: 1px solid var(--vkc-hairline);
+  }
+
+  .jump-nav li:last-child a {
+    border-right: 0;
+  }
+
+  .jump-nav a:hover,
+  .jump-nav a:focus-visible {
+    color: var(--vkc-ink);
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.25em;
+  }
+
+  /* The day as one bar: your shifts hatched like label stock, VKC's in ink. */
+  .shift-bar {
+    max-width: 48rem;
+  }
+
+  .shift-bar-track {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    height: 2.5rem;
+    border: var(--vkc-border) solid var(--vkc-ink);
+    border-radius: var(--vkc-radius);
+    background: var(--vkc-label);
+    overflow: hidden;
+  }
+
+  .shift-seg + .shift-seg {
+    border-left: var(--vkc-border) solid var(--vkc-ink);
+  }
+
+  .shift-seg-yours {
+    background: repeating-linear-gradient(
+      -45deg,
+      transparent 0 6px,
+      color-mix(in srgb, var(--vkc-hairline) 70%, transparent) 6px 7px
+    );
+  }
+
+  .shift-seg-ours {
+    background: var(--vkc-ink);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .shift-seg-ours {
+      transform-origin: left center;
+      animation: gauge-rise-x var(--vkc-dur-slow) var(--vkc-ease) both;
+      animation-delay: 200ms;
+    }
+  }
+
   /* ---- Misc -------------------------------------------------------------- */
 
   /* Preview-only placeholder for a missing photo. Never rendered in production. */
@@ -768,6 +861,15 @@
   }
   to {
     transform: scaleY(1);
+  }
+}
+
+@keyframes gauge-rise-x {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
   }
 }
 

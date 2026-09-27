@@ -20,7 +20,10 @@
       "montreal": "Montréal",
       "about": "À propos",
       "quote": "Obtenir une soumission",
-      "privacy": "Confidentialité"
+      "privacy": "Confidentialité",
+      "services": "Nos services",
+      "containers": "Contenants",
+      "industries": "Secteurs"
     },
     "groups": {
       "services": "Nos services",
@@ -76,7 +79,11 @@
       "officer": "Responsable de la protection des renseignements",
       "name": "Nom",
       "role": "Fonction"
-    }
+    },
+    "breadcrumb": "Vous êtes ici",
+    "onThisPage": "Sur cette page",
+    "related": "À lire ensuite",
+    "relatedHeading": "Où ça mène"
   },
   "services": {
     "ss": {
@@ -158,6 +165,18 @@
     "privacy": {
       "title": "Confidentialité",
       "description": "Ce que ce site recueille, où ça va, et ce qu’il ne fait pas : aucun traceur, aucun témoin publicitaire, aucune liste d’envoi."
+    },
+    "services": {
+      "title": "Services : un quart sur votre ligne, ou votre surplus sur la nôtre",
+      "description": "Les deux façons dont VKC Packaging ajoute de la production à une usine du Grand Montréal : un quart de production sur votre propre ligne, ou le conditionnement à forfait et le mélange à façon chez nous."
+    },
+    "containers": {
+      "title": "Contenants : bouteilles et bidons, seaux, trousses",
+      "description": "Les familles de contenants passées chez VKC Packaging, comment chacune se remplit, au poids ou au niveau, et quoi envoyer pour une soumission."
+    },
+    "industries": {
+      "title": "Secteurs : nettoyants, lubrifiants, scellants et revêtements",
+      "description": "Remplissage à forfait et mélange à façon pour les métiers auxquels VKC Packaging est adapté : nettoyants, lubrifiants, scellants, revêtements et colorants, et ce qui change à la ligne pour chacun."
     }
   },
   "home": {
@@ -419,7 +438,12 @@
             "Un lancement ou une grosse commande demande plus de production pour un temps."
           ]
         }
-      ]
+      ],
+      "shiftBar": {
+        "yours": "Vos quarts",
+        "ours": "{ss}",
+        "caption": "La journée de votre usine : les quarts que vous couvrez, et celui que VKC fait rouler."
+      }
     },
     "contractPackaging": {
       "eyebrow": "{bn} : conditionnement à forfait",
@@ -910,6 +934,102 @@
           "h2": "Si ça change",
           "body": [
             "Si ce que ce site fait de vos renseignements change — un nouveau formulaire, un traceur, quoi que ce soit qui recueille plus qu’aujourd’hui —, cette page change avec. Le changement s’écrit ici plutôt que de se deviner."
+          ]
+        }
+      ]
+    },
+    "services": {
+      "eyebrow": "Nos services",
+      "h1": "Deux façons d’ajouter de la production sans ajouter de ligne",
+      "lead": "Ou bien on fait rouler un quart sur votre ligne, ou bien votre surplus roule sur la nôtre. Tout ce que fait VKC tient dans l’une de ces deux formules; les pages ci-dessous disent comment chacune fonctionne.",
+      "cards": {
+        "secondShift": "Un quart de production sur votre propre ligne, acheté à la production.",
+        "contractPackaging": "Le remplissage : votre produit entre dans ses contenants, chez nous.",
+        "tollBlending": "Le lot : votre formule, fabriquée ici avant d’être remplie."
+      },
+      "sections": [
+        {
+          "h2": "Dans votre usine",
+          "body": [
+            "La ligne est à vous, et déjà payée; le quart, c’est celui que votre usine ne fait pas. Le {ss} remet cet équipement au travail pendant ce quart, comme un service acheté à la production. L’étiquette ci-dessous dit qui fait quoi."
+          ],
+          "slot": "secondShift"
+        },
+        {
+          "h2": "Chez nous",
+          "body": [
+            "Quand c’est la ligne elle-même qui est pleine, le surplus sort du bâtiment. {bn} le prend : remplissage, étiquetage, trousses et emballage, et mélange à façon quand le produit doit être fabriqué avant d’être emballé."
+          ],
+          "slot": "bottleneck"
+        },
+        {
+          "h2": "Trois pages, deux services",
+          "body": [
+            "{bn} occupe deux pages parce que c’est deux travaux. Le [conditionnement à forfait](/services/contract-packaging), c’est le remplissage : le produit existe et doit entrer dans ses contenants. Le [mélange à façon](/services/toll-blending), c’est le lot : la formule est à vous, et on fabrique le produit avant de le remplir."
+          ],
+          "slot": "pages"
+        },
+        {
+          "h2": "Lequel, et quand",
+          "body": [
+            "Une usine dont l’équipement dort pendant un quart qu’elle ne fait pas veut un {ss}. Une usine dont la ligne est pleine veut {bn}. Un produit pas encore fabriqué veut d’abord le mélange à façon. Les deux questions ci-dessous font le tri; une visite tranche le reste."
+          ]
+        }
+      ]
+    },
+    "containers": {
+      "eyebrow": "Contenants",
+      "h1": "Les contenants passés sur notre ligne",
+      "lead": "Trois familles : bouteilles et bidons, seaux, et trousses. Chaque page dit ce qu’on a rempli, comment ça se remplit, et quoi nous envoyer pour une soumission qui veut dire quelque chose.",
+      "sections": [
+        {
+          "h2": "Trois familles",
+          "body": [
+            "La répartition suit le produit. Ce qui se verse va en bouteilles et en bidons. Ce qui est épais, lourd ou vendu à un métier va en seaux. Ce qui se vend en ensemble devient une trousse."
+          ],
+          "slot": "groups"
+        },
+        {
+          "h2": "Deux façons de remplir",
+          "body": [
+            "Chaque contenant de ce site se remplit d’une de deux façons. Au poids, quand la balance dit vrai : un produit vendu au kilo, ou dont la mousse cache le niveau. Au niveau, quand c’est l’œil qui compte : une rangée en tablette qui doit paraître égale. Le produit décide, et chaque page dit de quel côté il penche."
+          ]
+        },
+        {
+          "h2": "Si le vôtre n’y est pas",
+          "body": [
+            "Les listes sont un registre, pas une limite. Un contenant qu’on n’a pas encore rempli est une question, pas un refus : envoyez son nom, son format et sa fermeture, ou un échantillon, et on vous dira s’il convient."
+          ]
+        }
+      ]
+    },
+    "industries": {
+      "eyebrow": "Secteurs",
+      "h1": "Des liquides et des pâtes, d’une poignée de métiers",
+      "lead": "Nettoyants, lubrifiants, scellants, revêtements et colorants. Ils se remplissent et se vérifient différemment, et chaque page dit ce qui change à la ligne pour ce métier-là.",
+      "cards": {
+        "cleaners": "De l’eau qui mousse. Le remplissage ralentit ou se fait au poids, et le concentré et le prêt à l’emploi sont deux productions distinctes.",
+        "lubricants": "Lent, collant, et plus lourd froid que chaud. Remplissage au poids quand l’étiquette doit être exacte, et une ligne propre entre deux produits.",
+        "sealersCoatings": "Une horloge dans chaque seau. Peau, décantation et durée de vie en pot dictent l’horaire; la couleur est une spécification, vérifiée du premier seau au dernier."
+      },
+      "sections": [
+        {
+          "h2": "Pourquoi le métier compte à la ligne",
+          "body": [
+            "La même remplisseuse ne se comporte pas pareil avec un nettoyant qui mousse, une huile qui colle et un revêtement qui fait une peau. Connaître le métier avant que le premier contenant passe sous la tête, c’est ce qui décide du montage du remplissage, et de la façon de le vérifier."
+          ],
+          "slot": "trades"
+        },
+        {
+          "h2": "Pas dans la liste?",
+          "body": [
+            "Les trois métiers sont ceux pour lesquels VKC est monté, pas une clôture autour de ce qu’on accepte de regarder. Un produit qui se comporte comme l’un d’eux, à base d’eau, d’huile ou réactif, vaut une conversation. Envoyez la fiche de données de sécurité et dites comment il coule."
+          ]
+        },
+        {
+          "h2": "Ce que chaque métier envoie en premier",
+          "body": [
+            "La fiche de données de sécurité. Elle dit ce qu’est le produit, comment il se manipule et s’entrepose, et elle répond à la moitié des questions qu’une soumission poserait autrement."
           ]
         }
       ]

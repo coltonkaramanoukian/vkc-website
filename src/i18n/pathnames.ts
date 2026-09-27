@@ -9,6 +9,7 @@ export const defaultLocale: Locale = "fr";
 export const pathnames = {
   "/": "/",
   "/visit": { fr: "/visite", en: "/visit" },
+  "/services": { fr: "/services", en: "/services" },
   "/services/second-shift": {
     fr: "/services/deuxieme-quart",
     en: "/services/second-shift",
@@ -21,6 +22,7 @@ export const pathnames = {
     fr: "/services/melange-a-facon",
     en: "/services/toll-blending",
   },
+  "/containers": { fr: "/contenants", en: "/containers" },
   "/containers/bottles-and-jugs": {
     fr: "/contenants/bouteilles-et-bidons",
     en: "/containers/bottles-and-jugs",
@@ -33,6 +35,7 @@ export const pathnames = {
     fr: "/contenants/trousses",
     en: "/containers/kits",
   },
+  "/industries": { fr: "/secteurs", en: "/industries" },
   "/industries/cleaners": {
     fr: "/secteurs/produits-nettoyants",
     en: "/industries/cleaners",
