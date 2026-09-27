@@ -50,7 +50,7 @@ export function Photo({
   if (SHOW_PLACEHOLDERS) {
     return (
       <div className={`vkc-photo-placeholder ${className}`} data-photo-slot={slot.id}>
-        PHOTO: {slot.intent}
+        PHOTO {slot.id}: {slot.intent}
       </div>
     );
   }

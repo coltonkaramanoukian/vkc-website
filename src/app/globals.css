@@ -1117,7 +1117,9 @@
       --gallery-cols: 1;
     }
 
-    .gallery[data-count="2"] {
+    .gallery[data-count="2"],
+    .gallery[data-count="4"] {
+      /* Four tiles sit two by two, not three and a straggler. */
       --gallery-cols: 2;
     }
 

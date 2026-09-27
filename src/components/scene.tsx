@@ -44,7 +44,7 @@ export async function Scene({
     return (
       <div className={`scene ${className}`} style={style} data-scene-slot={item.id}>
         <div className="scene-frame vkc-photo-placeholder">
-          SCENE ({item.aspect}): {item.intent}
+          SCENE {item.id} ({item.aspect}): {item.intent}
         </div>
       </div>
     );
@@ -124,10 +124,11 @@ export async function SceneGalleries({ route, locale, className = "" }: { route:
         <section key={gallery.id} className={`wrap mt-14 ${className}`} aria-label={gallery.id} data-scene-gallery={gallery.id}>
           {gallery.items.length === 0 ? (
             <div className="vkc-photo-placeholder" data-scene-slot={gallery.id}>
-              GALLERY: {gallery.intent}
+              GALLERY {gallery.id}: {gallery.intent}
             </div>
           ) : (
-            <ul className="gallery" data-count={Math.min(gallery.items.length, 3)}>
+            // data-count sets the columns from md: one, two or three per row; four tiles sit two by two (globals.css).
+            <ul className="gallery" data-count={gallery.items.length}>
               {gallery.items.map((item) => (
                 <li key={item.id}>
                   <Scene item={item} locale={locale} sizes={TILE_SIZES} />
