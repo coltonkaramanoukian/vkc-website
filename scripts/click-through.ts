@@ -138,15 +138,24 @@ async function scrollY(page: Page): Promise<number> {
   return page.evaluate(() => Math.round(window.scrollY));
 }
 
-/** Poll until two consecutive reads agree (a smooth scroll has finished). */
-async function settled(page: Page, limitMs = 2500): Promise<number> {
-  let last = await scrollY(page);
+/**
+ * Poll until two consecutive reads agree (a smooth scroll has finished). A
+ * scroll driven from a requestAnimationFrame loop (Lenis on the home page)
+ * has not moved by the first read, so a scroll that has not started yet does
+ * not count as finished until `graceMs` has passed.
+ */
+async function settled(page: Page, limitMs = 2500, graceMs = 400): Promise<number> {
+  const first = await scrollY(page);
+  let last = first;
+  let same = 0;
   const started = Date.now();
   while (Date.now() - started < limitMs) {
     await wait(120);
     const next = await scrollY(page);
-    if (next === last) return next;
+    same = next === last ? same + 1 : 0;
     last = next;
+    // Three matching reads: an eased scroll can hold still for one frame mid-way.
+    if (same >= 2 && (next !== first || Date.now() - started >= graceMs)) return next;
   }
   return last;
 }

@@ -1398,6 +1398,14 @@
   html {
     scroll-behavior: smooth;
   }
+
+  /* On the home page Lenis drives the scroll (home-motion.tsx). While it
+     does, the browser must not smooth each frame's scrollTo on its own, or
+     an in-page link creeps for a second and then rushes: lenis/dist/lenis.css
+     says the same. The class is Lenis's own, added while it is running. */
+  html.lenis {
+    scroll-behavior: auto !important;
+  }
 }
 
 @media print {
@@ -1584,6 +1592,13 @@
   .cine-hero-inner {
     padding-top: calc(var(--vkc-header-h) + 6rem);
     padding-bottom: clamp(2.5rem, 5vw, 5rem);
+    /* The copy sits over the film. Only the copy takes the pointer, so the
+       video's Play / Pause control in the top corner stays clickable. */
+    pointer-events: none;
+  }
+
+  .cine-hero-inner > * {
+    pointer-events: auto;
   }
 
   .cine-title {
@@ -1982,6 +1997,9 @@
   }
 
   .finale-title {
+    /* It rises into place over the button below it; a click in that moment
+       must reach the button, not the heading. */
+    pointer-events: none;
     font-size: clamp(3rem, 1rem + 9vw, 10.5rem);
     font-stretch: 62%;
     font-weight: 900;

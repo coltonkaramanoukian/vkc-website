@@ -70,7 +70,9 @@ export function HomeMotion() {
 
         // The statement fills word by word as it is read.
         gsap.utils.toArray<HTMLElement>(".statement").forEach((el) => {
-          gsap.to(el.querySelectorAll(".w"), {
+          const words = el.querySelectorAll(".w");
+          if (!words.length) return; // straight talk reuses the style without the word spans
+          gsap.to(words, {
             color: "var(--vkc-ink)",
             stagger: 0.05,
             ease: "none",
@@ -142,14 +144,36 @@ export function HomeMotion() {
       );
       document.querySelectorAll(".why-point").forEach((point) => observer.observe(point));
 
+      // In-page links scroll through Lenis so the two scroll engines never
+      // fight. The skip link keeps its native jump: its job is to move focus
+      // to <main>, which only the browser's fragment navigation does for
+      // free. Everything else lands just under the header (the same
+      // scroll-padding-top the CSS gives a native jump), takes about a
+      // second however far it is, writes the hash so the URL and the back
+      // button still mean something, and hands focus to the target when it
+      // arrives.
+      const headerOffset = () => (document.querySelector<HTMLElement>(".site-header")?.offsetHeight ?? 64) + 16;
       const onAnchor = (event: MouseEvent) => {
         const link = (event.target as HTMLElement).closest<HTMLAnchorElement>('a[href^="#"]');
         const id = link?.getAttribute("href");
-        if (!id || id.length < 2) return;
-        const target = document.querySelector(id);
+        if (!link || !id || id.length < 2 || link.classList.contains("skip-link")) return;
+        const target = document.querySelector<HTMLElement>(id);
         if (!target) return;
         event.preventDefault();
-        lenis.scrollTo(target as HTMLElement, { offset: -72 });
+        history.pushState(null, "", id);
+        // The browser may have just scrolled on its own (focus moving to the
+        // link, a click scrolling it into view); Lenis hears of that a frame
+        // later and would measure from where it thinks the page is. Start from
+        // where the page actually is, and aim at an absolute position.
+        const y = window.scrollY;
+        lenis.scrollTo(y, { immediate: true, force: true });
+        lenis.scrollTo(target.getBoundingClientRect().top + y - headerOffset(), {
+          duration: 1.1,
+          onComplete: () => {
+            if (!target.hasAttribute("tabindex")) target.setAttribute("tabindex", "-1");
+            target.focus({ preventScroll: true });
+          },
+        });
       };
       document.addEventListener("click", onAnchor);
       const refresh = () => ScrollTrigger.refresh();
