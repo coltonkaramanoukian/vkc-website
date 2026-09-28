@@ -12,7 +12,7 @@ HANDOFF: 2026-09-27 — `main` holds runs 1–4 plus the image-ban lift (#27); r
 - The site order is `src/lib/nav.ts` (Services, Industries, Containers,
   Regions, Company); the menu, footer, inline bar and the home page follow
   it (PR #29). The inline bar carries five of the six: see
-  `docs/DESIGN-DECISIONS.md` §13 for why Montréal is not in it.
+  `docs/DESIGN-DECISIONS.md` §14 for why Montréal is not in it.
 - **AI-generated imagery is permitted** (CLAUDE.md §1, amended by Colton,
   PR #27). Vito is filling the thirteen covers and two galleries;
   `docs/MEDIA-SLOTS.md` is the contract (positions, sizes, files, checks).

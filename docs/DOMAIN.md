@@ -86,5 +86,5 @@ is dead the moment the base URL changes. Print after step 4, not before.
 ## 5. What does NOT need to change
 
 - The Vercel project name, the GitHub repo, the env vars.
-- `vercel.json`: `git.deploymentEnabled.main = false` stays, so production
-  ships only through `vercel --prod`.
+- `vercel.json`: `git.deploymentEnabled.main = true` stays, so a merge to
+  `main` ships production.

@@ -10,20 +10,17 @@ Each item says what is missing, where it goes, and what appears once it is done.
 (created 2026-09-27). Its first production deploy is commit `c175c6e` (main as
 of run 4). The §6 SHA check passed, and `/fr`, `/en` and `/v` return 200.
 
-- `vercel.json` disables git deploys of `main`, so **merging a PR does not
-  deploy**. Production moves only when you run:
+- `vercel.json` enables git deploys of `main` (since 2026-09-28), so **merging a
+  PR deploys production** on `vkc-website-wz5a`. A manual deploy still works:
 
   ```bash
   cd "$HOME/Desktop/vkc-website" && git checkout main && git pull
-  vercel link --yes --project vkc-website-wz5a
   npm run build && vercel --prod
   ```
 
-- The main checkout's `.vercel/project.json` still points at the **old**
-  project `vkc-website` (vkc-website-zeta.vercel.app, an older build). Run the
-  `vercel link` line above once, then delete the old project in the Vercel
-  dashboard if you no longer want it.
-- Merged pull requests since `c175c6e` are not live until the next `vercel --prod`.
+- The main checkout is linked to `vkc-website-wz5a`. The old project
+  `vkc-website` (vkc-website-zeta.vercel.app) is a duplicate that also builds
+  every push; delete it in the Vercel dashboard.
 
 ## 2. Quote form email: wired, and one real send left to prove
 

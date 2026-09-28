@@ -130,6 +130,12 @@ export function tagline(locale: Locale): string {
   return options[taglinesJson.default][locale];
 }
 
+/** One named tagline option from content/taglines.json (e.g. "shiftEnds"). */
+export function taglineOption(key: string, locale: Locale): string | null {
+  const options = taglinesJson.options as Record<string, LocalizedText>;
+  return options[key]?.[locale] ?? null;
+}
+
 export function serviceNames(locale: Locale): { ss: string; bn: string } {
   return {
     ss: services.secondShift.name[locale],

@@ -128,7 +128,7 @@ export async function SceneGalleries({ route, locale, className = "" }: { route:
             </div>
           ) : (
             // data-count sets the columns from md: one, two or three per row; four tiles sit two by two (globals.css).
-            <ul className="gallery" data-count={gallery.items.length}>
+            <ul className="gallery" data-count={gallery.items.length} tabIndex={0}>
               {gallery.items.map((item) => (
                 <li key={item.id}>
                   <Scene item={item} locale={locale} sizes={TILE_SIZES} />

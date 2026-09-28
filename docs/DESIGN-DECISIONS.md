@@ -479,7 +479,37 @@ labels, the copy and every guard where they were.
   footer's tagline is set at display size, so the page's first and last
   words are the same words at the same weight.
 
-## 13. Run 5 decisions (2026-09-27, the navigation fix and the site order)
+## 13. Run 5 decisions (2026-09-27, the cinematic redesign)
+
+Asked for by the owners, who picked "Option A" from two hosted previews.
+brand/BRAND.md "Run 5" is the rulebook; this is the why.
+
+- **D5.1 Dark floor, amber fill.** A single dark scheme reads as a plant at
+  night under its lights and lets the generated scenes carry the page. The
+  accent moved from QC blue to fill amber so the page still has one accent,
+  now the colour of product at its fill line. Contrast checked by axe at 375
+  and 1280 on all 40 URLs: green.
+- **D5.2 Scenes filled.** content/scenes.json holds 13 covers and 6 gallery
+  stills generated with Higgsfield (CLAUDE.md §1, as amended), plus three
+  silent loops: the home hero (hero.mp4), toll blending (blend.mp4) and
+  lubricants (oil.mp4). None shows a person, a brand, readable text or a
+  number; guard:media green. Written by the Higgsfield run the owners
+  connected; review before merge.
+- **D5.3 Motion is progressive.** GSAP, ScrollTrigger and Lenis are imported
+  inside an effect after first paint, so the static HTML is the page. The
+  only hidden states sit behind `html.js-motion`, which is not set under
+  reduced motion or when an import fails. The sideways reel and the frame
+  reveal run from 900px only, where they can't crop copy.
+- **D5.4 New home copy, same facts.** New keys: home.statement, home.fill*,
+  home.reel.*, home.why*. They restate what other pages already say; no new
+  fact, number or claim. "The recipe never changes hands" was rewritten after
+  guard:staffing caught "hands"; the French was trimmed to 1.093 of the
+  English (guard:fr).
+- **D5.5 The closing frame on the home page** replaces the negative band
+  there (the band stays on every other page) and uses the "shiftEnds"
+  tagline from content/taglines.json.
+
+## 14. Run 5 decisions (2026-09-27, the navigation fix and the site order)
 
 - **One order, everywhere it is listed.** `lib/nav.ts` is the order:
   Services (Second Shift, then the two Bottleneck pages), Industries,

@@ -1,17 +1,17 @@
 {
-  "_note": "NULL AT BIRTH (CLAUDE.md §2): Colton, or the Higgsfield run he connects, fills this file. Every slot renders NOTHING until `kind` and `src` are set. Files live under /public/media/. `npm run guard:media` proves the file before a build. CLAUDE.md §1 bans generated imagery today; amending that line is Colton's, not a run's.",
+  "_note": "Filled 2026-09-27 by the Higgsfield run (generated imagery, permitted by CLAUDE.md §1 as amended by Colton). Files live under /public/media/. `npm run guard:media` proves the file before a build.",
   "slots": [
     {
       "id": "home-cover",
       "page": "/",
       "intent": "The cover strip under the home hero: a filling line running, containers passing the fill head, the fill line visible on a container. Silent, no text baked in, nobody identifiable.",
       "aspect": "21/9",
-      "kind": null,
-      "src": null,
-      "poster": null,
+      "kind": "video",
+      "src": "/media/hero.mp4",
+      "poster": "/media/home-cover.webp",
       "alt": {
-        "en": null,
-        "fr": null
+        "en": "Liquid filling a white jug under a stainless filling head",
+        "fr": "Du liquide qui remplit un bidon blanc sous une tête de remplissage en inox"
       },
       "caption": {
         "en": null,
@@ -24,12 +24,12 @@
       "page": "/services/second-shift",
       "intent": "A line at a customer's plant in the evening, lights on, the line moving. No customer branding.",
       "aspect": "16/9",
-      "kind": null,
-      "src": null,
+      "kind": "image",
+      "src": "/media/second-shift.webp",
       "poster": null,
       "alt": {
-        "en": null,
-        "fr": null
+        "en": "A packaging line in a plant at night, lights on",
+        "fr": "Une ligne de conditionnement dans une usine, la nuit, lumières allumées"
       },
       "caption": {
         "en": null,
@@ -42,12 +42,12 @@
       "page": "/services/contract-packaging",
       "intent": "Filling at VKC's facility: a jug under a fill head, cases being packed behind it.",
       "aspect": "16/9",
-      "kind": null,
-      "src": null,
+      "kind": "image",
+      "src": "/media/contract-packaging.webp",
       "poster": null,
       "alt": {
-        "en": null,
-        "fr": null
+        "en": "A jug under a fill head, cases lined up behind it",
+        "fr": "Un bidon sous une tête de remplissage, des caisses alignées derrière"
       },
       "caption": {
         "en": null,
@@ -60,12 +60,12 @@
       "page": "/services/toll-blending",
       "intent": "A blend in a mixing vessel, paddle turning, seen from above the rim.",
       "aspect": "16/9",
-      "kind": null,
-      "src": null,
-      "poster": null,
+      "kind": "video",
+      "src": "/media/blend.mp4",
+      "poster": "/media/toll-blending.webp",
       "alt": {
-        "en": null,
-        "fr": null
+        "en": "A mixer turning a pale blend in a steel tank, seen from above",
+        "fr": "Un mélangeur qui tourne dans un lot pâle, vu du haut de la cuve"
       },
       "caption": {
         "en": null,
@@ -78,12 +78,12 @@
       "page": "/containers/bottles-and-jugs",
       "intent": "HDPE bottles and D-jugs in a row on a conveyor, unlabelled.",
       "aspect": "16/9",
-      "kind": null,
-      "src": null,
+      "kind": "image",
+      "src": "/media/bottles-jugs.webp",
       "poster": null,
       "alt": {
-        "en": null,
-        "fr": null
+        "en": "Unlabelled HDPE bottles and D-jugs in a row on a conveyor",
+        "fr": "Des bouteilles et des bidons en PEHD sans étiquette, alignés sur un convoyeur"
       },
       "caption": {
         "en": null,
@@ -96,12 +96,12 @@
       "page": "/containers/pails",
       "intent": "Plastic and metal pails stacked on a pallet, lids on, no labels.",
       "aspect": "16/9",
-      "kind": null,
-      "src": null,
+      "kind": "image",
+      "src": "/media/pails.webp",
       "poster": null,
       "alt": {
-        "en": null,
-        "fr": null
+        "en": "Plastic and metal pails with lids, stacked on a pallet",
+        "fr": "Des seaux de plastique et de métal fermés, empilés sur une palette"
       },
       "caption": {
         "en": null,
@@ -114,12 +114,12 @@
       "page": "/containers/kits",
       "intent": "Kit components laid out in a grid beside the finished box.",
       "aspect": "16/9",
-      "kind": null,
-      "src": null,
+      "kind": "image",
+      "src": "/media/kits.webp",
       "poster": null,
       "alt": {
-        "en": null,
-        "fr": null
+        "en": "Kit components laid out in a grid beside an open box",
+        "fr": "Des pièces de trousse disposées en grille à côté d’une boîte ouverte"
       },
       "caption": {
         "en": null,
@@ -132,12 +132,12 @@
       "page": "/industries/cleaners",
       "intent": "Trigger-spray bottles being capped, unlabelled.",
       "aspect": "16/9",
-      "kind": null,
-      "src": null,
+      "kind": "image",
+      "src": "/media/cleaners.webp",
       "poster": null,
       "alt": {
-        "en": null,
-        "fr": null
+        "en": "Spray bottles moving through a capping station",
+        "fr": "Des vaporisateurs qui passent sous une boucheuse"
       },
       "caption": {
         "en": null,
@@ -150,12 +150,12 @@
       "page": "/industries/lubricants",
       "intent": "Oil being weigh-filled into a pail, the scale readout out of frame.",
       "aspect": "16/9",
-      "kind": null,
-      "src": null,
-      "poster": null,
+      "kind": "video",
+      "src": "/media/oil.mp4",
+      "poster": "/media/lubricants.webp",
       "alt": {
-        "en": null,
-        "fr": null
+        "en": "Oil pouring into a white pail on a scale",
+        "fr": "De l’huile versée dans un seau blanc posé sur une balance"
       },
       "caption": {
         "en": null,
@@ -168,12 +168,12 @@
       "page": "/industries/sealers-and-coatings",
       "intent": "A thick coating filling a metal pail to the line.",
       "aspect": "16/9",
-      "kind": null,
-      "src": null,
+      "kind": "image",
+      "src": "/media/sealers.webp",
       "poster": null,
       "alt": {
-        "en": null,
-        "fr": null
+        "en": "A thick grey coating in an open metal pail",
+        "fr": "Un revêtement gris épais dans un seau de métal ouvert"
       },
       "caption": {
         "en": null,
@@ -186,12 +186,12 @@
       "page": "/locations/montreal",
       "intent": "A pallet of finished cases at a dock door, daylight, no address visible.",
       "aspect": "16/9",
-      "kind": null,
-      "src": null,
+      "kind": "image",
+      "src": "/media/montreal.webp",
       "poster": null,
       "alt": {
-        "en": null,
-        "fr": null
+        "en": "A pallet of finished cases at an open dock door",
+        "fr": "Une palette de caisses finies devant une porte de quai ouverte"
       },
       "caption": {
         "en": null,
@@ -204,12 +204,12 @@
       "page": "/about",
       "intent": "The floor from the mezzanine: line, pallets, sealed concrete. Nobody identifiable.",
       "aspect": "16/9",
-      "kind": null,
-      "src": null,
+      "kind": "image",
+      "src": "/media/about.webp",
       "poster": null,
       "alt": {
-        "en": null,
-        "fr": null
+        "en": "A packaging floor seen from a mezzanine",
+        "fr": "Un plancher de production vu d’une mezzanine"
       },
       "caption": {
         "en": null,
@@ -222,18 +222,22 @@
       "page": "/visit",
       "intent": "The thirty-second version of the floor, for a phone held in one hand: portrait first.",
       "aspect": "16/9",
-      "kind": null,
-      "src": null,
+      "kind": "image",
+      "src": "/media/g4.webp",
       "poster": null,
       "alt": {
-        "en": null,
-        "fr": null
+        "en": "Stainless mixing tanks in a blending room",
+        "fr": "Des cuves de mélange en inox dans une salle de mélange"
       },
       "caption": {
         "en": null,
         "fr": null
       },
-      "portrait": null
+      "portrait": {
+        "src": "/media/visit.webp",
+        "poster": null,
+        "aspect": "9/16"
+      }
     }
   ],
   "galleries": [
@@ -241,13 +245,117 @@
       "id": "home-floor",
       "page": "/",
       "intent": "Three to six stills of the floor: a container at the fill head, a pallet, a QC sheet on a clipboard, a case being closed. No customer labels.",
-      "items": []
+      "items": [
+        {
+          "id": "home-floor-1",
+          "page": "/",
+          "intent": "Three to six stills of the floor: a container at the fill head, a pallet, a QC sheet on a clipboard, a case being closed. No customer labels.",
+          "aspect": "4/3",
+          "kind": "image",
+          "src": "/media/g1.webp",
+          "poster": null,
+          "alt": {
+            "en": "A jug held under a filling nozzle",
+            "fr": "Un bidon tenu sous un bec de remplissage"
+          },
+          "caption": {
+            "en": null,
+            "fr": null
+          }
+        },
+        {
+          "id": "home-floor-2",
+          "page": "/",
+          "intent": "Three to six stills of the floor: a container at the fill head, a pallet, a QC sheet on a clipboard, a case being closed. No customer labels.",
+          "aspect": "4/3",
+          "kind": "image",
+          "src": "/media/g3.webp",
+          "poster": null,
+          "alt": {
+            "en": "A case being closed on a packing table",
+            "fr": "Une caisse qu’on ferme sur une table d’emballage"
+          },
+          "caption": {
+            "en": null,
+            "fr": null
+          }
+        },
+        {
+          "id": "home-floor-3",
+          "page": "/",
+          "intent": "Three to six stills of the floor: a container at the fill head, a pallet, a QC sheet on a clipboard, a case being closed. No customer labels.",
+          "aspect": "4/3",
+          "kind": "image",
+          "src": "/media/g2.webp",
+          "poster": null,
+          "alt": {
+            "en": "A QC sheet on a clipboard beside a sample bottle",
+            "fr": "Une feuille CQ sur une planchette, à côté d’une bouteille témoin"
+          },
+          "caption": {
+            "en": null,
+            "fr": null
+          }
+        }
+      ]
     },
     {
       "id": "about-floor",
       "page": "/about",
       "intent": "The place and the trade, not the people: equipment, containers, records.",
-      "items": []
+      "items": [
+        {
+          "id": "about-floor-1",
+          "page": "/about",
+          "intent": "The place and the trade, not the people: equipment, containers, records.",
+          "aspect": "4/3",
+          "kind": "image",
+          "src": "/media/g4.webp",
+          "poster": null,
+          "alt": {
+            "en": "Stainless mixing tanks in a blending room",
+            "fr": "Des cuves de mélange en inox dans une salle de mélange"
+          },
+          "caption": {
+            "en": null,
+            "fr": null
+          }
+        },
+        {
+          "id": "about-floor-2",
+          "page": "/about",
+          "intent": "The place and the trade, not the people: equipment, containers, records.",
+          "aspect": "4/3",
+          "kind": "image",
+          "src": "/media/g6.webp",
+          "poster": null,
+          "alt": {
+            "en": "Retained sample bottles on a rack",
+            "fr": "Des bouteilles témoins conservées sur une étagère"
+          },
+          "caption": {
+            "en": null,
+            "fr": null
+          }
+        },
+        {
+          "id": "about-floor-3",
+          "page": "/about",
+          "intent": "The place and the trade, not the people: equipment, containers, records.",
+          "aspect": "4/3",
+          "kind": "image",
+          "src": "/media/about.webp",
+          "poster": null,
+          "alt": {
+            "en": "A packaging floor seen from a mezzanine",
+            "fr": "Un plancher de production vu d’une mezzanine"
+          },
+          "caption": {
+            "en": null,
+            "fr": null
+          }
+        }
+      ]
     }
   ]
 }

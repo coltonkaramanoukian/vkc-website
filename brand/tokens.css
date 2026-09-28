@@ -2,78 +2,56 @@
  * VKC Packaging — brand tokens. Framework-agnostic: the site imports this file,
  * and the video run reads it. Rationale for every value: brand/BRAND.md.
  *
+ * Run 5 (2026-09-27): the cinematic redesign. The site is set on a dark
+ * ground, the way a plant floor reads at night under its own lights, and the
+ * one accent is the amber of product filling a container to the line.
+ *
  * Six named colours, taken from the floor:
- *   floor     sealed-concrete grey the labels sit on (page ground)
- *   label     thermal label stock (placards, fields)
- *   ink       thermal-print black (text, label borders)
+ *   floor     the dark floor the page sits on (page ground)
+ *   label     a panel one step up from the floor (placards, fields, header)
+ *   ink       the light the text is set in
  *   graphite  secondary print (field names, meta)
- *   hairline  the rules printed inside a pallet label
- *   qc        QC-sheet ballpoint blue (the one accent: links, primary action, focus)
+ *   hairline  the rules between rows
+ *   qc        fill amber: the one accent (primary action, links, focus, the fill line)
  */
 
 :root {
-  --vkc-floor: #edeff2;
-  --vkc-label: #ffffff;
-  --vkc-ink: #15171a;
-  --vkc-graphite: #525964;
-  --vkc-hairline: #c7ccd3;
-  --vkc-qc: #1f33a6;
-  --vkc-on-qc: #ffffff;
+  --vkc-floor: #0b0c0e;
+  --vkc-label: #15171b;
+  --vkc-ink: #eeede8;
+  --vkc-graphite: #a1a7b0;
+  --vkc-hairline: #2c3037;
+  --vkc-qc: #f0b323;
+  --vkc-on-qc: #15171a;
 
   --vkc-font-sans: "Archivo", system-ui, sans-serif;
   --vkc-font-mono: "IBM Plex Mono", ui-monospace, monospace;
 
-  /* Archivo width axis (font-stretch). Display type runs semi-expanded. */
-  --vkc-stretch-display: 112.5%;
+  /* Archivo width axis (font-stretch). Display type runs condensed. */
+  --vkc-stretch-display: 66%;
   --vkc-stretch-body: 100%;
 
-  --vkc-border: 1.5px;
-  --vkc-radius: 2px;
+  --vkc-border: 1px;
+  --vkc-radius: 20px;
   --vkc-measure: 64ch;
-  --vkc-page-max: 72rem;
+  --vkc-page-max: 82rem;
   --vkc-gutter: 16px;
 
-  color-scheme: light dark;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --vkc-floor: #111316;
-    --vkc-label: #1a1d22;
-    --vkc-ink: #e8eaee;
-    --vkc-graphite: #a2a9b4;
-    --vkc-hairline: #343a43;
-    --vkc-qc: #9caeff;
-    --vkc-on-qc: #0e1330;
-  }
-}
-
-/*
- * Negative print. A block set in the other scheme's tokens: a label printed
- * in reverse, the way a warning label is. The six colours swap as a set, so
- * everything inside (text, rules, the one accent) keeps its contrast. One
- * block per page at most; on this site it is the closing call to action.
- */
-.vkc-negative {
-  --vkc-floor: #111316;
-  --vkc-label: #1a1d22;
-  --vkc-ink: #e8eaee;
-  --vkc-graphite: #a2a9b4;
-  --vkc-hairline: #343a43;
-  --vkc-qc: #9caeff;
-  --vkc-on-qc: #0e1330;
   color-scheme: dark;
 }
 
-@media (prefers-color-scheme: dark) {
-  .vkc-negative {
-    --vkc-floor: #edeff2;
-    --vkc-label: #ffffff;
-    --vkc-ink: #15171a;
-    --vkc-graphite: #525964;
-    --vkc-hairline: #c7ccd3;
-    --vkc-qc: #1f33a6;
-    --vkc-on-qc: #ffffff;
-    color-scheme: light;
-  }
+/*
+ * Negative print. A block set on paper instead of the floor: the six colours
+ * swap as a set, so everything inside keeps its contrast. The accent inside
+ * a paper block is ink-black, so the page still carries one accent colour.
+ */
+.vkc-negative {
+  --vkc-floor: #eeede8;
+  --vkc-label: #ffffff;
+  --vkc-ink: #15171a;
+  --vkc-graphite: #4f5560;
+  --vkc-hairline: #c9ccd1;
+  --vkc-qc: #15171a;
+  --vkc-on-qc: #eeede8;
+  color-scheme: light;
 }
