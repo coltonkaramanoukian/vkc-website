@@ -20,6 +20,13 @@ HANDOFF: 2026-09-27 — `main` holds runs 1–4 plus the image-ban lift (#27); r
   scenes schema; render changes go in `src/components/scene.tsx` only.
 - The auto-mode permission classifier refuses `gh pr merge` (merge without
   review). Open the PR, report it, and let Colton merge.
+- Every branch push deploys a preview on both linked Vercel projects, the
+  stale `vkc-website` and the live `vkc-website-wz5a`; `[skip vercel]` in
+  the commit message does not stop it (proven on #28 and #29). The Hobby
+  cap is 100 deploys a day and the account hit it on 2026-09-27, so a
+  "Deployment rate limited" check on a PR is the cap, not the build.
+  Turning previews off, or disconnecting the stale project, is a project
+  setting: Colton's (`NEEDS-COLTON.md`).
 
 ## Where the build stands
 

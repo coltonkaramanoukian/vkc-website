@@ -478,6 +478,27 @@ typecheck, lint, 80 tests, render 40/40, the five guards, hreflang 40/40
 (120 alternates), locale switch 20/20, census 40/40 and the `/v` door,
 overlap 7.6%.
 
+## Proof, PR #29 (final build of the branch, port 3200)
+
+Typecheck, lint, 80 tests, render 40/40, the five guards, hreflang 40/40,
+locale switch 20 pairs, census 40/40, overlap 7.6%. The header measured at
+1280 in both languages: five items on one line, no overflow; the French
+row keeps 18px of slack on each side at 24px gaps, the English row 104px.
+
+Lighthouse (mobile, three runs each, medians) on the six D12 pages:
+performance 96, accessibility 100, best practices 96, SEO 100 (`/visit`
+unscored for SEO, noindex by design). axe with `--self-check`: 80 scans,
+3490 rule passes, 0 violations, 0 allowlisted; the injected unlabelled
+button on `/fr` went red as expected.
+
+`check:clicks --shared all`, the shared chrome clicked from every page,
+both locales, run as two processes: 5080 clicks (4406 route links, 342 in-page anchors, 80 disclosures, 80
+chooser answer pairs, 80 skip links, 80 menu toggles, 12 empty-form
+submits), 314 more skipped as hidden at that width or `tel:`/`mailto:`.
+5080 landed where they should: 1280 FR 1309/1309, EN 1314/1314; 375 FR
+1226/1226, EN 1231/1231. GREEN at both widths, about 50 minutes per width
+from the production build.
+
 ## SELF-RESOLVED
 
 1. **The worktree had no `node_modules`**; `npm ci` first, then a
@@ -500,6 +521,14 @@ overlap 7.6%.
    in place; NC-5 covers the form's own validation.
 5. **`scripts/census.ts` and the other proof scripts default to port
    3100**; passed `--base http://localhost:3200`.
+6. **`[skip vercel]` in a commit message skips nothing on this account.**
+   Both linked Vercel projects (`vkc-website`, stale, and
+   `vkc-website-wz5a`, live) deployed a preview for the tips of #28 and
+   #29 regardless, and the live project's check on #29 reads "Deployment
+   rate limited, retry in 24 hours": the Hobby cap of 100 deploys a day,
+   not a build failure. Stopping previews is a project setting
+   (`NEEDS-COLTON.md`); the marker stays in the message as a record of
+   the attempt, nothing more.
 
 ## Not done, on purpose
 
