@@ -15,7 +15,7 @@ import { Scene, SceneGalleries } from "@/components/scene";
 import { ServiceChooserSection } from "@/components/service-chooser-section";
 import { containerFamilies, serviceNames, services, site, tagline, taglineOption } from "@/lib/content";
 import { getCopy } from "@/lib/i18n";
-import { sceneForRoute, sceneVisible } from "@/lib/scenes";
+import { sceneForRoute, sceneVisible, type SceneItem } from "@/lib/scenes";
 import { pageMetadata } from "@/lib/seo";
 import type { FaqItem } from "@/lib/structured-data";
 import { isLocale, localizedPath, type AppPathname, type Locale } from "@/i18n/pathnames";
@@ -60,10 +60,32 @@ function titleRows(text: string): string[] {
   return text.match(/[^.!?]+[.!?]+/g)?.map((row) => row.trim()) ?? [text];
 }
 
-async function Cover({ route, locale, preload = false }: { route: AppPathname; locale: Locale; preload?: boolean }) {
+/**
+ * The still of a scene: the image itself, or a video's poster. For the places
+ * a loop cannot carry its Play / Pause control: inside a link (a button in an
+ * anchor is not valid HTML, and the click would navigate) or beside the
+ * points, where the picture is decoration.
+ */
+function stillOf(item: SceneItem): SceneItem {
+  return item.kind === "video" ? { ...item, kind: "image", src: item.poster, poster: null } : item;
+}
+
+async function Cover({
+  route,
+  locale,
+  preload = false,
+  still = false,
+  sizes = "100vw",
+}: {
+  route: AppPathname;
+  locale: Locale;
+  preload?: boolean;
+  still?: boolean;
+  sizes?: string;
+}) {
   const item = sceneForRoute(route);
   if (!sceneVisible(item)) return null;
-  return <Scene item={item} locale={locale} preload={preload} sizes="100vw" />;
+  return <Scene item={still ? stillOf(item) : item} locale={locale} preload={preload} sizes={sizes} />;
 }
 
 /**
@@ -198,7 +220,7 @@ export default async function HomePage({ params }: Props) {
           {REEL.map((item) => (
             <li key={item.route}>
               <Link href={localizedPath(locale, item.route)} className="reel-card">
-                <Cover route={item.route} locale={locale} />
+                <Cover route={item.route} locale={locale} still sizes="(min-width: 900px) 34rem, 82vw" />
                 <div className="flex items-baseline justify-between gap-4">
                   <h3>{t(item.title, names)}</h3>
                   {item.field && <span className="field-name">{t(item.field, names)}</span>}
@@ -237,7 +259,7 @@ export default async function HomePage({ params }: Props) {
               if (!sceneVisible(item)) return null;
               return (
                 <div key={route} className="why-pic" data-index={i} data-on={i === 0 ? "" : undefined}>
-                  <Scene item={{ ...item, kind: item.kind === "video" ? "image" : item.kind, src: item.kind === "video" ? item.poster : item.src, poster: null }} locale={locale} sizes="50vw" />
+                  <Scene item={stillOf(item)} locale={locale} sizes="50vw" />
                 </div>
               );
             })}
