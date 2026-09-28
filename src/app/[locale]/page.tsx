@@ -10,6 +10,7 @@ import { Faq } from "@/components/faq";
 import { HomeMotion } from "@/components/home-motion";
 import { PageShell } from "@/components/page-shell";
 import { PhotoRow } from "@/components/photo";
+import { RelatedPages } from "@/components/related-pages";
 import { Scene, SceneGalleries } from "@/components/scene";
 import { ServiceChooserSection } from "@/components/service-chooser-section";
 import { containerFamilies, serviceNames, services, site, tagline, taglineOption } from "@/lib/content";
@@ -88,12 +89,14 @@ async function Cover({
 }
 
 /**
- * The home page, run 5: a film more than a label. A video hero under the
- * tagline, the container names running past, one statement that fills as it
- * is read, the two services as full-bleed films, what we fill as a reel, the
- * chooser, why plants hand us the work beside a picture that follows, the
- * container label, the steps on a rail that fills, straight talk, the floor,
- * the FAQ, and a closing frame.
+ * The home page, run 5: a film more than a label, in the site's order
+ * (lib/nav.ts). A video hero under the tagline, the container names running
+ * past, one statement that fills as it is read, the two services as
+ * full-bleed films, what we fill as a reel (the industries first), the
+ * container label, the chooser, why plants hand us the work beside a picture
+ * that follows, the steps on a rail that fills, straight talk, the floor,
+ * the FAQ, the three pages that close the site (where it works, who it is,
+ * how to reach it), and a closing frame.
  */
 export default async function HomePage({ params }: Props) {
   const { locale } = await params;
@@ -229,6 +232,17 @@ export default async function HomePage({ params }: Props) {
         </ul>
       </section>
 
+      {/* Containers: one label, three fields. */}
+      <section className="wrap section-tight" aria-labelledby="containers-heading">
+        <div className="section-head" data-rise>
+          <h2 id="containers-heading">{t("home.containersHeading")}</h2>
+          <p className="text-graphite">{t("home.containersIntro")}</p>
+        </div>
+        <div className="mt-8">
+          <ContainerLabel locale={locale} />
+        </div>
+      </section>
+
       <div id="fit" className="scroll-mt-4">
         <ServiceChooserSection locale={locale} />
       </div>
@@ -258,17 +272,6 @@ export default async function HomePage({ params }: Props) {
               </article>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* Containers: one label, three fields. */}
-      <section className="wrap section-tight" aria-labelledby="containers-heading">
-        <div className="section-head" data-rise>
-          <h2 id="containers-heading">{t("home.containersHeading")}</h2>
-          <p className="text-graphite">{t("home.containersIntro")}</p>
-        </div>
-        <div className="mt-8">
-          <ContainerLabel locale={locale} />
         </div>
       </section>
 
@@ -313,6 +316,11 @@ export default async function HomePage({ params }: Props) {
 
       <ClientStories locale={locale} heading={t("common.storiesHeading")} />
       <ClientList heading={t("common.clientsHeading")} />
+
+      {/* Where this leads next: Montreal, About, Contact, the end of the site's order. */}
+      <div className="wrap mt-20">
+        <RelatedPages locale={locale} route="/" />
+      </div>
 
       {/* The closing frame. */}
       <section className="finale mt-20" aria-labelledby="finale-heading" data-shared="cta">

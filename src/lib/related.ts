@@ -28,11 +28,14 @@ export const ROUTE_PICTO: Partial<Record<AppPathname, PictogramName>> = {
  * that fills it, not at more containers.
  */
 export const RELATED: Partial<Record<AppPathname, AppPathname[]>> = {
+  // The home page closes on the three pages that end the site's order:
+  // where VKC works, who it is, how to reach it.
+  "/": ["/locations/montreal", "/about", "/contact"],
   "/services": ["/services/second-shift", "/services/contract-packaging", "/services/toll-blending"],
   "/services/second-shift": ["/locations/montreal", "/industries", "/about"],
-  "/services/contract-packaging": ["/containers", "/services/toll-blending", "/industries"],
+  "/services/contract-packaging": ["/industries", "/services/toll-blending", "/containers"],
   "/services/toll-blending": ["/services/contract-packaging", "/industries/sealers-and-coatings", "/containers/pails"],
-  "/containers": ["/services/contract-packaging", "/industries", "/services/toll-blending"],
+  "/containers": ["/industries", "/services/contract-packaging", "/services/toll-blending"],
   "/containers/bottles-and-jugs": ["/industries/cleaners", "/industries/lubricants", "/containers/kits"],
   "/containers/pails": ["/industries/sealers-and-coatings", "/industries/lubricants", "/services/toll-blending"],
   "/containers/kits": ["/containers/bottles-and-jugs", "/industries/sealers-and-coatings", "/services/contract-packaging"],

@@ -85,6 +85,15 @@ The project is on Hobby (run 1's log, 2026-09-22). Vercel's own FAQ says Hobby
 is for personal, non-commercial use. A plan change is a paid action an agent
 must not take.
 
+Also on Hobby: 100 deploys a day, and every branch push spends two, because
+both linked projects (`vkc-website`, the stale one, and `vkc-website-wz5a`,
+the live one) deploy a preview; `[skip vercel]` in a commit message does not
+stop it (proven on #28 and #29). The account hit the cap on 2026-09-27, so a
+"Deployment rate limited" check on a PR is the cap, not the build. Two
+settings only you can change: disconnect the stale project's git
+integration, and turn previews off on the live one (Ignored Build Step) if
+Vito's image PRs do not need preview links.
+
 ## 7. Video (the video run's file)
 
 `content/media.json` is reserved for the video run; the demo video slot on
@@ -109,12 +118,12 @@ folder:
   `.claude/launch.json` (or `NEXT_PUBLIC_SHOW_PLACEHOLDERS=1 npm run dev`)
   draws every empty slot as a dashed box with its intent.
 
-Two things only you can do first:
+Two things that were yours first (one is done):
 
-1. **Amend CLAUDE.md §1.** It reads "No stock, generated or third-party
-   imagery". Generated covers need that line changed (for example: "generated
-   media renders only from `content/scenes.json`, marked as such where it
-   appears"). A run will not loosen §1 on its own.
+1. **Done (PR #27, 2026-09-27): CLAUDE.md §1 permits AI-generated imagery.**
+   Stock and third-party imagery stay banned; real photos still render only
+   from `content/photos.json`. Where each slot sits, how big, and what makes
+   a file valid: `docs/MEDIA-SLOTS.md`.
 2. **Decide what a generated scene may depict.** The `intent` lines describe
    a floor, containers and equipment with nobody identifiable and no customer
    branding. Anything showing a real customer's plant or product needs their

@@ -1,6 +1,40 @@
-HANDOFF: 2026-09-27 — `main` holds runs 1–4 (PRs #1–#23): every page built in FR and EN, the run 4 design pass merged, every gate green on a local build, nothing deployed since run 1; next is Colton's list in `NEEDS-COLTON.md`, then whatever a real reader on a real phone says.
+HANDOFF: 2026-09-28 — `main` holds runs 1–4, the image-ban lift (#27) and Vito's cinematic redesign (#30, merged 00:53 UTC, scenes filled); run 5 is two open PRs rebased on it, #28 (every click lands, `check:clicks` gate, the home page's Lenis fixes) and #29 (the site order, slot labels, `docs/MEDIA-SLOTS.md`), for Colton to merge; since 194d361 a merge to `main` deploys production, but production still serves 194d361 (the pre-redesign site) because Vercel's daily cap refused the merge of #30.
 
 # Handoff
+
+## Run 5 (2026-09-27): navigation and order
+
+- Every route link opened its page part-way down (Next 16 + the site's
+  smooth scroll); PR #28 fixes it and adds `npm run check:clicks`, which
+  clicks every link and control on every page in both locales at 1280 and
+  375 and asserts where each lands. Run it after any change to chrome,
+  links or scroll behaviour. `docs/RUN-LOG.md` run 5 has the trace.
+- Vito's redesign (#30) merged mid-run; both PRs now sit on top of it. The
+  gate found four things on the new home page, fixed in #28: the skip link
+  was intercepted by the anchor handler, the hero video's Pause control sat
+  under the copy overlay, two Play buttons rendered inside reel links, and
+  the chooser anchor landed short after a native scroll (Lenis measured from
+  a stale position) while the page's `scroll-behavior: smooth` fought Lenis
+  frame by frame. If Lenis stays, keep `html.lenis { scroll-behavior: auto
+  !important }` and keep buttons out of links; the gate catches both.
+- The site order is `src/lib/nav.ts` (Services, Industries, Containers,
+  Regions, Company); the menu, footer, inline bar and the home page follow
+  it (PR #29). The inline bar carries five of the six: see
+  `docs/DESIGN-DECISIONS.md` §14 for why Montréal is not in it.
+- **AI-generated imagery is permitted** (CLAUDE.md §1, amended by Colton,
+  PR #27). Vito is filling the thirteen covers and two galleries;
+  `docs/MEDIA-SLOTS.md` is the contract (positions, sizes, files, checks).
+  A build run stays out of `content/scenes.json`, `public/media/` and the
+  scenes schema; render changes go in `src/components/scene.tsx` only.
+- The auto-mode permission classifier refuses `gh pr merge` (merge without
+  review). Open the PR, report it, and let Colton merge.
+- Every branch push deploys a preview on both linked Vercel projects, the
+  stale `vkc-website` and the live `vkc-website-wz5a`; `[skip vercel]` in
+  the commit message does not stop it (proven on #28 and #29). The Hobby
+  cap is 100 deploys a day and the account hit it on 2026-09-27, so a
+  "Deployment rate limited" check on a PR is the cap, not the build.
+  Turning previews off, or disconnecting the stale project, is a project
+  setting: Colton's (`NEEDS-COLTON.md`).
 
 ## Where the build stands
 
@@ -28,7 +62,11 @@ HANDOFF: 2026-09-27 — `main` holds runs 1–4 (PRs #1–#23): every page built
   violations, Lighthouse mobile medians 96 / 100 / 96 / 100 on the six D12
   pages (best-practices 96 is the local `/_vercel/insights` 404; production
   will read 100).
-- Production (`vkc-website-zeta.vercel.app`) is still the run 1 build.
+- Production (`vkc-website-wz5a.vercel.app`) serves 194d361: the pre-redesign
+  site with the navigation bug. The redesign (#30) is on `main` but its deploy
+  was rate-limited; the next push to `main` after the cap resets (or
+  `vercel --prod`) ships it, and #28 with it once merged. The old project
+  `vkc-website` is gone (2026-09-28).
   Deploying is Colton's (`NEEDS-COLTON.md` item 1), as are the email
   provider, the content files (all still null), the lawyer's answer on §4,
   domain, plan, and the Higgsfield decisions (item 8, which now says where
