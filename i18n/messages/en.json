@@ -310,7 +310,33 @@
           "a": "It becomes one email to VKC, used to answer you. There is no database behind this site and no second copy: no advertising cookies, no trackers, nothing stored anywhere but the inbox it lands in."
         }
       ]
-    }
+    },
+    "statement": "Your filling line is already paid for. When your shifts run out, we run it. When orders outrun it, we take the overflow. Blended, filled, labelled, kitted, packed, and every run written down.",
+    "fillHeading": "What we fill",
+    "fillIntro": "Five kinds of work, one floor. Each opens its own page.",
+    "reel": {
+      "tollBlending": "Your formula, made into a batch here, then filled and packed on the same floor if you want.",
+      "kits": "Loose components in, one finished retail box out."
+    },
+    "whyHeading": "More output, no new line",
+    "why": [
+      {
+        "title": "You buy output, not hours",
+        "body": "Before anything runs, we settle the product, the container, the specification and the count. What comes back is finished product with the paperwork that shows how it was made."
+      },
+      {
+        "title": "Blend, fill and pack in one place",
+        "body": "A batch made here goes straight into bottles, jugs, pails or kits, with no truck between the mixer and the filler. One quote covers all of it."
+      },
+      {
+        "title": "The recipe stays yours",
+        "body": "You keep the formula and the specification. We supply the mixing, and the product that comes out is yours from start to finish."
+      },
+      {
+        "title": "Every lot has a paper trail",
+        "body": "QC sheets and a production log follow each run. When a question about a lot comes up days later, the record answers it."
+      }
+    ]
   },
   "visit": {
     "heading": "Two ways VKC takes pressure off your plant",

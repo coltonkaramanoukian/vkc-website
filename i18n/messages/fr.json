@@ -310,7 +310,33 @@
           "a": "Ça devient un seul courriel à VKC, qui sert à vous répondre. Ni base de données derrière ce site, ni deuxième copie : aucun témoin publicitaire, aucun traceur, rien de gardé ailleurs que dans la boîte de réception."
         }
       ]
-    }
+    },
+    "statement": "Votre ligne est déjà payée. Quand vos quarts manquent, on la fait rouler. Quand les commandes la dépassent, on prend le surplus. Mélangé, rempli, étiqueté, assemblé, emballé, et chaque lot consigné.",
+    "fillHeading": "Ce qu’on remplit",
+    "fillIntro": "Cinq types de travail, un seul plancher. Chacun a sa page.",
+    "reel": {
+      "tollBlending": "Votre formule devient un lot ici, puis on le remplit et l’emballe sur le même plancher si vous le voulez.",
+      "kits": "Des pièces détachées à l’entrée, une boîte finie à la sortie."
+    },
+    "whyHeading": "Plus de production, sans nouvelle ligne",
+    "why": [
+      {
+        "title": "Vous achetez la production, pas les heures",
+        "body": "Avant que ça roule, on fixe le produit, le contenant, la spécification et la quantité. Il vous revient du produit fini, avec les papiers qui montrent comment il a été fait."
+      },
+      {
+        "title": "Mélange, remplissage et emballage sous un toit",
+        "body": "Un lot fabriqué ici passe directement en bouteilles, bidons, seaux ou trousses, sans camion entre le mélangeur et la remplisseuse. Une soumission couvre tout."
+      },
+      {
+        "title": "La recette reste la vôtre",
+        "body": "La formule et la spécification restent à vous. On fait le mélange, et le produit qui en sort vous appartient du début à la fin."
+      },
+      {
+        "title": "Chaque lot laisse une trace écrite",
+        "body": "Feuilles CQ et registre de production suivent chaque lot. Si une question arrive des jours plus tard, le registre y répond."
+      }
+    ]
   },
   "visit": {
     "heading": "Deux façons d’alléger votre usine",
