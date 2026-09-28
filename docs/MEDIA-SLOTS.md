@@ -1,10 +1,12 @@
 # Media slots: where each image lands
 
 The contract between the site and whoever fills `content/scenes.json`
-(Colton, or the Higgsfield run he connects). Written 2026-09-27, run 5,
-after the navigation fix and before the page reorder; the reorder moves
-sections on the home page but not one of these slots. The page structure
-around every slot below is stable.
+(Colton, or the Higgsfield run he connects). Written 2026-09-27, run 5.
+Filled the same night by Vito's run (PR #30): 13 covers, 6 gallery stills,
+3 silent loops (the home cover, toll blending, lubricants). The cinematic
+redesign in that PR also changed where the home page shows its media; the
+home rows below say where each cover appears now. Inner-page covers did
+not move.
 
 The manifest itself is `content/scenes.json` and is not edited by a build
 run (CLAUDE.md §2). This file only says where each slot renders, how big,
@@ -57,7 +59,7 @@ and what makes a file valid. Nothing in it changes the manifest's shape.
 
 | id | Page (EN / FR) | Where it sits | Aspect | Frame at 1280 / 375 |
 |---|---|---|---|---|
-| `home-cover` | `/en` / `/fr` | Directly under the home hero (tagline and gauge), above the demo-video slot and the first fill rule | 21/9 | 1152 x 494 / 375 x 161 |
+| `home-cover` | `/en` / `/fr` | Full-bleed behind the home hero (`.cine-hero-media`, PR #30); the frame is the hero itself, `min(100svh, 62rem)` tall, so compose for a tall crop with the left third under copy | 21/9 (declared) | full viewport |
 | `second-shift-cover` | `/en/services/second-shift` / `/fr/services/deuxieme-quart` | Between the page hero (h1, lead, quote button) and the "On this page" strip | 16/9 | 1152 x 648 / 375 x 211 |
 | `contract-packaging-cover` | `/en/services/contract-packaging` / `/fr/services/conditionnement-a-forfait` | same position | 16/9 | same |
 | `toll-blending-cover` | `/en/services/toll-blending` / `/fr/services/melange-a-facon` | same position | 16/9 | same |
@@ -76,6 +78,17 @@ the picture. The three hub pages (`/services`, `/containers`,
 `/industries`), the glossary, contact, quote and privacy pages have no cover
 slot by design.
 
+## Covers reused on the home page (PR #30)
+
+The home page also shows other pages' covers, so a change to one of these
+files changes two places: `second-shift-cover` and `contract-packaging-cover`
+are the two service films; `cleaners-cover`, `lubricants-cover`,
+`sealers-and-coatings-cover`, `toll-blending-cover` and `kits-cover` are the
+"What we fill" reel (as stills: a video shows its poster there, because a
+Play button cannot sit inside a link); `contract-packaging-cover`,
+`about-cover`, `toll-blending-cover` and `visit-cover` are the pictures beside
+the "why" points (stills); `montreal-cover` is behind the closing frame.
+
 ## The two galleries
 
 `sizes="(min-width: 768px) 384px, 85vw"`. Each item is a full slot object
@@ -86,7 +99,7 @@ they are a sideways strip that snaps, each tile 85% of the width.
 
 | id | Page | Where it sits | Items |
 |---|---|---|---|
-| `home-floor` | home | After the two service placards (and their photo row), before "Which one fits?" | three to six stills |
+| `home-floor` | home | The mosaic after "Straight talk", before the FAQ (`.mosaic`, PR #30); tiles are 4/5 | three to six stills |
 | `about-floor` | `/about` | After the page's last section, before "Where this leads next" | as many as tell the place |
 
 ## Not for generated media

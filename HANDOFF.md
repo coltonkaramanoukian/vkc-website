@@ -1,4 +1,4 @@
-HANDOFF: 2026-09-27 — `main` holds runs 1–4 plus the image-ban lift (#27); run 5 is two open PRs, #28 (every click lands at the top, `check:clicks` gate) and #29 (the site order, slot labels, `docs/MEDIA-SLOTS.md`), for Colton to merge; Vito is filling `content/scenes.json` against the slot list; nothing deployed since run 1.
+HANDOFF: 2026-09-28 — `main` holds runs 1–4, the image-ban lift (#27) and Vito's cinematic redesign (#30, merged 00:53 UTC, scenes filled); run 5 is two open PRs rebased on it, #28 (every click lands, `check:clicks` gate, the home page's Lenis fixes) and #29 (the site order, slot labels, `docs/MEDIA-SLOTS.md`), for Colton to merge; since 194d361 a merge to `main` deploys production, but production still serves 194d361 (the pre-redesign site) because Vercel's daily cap refused the merge of #30.
 
 # Handoff
 
@@ -9,6 +9,14 @@ HANDOFF: 2026-09-27 — `main` holds runs 1–4 plus the image-ban lift (#27); r
   clicks every link and control on every page in both locales at 1280 and
   375 and asserts where each lands. Run it after any change to chrome,
   links or scroll behaviour. `docs/RUN-LOG.md` run 5 has the trace.
+- Vito's redesign (#30) merged mid-run; both PRs now sit on top of it. The
+  gate found four things on the new home page, fixed in #28: the skip link
+  was intercepted by the anchor handler, the hero video's Pause control sat
+  under the copy overlay, two Play buttons rendered inside reel links, and
+  the chooser anchor landed short after a native scroll (Lenis measured from
+  a stale position) while the page's `scroll-behavior: smooth` fought Lenis
+  frame by frame. If Lenis stays, keep `html.lenis { scroll-behavior: auto
+  !important }` and keep buttons out of links; the gate catches both.
 - The site order is `src/lib/nav.ts` (Services, Industries, Containers,
   Regions, Company); the menu, footer, inline bar and the home page follow
   it (PR #29). The inline bar carries five of the six: see
@@ -54,7 +62,11 @@ HANDOFF: 2026-09-27 — `main` holds runs 1–4 plus the image-ban lift (#27); r
   violations, Lighthouse mobile medians 96 / 100 / 96 / 100 on the six D12
   pages (best-practices 96 is the local `/_vercel/insights` 404; production
   will read 100).
-- Production (`vkc-website-zeta.vercel.app`) is still the run 1 build.
+- Production (`vkc-website-wz5a.vercel.app`) serves 194d361: the pre-redesign
+  site with the navigation bug. The redesign (#30) is on `main` but its deploy
+  was rate-limited; the next push to `main` after the cap resets (or
+  `vercel --prod`) ships it, and #28 with it once merged. The old project
+  `vkc-website` is gone (2026-09-28).
   Deploying is Colton's (`NEEDS-COLTON.md` item 1), as are the email
   provider, the content files (all still null), the lawyer's answer on §4,
   domain, plan, and the Higgsfield decisions (item 8, which now says where

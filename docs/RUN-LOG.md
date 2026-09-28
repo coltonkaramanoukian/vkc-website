@@ -499,6 +499,52 @@ submits), 314 more skipped as hidden at that width or `tel:`/`mailto:`.
 1226/1226, EN 1231/1231. GREEN at both widths, about 50 minutes per width
 from the production build.
 
+## After PR #30 merged (2026-09-28, 00:53 UTC)
+
+Vito's cinematic redesign (`redesign/cinematic`, author Pito1) reached
+`main` while this run's PRs were open: a dark theme, the home page rebuilt
+with GSAP, ScrollTrigger and Lenis, `content/scenes.json` filled with 13
+covers, 6 gallery stills and 3 loops, and `vercel.json` flipped so a merge
+to `main` deploys production (194d361, Colton's own commit on `main`). Its
+own production deploy was refused by the daily cap, so production still
+serves 194d361, the pre-redesign site with the navigation bug.
+
+`origin/main` was merged into both branches (his home page taken whole,
+this run's order re-applied on it; his §13 kept, this run's decisions are
+§14). The gate then ran on the merged build and found four faults on the
+new home page, all in the new pieces and none in his content:
+
+1. The skip link was intercepted by the new in-page-anchor handler and
+   moved neither scroll nor focus. It keeps its native jump.
+2. The hero video's Play / Pause control sat under the copy overlay and
+   could not be clicked. The overlay passes the pointer through except on
+   its own content.
+3. Two Play buttons rendered inside reel links (a button in an anchor), so
+   pressing Play navigated. Reel cards and the "why" pictures show a video's
+   poster; the loops stay on their own pages.
+4. The chooser anchor landed short whenever the browser had scrolled the
+   link into view first (a click that scrolls, a keyboard user tabbing to
+   it): Lenis measured from a stale position, and the page's own
+   `scroll-behavior: smooth` fought it frame by frame (23px after 200ms,
+   then a rush). The handler starts from `window.scrollY`, aims at an
+   absolute position under the header, takes 1.1s, writes the hash and
+   focuses the target; `html.lenis { scroll-behavior: auto !important }` is
+   Lenis's own rule. The finale title, which rises into place over the quote
+   button, takes no pointer events.
+
+The gate itself learned that a requestAnimationFrame-driven scroll has not
+moved by its first read: "settled" now needs three matching reads and a
+scroll that has not started is not finished.
+
+Proof, PR #28 on `main` at 713a6b0 (port 3200): typecheck, lint, 80 tests,
+render 40/40, the five guards (media 13/13), hreflang 40/40, census 40/40;
+`check:clicks --shared once`: 1280: 897 clicks, FR 446/446, EN 451/451; 375: 881 clicks, FR 438/438, EN 443/443. GREEN at both widths, zero failures.
+
+Proof, PR #29 on the same base plus #28 (port 3300): typecheck, lint, 80
+tests, render 40/40, the five guards, hreflang, census; home page
+`check:clicks`: 1280 FR 84/84, EN 85/85; 375 FR 80/80, EN 81/81;
+`--shared once` on every page: 1280: 903 clicks, FR 449/449, EN 454/454; 375: 887 clicks, FR 441/441, EN 446/446. GREEN at both widths, zero failures. Also axe 80 scans, 3587 rule passes, 0 violations; locale switch 20 pairs; overlap GREEN.
+
 ## SELF-RESOLVED
 
 1. **The worktree had no `node_modules`**; `npm ci` first, then a
