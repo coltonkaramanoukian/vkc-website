@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { NavLink } from "@/components/nav-link";
 import { Wordmark } from "@/components/wordmark";
 import { addressLine, contact, site, tagline, telHref } from "@/lib/content";
 import { getCopy } from "@/lib/i18n";
@@ -29,13 +29,14 @@ export async function SiteFooter({ locale, route }: { locale: Locale; route: App
     <footer className="site-footer mt-24 border-t border-hairline bg-label">
       <div className="wrap grid gap-10 py-14 lg:grid-cols-[1.6fr_repeat(5,1fr)] lg:gap-8">
         <div className="max-w-sm">
-          <Link
+          <NavLink
             href={localizedPath(locale, "/")}
+            current={route === "/"}
             aria-label={`${site.brandName}, ${t("home")}`}
             className="inline-flex text-ink"
           >
             <Wordmark className="h-5 w-auto" />
-          </Link>
+          </NavLink>
           <p className="mt-4 max-w-[16ch] text-[1.375rem] font-extrabold leading-tight tracking-[-0.01em] [font-stretch:112.5%]">{tagline(locale)}</p>
           <p className="field-name mt-3">{site.legalName}</p>
           {contactRows.length > 0 && (
@@ -54,9 +55,9 @@ export async function SiteFooter({ locale, route }: { locale: Locale; route: App
             <nav key={group.key} aria-label={t(`groups.${group.key}`)}>
               <h2 className="field-name">
                 {group.hub ? (
-                  <Link href={localizedPath(locale, group.hub)} className="chrome-link text-graphite">
+                  <NavLink href={localizedPath(locale, group.hub)} current={group.hub === route} className="chrome-link text-graphite">
                     {t(`groups.${group.key}`)}
-                  </Link>
+                  </NavLink>
                 ) : (
                   t(`groups.${group.key}`)
                 )}
@@ -64,9 +65,9 @@ export async function SiteFooter({ locale, route }: { locale: Locale; route: App
               <ul className="mt-2.5 space-y-2 text-[0.9375rem]">
                 {group.items.map((item) => (
                   <li key={item.route}>
-                    <Link href={localizedPath(locale, item.route)} className="chrome-link">
+                    <NavLink href={localizedPath(locale, item.route)} current={item.route === route} className="chrome-link">
                       {t(`nav.${item.label}`)}
-                    </Link>
+                    </NavLink>
                   </li>
                 ))}
               </ul>

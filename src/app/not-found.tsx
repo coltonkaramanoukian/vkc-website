@@ -4,7 +4,7 @@ import "./globals.css";
 // Paths outside /fr and /en that reach the app (the proxy handles the rest).
 export default function GlobalNotFound() {
   return (
-    <html lang="fr-CA">
+    <html lang="fr-CA" data-scroll-behavior="smooth">
       <body>
         <main className="wrap py-20">
           <h1>Page introuvable / Page not found</h1>

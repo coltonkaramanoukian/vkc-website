@@ -18,6 +18,7 @@
     "check:locale-switch": "node scripts/locale-switch.ts",
     "census": "node scripts/census.ts",
     "check:hreflang": "node scripts/hreflang.ts",
+    "check:clicks": "node scripts/click-through.ts",
     "shots": "node scripts/screenshots.ts",
     "proof:diff": "node scripts/proof-diff.ts",
     "proof:parity": "node scripts/proof-parity.ts",

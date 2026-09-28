@@ -28,6 +28,7 @@ npm run a11y -- --base http://localhost:3100 --self-check   # axe over every URL
 npm run overlap        # reused-sentence gate on the copy
 npm run check:hreflang -- --base http://localhost:3100    # every alternate resolves
 npm run check:locale-switch -- --base http://localhost:3100
+npm run check:clicks -- --base http://localhost:3100       # clicks every link and control, both locales, 1280 and 375; --shared all for the full proof
 npm run lighthouse -- --base http://localhost:3100        # medians, six pages, three runs
 npm run test && npm run typecheck && npm run lint
 node scripts/nc/nc5-quote-form.ts   # the form, end to end, against a mock
