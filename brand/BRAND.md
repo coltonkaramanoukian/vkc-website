@@ -1,5 +1,43 @@
 # VKC Packaging — brand
 
+## Run 5 — the cinematic redesign (2026-09-27, supersedes where it conflicts)
+
+Chosen by the owners from two previews ("Option A"). Everything below this
+section still holds unless this section changes it.
+
+- **Ground and accent.** One dark scheme, no light mode: the floor at night
+  under its own lights. `--vkc-floor #0b0c0e`, `--vkc-label #15171b`,
+  `--vkc-ink #eeede8`, `--vkc-graphite #a1a7b0`, `--vkc-hairline #2c3037`.
+  The one accent is **fill amber** `--vkc-qc #f0b323` with `--vkc-on-qc
+  #15171a`: the colour of product filling a container to the line. It marks
+  what the reader can act on (primary button, links, focus) and the fill line
+  itself. `.vkc-negative` now prints on paper (ink-black accent inside it).
+- **Type.** Display type is Archivo condensed (`font-stretch` 62–76%), weight
+  850–900, UPPERCASE, line-height ~0.9. Field names and eyebrows are Plex Mono
+  in spaced capitals. Body stays Archivo 100%. The web font is re-subset to
+  wdth 62–112.5, wght 400–900 (`scripts/subset-fonts.py`).
+- **Shape.** Buttons are pills; placards, media and panels are rounded
+  (`--vkc-radius: 20px`, media 24–28px); rules are 1px hairlines.
+- **Media.** Generated covers (content/scenes.json) run full-bleed behind the
+  home hero, the two service "films", the "What we fill" reel, the "why"
+  picture and the closing frame. Videos stay silent loops with a poster and a
+  Play / Pause control, and never play under reduced motion.
+- **Motion.** The home page may move: the title rises line by line, the hero
+  picture settles and drifts, the statement fills word by word, service films
+  open from a smaller frame, "What we fill" scrolls sideways while its section
+  holds (900px and up), the steps' rail fills, section heads rise once, and
+  Lenis smooths the scroll. It runs from `src/components/home-motion.tsx`
+  (GSAP + ScrollTrigger + Lenis, loaded after first paint). Every word is in
+  the HTML and readable without it; hidden starting states exist only behind
+  `html.js-motion`, which is never set under `prefers-reduced-motion: reduce`.
+  The CSS-only fill rule, header fill and marquee remain, and also stop under
+  reduced motion.
+- **Superseded rules** from the list below: "Sentence case everywhere",
+  "no fade-slide entrances", "no parallax", "no JavaScript in any of it",
+  "Borders are 1.5px ink", "a die-cut corner, not a rounded card", and the
+  light-default colour table.
+
+
 Invented by this run (D8). Everything here is shipped and verifiable in the
 repo; the video run reads this file and must match it.
 

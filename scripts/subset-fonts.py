@@ -4,7 +4,8 @@
     python3 scripts/subset-fonts.py
 
 Archivo ships as a variable font with wdth 62-125 and wght 100-900. The site
-uses wdth 100-112.5 (body 100, display 112.5) and wght 400-800, so the axes
+uses wdth 62-112.5 (condensed display 62-70, body 100, expanded 112.5) and
+wght 400-900, so the axes
 are pinned to those ranges before subsetting: every unused delta is weight on
 the LCP path, and the glyphs at the values the CSS asks for are unchanged.
 The character set is the latin range (French needs nothing more). Output is
@@ -29,7 +30,7 @@ SOURCE = os.path.join(ROOT, "brand/fonts/ttf/Archivo[wdth,wght].ttf")
 TARGET = os.path.join(ROOT, "brand/fonts/web/Archivo-latin-wdth-wght.woff2")
 
 # Keep in step with src/app/fonts.ts (weight, font-stretch) and brand/BRAND.md.
-AXES = {"wdth": (100.0, 112.5), "wght": (400.0, 800.0)}
+AXES = {"wdth": (62.0, 112.5), "wght": (400.0, 900.0)}
 
 # The latin range: ASCII, Latin-1, œ/Œ, the punctuation block, €, ™, arrows.
 LATIN_RANGES = [

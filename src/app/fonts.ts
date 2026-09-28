@@ -5,10 +5,10 @@ import localFont from "next/font/local";
 export const archivo = localFont({
   src: "../../brand/fonts/web/Archivo-latin-wdth-wght.woff2",
   variable: "--font-archivo",
-  weight: "400 800",
+  weight: "400 900",
   style: "normal",
   display: "swap",
-  declarations: [{ prop: "font-stretch", value: "100% 112.5%" }],
+  declarations: [{ prop: "font-stretch", value: "62% 112.5%" }],
   fallback: ["system-ui", "Arial", "sans-serif"],
 });
 

@@ -127,7 +127,7 @@ export async function SceneGalleries({ route, locale, className = "" }: { route:
               GALLERY: {gallery.intent}
             </div>
           ) : (
-            <ul className="gallery" data-count={Math.min(gallery.items.length, 3)}>
+            <ul className="gallery" data-count={Math.min(gallery.items.length, 3)} tabIndex={0}>
               {gallery.items.map((item) => (
                 <li key={item.id}>
                   <Scene item={item} locale={locale} sizes={TILE_SIZES} />
