@@ -4,7 +4,14 @@
 
 export const locales = ["fr", "en"] as const;
 export type Locale = (typeof locales)[number];
-export const defaultLocale: Locale = "fr";
+// English is the default: the root redirect (src/i18n/routing.ts) detects the
+// visitor's Accept-Language and only falls back here when nothing matches, so a
+// header-less request (a bare curl, a crawler) lands on /en rather than /fr. A
+// French browser still resolves to /fr, and the header language switch always
+// offers the other locale. (The QR door /v keeps its own FR fallback; see
+// src/app/v/route.ts. The x-default hreflang stays FR by design; see
+// src/lib/seo.ts and the scripts/hreflang.ts guard.)
+export const defaultLocale: Locale = "en";
 
 export const pathnames = {
   "/": "/",
