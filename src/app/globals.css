@@ -1767,6 +1767,10 @@
     gap: 1.375rem;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
+    /* Mandatory snapping aligns a card with the scrollport's edge, not with
+       the padding inside it; without this the first card sits flush against
+       the viewport while the heading above it keeps the page margin. */
+    scroll-padding-inline: var(--vkc-wrap-pad);
     scrollbar-width: none;
     padding-inline: var(--vkc-wrap-pad);
     padding-bottom: 0.5rem;
