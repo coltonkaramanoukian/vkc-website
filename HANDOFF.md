@@ -1,6 +1,55 @@
-HANDOFF: 2026-09-29 — `main` holds runs 1–5, the image-ban lift (#27), Vito's cinematic redesign (#30), a usability loop (#32–#34) and a second usability pass (#36). Production is live on `vkc-website-wz5a.vercel.app`, serving current `main`; root 307s to `/en`, an FR browser to `/fr`. The second pass shipped one real copy fix and closed at diminishing returns; its one deeper finding sits in Vito's motion lane and is flagged in `NEEDS-COLTON.md` §10, not fixed unseen.
+HANDOFF: 2026-09-29 — `main` holds runs 1–5, the image-ban lift (#27), Vito's cinematic redesign (#30), a usability loop (#32–#34), a second usability pass (#36) and a third, verification-only pass (this one). Production is live on `vkc-website-wz5a.vercel.app`, serving current `main`; root 307s to `/en`, an FR browser to `/fr`, `/v` to `/fr/visite`. The third pass ran a full independent sweep against live production and shipped **no code change**: every usability dimension came back clean, confirming the diminishing-returns close of passes 1–2. The one open usability item (desktop pinned-reel keyboard focus, WCAG 2.4.11) remains in Vito's motion lane, flagged in `NEEDS-COLTON.md` §10, not fixed unseen.
 
 # Handoff
+
+## Usability pass 3 — verification only (2026-09-29)
+
+A fresh session picked up the usability loop and, before touching anything, ran
+a full independent audit against **live production** (`wz5a`), not against a
+local build or prior run's notes. The purpose was to either find genuine new
+in-lane work or confirm the diminishing-returns close honestly. It confirmed
+the close: **no code PR — the site is clean on every dimension checked.** Vito's
+lane untouched (no `content/scenes.json`, no media, no image schema, no
+`home-motion.tsx`, no Vito branches).
+
+What was checked live, through the Playwright MCP at 1280 and 375, EN and FR,
+plus production `curl`:
+
+- **Load speed** (the dimension no prior pass had measured on the live deploy):
+  home `/en` returns TTFB 104 ms, first-contentful-paint 228 ms, DOM
+  interactive 163 ms, load 356 ms, 39 requests / 338 KB transferred, **0
+  console errors or warnings**. Fast by any bar.
+- **Nav** — clear on both widths: Services · Industries · Containers · About ·
+  Contact, plus the language toggle, a native `<details>`/`<summary>` Menu
+  (keyboard-operable, `aria-haspopup`) and the persistent amber Get-a-quote.
+- **CTAs** — obvious and repeated without being noisy: the hero pair
+  (Get a quote + "Which one fits your plant?"), a sticky bottom Get-a-quote
+  that follows the scroll, and the closing band. FR renders them native
+  ("Obtenir une soumission", "Lequel convient à votre usine?").
+- **Mobile responsiveness** — `document.scrollWidth === clientWidth` (0 px
+  horizontal overflow) at 375 on home, `/en/quote` and `/fr`.
+- **Tap targets** — the apparent small-target hits are all false positives:
+  the chooser and quote radios are 20 px inputs wrapped in 301×77 px `<label>`
+  tap areas, and the rest are footer/inline prose text links (conventionally
+  exempt). Real controls: form fields 48–49 px, submit 56 px.
+- **Interactive flows** — the home chooser works end-to-end (two clicks
+  recommend a service and surface its link in an `aria-live` region); the quote
+  form is sound (required-marking, `autocomplete`/`inputmode` on the contact
+  fields, progressive disclosure of the shift options under Second Shift, a
+  honeypot, first-invalid-field focus per the pass-2 note).
+- **Contrast / a11y structure** — no images missing `alt` (EN or FR), `lang`
+  correct per locale (`en-CA` / `fr-CA`), skip link first in tab order (carried
+  over from pass 2's full axe/reduced-motion/heading sweep, re-spot-checked and
+  unchanged).
+- **Links** — all **38** sitemap URLs return 200 on production; root 307s
+  `/en`, `/v` 307s `/fr/visite` (FR-default, deliberate — D17). No broken
+  links, no dead clicks.
+
+**Conclusion.** Three passes now converge on the same read: the fundamentals
+were built right and the two earlier loops (#32–#34, #36) already did the
+in-lane work. A code change here would be churn or Vito's visual lane. The
+loop is closed at diminishing returns, this time confirmed by an independent
+live sweep rather than inherited from notes.
 
 ## Usability pass 2 (2026-09-29)
 
