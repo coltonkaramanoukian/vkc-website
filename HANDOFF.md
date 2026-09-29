@@ -1,6 +1,66 @@
-HANDOFF: 2026-09-29 — `main` holds runs 1–5, the image-ban lift (#27), Vito's cinematic redesign (#30), a usability loop (#32–#34), a second usability pass (#36), a third verification-only pass, and a **fourth pass (#39, #40, this one)**. Production is live on `vkc-website-wz5a.vercel.app`, serving current `main`; root 307s to `/en`, an FR browser to `/fr`, `/v` to `/fr/visite`. Passes 1–3 converged on a clean, diminishing-returns close; pass 4 re-audited independently and shipped two real, in-lane fixes (#39 quote-form contact hint, #40 sticky glossary A–Z). The one open usability item (desktop pinned-reel keyboard focus, WCAG 2.4.11) remains in Vito's motion lane, flagged in `NEEDS-COLTON.md` §10, not fixed unseen.
+HANDOFF: 2026-09-29 — `main` holds runs 1–5, the image-ban lift (#27), Vito's cinematic redesign (#30), a usability loop (#32–#34), a second usability pass (#36), a third verification-only pass, a fourth pass (#39, #40), and a **fifth pass (#42, this one)**. Production is live on `vkc-website-wz5a.vercel.app`, serving current `main`; root 307s to `/en`, an FR browser to `/fr`, `/v` to `/fr/visite`. Passes 1–3 converged on a clean, diminishing-returns close; pass 4 re-audited independently and shipped two real fixes (#39 quote-form contact hint, #40 sticky glossary A–Z); pass 5 re-audited live and found the one defect every prior pass had missed by only ever measuring 375px — a 320px (WCAG 1.4.10 reflow) header overflow that clipped the mobile Menu control (#42, shipped and verified live), then swept 320/375/768 clean site-wide. The one open usability item (desktop pinned-reel keyboard focus, WCAG 2.4.11) remains in Vito's motion lane, flagged in `NEEDS-COLTON.md` §10, not fixed unseen.
 
 # Handoff
+
+## Usability pass 5 (2026-09-29)
+
+A fresh session reopened the loop and, instead of inheriting the pass-1–4
+"diminishing returns" close from notes, ran its own live audit against
+production (`wz5a`) through the Playwright MCP. It confirmed the earlier passes
+on every dimension they measured (chooser end-to-end, contact null-state,
+mobile overflow at 375, forms) **and found one genuine defect they had not: the
+site was only ever measured at 375px, never at 320px.**
+
+- **#42 `fix/header-reflow-320` (merged 227e558).** At the WCAG 1.4.10 reflow
+  benchmark width (320 CSS px), the header's three items — the VKC wordmark
+  (140px), the language switch (83px "Français") and the **Menu** control
+  (77px) — need ~332px side by side with the default 16px gutter. So at 320px
+  the **"Menu" label clipped off the right edge** and the page carried ~12px of
+  horizontal scroll, degrading the only route to navigation on the smallest
+  phones (the top-level nav is `hidden xl:block`; "Get a quote" is
+  `hidden sm:inline-flex`, so at 320 the row is brand + language + Menu only).
+  Fix: one `@media (max-width: 360px)` block trimming the header's own inline
+  gutter (`.site-header .header-bar` 16px → 10px) and the Menu summary's inner
+  padding (`.site-header .menu-summary` 0.5rem → 0.25rem, glyph gap 0.6 → 0.4rem).
+  At 320px the row now fits with ~11px to spare, EN and FR, and the Menu opens
+  to a full-width panel with 0 horizontal scroll. **Capped at 360px on purpose:**
+  361px and up are byte-identical, so the verified-clean 375px layout is
+  untouched; the 44px tap-target height is untouched (only inline padding moves).
+  Header/CSS only — outside Vito's motion/scenes lane. An initial
+  `[data-locale-switch]` override was dropped as dead code: it sat in
+  `@layer components` but targeted a Tailwind utility (`px-2`), which wins by
+  layer order, so it never applied — and the header gutter + Menu padding alone
+  already clear the row. Verified on a local `next start` via Playwright at 320
+  and 375, EN+FR (overflow 0, Menu unclipped/clickable, panel within viewport,
+  375 unchanged). Gates green: typecheck, `eslint src scripts guard`, 80 node
+  tests, build, guards numbers/fr/claims/staffing/media. Live after merge: root
+  still 307s `/en`, and production CSS carries the rule (320px overflow 0, Menu
+  right edge 315/320, 44px tap target).
+
+**Also checked and confirmed clean this pass** (measured live, not inherited).
+After the header fix, a fresh 320px reflow sweep of the content-heavy pages
+(`/services`, `/containers/pails`, `/industries`, `/glossary`, `/quote`,
+`/about`, `/locations/montreal`, plus `/fr`, `/fr/services`, `/fr/soumission`,
+`/fr/lexique`) — **document overflow 0 on every one**; the only per-element
+widths past the viewport are the intentional horizontal scrollers (the glossary
+A–Z strip `overflow-x:auto`, the "where this leads" rails) and the collapsed
+`.menu-panel` (absolute, clipped) — none of which scroll the page. Widths 375
+and 768 also 0 document overflow (the marquee and Vito's pinned reel exceed the
+box but are clipped by an `overflow:hidden` ancestor). The 404 (`/en/<bogus>`)
+returns HTTP 404 with a clear H1, a home link, the full footer nav for recovery
+and the sticky quote CTA. Keyboard focus: first Tab lands on "Skip to content"
+with the 3px solid amber ring. The home chooser still resolves end-to-end (two
+clicks → "Bottleneck, at our facility" with a link and Start-over), and the
+contact page still degrades to form-only under null content.
+
+**Closed at diminishing returns — now five passes deep.** This pass did NOT
+inherit the pass-1–4 close; it re-audited live and found the one real defect
+those passes had structurally missed by only ever measuring 375px, never the
+320px WCAG reflow width (#42, shipped). With that fixed and the 320/375/768
+sweep clean, the remaining candidates are Vito's motion/scenes lane (the
+pinned-reel keyboard focus, `NEEDS-COLTON.md` §10) or would be churn. No new
+Colton item surfaced. Further in-lane usability change here is not warranted
+without new content or a Vito design change.
 
 ## Usability pass 4 (2026-09-29)
 
