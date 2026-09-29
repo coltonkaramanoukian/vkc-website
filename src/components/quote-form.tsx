@@ -113,15 +113,22 @@ export function QuoteForm({ mode, source: sourceProp, locale, labels: l, contain
       </p>
     ) : null;
 
-  const describedBy = (name: string, hint?: boolean) =>
-    [hint ? id(`${name}-hint`) : null, errors[name] ? id(`${name}-error`) : null]
+  const describedBy = (name: string, hint?: boolean, extra?: string) =>
+    [hint ? id(`${name}-hint`) : null, extra ?? null, errors[name] ? id(`${name}-error`) : null]
       .filter(Boolean)
       .join(" ") || undefined;
 
   const text = (
     name: string,
     label: string,
-    opts: { required?: boolean; type?: string; autoComplete?: string; hint?: string; inputMode?: "tel" | "email" | "text" } = {},
+    opts: {
+      required?: boolean;
+      type?: string;
+      autoComplete?: string;
+      hint?: string;
+      inputMode?: "tel" | "email" | "text";
+      describedById?: string;
+    } = {},
   ) => (
     <div>
       <label htmlFor={id(name)} className="block font-semibold">
@@ -141,7 +148,7 @@ export function QuoteForm({ mode, source: sourceProp, locale, labels: l, contain
         autoComplete={opts.autoComplete}
         required={opts.required}
         aria-invalid={errors[name] ? true : undefined}
-        aria-describedby={describedBy(name, Boolean(opts.hint))}
+        aria-describedby={describedBy(name, Boolean(opts.hint), opts.describedById)}
         className="field-input mt-1.5"
       />
       {fieldError(name)}
@@ -224,18 +231,35 @@ export function QuoteForm({ mode, source: sourceProp, locale, labels: l, contain
 
       {group(
         l.groupYou,
-        <div className="grid gap-5 sm:grid-cols-2">
-          {text("company", l.company, { required: true, autoComplete: "organization" })}
-          {text("name", l.name, { required: true, autoComplete: "name" })}
-          {mode === "full" ? (
-            <>
-              {text("email", l.email, { type: "email", autoComplete: "email", inputMode: "email" })}
-              {text("phone", l.phone, { type: "tel", autoComplete: "tel", inputMode: "tel" })}
-            </>
-          ) : (
-            text("contact", l.contact, { required: true, autoComplete: "on" })
-          )}
-        </div>,
+        mode === "full" ? (
+          <>
+            <div className="grid gap-5 sm:grid-cols-2">
+              {text("company", l.company, { required: true, autoComplete: "organization" })}
+              {text("name", l.name, { required: true, autoComplete: "name" })}
+              {text("email", l.email, {
+                type: "email",
+                autoComplete: "email",
+                inputMode: "email",
+                describedById: id("contact-note"),
+              })}
+              {text("phone", l.phone, {
+                type: "tel",
+                autoComplete: "tel",
+                inputMode: "tel",
+                describedById: id("contact-note"),
+              })}
+            </div>
+            <p id={id("contact-note")} className="text-sm text-graphite">
+              {l.contactNote}
+            </p>
+          </>
+        ) : (
+          <div className="grid gap-5 sm:grid-cols-2">
+            {text("company", l.company, { required: true, autoComplete: "organization" })}
+            {text("name", l.name, { required: true, autoComplete: "name" })}
+            {text("contact", l.contact, { required: true, autoComplete: "on" })}
+          </div>
+        ),
       )}
 
       {group(

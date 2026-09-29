@@ -373,6 +373,7 @@
     "email": "Courriel",
     "phone": "Téléphone",
     "contact": "Téléphone ou courriel",
+    "contactNote": "Laissez un téléphone ou un courriel pour qu’on vous réponde.",
     "service": "De quoi avez-vous besoin?",
     "serviceSs": "{ss} (dans votre usine)",
     "serviceBn": "{bn} (chez nous)",
