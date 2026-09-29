@@ -2,6 +2,34 @@ HANDOFF: 2026-09-28 — `main` holds runs 1–4, the image-ban lift (#27) and Vi
 
 # Handoff
 
+## Usability loop (2026-09-28)
+
+A usability pass on top of run 5, merged directly to `main` (Colton's
+standing authorization; Vercel deploy check is the signal, Actions is
+billing-blocked). Each PR verified live on `vkc-website-wz5a` after merge;
+root still defaults to `/en` after every one. Found the work with an
+axe/tap-target/link-integrity sweep and Playwright at 1280/375 FR+EN; the
+click-nav, forms, a11y and reduced-motion fundamentals were already clean
+(see memory `vkc-website-usability-audit`), so this pass is link/routing
+correctness, not redesign. Vito's lane untouched (no `content/scenes.json`,
+no media, no image schema, no Vito branches).
+
+- **#32 `fix/apple-icon-proxy` (merged e18692e).** The `<link rel="apple-touch-icon" href="/apple-icon?…">`
+  in every page 307-redirected to `/en/apple-icon` (a 404) because the proxy
+  matcher's dot rule missed the extension-less `/apple-icon`; iOS home-screen
+  bookmarks got no icon. Added `apple-icon` to the matcher exclusions
+  (`src/proxy.ts`). Live: `/apple-icon` → 200 image/png; root → 307 /en.
+- **`fix/canonical-live-domain`.** `content/site.json` `baseUrl` still pointed at
+  `vkc-website-zeta.vercel.app` — the project deleted 2026-09-28, which now 404s.
+  Every canonical, hreflang alternate (120 of them), OG URL, JSON-LD `@id`/`url`,
+  sitemap entry and the `/v` QR code therefore resolved to a dead domain (a
+  share, a crawler or a scanned QR landed on a 404). Flipped `baseUrl` to the
+  live `wz5a`, regenerated `public/qr/v.svg` (`npm run qr`, now encodes
+  `wz5a/v`), and corrected the stale `docs/DOMAIN.md` line. `check:hreflang`
+  went from 404s to 120/120 resolving 200; guard:numbers/fr/staffing/claims/media
+  all green. `vkcpack.com` is still the eventual domain (human-gated,
+  `docs/DOMAIN.md`); this only corrects the interim value away from a dead one.
+
 ## Run 5 (2026-09-27): navigation and order
 
 - Every route link opened its page part-way down (Next 16 + the site's

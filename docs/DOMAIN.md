@@ -4,10 +4,16 @@ Nothing here has been run. Buying a domain, changing DNS and attaching a custom
 domain are Colton's, not an agent's (CLAUDE.md §6). Production currently lives
 at the Vercel-assigned domain only:
 
-    https://vkc-website-zeta.vercel.app
+    https://vkc-website-wz5a.vercel.app
 
-`vkc-website.vercel.app` (without `-zeta`) is **someone else's site** — a church
-in Cape Town. Never point anything at it.
+`content/site.json` → `baseUrl` now points here. It was the deleted
+`vkc-website-zeta` project, which 404s — that stale reference sent every
+canonical, hreflang and OG URL, the sitemap and the `/v` QR code to a dead
+domain (corrected 2026-09-28). When the custom domain below is attached,
+step 5 flips `baseUrl` to it.
+
+`vkc-website.vercel.app` (without a project suffix) is **someone else's site** —
+a church in Cape Town. Never point anything at it.
 
 ## Recommended
 
