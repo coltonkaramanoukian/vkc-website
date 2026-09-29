@@ -1,6 +1,68 @@
-HANDOFF: 2026-09-29 — `main` holds runs 1–5, the image-ban lift (#27), Vito's cinematic redesign (#30), a usability loop (#32–#34), a second usability pass (#36), a third verification-only pass, a fourth pass (#39, #40), and a **fifth pass (#42, this one)**. Production is live on `vkc-website-wz5a.vercel.app`, serving current `main`; root 307s to `/en`, an FR browser to `/fr`, `/v` to `/fr/visite`. Passes 1–3 converged on a clean, diminishing-returns close; pass 4 re-audited independently and shipped two real fixes (#39 quote-form contact hint, #40 sticky glossary A–Z); pass 5 re-audited live and found the one defect every prior pass had missed by only ever measuring 375px — a 320px (WCAG 1.4.10 reflow) header overflow that clipped the mobile Menu control (#42, shipped and verified live), then swept 320/375/768 clean site-wide. The one open usability item (desktop pinned-reel keyboard focus, WCAG 2.4.11) remains in Vito's motion lane, flagged in `NEEDS-COLTON.md` §10, not fixed unseen.
+HANDOFF: 2026-09-29 — `main` holds runs 1–5, the image-ban lift (#27), Vito's cinematic redesign (#30), a usability loop (#32–#34), a second usability pass (#36), a third verification-only pass, a fourth pass (#39, #40), a fifth pass (#42), and a **sixth verification-only pass (this one, no code change)**. Production is live on `vkc-website-wz5a.vercel.app`, serving current `main`; root 307s to `/en`, an FR browser to `/fr`, `/v` to `/fr/visite`. Passes 1–3 converged on a clean, diminishing-returns close; pass 4 re-audited independently and shipped two real fixes (#39 quote-form contact hint, #40 sticky glossary A–Z); pass 5 re-audited live and found the one defect every prior pass had missed by only ever measuring 375px — a 320px (WCAG 1.4.10 reflow) header overflow that clipped the mobile Menu control (#42, shipped and verified live), then swept 320/375/768 clean site-wide. Pass 6 re-audited live on **five dimensions the prior five passes never measured** (text-spacing WCAG 1.4.12, ultrawide 2560, locale-switch deep-path preservation, sticky-CTA/footer overlap, OG social-share image resolution) plus the core brief dimensions independently — all clean, no code change. The one open usability item (desktop pinned-reel keyboard focus, WCAG 2.4.11) remains in Vito's motion lane, flagged in `NEEDS-COLTON.md` §10, not fixed unseen.
 
 # Handoff
+
+## Usability pass 6 — verification only (2026-09-29)
+
+A fresh session reopened the loop and, rather than inherit the pass-1–5
+diminishing-returns close from notes, ran its own live audit against production
+(`wz5a`) through the Playwright MCP — deliberately targeting **dimensions the
+prior five passes had never actually measured**, since re-running the same
+320/375/768 overflow sweep would only redo pass 5. It found new work on none of
+them: **no code PR — the site is clean on every dimension checked.** Vito's lane
+untouched (no `content/scenes.json`, no media, no image schema, no
+`home-motion.tsx`, no Vito branches).
+
+New dimensions measured for the first time, all clean:
+
+- **WCAG 1.4.12 text spacing** (the failure mode fixed-height chrome usually
+  trips on): applied the standard override — `line-height 1.5`,
+  `letter-spacing 0.12em`, `word-spacing 0.16em`, paragraph `margin 2em` — to
+  `/en`, `/en/quote`, `/en/glossary` at 375px and scanned every text-bearing
+  element for content clipped by an `overflow:hidden`/`clip` ancestor. **0
+  clipped, 0 document overflow** on all three (the header and its fixed-height
+  controls ride every page, so this covers the chrome). The layout is fluid, so
+  spacing reflows rather than clips.
+- **Ultrawide / wide viewport** (every prior pass used only 1280 and 375). At
+  **2560×1400** the `.wrap` content column caps at **1312px and centres** with
+  equal 624px gutters, **0 document overflow**, and the top nav is present (it is
+  `hidden xl:block`, so it correctly appears from 1280 up). Nothing stretches or
+  strands.
+- **Locale-switch deep-path preservation.** On a deep page
+  (`/en/containers/pails`) the language switch points at the **translated deep
+  path** `/fr/contenants/seaux`, not a dump to the FR home — verified from the
+  live DOM. Core to a bilingual site; correct.
+- **Sticky mobile CTA vs. footer overlap.** At 375px scrolled fully to the
+  bottom, the fixed full-width "Get a quote" bar (top 739) sits below the
+  footer's last link (bottom 716) with a 23px clearance and the page carries the
+  bottom padding to clear it — **no overlap**, no content hidden behind the bar.
+- **OG / social-share image resolution** (prior passes checked titles and
+  descriptions were unique, not that the share image *resolves*). Home
+  `og:image` = `…/og/en/home` returns **200 image/png**; `twitter:card` is
+  `summary_large_image` with the same image; canonical + og:url point at the
+  live domain. Shares render, not broken.
+
+Core brief dimensions re-confirmed independently (measured live, not inherited):
+
+- **Link integrity** — a single in-page `fetch` of **all 40 content URLs**
+  (19 routes × 2 locales, minus the shared root) returned **200 on every one**;
+  root and `/v` return manual-redirect responses (root 307→`/en` per `curl`).
+- **Home chooser end-to-end** — answering both questions programmatically
+  (`pressure=shifts`, `want=ownLine`) updates the `aria-live` region to
+  "**Second Shift, at your plant**" with the four §4 facts and a working link
+  "How Second Shift works" → `/en/services/second-shift`. The decision aid works.
+- **Desktop visual** (1440) — polished hero, clear nav (Services · Industries ·
+  Containers · About · Contact + language + Menu + amber Get-a-quote), obvious
+  CTAs, sensible section order. Nothing confusing.
+- **375 overflow** — 0 document overflow on every page loaded this pass.
+
+**Closed at diminishing returns — six passes deep, this one confirmed by
+measurement on new dimensions rather than inherited from notes.** The
+fundamentals were built right and passes 1–5 already swept the brief; pass 6
+went looking specifically where the prior passes had *not* looked and still
+found nothing in-lane to fix. The remaining candidate stays Vito's motion lane
+(the pinned-reel keyboard focus, `NEEDS-COLTON.md` §10); a code change here would
+be churn. No new Colton item surfaced.
 
 ## Usability pass 5 (2026-09-29)
 
