@@ -146,8 +146,9 @@ export function HomeMotion() {
 
       // In-page links scroll through Lenis so the two scroll engines never
       // fight. The skip link keeps its native jump: its job is to move focus
-      // to <main>, which only the browser's fragment navigation does for
-      // free. Everything else lands just under the header (the same
+      // to <main> (focusable via tabIndex=-1 in page-shell.tsx, which is what
+      // lets the browser's fragment navigation land focus there at all).
+      // Everything else lands just under the header (the same
       // scroll-padding-top the CSS gives a native jump), takes about a
       // second however far it is, writes the hash so the URL and the back
       // button still mean something, and hands focus to the target when it

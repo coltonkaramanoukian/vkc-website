@@ -108,6 +108,16 @@
     outline-offset: 2px;
   }
 
+  /* The skip link moves focus to <main> (tabIndex=-1 in page-shell.tsx) so a
+     screen reader announces the landmark and the next Tab continues in the
+     content. Suppress the ring on that container-level focus: a 3px box drawn
+     around the whole page is disorienting and not the point — the move and the
+     announcement are. Not an interactive control, so no 2.4.7 indicator is
+     owed; every real control keeps its :focus-visible ring above. */
+  #main:focus {
+    outline: none;
+  }
+
   ::selection {
     background: var(--vkc-qc);
     color: var(--vkc-on-qc);
