@@ -1,6 +1,98 @@
-HANDOFF: 2026-09-29 — `main` holds runs 1–5, the image-ban lift (#27), Vito's cinematic redesign (#30), a usability loop (#32–#34), a second usability pass (#36), a third verification-only pass, a fourth pass (#39, #40), a fifth pass (#42), and a **sixth verification-only pass (this one, no code change)**. Production is live on `vkc-website-wz5a.vercel.app`, serving current `main`; root 307s to `/en`, an FR browser to `/fr`, `/v` to `/fr/visite`. Passes 1–3 converged on a clean, diminishing-returns close; pass 4 re-audited independently and shipped two real fixes (#39 quote-form contact hint, #40 sticky glossary A–Z); pass 5 re-audited live and found the one defect every prior pass had missed by only ever measuring 375px — a 320px (WCAG 1.4.10 reflow) header overflow that clipped the mobile Menu control (#42, shipped and verified live), then swept 320/375/768 clean site-wide. Pass 6 re-audited live on **five dimensions the prior five passes never measured** (text-spacing WCAG 1.4.12, ultrawide 2560, locale-switch deep-path preservation, sticky-CTA/footer overlap, OG social-share image resolution) plus the core brief dimensions independently — all clean, no code change. The one open usability item (desktop pinned-reel keyboard focus, WCAG 2.4.11) remains in Vito's motion lane, flagged in `NEEDS-COLTON.md` §10, not fixed unseen.
+HANDOFF: 2026-09-29 — `main` holds runs 1–5, the image-ban lift (#27), Vito's cinematic redesign (#30), a usability loop (#32–#34), a second usability pass (#36), a third verification-only pass, a fourth pass (#39, #40), a fifth pass (#42), a sixth verification-only pass, and a **seventh verification-only pass (this one, no code change)**. Production is live on `vkc-website-wz5a.vercel.app`, serving current `main`; root 307s to `/en`, an FR browser to `/fr`, `/v` to `/fr/visite`. Passes 1–3 converged on a clean, diminishing-returns close; pass 4 re-audited independently and shipped two real fixes (#39 quote-form contact hint, #40 sticky glossary A–Z); pass 5 re-audited live and found the one defect every prior pass had missed by only ever measuring 375px — a 320px (WCAG 1.4.10 reflow) header overflow that clipped the mobile Menu control (#42, shipped and verified live), then swept 320/375/768 clean site-wide. Pass 6 re-audited live on **five dimensions the prior five passes never measured** (text-spacing WCAG 1.4.12, ultrawide 2560, locale-switch deep-path preservation, sticky-CTA/footer overlap, OG social-share image resolution) plus the core brief dimensions independently — all clean, no code change. Pass 7 went again at **six more dimensions no prior pass measured**, in EN and FR (form `autocomplete`/WCAG 1.3.5, menu Escape/outside/link dismissal, mid-band widths 640–1279 + the `xl` boundary/WCAG 1.4.4, focus-not-obscured/WCAG 2.4.11, content visibility under `prefers-reduced-motion`, and forced-colors/Windows High Contrast) — every one clean or already correctly coded, no code change. The one open usability item (desktop pinned-reel keyboard focus, WCAG 2.4.11) remains in Vito's motion lane, flagged in `NEEDS-COLTON.md` §10, not fixed unseen.
 
 # Handoff
+
+## Usability pass 7 — verification only (2026-09-29)
+
+A fresh session reopened the "full-send" usability loop. Rather than inherit the
+pass-1–6 diminishing-returns close from notes, or redo the 320/375/768 sweep
+(that only redoes pass 5) or pass 6's five dimensions, it ran its own live audit
+against production (`wz5a`) through the Playwright MCP, deliberately targeting
+**six dimensions the prior six passes never measured**, in **both EN and FR**. It
+found new work on none of them: **no code PR — the site is clean on every
+dimension checked, or the correct handling was already in the code.** Vito's lane
+untouched (no `content/scenes.json`, no media, no image schema, no
+`home-motion.tsx`, no Vito branches).
+
+Before measuring the browser, two dimensions were checked in source and found
+**already correctly handled** (so no live test was needed to confirm a gap that
+does not exist):
+
+- **WCAG 1.3.5 Identify Input Purpose (`autocomplete`).** Prior passes checked
+  the quote form's focus-to-first-invalid, live regions and `inputmode`, but
+  never its `autocomplete` tokens. `quote-form.tsx` already sets
+  `autocomplete="organization"` (company), `"name"`, `"email"` and `"tel"` on
+  the full form, and `"on"` on the short-mode combined contact field —
+  confirmed live on the rendered DOM at `/fr/soumission` too
+  (`organization`/`name`/`email`/`tel`). Mobile autofill works; 1.3.5 satisfied,
+  bilingually.
+- **Mobile menu dismissal.** The header Menu is a native `<details>`/`<summary>`;
+  `nav-menu.tsx` already layers on exactly what a keyboard/pointer user expects —
+  **Escape** closes it and returns focus to the summary, a **pointerdown
+  outside** closes it, and **following any link** inside it closes it. Nothing to
+  add.
+
+Four dimensions measured live, all clean:
+
+- **Mid-band viewport widths + the `xl` breakpoint boundary.** Every prior pass
+  measured only 320/375/768 and 1280/1440/2560, never the awkward **600–1080
+  band** a desktop layout collapses through (and what a 1280 window reflows to at
+  200% browser zoom, WCAG 1.4.4). At **640, 900, 1279 and 1280** on `/en`, and
+  **640** on `/fr` + `/fr/soumission` (longest French labels): **0 document
+  overflow**, 0 un-clipped offenders. Navigation stays reachable across the whole
+  band — the primary top nav is `hidden xl:block` (appears from 1280), and below
+  1280 the **Menu** control + language switch are always present and visible
+  (verified at 900 and 1279). The 1279→1280 swap is clean both sides.
+- **WCAG 2.4.11 Focus Not Obscured (sequential Tab under the sticky header).**
+  Prior passes flagged only the desktop pinned-reel (Vito's lane); no pass tested
+  general sequential focus under the 65px sticky header. `html` carries
+  `scroll-padding-top: 80px` (> the 65px header) — the exact mechanism — and a
+  spread of in-content links focused across the page depth land **below** the
+  header (tops 269–514px); nothing interactive ends up **entirely** hidden (the
+  AA threshold), and real sequential Tab honours scroll-padding at least as well
+  as the programmatic probe. Satisfied.
+- **Content visibility under `prefers-reduced-motion: reduce`** (the highest-risk
+  dimension for a cinematic scroll site — scroll-reveal blocks that start at
+  `opacity:0` would leave reduced-motion users staring at blank sections). With
+  reduced-motion emulated on `/en`, a scan of every `section`/heading/`p`/`a`/`li`
+  for `opacity<0.05`, `visibility:hidden` or a >100px hiding transform returned
+  **0 hidden text-bearing elements** across the full 11,702px document. Motion is
+  CSS-gated, so under reduced-motion content resolves to its natural, visible
+  state. Correct.
+- **Forced-colors / Windows High Contrast Mode (WCAG 1.4.1 robustness)** — never
+  measured; a real risk for a dark, custom-styled site. With `forced-colors:
+  active` emulated on `/en`: **0 elements opt out** via `forced-color-adjust:
+  none` (nothing fights the system palette), and a screenshot confirms the
+  "Get a quote" CTA keeps a clear rounded pill boundary, "Français" reads as a
+  proper underlined link, and the hero eyebrow + H1 render on white backplates —
+  all legible. (Note for the next session: `getComputedStyle` does **not** reflect
+  Chromium's forced-colors paint — the button's border/background/outline all read
+  as absent/transparent while the render shows a boundary. Trust the screenshot,
+  not the computed style, for this dimension.)
+
+One more was settled by markup rather than a live keyboard walk: the **home
+service chooser** — the site's primary decision aid, only ever exercised by
+click/programmatically before — uses native `<input type="radio">` inside
+`<label>`s, grouped by `name` in `<fieldset>`s, with the result in an
+`aria-live="polite"` region (`service-chooser.tsx`). Native radio semantics
+guarantee arrow-key selection within a group and Tab traversal between groups; the
+markup is definitively keyboard-operable, no defect possible.
+
+Core dims re-confirmed live: root still 307s to `/en`, `/en` and `/fr` both 200.
+
+### §7 sign-off (pass 7)
+
+**Nothing should be cut.** Seven passes — three of them (3, 6, 7) fresh,
+independent, measurement-first audits that deliberately targeted *un*measured
+dimensions rather than redoing the sweep — converge on the same verdict: the
+fundamentals were built right, and every dimension the brief names (clear nav,
+CTAs, mobile, fast loads, no dead clicks, section order, contrast/tap targets, no
+broken links) plus the newer accessibility dimensions (1.3.5, 1.4.4/mid-band,
+2.4.11, reduced-motion, forced-colors) is clean or already handled in code. The
+one remaining candidate stays Vito's motion lane (the pinned-reel keyboard focus,
+`NEEDS-COLTON.md` §10), not to be fixed unseen. **This loop is genuinely closed;
+further in-lane usability change would be churn without new content or a Vito
+design change.** No new Colton item surfaced.
 
 ## Usability pass 6 — verification only (2026-09-29)
 
