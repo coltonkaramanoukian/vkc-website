@@ -546,3 +546,17 @@ brand/BRAND.md "Run 5" is the rulebook; this is the why.
   fourth tile alone on a second row; `data-count` now carries the real
   count and the CSS gives four a 2x2 grid (frontend-design: a grid has as
   many cells as it has content).
+
+## 15. Usability pass (2026-09-29)
+
+- **`{legal}` is not followed by a period in the copy, on purpose.**
+  `content/site.json` `legalName` is `17125003 Canada Inc.`, which already
+  ends in the abbreviation's period. The About lead (`pages.about.lead`, both
+  locales) reads `... operating name of {legal} We fill ...` with a single
+  space and no period between the placeholder and the next sentence: at
+  render the "Inc." period both closes the abbreviation and ends the
+  sentence, the standard rule (one period, never "Inc.."). The template used
+  to add its own period and shipped a visible `Canada Inc..` on `/about` in
+  FR and EN. Do not "restore" the period after `{legal}`; it would bring the
+  double period back. The meta description (`meta.about.description`) is
+  unaffected: it follows `{legal}` with a colon, not a period.

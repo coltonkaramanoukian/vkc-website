@@ -975,7 +975,7 @@
     "about": {
       "eyebrow": "À propos",
       "h1": "À qui vous avez affaire",
-      "lead": "{brand} est le nom commercial de {legal}. On remplit, emballe et mélange les produits des autres : sur notre ligne, ou sur la leur.",
+      "lead": "{brand} est le nom commercial de {legal} On remplit, emballe et mélange les produits des autres : sur notre ligne, ou sur la leur.",
       "sections": [
         {
           "h2": "Ce qu’on fait",
