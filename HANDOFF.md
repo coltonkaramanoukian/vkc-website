@@ -1,6 +1,97 @@
-HANDOFF: 2026-09-29 — `main` holds runs 1–5, the image-ban lift (#27), Vito's cinematic redesign (#30), a usability loop (#32–#34), a second usability pass (#36), a third verification-only pass, a fourth pass (#39, #40), a fifth pass (#42), a sixth verification-only pass, a seventh verification-only pass, an eighth pass (#46, print stylesheet), a ninth pass (#48, skip-link focus), and a **tenth pass (this one — verification only, no code change)**. Production is live on `vkc-website-wz5a.vercel.app`, serving current `main`; root 307s to `/en`, an FR browser to `/fr`, `/v` to `/fr/visite`. Passes 1–3 converged on a clean, diminishing-returns close; pass 4 re-audited independently and shipped two real fixes (#39 quote-form contact hint, #40 sticky glossary A–Z); pass 5 re-audited live and found the one defect every prior pass had missed by only ever measuring 375px — a 320px (WCAG 1.4.10 reflow) header overflow that clipped the mobile Menu control (#42, shipped and verified live), then swept 320/375/768 clean site-wide. Pass 6 re-audited live on **five dimensions the prior five passes never measured** (text-spacing WCAG 1.4.12, ultrawide 2560, locale-switch deep-path preservation, sticky-CTA/footer overlap, OG social-share image resolution) plus the core brief dimensions independently — all clean, no code change. Pass 7 went again at **six more dimensions no prior pass measured**, in EN and FR (form `autocomplete`/WCAG 1.3.5, menu Escape/outside/link dismissal, mid-band widths 640–1279 + the `xl` boundary/WCAG 1.4.4, focus-not-obscured/WCAG 2.4.11, content visibility under `prefers-reduced-motion`, and forced-colors/Windows High Contrast) — every one clean or already correctly coded, no code change. **Pass 8 (#46, shipped) found a real defect no prior pass had measured: the print stylesheet.** The site is dark-themed; on paper the light colour tokens (secondary prose, near-white FAQ questions, amber links) printed faint or vanished once a printer dropped the dark backgrounds — 44 failing text elements on the home page, 32 on a service page. Fixed by swapping the six colour tokens to the paper palette under `@media print` (the same set `.vkc-negative` uses) and outlining buttons; **0 failing text elements after, verified live on production.** **Pass 9 (#48, shipped) found the next un-measured defect: the skip link scrolled but never moved keyboard focus.** Every page's first Tab lands on "Skip to content", but `<main>` was not focusable (no `tabindex`), so activating it left `document.activeElement` on `<body>` — a screen-reader user heard nothing move and native fragment navigation only worked in browsers that implement the sequential-focus starting point (WCAG 2.4.1). Fixed with `tabIndex={-1}` on `<main id="main">` (page-shell.tsx) so focus lands on the landmark, plus `#main:focus{outline:none}` so a full-width container doesn't draw the 3px ring around the whole page; verified live that focus now moves to `<main>`, EN + FR, no ring, next Tab in content. The one open usability item (desktop pinned-reel keyboard focus, WCAG 2.4.11) remains in Vito's motion lane, flagged in `NEEDS-COLTON.md` §10, not fixed unseen. **Pass 10 independently measured eight dimensions/surfaces no prior pass had — WCAG 2.5.8 target size, a copy/typography anomaly scan of all 40 URLs, French non-breaking-space punctuation, link-purpose 2.4.4/2.4.9 (generic/ambiguous/duplicate link names), the `/visit` QR entry point, the error/not-found/global-error boundaries, the live quote-form empty-submit experience, and the print stylesheet's fixed/sticky chrome — in EN and FR, and found every one clean or already correctly built. No code PR; the loop is closed at genuine diminishing returns, confirmed by fresh measurement, not inherited from notes.
+HANDOFF: 2026-09-29 — `main` holds runs 1–5, the image-ban lift (#27), Vito's cinematic redesign (#30), a usability loop (#32–#34), a second usability pass (#36), a third verification-only pass, a fourth pass (#39, #40), a fifth pass (#42), a sixth verification-only pass, a seventh verification-only pass, an eighth pass (#46, print stylesheet), a ninth pass (#48, skip-link focus), and a **tenth pass (this one — verification only, no code change)**. Production is live on `vkc-website-wz5a.vercel.app`, serving current `main`; root 307s to `/en`, an FR browser to `/fr`, `/v` to `/fr/visite`. Passes 1–3 converged on a clean, diminishing-returns close; pass 4 re-audited independently and shipped two real fixes (#39 quote-form contact hint, #40 sticky glossary A–Z); pass 5 re-audited live and found the one defect every prior pass had missed by only ever measuring 375px — a 320px (WCAG 1.4.10 reflow) header overflow that clipped the mobile Menu control (#42, shipped and verified live), then swept 320/375/768 clean site-wide. Pass 6 re-audited live on **five dimensions the prior five passes never measured** (text-spacing WCAG 1.4.12, ultrawide 2560, locale-switch deep-path preservation, sticky-CTA/footer overlap, OG social-share image resolution) plus the core brief dimensions independently — all clean, no code change. Pass 7 went again at **six more dimensions no prior pass measured**, in EN and FR (form `autocomplete`/WCAG 1.3.5, menu Escape/outside/link dismissal, mid-band widths 640–1279 + the `xl` boundary/WCAG 1.4.4, focus-not-obscured/WCAG 2.4.11, content visibility under `prefers-reduced-motion`, and forced-colors/Windows High Contrast) — every one clean or already correctly coded, no code change. **Pass 8 (#46, shipped) found a real defect no prior pass had measured: the print stylesheet.** The site is dark-themed; on paper the light colour tokens (secondary prose, near-white FAQ questions, amber links) printed faint or vanished once a printer dropped the dark backgrounds — 44 failing text elements on the home page, 32 on a service page. Fixed by swapping the six colour tokens to the paper palette under `@media print` (the same set `.vkc-negative` uses) and outlining buttons; **0 failing text elements after, verified live on production.** **Pass 9 (#48, shipped) found the next un-measured defect: the skip link scrolled but never moved keyboard focus.** Every page's first Tab lands on "Skip to content", but `<main>` was not focusable (no `tabindex`), so activating it left `document.activeElement` on `<body>` — a screen-reader user heard nothing move and native fragment navigation only worked in browsers that implement the sequential-focus starting point (WCAG 2.4.1). Fixed with `tabIndex={-1}` on `<main id="main">` (page-shell.tsx) so focus lands on the landmark, plus `#main:focus{outline:none}` so a full-width container doesn't draw the 3px ring around the whole page; verified live that focus now moves to `<main>`, EN + FR, no ring, next Tab in content. The one open usability item (desktop pinned-reel keyboard focus, WCAG 2.4.11) remains in Vito's motion lane, flagged in `NEEDS-COLTON.md` §10, not fixed unseen. **Pass 10 independently measured eight dimensions/surfaces no prior pass had — WCAG 2.5.8 target size, a copy/typography anomaly scan of all 40 URLs, French non-breaking-space punctuation, link-purpose 2.4.4/2.4.9 (generic/ambiguous/duplicate link names), the `/visit` QR entry point, the error/not-found/global-error boundaries, the live quote-form empty-submit experience, and the print stylesheet's fixed/sticky chrome — in EN and FR, and found every one clean or already correctly built. No code PR; the loop is closed at genuine diminishing returns, confirmed by fresh measurement, not inherited from notes. **Pass 11 (this one, docs only) went again at six more un-measured dimensions** — landscape/short-height viewport (812×375), PWA manifest orientation lock (WCAG 1.3.4), the marquee under 2.2.2 Pause/Stop/Hide, in-page anchor landing under the *double* sticky bar (glossary A–Z, measured with a real Lenis click), heading-level hierarchy across 25 EN+FR URLs, and language-toggle/hreflang integrity on the localized FR slugs — and found **five clean and one minor Level-A finding (the marquee's pause control), routed to `NEEDS-COLTON.md` §10b as Vito's motion decision rather than fixed unseen.** Live `/en` default re-confirmed. The loop remains genuinely closed.
 
 # Handoff
+
+## Usability pass 11 — fresh independent audit, one finding routed (2026-09-29)
+
+A new session reopened the "full-send" usability loop. Rather than inherit the
+pass-1–10 close from notes, it ran its own live, measurement-first audit against
+production (`vkc-website-wz5a`) through the Playwright MCP, deliberately
+targeting **six dimensions and surfaces no prior pass had measured**, in EN and
+FR. Five came back clean or already-correct; one produced a single, minor,
+Level-A finding that lives in Vito's motion lane, so it was **routed to
+`NEEDS-COLTON.md` §10b rather than fixed unseen — no code PR, docs only.**
+Vito's lane untouched (no `content/scenes.json`, no media, no image schema, no
+`home-motion.tsx`, no Vito branches). Live `/en` default re-confirmed:
+root (no/EN `Accept-Language`) → 307 → `/en`, FR `Accept-Language` → `/fr`,
+`/en` `/fr` 200, `/v` → `/fr/visite`.
+
+The six, each measured or read this pass:
+
+- **Landscape / short-height viewport (812×375).** Every prior pass measured
+  *portrait* widths only (320 / 375 / 768); none had ever loaded the site on a
+  short landscape phone, where a full-bleed `100svh` hero and a sticky header
+  most often collide. Measured live: **0 horizontal document overflow**
+  (`scrollWidth === clientWidth === 812`); the one element wider than the
+  viewport is the `.marquee-track` ticker, correctly contained by its
+  `overflow: hidden` parent so it adds no document scroll. The `.cine-hero`
+  (`min-height: min(100svh, 62rem)`, `align-items: end`) grows to contain its
+  ~800px of content and is reached by a normal scroll — **nothing is clipped**
+  (the box expands past the 375px min, so `overflow: hidden` never cuts it).
+  Header stays a 65px sticky bar. Clean.
+- **PWA manifest orientation lock (WCAG 1.3.4 Orientation, AA).** A manifest
+  that pins `"orientation": "portrait"` restricts the content to one orientation
+  and fails 1.3.4. Read `src/app/manifest.ts`: `display: "browser"` and **no
+  `orientation` key** — the site never locks orientation. Clean, and confirmed
+  by the landscape test above rendering fine.
+- **The container-name marquee under "Pause, Stop, Hide" (WCAG 2.2.2, A).** Pass
+  7 checked general content-visibility under reduced motion; no pass had held the
+  *auto-scrolling ticker* against 2.2.2 specifically. It is well built —
+  `aria-hidden="true"` and the `animation` gated behind
+  `prefers-reduced-motion: no-preference` — but 2.2.2 asks for a pause mechanism
+  available to *every* visitor, not only those who set the OS reduced-motion
+  flag. The one real finding of the pass. **Routed to `NEEDS-COLTON.md` §10b**
+  (Vito's motion lane): the only complete fix is a visible pause control on one
+  of his signature home elements, and a CSS hover-pause half-measure helps
+  neither touch nor keyboard, so it is not shipped unseen.
+- **In-page anchor landing under the sticky bars.** Pass 10 verified `#book`'s
+  `scroll-margin-top`; this pass measured the tightest case — the glossary A–Z
+  strip, which stacks a **second** sticky bar (the letter strip, ~47px) under the
+  65px header. The mechanism: `html { scroll-padding-top: calc(4rem + 1rem) }`
+  (80px) on the scroll container, plus `--vkc-jump-stick` (`4rem + 3.75rem` =
+  124px) as each letter/term's `scroll-mt`. Verified not by reading CSS but by
+  a **real, Lenis-handled click** on "S" (a programmatic `location.hash` does
+  *not* trigger this site's smooth scroll — anchors are driven from
+  `window.scrollY`): the S heading lands at `top: 204px`, **92px clear** of the
+  strip's 112px bottom. Nothing lands under the chrome. Clean.
+- **Heading-level hierarchy across 25 URLs, EN + FR.** Prior passes counted `h1`
+  (exactly 1); none had checked for *level skips* (an `h2`→`h4` jump a screen
+  reader reports as a missing level). Fetched and parsed every main route in both
+  locales: **exactly one `h1` per page and zero level skips on all 25** (home,
+  services + the three service pages, about, glossary/lexique, industries,
+  containers, quote/soumission, visit/visite, privacy, montreal). The outline is
+  sound site-wide.
+- **Language-toggle / hreflang targets on the localized-slug pages.** The FR
+  slugs are true translations (`/fr/lexique`, `/fr/soumission`), not `/fr/`+the
+  English word — a class of route where a stale toggle would 404 in production.
+  Read the actual toggle and `<link rel="alternate" hreflang>` off `/en/glossary`
+  and `/en/quote`: both point at the real localized FR slug, and each resolves
+  **200** with a clean heading outline. (The two 404s in this pass's console were
+  the audit script's own wrong-guess fetches — `/fr/glossaire`, `/fr/devis` — not
+  links the site emits.) Clean.
+
+**GOTCHA for the next session.** To measure where an in-page anchor *actually*
+lands on this site, you must **click the link** — setting `location.hash` looks
+like it works but skips Lenis, which drives anchor scroll from `window.scrollY`
+(a `location.hash` test here reported the target at `top: 908` — off-screen —
+while a real click put it at the correct `top: 204`). And when auditing routes,
+resolve FR slugs from the page's own `hreflang`/toggle, not by translating the
+English path: the FR slugs are localized (`lexique`, `soumission`, `deuxieme-
+quart`), so guessed paths 404 and pollute the console with false errors.
+
+### §7 sign-off (pass 11)
+
+**Nothing should be cut.** Eleven passes — five of them (3, 6, 7, 10, 11) fresh,
+independent, measurement-first audits that each went at *un*measured dimensions
+rather than redoing the sweep — converge on one read: the fundamentals were built
+right, and every dimension checked (now including landscape/short-viewport,
+1.3.4 orientation, heading-level hierarchy, localized-slug toggle integrity, and
+the tightest double-sticky-bar anchor landing) is clean or already handled in
+code. The single new finding — the marquee's strict 2.2.2 pause control — is a
+minor Level-A item on a decorative, `aria-hidden`, reduced-motion-gated element
+that is Vito's design to change, and it is routed to him in `NEEDS-COLTON.md`
+§10b, not fixed unseen. This loop stays genuinely closed; further in-lane
+usability change would be churn without new content or a Vito motion decision.
 
 ## Usability pass 10 — verification only (2026-09-29)
 

@@ -209,6 +209,38 @@ they never focus a card without also seeing it. It is Vito's call how his reel
 should behave for a keyboard, so it waits for him rather than an agent editing
 his showcase unseen.
 
+### 10b. The container-name marquee and "pause, stop, hide" (Vito's lane)
+
+Found in the 2026-09-29 usability pass 11, and left here for the same reason as
+10 above: it lives in Vito's cinematic motion, not the chrome an agent owns.
+
+The home page runs a container-name ticker (`.marquee` / `.marquee-track` in
+`src/app/globals.css`, rendered from `src/app/[locale]/page.tsx`) that scrolls
+sideways forever (`animation: marquee 50s linear infinite`). It is built
+carefully: it is `aria-hidden="true"` (a decorative, duplicated brand flourish,
+invisible to a screen reader) and the animation is gated behind
+`@media (prefers-reduced-motion: no-preference)`, so a visitor who has asked
+their OS for reduced motion sees it standing still.
+
+The gap is narrow and strict: **WCAG 2.2.2 "Pause, Stop, Hide" (Level A)** asks
+that any content which moves automatically, lasts more than five seconds, and
+sits beside other content offers the visitor a way to pause it — and it asks
+this of *every* visitor, not only the ones who set the OS reduced-motion flag.
+A sighted visitor with vestibular or attention sensitivity who has never found
+that setting gets a ticker that never stops. The reduced-motion gate and the
+`aria-hidden` already cover the two cohorts most sites forget; what 2.2.2 wants
+on top is a control anyone can reach.
+
+Why it is not fixed unseen: the only *complete* fix is a visible pause/play
+control on the ticker, which is a design decision on one of Vito's signature
+home elements. A cheaper CSS-only half-measure —
+`.marquee:hover .marquee-track { animation-play-state: paused }` — gives a
+mouse user a pause but does nothing for touch (the mobile majority) or a
+keyboard, so shipping it alone would look done without being done. It is Vito's
+call how his ticker should offer a pause; it waits for him. Minor, not a
+blocker — the content is decorative and repeated as real text elsewhere on the
+page.
+
 ## Things that look like problems and are not
 
 - **Lighthouse best-practices 96 on a local build.** The only failing audit is
