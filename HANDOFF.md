@@ -1,6 +1,124 @@
-HANDOFF: 2026-09-29 — `main` holds runs 1–5, the image-ban lift (#27), Vito's cinematic redesign (#30), a usability loop (#32–#34), a second usability pass (#36), a third verification-only pass, a fourth pass (#39, #40), a fifth pass (#42), a sixth verification-only pass, a seventh verification-only pass, an eighth pass (#46, print stylesheet), and a **ninth pass (#48, this one — the skip link now moves focus, shipped)**. Production is live on `vkc-website-wz5a.vercel.app`, serving current `main`; root 307s to `/en`, an FR browser to `/fr`, `/v` to `/fr/visite`. Passes 1–3 converged on a clean, diminishing-returns close; pass 4 re-audited independently and shipped two real fixes (#39 quote-form contact hint, #40 sticky glossary A–Z); pass 5 re-audited live and found the one defect every prior pass had missed by only ever measuring 375px — a 320px (WCAG 1.4.10 reflow) header overflow that clipped the mobile Menu control (#42, shipped and verified live), then swept 320/375/768 clean site-wide. Pass 6 re-audited live on **five dimensions the prior five passes never measured** (text-spacing WCAG 1.4.12, ultrawide 2560, locale-switch deep-path preservation, sticky-CTA/footer overlap, OG social-share image resolution) plus the core brief dimensions independently — all clean, no code change. Pass 7 went again at **six more dimensions no prior pass measured**, in EN and FR (form `autocomplete`/WCAG 1.3.5, menu Escape/outside/link dismissal, mid-band widths 640–1279 + the `xl` boundary/WCAG 1.4.4, focus-not-obscured/WCAG 2.4.11, content visibility under `prefers-reduced-motion`, and forced-colors/Windows High Contrast) — every one clean or already correctly coded, no code change. **Pass 8 (#46, shipped) found a real defect no prior pass had measured: the print stylesheet.** The site is dark-themed; on paper the light colour tokens (secondary prose, near-white FAQ questions, amber links) printed faint or vanished once a printer dropped the dark backgrounds — 44 failing text elements on the home page, 32 on a service page. Fixed by swapping the six colour tokens to the paper palette under `@media print` (the same set `.vkc-negative` uses) and outlining buttons; **0 failing text elements after, verified live on production.** **Pass 9 (#48, shipped) found the next un-measured defect: the skip link scrolled but never moved keyboard focus.** Every page's first Tab lands on "Skip to content", but `<main>` was not focusable (no `tabindex`), so activating it left `document.activeElement` on `<body>` — a screen-reader user heard nothing move and native fragment navigation only worked in browsers that implement the sequential-focus starting point (WCAG 2.4.1). Fixed with `tabIndex={-1}` on `<main id="main">` (page-shell.tsx) so focus lands on the landmark, plus `#main:focus{outline:none}` so a full-width container doesn't draw the 3px ring around the whole page; verified live that focus now moves to `<main>`, EN + FR, no ring, next Tab in content. The one open usability item (desktop pinned-reel keyboard focus, WCAG 2.4.11) remains in Vito's motion lane, flagged in `NEEDS-COLTON.md` §10, not fixed unseen.
+HANDOFF: 2026-09-29 — `main` holds runs 1–5, the image-ban lift (#27), Vito's cinematic redesign (#30), a usability loop (#32–#34), a second usability pass (#36), a third verification-only pass, a fourth pass (#39, #40), a fifth pass (#42), a sixth verification-only pass, a seventh verification-only pass, an eighth pass (#46, print stylesheet), a ninth pass (#48, skip-link focus), and a **tenth pass (this one — verification only, no code change)**. Production is live on `vkc-website-wz5a.vercel.app`, serving current `main`; root 307s to `/en`, an FR browser to `/fr`, `/v` to `/fr/visite`. Passes 1–3 converged on a clean, diminishing-returns close; pass 4 re-audited independently and shipped two real fixes (#39 quote-form contact hint, #40 sticky glossary A–Z); pass 5 re-audited live and found the one defect every prior pass had missed by only ever measuring 375px — a 320px (WCAG 1.4.10 reflow) header overflow that clipped the mobile Menu control (#42, shipped and verified live), then swept 320/375/768 clean site-wide. Pass 6 re-audited live on **five dimensions the prior five passes never measured** (text-spacing WCAG 1.4.12, ultrawide 2560, locale-switch deep-path preservation, sticky-CTA/footer overlap, OG social-share image resolution) plus the core brief dimensions independently — all clean, no code change. Pass 7 went again at **six more dimensions no prior pass measured**, in EN and FR (form `autocomplete`/WCAG 1.3.5, menu Escape/outside/link dismissal, mid-band widths 640–1279 + the `xl` boundary/WCAG 1.4.4, focus-not-obscured/WCAG 2.4.11, content visibility under `prefers-reduced-motion`, and forced-colors/Windows High Contrast) — every one clean or already correctly coded, no code change. **Pass 8 (#46, shipped) found a real defect no prior pass had measured: the print stylesheet.** The site is dark-themed; on paper the light colour tokens (secondary prose, near-white FAQ questions, amber links) printed faint or vanished once a printer dropped the dark backgrounds — 44 failing text elements on the home page, 32 on a service page. Fixed by swapping the six colour tokens to the paper palette under `@media print` (the same set `.vkc-negative` uses) and outlining buttons; **0 failing text elements after, verified live on production.** **Pass 9 (#48, shipped) found the next un-measured defect: the skip link scrolled but never moved keyboard focus.** Every page's first Tab lands on "Skip to content", but `<main>` was not focusable (no `tabindex`), so activating it left `document.activeElement` on `<body>` — a screen-reader user heard nothing move and native fragment navigation only worked in browsers that implement the sequential-focus starting point (WCAG 2.4.1). Fixed with `tabIndex={-1}` on `<main id="main">` (page-shell.tsx) so focus lands on the landmark, plus `#main:focus{outline:none}` so a full-width container doesn't draw the 3px ring around the whole page; verified live that focus now moves to `<main>`, EN + FR, no ring, next Tab in content. The one open usability item (desktop pinned-reel keyboard focus, WCAG 2.4.11) remains in Vito's motion lane, flagged in `NEEDS-COLTON.md` §10, not fixed unseen. **Pass 10 independently measured eight dimensions/surfaces no prior pass had — WCAG 2.5.8 target size, a copy/typography anomaly scan of all 40 URLs, French non-breaking-space punctuation, link-purpose 2.4.4/2.4.9 (generic/ambiguous/duplicate link names), the `/visit` QR entry point, the error/not-found/global-error boundaries, the live quote-form empty-submit experience, and the print stylesheet's fixed/sticky chrome — in EN and FR, and found every one clean or already correctly built. No code PR; the loop is closed at genuine diminishing returns, confirmed by fresh measurement, not inherited from notes.
 
 # Handoff
+
+## Usability pass 10 — verification only (2026-09-29)
+
+A fresh session reopened the "full-send" usability loop. Rather than inherit the
+pass-1–9 close from notes, or redo the 320/375/768 overflow sweep (pass 5) or the
+dimension sets of passes 6 and 7, it ran its own live audit against production
+(`vkc-website-wz5a`) through the Playwright MCP, deliberately targeting **eight
+dimensions and surfaces no prior pass had measured**, in EN and FR. It found new
+work on none of them: **no code PR — the site is clean on every dimension checked,
+or the correct handling was already in the code.** Vito's lane untouched (no
+`content/scenes.json`, no media, no image schema, no `home-motion.tsx`, no Vito
+branches).
+
+The eight, each measured or read this pass:
+
+- **WCAG 2.5.8 Target Size (Minimum, AA).** Prior passes checked ≥44px on real
+  controls (that is AAA 2.5.5) and dismissed inline links as exempt, but never
+  measured the AA 24px rule on the site's tightest non-inline control — the
+  **glossary A–Z jump strip** (single-letter links reusing `.jump-nav a`).
+  Measured live: letters render **24.8px wide × 44.8px tall** (the narrowest,
+  "W", is 23.8px — 0.2px under), but the **centre-to-centre spacing is ~40px**,
+  so a 24px-diameter circle centred on each target cannot intersect a neighbour.
+  2.5.8's spacing provision is satisfied; the strip passes. Nothing else on the
+  site puts two small non-inline targets closer than that.
+- **Copy / typography anomaly scan of all 40 URLs.** Prior passes checked
+  metadata, titles and descriptions, never the *rendered body copy* end to end.
+  A fetch-and-parse sweep of every route (block elements separated so `innerText`
+  joins don't create false hits) scanned for unresolved `{tokens}`, literal
+  `undefined`/`null`/`NaN`, doubled periods/commas, doubled words, placeholder
+  text, and `h1` count. **Zero real defects** (every "doubled-word" hit was a
+  breadcrumb-then-H1 or two adjacent list items across a block boundary; `h1`
+  count is exactly 1 on all 40). The `Inc..` class of defect (pass 2) is gone
+  site-wide.
+- **French non-breaking-space punctuation.** French typography wants a
+  no-break space before `: ; ! ?` and inside guillemets, or the punctuation can
+  orphan to the start of a line. Source check of `i18n/messages/fr.json`: **139
+  `U+00A0` non-breaking spaces, 0 plain spaces before `: ; ! ?`, and all four
+  `«` guillemets use `« `.** Already correct — the scan's "space-before-
+  punct" hits were NBSPs normalised to a plain space before matching.
+- **Link purpose (WCAG 2.4.4 / 2.4.9).** axe flags empty/missing link names,
+  not *ambiguous* ones; no pass had measured link-text quality. Swept all 40
+  URLs for generic link text ("here", "read more", "learn more", … and the FR
+  equivalents), empty accessible names, and the same accessible name pointing at
+  different hrefs (confusing in a screen-reader link list). **Zero of each** —
+  the design's descriptive labels ("How Second Shift works", "More on
+  Bottleneck") hold up bilingually.
+- **The `/visit` QR entry point.** `/v` (→ `/fr/visite`) is a real doorway (a
+  scanned QR on a card or at a show), but prior passes centred on home / services
+  / quote / glossary. Checked live: **0 document overflow**, a sound heading
+  outline, the empty `content/media.json` video slot correctly renders **nothing**
+  (no reserved dead space), and the primary CTA "Book a walkthrough" resolves to
+  a real `#book` section carrying the visit-mode form (company / name / contact /
+  service radios / notes / honeypot) with `scroll-margin-top: 96px` clearing the
+  65px header. Clean and functional.
+- **The error / not-found / global-error boundaries** — surfaces that never
+  render in a normal sweep. **`error.tsx` uses `retry`, which is correct for this
+  Next.js version (16.3.5): the App-Router error-boundary recovery prop is
+  `retry` — stable since v16.3.0, per `node_modules/next/dist/docs/01-app/03-api-reference/03-file-conventions/error.md` — not the pre-16 `reset`.** (Exactly the
+  AGENTS.md trap: the instinct "it should be `reset`" is stale; the bundled docs
+  settle it.) `global-error.tsx` also uses `retry`, is bilingual with `lang` on
+  parts and both home links; `[locale]/not-found.tsx` is localized inside
+  `PageShell` (full nav for recovery); the root `not-found.tsx` offers both home
+  links. All correctly built and recoverable.
+- **The quote-form empty-submit experience, observed live.** Prior passes
+  verified the *mechanism* (labels, `aria-invalid`, `inputmode`, focus-to-first-
+  invalid). This pass watched it *render*: an empty submit sets
+  `data-form-status="invalid"`, marks the three offending fields `aria-invalid`,
+  shows clear per-field messages ("This field is required.", "Enter a phone
+  number or an email address.", "Choose one of the options.") plus a
+  `role="alert"` summary ("Check the fields marked below."), and moves focus to
+  the first invalid field. Server-driven (the form POSTs and the route returns
+  `400` with field errors, per `NEEDS-COLTON` item 2 — the `400` in the console
+  is expected REST semantics, not a bug). The conversion path's error UX is
+  clear and accessible.
+- **The print stylesheet's fixed/sticky chrome.** Pass 8 fixed print *contrast*;
+  this pass closed the sub-dimension it opened. In `@media print` the sticky
+  header and footer are `display:none`, and the fixed mobile **"Get a quote"
+  action bar carries `no-print`** (`action-bar.tsx:23`), so no fixed chrome
+  prints over content. External links append their URL (`a[href^="http"]::after`).
+  Clean.
+
+**Considered and deliberately not shipped** (on record so pass 11 need not
+re-derive them, and so the choice is honest, not an omission):
+
+- **No-JS quote submit.** The form has a native `action="/api/quote"
+  method="post"` fallback, so with JavaScript off (or a failed bundle) a submit
+  navigates to the JSON API and shows raw JSON. Real but an edge for a modern
+  marketing-site visitor, and the correct fix (server content-negotiation →
+  redirect to a result page) is feature-shaped and touches the conversion
+  backend — Colton's lane, alongside the null `content/contact.json` and the
+  Resend wiring (`NEEDS-COLTON` items 2–3). Not an unattended backend change.
+- **Root `not-found.tsx` lang-of-parts.** Its bilingual heading ("Page
+  introuvable / Page not found") does not wrap the English half in
+  `lang="en-CA"` the way `global-error.tsx` does. Genuine but on the
+  outside-`/fr`-and-`/en` 404, an ultra-rare surface with minimal content; a PR
+  here is closer to churn than fix.
+
+**GOTCHA for the next session.** When an `error.tsx`/`global-error.tsx` prop
+name "looks wrong" against your memory of Next.js, check the **bundled** docs for
+the installed version (`node_modules/next/dist/docs/`) before calling it a bug —
+this Next is modified and versioned APIs move (here, `reset` → `retry`, stable in
+16.3.0). And for WCAG 2.5.8, a target under 24px is not a failure if the
+centre-to-centre spacing to its neighbours is ≥24px (a 24px circle on each must
+not intersect another target); measure the spacing, not just the box.
+
+### §7 sign-off (pass 10)
+
+**Nothing should be cut.** Ten passes — four of them (3, 6, 7, 10) fresh,
+independent, measurement-first audits that each targeted *un*measured dimensions
+rather than redoing the sweep — converge on the same read: the fundamentals were
+built right, and every dimension the brief names plus every accessibility and
+robustness dimension checked since (2.5.8, 2.4.4/2.4.9, print, error boundaries,
+copy quality, FR typography, the `/visit` doorway) is clean or already handled in
+code. The one open in-lane candidate stays Vito's motion lane (the pinned-reel
+keyboard focus, `NEEDS-COLTON.md` §10), not fixed unseen; the two micro-items
+above are named and declined with rationale. **This loop is genuinely closed;
+further in-lane usability change would be churn without new content or a Vito
+design change.** No new Colton item surfaced.
 
 ## Usability pass 9 — the skip link now moves focus (2026-09-29, #48 shipped)
 
