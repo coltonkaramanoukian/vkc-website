@@ -29,6 +29,13 @@ no media, no image schema, no Vito branches).
   went from 404s to 120/120 resolving 200; guard:numbers/fr/staffing/claims/media
   all green. `vkcpack.com` is still the eventual domain (human-gated,
   `docs/DOMAIN.md`); this only corrects the interim value away from a dead one.
+- **`fix/manifest-theme-dark`.** The PWA manifest still declared the
+  pre-redesign light palette (`theme_color #ffffff`, `background_color #edeff2`)
+  while the site (and the page's `<meta name="theme-color">`) is dark
+  (`:root` `--vkc-floor #0b0c0e`, `color-scheme: dark`). On add-to-home-screen
+  that gave a white toolbar and a white splash flash. Set both manifest colours
+  to `#0b0c0e` (the shipped floor token) so install/splash match the site. Only
+  `src/app/manifest.ts`; no page content changed.
 
 ## Run 5 (2026-09-27): navigation and order
 
