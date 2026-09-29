@@ -26,7 +26,17 @@ export async function PageShell({
         {t("skip")}
       </a>
       <SiteHeader locale={locale} route={route} />
-      <main id="main" data-route={route}>
+      {/*
+        tabIndex=-1 so activating the skip link actually MOVES focus here, not
+        just scrolls. A <main> is not focusable by default: the browser's
+        fragment navigation only sets the next-Tab starting point, leaving
+        document.activeElement on <body> — so a screen-reader user hears
+        nothing move and the focus ring vanishes for a Tab. With -1 the target
+        is focusable, focus lands on the main landmark (announced), and older
+        browsers that never implemented the sequential-focus starting point
+        still skip the header. Load-bearing for WCAG 2.4.1; do not remove.
+      */}
+      <main id="main" data-route={route} tabIndex={-1}>
         {children}
       </main>
       <SiteFooter locale={locale} route={route} />
