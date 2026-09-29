@@ -182,6 +182,33 @@ revert).
 To see the empty slots laid out, run the `dev-placeholders` launch config
 (port 3201); the live site never shows them.
 
+## 10. The home "what we fill" reel and the keyboard, on desktop (Vito's lane)
+
+Found in the 2026-09-29 usability sweep; left for Vito because it lives in his
+cinematic motion, not in the chrome an agent owns.
+
+On a phone, and under reduced motion, and if the motion libraries fail to load,
+the reel is a normal horizontal scroller and a keyboard reaches every card
+fine. On desktop with the motion on, the reel is a **pinned** horizontal pan
+(`src/components/home-motion.tsx`, the `#fill` ScrollTrigger with `pin: true`):
+the section holds still while vertical scroll drives the reel sideways. A
+keyboard user who tabs onto card 3, 4 or 5 focuses a card that is panned
+off-screen and clipped by the section's `overflow: hidden`, because the pin
+absorbs the browser's "scroll the focused thing into view" (measured: `scrollY`
+stays put while the focused card sits partly outside the viewport). It is a
+minor issue, not a blocker — every reel destination (cleaners, lubricants,
+sealers, toll blending, kits) is also a plain link in the menu and the footer,
+so nothing is unreachable; it is WCAG 2.4.11 (focus not obscured) on a
+decorative, duplicate row.
+
+The safe fix is additive and belongs with the motion: on `focusin` of a reel
+card, scroll the window to the position where the pinned ScrollTrigger has that
+card in view (reuse `distance()` and the existing `lenis.scrollTo`, the way the
+in-page anchor handler already does). It changes nothing for mouse or touch —
+they never focus a card without also seeing it. It is Vito's call how his reel
+should behave for a keyboard, so it waits for him rather than an agent editing
+his showcase unseen.
+
 ## Things that look like problems and are not
 
 - **Lighthouse best-practices 96 on a local build.** The only failing audit is

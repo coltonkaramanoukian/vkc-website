@@ -1,6 +1,59 @@
-HANDOFF: 2026-09-28 — `main` holds runs 1–5, the image-ban lift (#27), Vito's cinematic redesign (#30) and a usability loop (#32–#34). Production is live on `vkc-website-wz5a.vercel.app`, serving current `main`; root 307s to `/en`, an FR browser to `/fr`. The usability loop closed at diminishing returns (details below); one non-usability gate issue is flagged there for a future pass.
+HANDOFF: 2026-09-29 — `main` holds runs 1–5, the image-ban lift (#27), Vito's cinematic redesign (#30), a usability loop (#32–#34) and a second usability pass (#36). Production is live on `vkc-website-wz5a.vercel.app`, serving current `main`; root 307s to `/en`, an FR browser to `/fr`. The second pass shipped one real copy fix and closed at diminishing returns; its one deeper finding sits in Vito's motion lane and is flagged in `NEEDS-COLTON.md` §10, not fixed unseen.
 
 # Handoff
+
+## Usability pass 2 (2026-09-29)
+
+A fresh full audit on top of the first usability loop, one PR merged to `main`
+(Colton's standing authorization; the Vercel deploy check is the signal, GitHub
+Actions is billing-blocked). Vito's lane untouched (no `content/scenes.json`,
+no media, no image schema, no `home-motion.tsx`, no Vito branches).
+
+- **#36 `fix/about-legal-double-period` (merged f90e12d).** `/about` shipped a
+  visible double period — `17125003 Canada Inc..` — in **both** locales.
+  `content/site.json` `legalName` already ends in the abbreviation's period,
+  and the About lead template (`pages.about.lead`) added its own after
+  `{legal}`. A sentence ending in an abbreviation takes one period, so the
+  template now leaves it to `Inc.` The coupling (no period after `{legal}` in
+  the source, on purpose) is written down in `docs/DESIGN-DECISIONS.md` §15 so
+  it is not "restored". Guards fr/numbers/claims/staffing, typecheck,
+  `eslint src scripts guard` and the 80 node tests all green; verified live on
+  `wz5a` — `/en/about` reads "Canada Inc. We", `/fr/a-propos` reads
+  "Canada Inc. On", root still 307s `/en`, `/en /fr /v /en/quote
+  /en/services/second-shift` all 200.
+
+**What the audit checked and found already clean** (so a later run does not
+redo it). At 375 and 1280, FR and EN, through the Playwright MCP: contrast
+(every text pair AA+; the amber button, links and secondary graphite all pass
+on the floor and on cards; hairlines are non-text rules), `prefers-reduced-
+motion` (every animation and the marquee are gated behind `no-preference`;
+smooth scroll too), the ambient/demo video (preload none, honours reduced data
+and reduced motion, always-present pause control), the quote/contact form
+(labels, `aria-invalid`, `inputmode`/`type`, honeypot, live regions, focus
+moves to the first invalid field on a rejected submit), the menu and FAQ
+(native `<details>`, Escape/outside-click/link close), no horizontal overflow,
+no missing `alt`, no duplicate ids, no skipped heading levels, `lang` per
+locale (`fr-CA`/`en-CA`), the null-content states (contact and the client
+sections degrade to form-only / nothing), the 404 (clear heading, home link,
+full footer for recovery), `aria-current="page"` on the current nav link, the
+skip link + `<main>` landmark first in tab order, a visible amber focus ring
+on every control, and the glossary's A–Z jump strip. The single visible
+typographic defect across all 40 pages was the double period above.
+
+- **Flagged, not fixed — `NEEDS-COLTON.md` §10 (Vito's lane).** On desktop with
+  the motion on, the home "what we fill" reel is a pinned horizontal pan; a
+  keyboard user tabbing onto cards 3–5 focuses a card the pin holds clipped
+  off-screen (WCAG 2.4.11). Minor — every reel destination is also a plain link
+  in the menu and footer, and the phone / reduced-motion / no-JS reel is a
+  normal keyboard-reachable scroller — and the safe fix is additive but belongs
+  in Vito's `home-motion.tsx`, so it waits for him rather than an agent editing
+  his showcase unseen.
+
+**Closed at diminishing returns.** The first loop (#32–#34) and runs 1–5 had
+already done the usability work; this pass confirmed it against a full fresh
+sweep and found one real, in-lane defect (shipped) plus one motion-lane
+consideration (routed to Vito). Further change here would be churn or Vito's
+visual lane.
 
 ## Usability loop (2026-09-28)
 
