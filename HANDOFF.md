@@ -1,4 +1,4 @@
-HANDOFF: 2026-09-28 — `main` holds runs 1–4, the image-ban lift (#27) and Vito's cinematic redesign (#30, merged 00:53 UTC, scenes filled); run 5 is two open PRs rebased on it, #28 (every click lands, `check:clicks` gate, the home page's Lenis fixes) and #29 (the site order, slot labels, `docs/MEDIA-SLOTS.md`), for Colton to merge; since 194d361 a merge to `main` deploys production, but production still serves 194d361 (the pre-redesign site) because Vercel's daily cap refused the merge of #30.
+HANDOFF: 2026-09-28 — `main` holds runs 1–5, the image-ban lift (#27), Vito's cinematic redesign (#30) and a usability loop (#32–#34). Production is live on `vkc-website-wz5a.vercel.app`, serving current `main`; root 307s to `/en`, an FR browser to `/fr`. The usability loop closed at diminishing returns (details below); one non-usability gate issue is flagged there for a future pass.
 
 # Handoff
 
@@ -36,6 +36,25 @@ no media, no image schema, no Vito branches).
   that gave a white toolbar and a white splash flash. Set both manifest colours
   to `#0b0c0e` (the shipped floor token) so install/splash match the site. Only
   `src/app/manifest.ts`; no page content changed.
+
+**Closed at diminishing returns.** A link-integrity crawl of all 40 pages now
+reports **0 broken links** (was 39: the 38 dead-domain URLs + the icon);
+robots.txt and sitemap.xml carry the live domain. axe (0 violations), tap
+targets (≥44px), `check:clicks` (0 dead clicks), forms, reduced-motion, skip
+link, focus, and the sticky nav / persistent CTAs were already clean before
+this loop — the three fixes above were the real, in-lane defects; further
+usability change would be churn or Vito's visual lane. Every fix verified live
+on `wz5a`; root still `/en` after each.
+
+**Flagged, not fixed (not a usability item, out of this loop's lane):**
+`npm run lint` is red locally — ~1583 errors, all from
+`.claude/worktrees/*/.next/**` (build output of other sessions' worktrees).
+eslint's `globalIgnores` covers root `.next/**` but not nested ones, so bare
+`eslint` walks into them. CI is unaffected (no worktrees there) and the real
+source (`eslint src scripts guard`) is clean, but the documented "lint green"
+gate can't be satisfied locally until either `.claude/worktrees/` is gitignored
+or `**/.next/` is added to the eslint ignores. A one-line `chore:` when someone
+wants the local gate honest.
 
 ## Run 5 (2026-09-27): navigation and order
 
