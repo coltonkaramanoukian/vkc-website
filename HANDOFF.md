@@ -1,6 +1,70 @@
-HANDOFF: 2026-09-29 — `main` holds runs 1–5, the image-ban lift (#27), Vito's cinematic redesign (#30), a usability loop (#32–#34), a second usability pass (#36), a third verification-only pass, a fourth pass (#39, #40), a fifth pass (#42), a sixth verification-only pass, and a **seventh verification-only pass (this one, no code change)**. Production is live on `vkc-website-wz5a.vercel.app`, serving current `main`; root 307s to `/en`, an FR browser to `/fr`, `/v` to `/fr/visite`. Passes 1–3 converged on a clean, diminishing-returns close; pass 4 re-audited independently and shipped two real fixes (#39 quote-form contact hint, #40 sticky glossary A–Z); pass 5 re-audited live and found the one defect every prior pass had missed by only ever measuring 375px — a 320px (WCAG 1.4.10 reflow) header overflow that clipped the mobile Menu control (#42, shipped and verified live), then swept 320/375/768 clean site-wide. Pass 6 re-audited live on **five dimensions the prior five passes never measured** (text-spacing WCAG 1.4.12, ultrawide 2560, locale-switch deep-path preservation, sticky-CTA/footer overlap, OG social-share image resolution) plus the core brief dimensions independently — all clean, no code change. Pass 7 went again at **six more dimensions no prior pass measured**, in EN and FR (form `autocomplete`/WCAG 1.3.5, menu Escape/outside/link dismissal, mid-band widths 640–1279 + the `xl` boundary/WCAG 1.4.4, focus-not-obscured/WCAG 2.4.11, content visibility under `prefers-reduced-motion`, and forced-colors/Windows High Contrast) — every one clean or already correctly coded, no code change. The one open usability item (desktop pinned-reel keyboard focus, WCAG 2.4.11) remains in Vito's motion lane, flagged in `NEEDS-COLTON.md` §10, not fixed unseen.
+HANDOFF: 2026-09-29 — `main` holds runs 1–5, the image-ban lift (#27), Vito's cinematic redesign (#30), a usability loop (#32–#34), a second usability pass (#36), a third verification-only pass, a fourth pass (#39, #40), a fifth pass (#42), a sixth verification-only pass, and a **seventh verification-only pass (this one, no code change)**. Production is live on `vkc-website-wz5a.vercel.app`, serving current `main`; root 307s to `/en`, an FR browser to `/fr`, `/v` to `/fr/visite`. Passes 1–3 converged on a clean, diminishing-returns close; pass 4 re-audited independently and shipped two real fixes (#39 quote-form contact hint, #40 sticky glossary A–Z); pass 5 re-audited live and found the one defect every prior pass had missed by only ever measuring 375px — a 320px (WCAG 1.4.10 reflow) header overflow that clipped the mobile Menu control (#42, shipped and verified live), then swept 320/375/768 clean site-wide. Pass 6 re-audited live on **five dimensions the prior five passes never measured** (text-spacing WCAG 1.4.12, ultrawide 2560, locale-switch deep-path preservation, sticky-CTA/footer overlap, OG social-share image resolution) plus the core brief dimensions independently — all clean, no code change. Pass 7 went again at **six more dimensions no prior pass measured**, in EN and FR (form `autocomplete`/WCAG 1.3.5, menu Escape/outside/link dismissal, mid-band widths 640–1279 + the `xl` boundary/WCAG 1.4.4, focus-not-obscured/WCAG 2.4.11, content visibility under `prefers-reduced-motion`, and forced-colors/Windows High Contrast) — every one clean or already correctly coded, no code change. **Pass 8 (#46, shipped) found a real defect no prior pass had measured: the print stylesheet.** The site is dark-themed; on paper the light colour tokens (secondary prose, near-white FAQ questions, amber links) printed faint or vanished once a printer dropped the dark backgrounds — 44 failing text elements on the home page, 32 on a service page. Fixed by swapping the six colour tokens to the paper palette under `@media print` (the same set `.vkc-negative` uses) and outlining buttons; **0 failing text elements after, verified live on production.** The one open usability item (desktop pinned-reel keyboard focus, WCAG 2.4.11) remains in Vito's motion lane, flagged in `NEEDS-COLTON.md` §10, not fixed unseen.
 
 # Handoff
+
+## Usability pass 8 — the print stylesheet (2026-09-29, #46 shipped)
+
+A fresh session reopened the "full-send" usability loop. Passes 1–7 had swept
+the screen experience deep (interaction, a11y, overflow 320→2560, reduced-motion,
+forced-colors, text-spacing, autocomplete, focus-not-obscured, …). This pass
+targeted a surface **no prior pass had touched at all: the printed page** — a
+real use for a B2B marketing site (a plant manager printing or saving a service
+page or a quote to circulate internally).
+
+**The defect.** The site is set on a dark floor for screen (`brand/tokens.css`),
+but `@media print` (`globals.css`) only forced `body` to white/black. Every
+element that sets its own colour from a token kept its **dark-theme** value, so
+on paper the light text tokens printed faint or vanished the moment a printer
+dropped the dark backgrounds — the common *economy / no-background* default.
+Measured under `print` media via the Playwright MCP against live production:
+
+- **Home `/en`: 44 text elements** failing contrast vs. white paper.
+- **`/en/services/second-shift`: 32.** Offenders were the three light tokens:
+  `.text-graphite` secondary prose (leads, field labels, legends) at **2.42:1**;
+  near-white ink on the **FAQ questions** and `.btn-secondary` at **1.17:1**
+  (effectively invisible); the **amber accent** on inline links at **1.88:1**.
+  The spec table and cards printed as heavy dark ink blocks with illegible text.
+
+**#46 `fix/print-legibility-dark` (merged 9a09dfc).** In `@media print` only:
+(1) **swap the six colour tokens on `:root`** to the paper palette — the *same
+set* `.vkc-negative` already uses for a block set on paper — so every
+token-driven surface recolours to dark ink on white **from one place** (the
+codebase's own light-theme mechanism, applied for print); (2) **render buttons
+outlined** (ink text + hairline border, transparent background) so they stay
+legible with or without printed backgrounds, including in the `.vkc-negative`
+context where a filled pill drops out in economy print. Base links already carry
+`text-decoration: underline`, so they stay distinguishable once the amber token
+goes to ink.
+
+**Proven before writing a line**, then re-verified on the built CSS and live:
+the token swap alone took the service page 32→1 (the lone holdout the closing-
+band button, fixed by the outline rule → 0). After merge + deploy: **0 failing
+text elements under print media** on `/en`, `/en/quote`, `/en/glossary`,
+`/en/services/second-shift`, `/fr`, `/fr/soumission` — home 44→0 confirmed on
+**live production** (prod CSS carries `@media print{:root{--vkc-graphite:#4f5560;
+…color-scheme:light}}`). Before/after full-page print screenshots captured
+(`print-before-second-shift.png` / `print-after-second-shift.png`, untracked).
+
+Gates green: typecheck, `eslint src scripts guard` (0), 80 node tests, build,
+render 40/40, guards numbers/fr/claims/staffing/media. CSS only — **Vito's
+scenes/motion lane untouched** (no `content/scenes.json`, no media, no image
+schema, no `home-motion.tsx`). Live root still 307s → `/en`, `/en` + `/fr` 200.
+
+**GOTCHA for the next session.** To test print, use the Playwright MCP's
+`browser_emulate_media({media:'print'})` then scan computed text `color` against
+**white** (economy print drops backgrounds, so light text = invisible on paper) —
+a screenshot under print emulation renders *with* backgrounds and hides the
+economy failure. The measurement, not the screenshot, is authoritative for this
+dimension. `getComputedStyle` **does** reflect print `@media` token swaps here
+(unlike the forced-colors gotcha from pass 7).
+
+### §7 sign-off (pass 8)
+
+**Nothing should be cut.** Eight passes deep; this one found the last obviously
+un-swept surface (print) and shipped a real, contained, in-lane fix. The screen
+experience is exhaustively verified; the print page is now legible in both
+locales. Remaining candidates are Vito's motion lane (the pinned-reel keyboard
+focus, `NEEDS-COLTON.md` §10) or genuine churn. No new Colton item surfaced.
 
 ## Usability pass 7 — verification only (2026-09-29)
 
