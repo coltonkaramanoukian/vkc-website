@@ -1443,6 +1443,25 @@
 }
 
 @media print {
+  /* Screen sets the site on a dark floor (brand/tokens.css). Paper is the
+     opposite. Swap the six colour tokens to the paper palette — the same set
+     .vkc-negative already uses for a block set on paper — so every token-driven
+     surface recolours to dark ink on white from one place. Without this, the
+     light text tokens (ink, graphite, the amber accent) print faint or vanish
+     entirely once a printer drops the dark backgrounds, which is the common
+     "economy" / no-background default: field labels, leads, FAQ questions and
+     inline links all disappeared. */
+  :root {
+    --vkc-floor: #ffffff;
+    --vkc-label: #ffffff;
+    --vkc-ink: #15171a;
+    --vkc-graphite: #4f5560;
+    --vkc-hairline: #c9ccd1;
+    --vkc-qc: #15171a;
+    --vkc-on-qc: #ffffff;
+    color-scheme: light;
+  }
+
   .site-header,
   .site-footer,
   .skip-link,
@@ -1452,7 +1471,19 @@
 
   body {
     background: #fff;
-    color: #000;
+    color: var(--vkc-ink);
+  }
+
+  /* Buttons carry meaning on paper ("Get a quote") but can't lean on their
+     filled background, which drops out in economy print — and the negative
+     band's button is light text on a dark pill. Render every button outlined:
+     ink text and a hairline border on white, legible with or without the
+     background, in both the normal and the .vkc-negative context. */
+  .btn-primary,
+  .btn-secondary {
+    background: transparent !important;
+    color: var(--vkc-ink) !important;
+    border: 1px solid var(--vkc-ink) !important;
   }
 
   a[href^="http"]::after {
