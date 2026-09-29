@@ -21,6 +21,9 @@
   --vkc-dur: 200ms;
   --vkc-dur-slow: 900ms;
   --vkc-header-h: 4rem;
+  /* Where a glossary letter/term lands when jumped to: clear of the header
+     AND the sticky A–Z strip (.glossary-jump), plus a little breathing room. */
+  --vkc-jump-stick: calc(var(--vkc-header-h) + 3.75rem);
   /* The page column's side padding, one value the header's rule can read too. */
   --vkc-wrap-pad: var(--vkc-gutter);
   --vkc-qc-hover: color-mix(in srgb, var(--vkc-qc) 86%, var(--vkc-ink));
@@ -983,6 +986,17 @@
     text-decoration: underline;
     text-decoration-thickness: 2px;
     text-underline-offset: 0.25em;
+  }
+
+  /* On a five-screen page the A–Z stays one click away: the strip sticks
+     under the header while the terms scroll under it. Floor background so
+     nothing shows through; below the header and menu panel (both z-40). The
+     letter and term anchors clear both bars via --vkc-jump-stick. */
+  .glossary-jump {
+    position: sticky;
+    top: calc(var(--vkc-header-h) + 1px);
+    z-index: 30;
+    background: var(--vkc-floor);
   }
 
   /* The day as one bar: your shifts hatched like label stock, VKC's in ink. */

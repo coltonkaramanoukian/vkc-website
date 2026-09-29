@@ -21,7 +21,7 @@ export async function Glossary({ locale, terms, title }: { locale: Locale; terms
 
   return (
     <>
-      <nav aria-label={t("lettersLabel")} className="wrap">
+      <nav aria-label={t("lettersLabel")} className="wrap glossary-jump">
         <ol className="jump-nav">
           {letters.map((letter) => (
             <li key={letter}>
@@ -32,14 +32,14 @@ export async function Glossary({ locale, terms, title }: { locale: Locale; terms
       </nav>
 
       {letters.map((letter) => (
-        <section key={letter} id={letterAnchor(letter)} className="wrap mt-12 scroll-mt-24">
+        <section key={letter} id={letterAnchor(letter)} className="wrap mt-12 scroll-mt-[var(--vkc-jump-stick)]">
           <div className="grid gap-4 md:grid-cols-[minmax(0,1fr)_minmax(0,3fr)] md:gap-10">
             <h2 className="glossary-letter">{letter}</h2>
             <dl className="glossary">
               {entries
                 .filter((entry) => entry.letter === letter)
                 .map((entry) => (
-                  <div key={entry.slug} id={entry.slug} className="glossary-entry scroll-mt-24">
+                  <div key={entry.slug} id={entry.slug} className="glossary-entry scroll-mt-[var(--vkc-jump-stick)]">
                     <dt>{entry.term}</dt>
                     <dd>
                       <Inline text={entry.def} locale={locale} />
