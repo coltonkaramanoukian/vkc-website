@@ -1,6 +1,66 @@
-HANDOFF: 2026-09-29 — `main` holds runs 1–5, the image-ban lift (#27), Vito's cinematic redesign (#30), a usability loop (#32–#34), a second usability pass (#36) and a third, verification-only pass (this one). Production is live on `vkc-website-wz5a.vercel.app`, serving current `main`; root 307s to `/en`, an FR browser to `/fr`, `/v` to `/fr/visite`. The third pass ran a full independent sweep against live production and shipped **no code change**: every usability dimension came back clean, confirming the diminishing-returns close of passes 1–2. The one open usability item (desktop pinned-reel keyboard focus, WCAG 2.4.11) remains in Vito's motion lane, flagged in `NEEDS-COLTON.md` §10, not fixed unseen.
+HANDOFF: 2026-09-29 — `main` holds runs 1–5, the image-ban lift (#27), Vito's cinematic redesign (#30), a usability loop (#32–#34), a second usability pass (#36), a third verification-only pass, and a **fourth pass (#39, #40, this one)**. Production is live on `vkc-website-wz5a.vercel.app`, serving current `main`; root 307s to `/en`, an FR browser to `/fr`, `/v` to `/fr/visite`. Passes 1–3 converged on a clean, diminishing-returns close; pass 4 re-audited independently and shipped two real, in-lane fixes (#39 quote-form contact hint, #40 sticky glossary A–Z). The one open usability item (desktop pinned-reel keyboard focus, WCAG 2.4.11) remains in Vito's motion lane, flagged in `NEEDS-COLTON.md` §10, not fixed unseen.
 
 # Handoff
+
+## Usability pass 4 (2026-09-29)
+
+A fresh session picked up the loop and ran a full independent audit against live
+production (`wz5a`) — metadata/titles/descriptions (38 pages, all unique, all
+200), contrast (measured; nothing within 0.3 of AA on home), mobile at 375 (0
+overflow, header tap targets ≥44px), nav/CTAs, and the quote form. Passes 1–3
+were confirmed correct on every dimension. A cross-page automated sweep of all
+38 URLs also came back clean (no dead links, unnamed controls, duplicate ids,
+heading-level skips, unsafe new-tab links, or missing `alt`), as did breadcrumb
+consistency (every sub-page, correctly absent on home) and per-page quote CTAs
+(7–8 each). **Two genuine in-lane fixes found and shipped:**
+
+- **#40 `usability/glossary-sticky-az` (merged da6ef56).** The glossary
+  (`/glossary`, `/lexique`) is a ~5-screen page whose only cross-navigation is
+  the A–Z jump strip, which was `position: static` — after jumping to a letter
+  near the bottom the strip was stranded far above. Made it sticky under the
+  header (`.glossary-jump`: `top: calc(var(--vkc-header-h) + 1px)`, z-30 below
+  the header/menu at z-40, floor background), and retuned the anchor clearance
+  with a new `--vkc-jump-stick` token (replaces `scroll-mt-24` on the letter
+  sections and term entries) so a jumped-to heading lands below the strip, not
+  under it. Glossary-only; `HomeMotion`'s Lenis anchor scroll is home-only so
+  the native fragment jump here honours the CSS. Verified `check:clicks --only
+  /glossary` (102 clicks, 0 failed, 0 hidden, EN+FR 1280/375) + all four gates
+  + guards. Live: strip sticks (nav top = header bottom = 65px), root still
+  307s `/en`. Vito's lane untouched.
+
+- **#39 `fix/quote-contact-hint` (merged daa5f61).** The full quote form
+  requires at least one of email or phone (server-side `contact` check in
+  `src/lib/quote/validate.ts:91`), but neither field carries a `(required)`
+  marker — correctly, since only one is needed — so a visitor discovered the
+  rule only after a rejected submit, friction on the site's only conversion
+  path. Added a note under the email/phone pair ("Leave a phone number or an
+  email so we can reply."), given an id and wired to **both** inputs via
+  `aria-describedby` (extended the `text()` helper with an optional shared
+  `describedById`). Full mode only; short mode (contact/visit) already uses a
+  single required "Phone or email" field. FR written native
+  ("Laissez un téléphone ou un courriel pour qu'on vous réponde."). Gates green:
+  typecheck, `eslint src scripts guard`, 80 node tests, build, guards
+  fr/numbers/claims/staffing (copy ratio /quote 1.084 < 1.10). Verified on a
+  local `next start` build via Playwright at 1280/375 EN+FR (note renders,
+  `aria-describedby` on both inputs, both stay optional, 0 overflow), note
+  contrast 7.41:1. Verified live after merge: EN + FR notes on production, root
+  still 307s `/en`, key routes all 200. Vito's lane untouched.
+
+**Also checked and confirmed already clean** (measured, not inherited): focus
+visibility — every interactive element takes a `3px solid` amber outline on
+keyboard focus, logical tab order (skip link first); decision support — the home
+chooser (two clicks → a recommended service in an `aria-live` region) plus the
+services hub's `CompareTable` (Second Shift vs Bottleneck); breadcrumbs on every
+sub-page; 7–8 quote CTAs per page.
+
+**Closed at diminishing returns.** Four passes now converge: the fundamentals
+were built right, and passes 1–3 plus this one have swept every usability
+dimension the brief names (nav, CTAs, mobile, load speed, dead/confusing clicks,
+section order, contrast, tap targets, broken links) by independent measurement.
+Pass 4 found and shipped the two remaining real, in-lane gaps (#39, #40); the
+next-nearest items are Vito's visual/motion lane (the pinned-reel keyboard focus,
+`NEEDS-COLTON.md` §10) or would be churn. Further usability change here is not
+warranted without new content or a Vito design change.
 
 ## Usability pass 3 — verification only (2026-09-29)
 
