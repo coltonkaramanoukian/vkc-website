@@ -321,6 +321,39 @@ Built branch-only, verified locally (login → edit contact → save → both
 Nothing was deployed. Code: `src/app/admin/`, `src/app/api/admin/`,
 `src/components/admin/`, `src/lib/admin/`, the `/admin` gate in `src/proxy.ts`.
 
+## 12. The blog / case-studies system (built 2026-10-02)
+
+A public blog and an editor for it, built on the same auth + git-commit-back as
+the content editor (§11). **It turns on with the same two secrets** —
+`ADMIN_PASSWORD` + `ADMIN_SESSION_SECRET` — and publishes the same way (a save
+in production commits to the repo, which deploys). Nothing extra to configure.
+
+- **Write posts** at `/admin` → "Blog & case studies". Each post has a slug, a
+  date, a category and tags, a bilingual title / excerpt / Markdown body, and a
+  draft ↔ published toggle. The editor refuses staffing wording (§4) and claims
+  the site can't make (§1) on save, the same as the content editor.
+- **A draft is private.** It shows only in the editor; it never appears on the
+  public blog or gets a page until you publish it. The site ships with one
+  **example draft** so you can see the shape — rewrite it or delete it.
+- **Where it appears.** Published posts show on `/blog` (FR `/blogue`), each with
+  its own page at `/blog/<slug>`, newest first, with correct metadata, Article +
+  breadcrumb structured data, hreflang and a sitemap entry — all automatic.
+- **Write both languages.** A post renders in a language only when it has a title
+  and body there (an English-only post shows on `/blog`, not `/blogue`). For a
+  public post, fill EN and FR, the way the rest of the site does.
+- **Article cover images are a reserved slot for the imaging run (Vito).** The
+  `coverImage` field exists on every post but is not set from the editor and not
+  rendered yet; wiring article images (and any guard for them) is imaging work,
+  not an agent's. Everything else on a post is yours to write.
+- **One caveat, by design:** article *pages* are dynamic and are not scanned by
+  the build guards (numbers/claims/staffing/fr) the way the fixed pages are — the
+  editor's save-time checks are their gate. The `/blog` index itself is guarded
+  like any other page.
+
+As with §11, **`.env.example` could not be updated by an agent** (this
+environment blocks every `.env*` file); the `ADMIN_*` keys it needs are the same
+ones listed in §11.
+
 ## Things that look like problems and are not
 
 - **Lighthouse best-practices 96 on a local build.** The only failing audit is

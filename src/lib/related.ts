@@ -18,6 +18,7 @@ export const ROUTE_PICTO: Partial<Record<AppPathname, PictogramName>> = {
   "/locations/montreal": "plant",
   "/about": "clipboard",
   "/contact": "phone",
+  "/blog": "clipboard",
   "/glossary": "tag",
   "/quote": "clipboard",
 };

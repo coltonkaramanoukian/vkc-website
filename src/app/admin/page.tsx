@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { LogoutButton } from "@/components/admin/logout-button";
-import { currentContent } from "@/lib/admin/current";
+import { currentArticles, currentContent } from "@/lib/admin/current";
 import { sectionHasContent } from "@/lib/admin/prefill";
 import { SECTIONS } from "@/lib/admin/sections";
 import { persistenceMode } from "@/lib/admin/store";
@@ -19,6 +19,8 @@ export default async function AdminDashboard() {
   const cards = await Promise.all(
     SECTIONS.map(async (section) => ({ section, hasContent: sectionHasContent(section, await currentContent(section)) })),
   );
+  const articles = await currentArticles();
+  const publishedCount = articles.filter((a) => a.status === "published").length;
 
   return (
     <main className="mx-auto max-w-3xl px-4 py-12 sm:py-16">
@@ -49,6 +51,19 @@ export default async function AdminDashboard() {
             </Link>
           </li>
         ))}
+        <li>
+          <Link href="/admin/articles" className="block rounded-2xl border border-hairline bg-label p-5 transition hover:border-qc">
+            <div className="flex items-center justify-between gap-4">
+              <h2 className="text-lg font-semibold text-ink">Blog &amp; case studies</h2>
+              <span className={`font-mono text-xs uppercase tracking-wider ${articles.length > 0 ? "text-qc" : "text-graphite"}`}>
+                {articles.length === 0 ? "None" : `${publishedCount} live · ${articles.length - publishedCount} draft`}
+              </span>
+            </div>
+            <p className="mt-2 text-sm text-graphite">
+              Write, edit and publish posts. Drafts stay private; published posts appear on the blog with their own page and SEO.
+            </p>
+          </Link>
+        </li>
       </ul>
 
       <p className="mt-10 text-xs text-graphite">

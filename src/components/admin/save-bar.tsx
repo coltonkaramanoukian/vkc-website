@@ -24,12 +24,12 @@ export function useSave() {
   const [bannerError, setBannerError] = useState<string | null>(null);
   const [fieldErrors, setFieldErrors] = useState<Map<string, string>>(new Map());
 
-  async function save(payload: { section: string; data: unknown }) {
+  async function save(payload: unknown, endpoint = "/api/admin/save") {
     setStatus("saving");
     setBannerError(null);
     setFieldErrors(new Map());
     try {
-      const response = await fetch("/api/admin/save", {
+      const response = await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),

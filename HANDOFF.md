@@ -212,6 +212,84 @@ environment blocks agents from any `.env*` file; the five keys are documented in
 §11 for Colton to add. Numbers (NC-3) and FR/EN parity (NC-4) are deliberately
 not enforced at save.
 
+## Blog / case-studies system — branch `quality/overhaul` (2026-10-02)
+
+A public blog + an owner editor for it, reusing the content editor's auth +
+git-commit-back + save-time-guard pattern. Local-only, **not merged/deployed**.
+
+### Approach
+
+- **Storage: one top-level `content/articles.json` array.** Top-level on purpose:
+  `guard:numbers` reads `content/*.json` non-recursively, so article dates/numbers
+  land in the allowed set automatically, and a single file bundles for production
+  (no runtime fs-read gap). Edited by rewriting the array (read-modify-write),
+  same store as the content editor.
+- **Public routes.** A **fixed** `/blog` index (`pathnames.ts` → `/blog` /
+  `/blogue`) joins every guard/census/hreflang/sitemap automatically (count
+  40→42, no hardcoded totals). Article pages are **dynamic** `/[locale]/blog/[slug]`
+  — SSG for published slugs, `notFound()` for drafts/unknown/locale-incomplete.
+  next-intl localizes the slug via a `"/blog/[slug]"` pattern added to `pathnames`
+  but **filtered out of `routes`** (templates aren't fetchable pages), so the
+  guards never try to GET a literal `[slug]`.
+- **Dynamic article pages are invisible to the build guards** (only fixed routes
+  are enumerated). That's why the **save-time** staffing (§4) + claims (§1) checks
+  run on every article field — the same matchers the guards use. The `/blog`
+  index IS captured, so its chrome is guard-clean and bilingual (±10%, verified).
+- **SEO.** Per-article `generateMetadata` (title/excerpt → description, canonical,
+  both-locale hreflang only where the post exists, `og:type=article`,
+  `article:published_time`), **Article + BreadcrumbList JSON-LD**, a `Blog`
+  listing on the index, and published articles appended to `sitemap.ts`
+  separately (not via `allUrls()`, which census treats as exact).
+- **Body is Markdown**, parsed to a plain AST (`lib/blog/markdown.ts`) and
+  rendered to React (`markdown-view.tsx`) — **no `dangerouslySetInnerHTML`**, so
+  a body can't inject markup. Subset: `##`/`###`, paragraphs, `-`/`1.` lists,
+  `>` quotes, `**bold**`, `*italic*`, `` `code` ``, `[label](/route)` links
+  (internal links localize; only http(s)/known-internal render as links).
+- **Imaging stays Vito's.** `Article.coverImage` is a reserved null slot, passed
+  through untouched and **not rendered yet** (wiring it + any guard is imaging =
+  Vito's lane). No photos/scenes/media touched.
+
+### Owner side
+
+`/admin` gains a "Blog & case studies" card → `/admin/articles` (list with
+publish/unpublish + edit + "New post") → `/admin/articles/[slug]` editor (slug,
+date, category, tags, status toggle, bilingual title/excerpt/Markdown body, SEO
+overrides, delete). API: `/api/admin/articles/{save,delete,status}`, each with
+the same `requireAdmin` + Origin + rate-limited-login auth, and `save` runs
+`prepareArticle` (validation + §1/§4 guards + canonical shaping + slug
+uniqueness/rename).
+
+### Content stance
+
+Ships with **one clearly-labelled EXAMPLE draft** (`content/articles.json`,
+`status: draft`) so Colton sees the shape; it never renders publicly. No case
+studies, client names or numbers invented.
+
+### Verified end-to-end (Playwright MCP, local)
+
+Signed in → **created a post → set Published → saved** → it rendered on
+`/en/blog` (card) and `/en/blog/<slug>` **and** `/fr/blogue/<slug>` (localized
+slug), with the Markdown rendered (h2, bold, tick-list, internal link localized
+per locale) and the full SEO head present (Article JSON-LD author/publisher →
+`#organization`, BreadcrumbList Home›Blog›title, canonical, fr-CA/en-CA/x-default
+hreflang, `og:type=article`). A draft and an unknown slug both 404 publicly.
+Then the test post was reverted to the example-only seed.
+
+### Gate (all green on the ship state)
+
+typecheck · lint (`src scripts guard e2e`) · **160 unit tests** (+20: Markdown
+parser, article validator/collection ops) · production build · guards
+**fr / numbers / claims / staffing** · **census 42/42** · hreflang (local) ·
+locale-switch · overlap. (hreflang against *production* is red only until deploy,
+the documented pre-ship behaviour for any new route.) Local only — not merged,
+not deployed.
+
+### Flagged for Colton (`NEEDS-COLTON.md` §12)
+
+Same `ADMIN_*` envs turn it on (shared with the content editor). Article cover
+images are a reserved slot for the imaging run. Article pages are not covered by
+the build guards by design — the editor is their gate.
+
 ## Usability pass 11 — fresh independent audit, one finding routed (2026-09-29)
 
 A new session reopened the "full-send" usability loop. Rather than inherit the

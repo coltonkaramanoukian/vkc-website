@@ -58,6 +58,7 @@ export const navGroups: NavGroup[] = [
       { route: "/about", label: "about" },
       { route: "/contact", label: "contact" },
       { route: "/quote", label: "quote" },
+      { route: "/blog", label: "blog" },
       { route: "/glossary", label: "glossary" },
       { route: "/privacy", label: "privacy" },
     ],

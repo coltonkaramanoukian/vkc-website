@@ -25,6 +25,7 @@
       "containers": "Containers",
       "industries": "Industries",
       "contact": "Contact",
+      "blog": "Blog",
       "glossary": "Glossary"
     },
     "groups": {
@@ -189,6 +190,10 @@
     "contact": {
       "title": "Contact VKC Packaging",
       "description": "How to reach VKC Packaging for contract filling, packaging and toll blending in greater Montreal, and what to say to get a useful first answer."
+    },
+    "blog": {
+      "title": "Blog and case studies",
+      "description": "Notes, guides and case studies on contract filling, packaging and toll blending, written by the crew that runs the lines in greater Montreal."
     },
     "glossary": {
       "title": "Glossary of filling and packaging terms",
@@ -1205,6 +1210,16 @@
         "If the answer depends on your floor, we propose a date to walk through it together."
       ],
       "quoteNote": "Ready to talk numbers? The longer form asks about the product, its container and the run size: [Get a quote](/quote)."
+    },
+    "blog": {
+      "eyebrow": "Blog",
+      "h1": "Notes from the plant floor",
+      "lead": "What we run, read and learn about contract filling and packaging. New posts land here; case studies show how a finished production run actually went.",
+      "emptyTitle": "No posts yet",
+      "emptyBody": "The first article is on its way. Come back soon, or tell us what you would like us to write about.",
+      "readMore": "Read the post",
+      "allPosts": "All posts",
+      "published": "Published"
     },
     "glossary": {
       "eyebrow": "Glossary",

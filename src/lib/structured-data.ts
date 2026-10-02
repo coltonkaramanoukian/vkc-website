@@ -102,6 +102,37 @@ export function buildDefinedTermSetJsonLd(facts: { name: string; url: string; te
   };
 }
 
+export interface ArticleFacts {
+  headline: string;
+  description: string;
+  url: string;
+  /** YYYY-MM-DD. */
+  datePublished: string;
+  /** "fr-CA" | "en-CA". */
+  inLanguage: string;
+  /** The Organization @id (single-company site: VKC authors and publishes). */
+  organizationId: string;
+  /** Absolute image URL, when the post has a cover. */
+  image?: string | null;
+}
+
+/** schema.org Article for a blog post. Every value is copy the page renders (§1). */
+export function buildArticleJsonLd(facts: ArticleFacts): Record<string, unknown> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: facts.headline,
+    description: facts.description,
+    url: facts.url,
+    mainEntityOfPage: facts.url,
+    datePublished: facts.datePublished,
+    inLanguage: facts.inLanguage,
+    author: { "@id": facts.organizationId },
+    publisher: { "@id": facts.organizationId },
+    ...(facts.image ? { image: facts.image } : {}),
+  };
+}
+
 /** JSON for a <script type="application/ld+json">: `<` escaped so a value can never close the tag. */
 export function serializeJsonLd(data: Record<string, unknown>): string {
   return JSON.stringify(data).replace(/</g, "\\u003c");

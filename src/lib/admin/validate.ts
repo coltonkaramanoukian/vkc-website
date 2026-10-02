@@ -46,7 +46,7 @@ function isDenial(excerpt: string, term: string, locale: GuardLocale): boolean {
 }
 
 /** Every constitution problem in one human-written string, for the given locales. */
-function constitutionProblems(text: string, locales: GuardLocale[]): string[] {
+export function constitutionProblems(text: string, locales: GuardLocale[]): string[] {
   const problems: string[] = [];
   for (const locale of locales) {
     for (const hit of findStaffingTerms(text, STAFFING, locale)) {
@@ -61,13 +61,13 @@ function constitutionProblems(text: string, locales: GuardLocale[]): string[] {
   return Array.from(new Set(problems));
 }
 
-function coerceString(value: unknown): string | null {
+export function coerceString(value: unknown): string | null {
   if (typeof value !== "string") return null;
   const trimmed = value.trim();
   return trimmed === "" ? null : trimmed;
 }
 
-function coerceLocalized(value: unknown): { en: string | null; fr: string | null } {
+export function coerceLocalized(value: unknown): { en: string | null; fr: string | null } {
   const object = value && typeof value === "object" ? (value as Record<string, unknown>) : {};
   return { en: coerceString(object.en), fr: coerceString(object.fr) };
 }

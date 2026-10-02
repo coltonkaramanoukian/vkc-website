@@ -61,6 +61,11 @@ export const pathnames = {
   },
   "/about": { fr: "/a-propos", en: "/about" },
   "/contact": { fr: "/nous-joindre", en: "/contact" },
+  "/blog": { fr: "/blogue", en: "/blog" },
+  // Dynamic article pattern: tells next-intl to localize /blogue/<slug> ↔
+  // /blog/<slug>. Excluded from `routes` below (it is a template, not a page),
+  // so the guards/sitemap/census never try to fetch a literal "[slug]" URL.
+  "/blog/[slug]": { fr: "/blogue/[slug]", en: "/blog/[slug]" },
   "/glossary": { fr: "/lexique", en: "/glossary" },
   "/quote": { fr: "/soumission", en: "/quote" },
   "/privacy": { fr: "/confidentialite", en: "/privacy" },
@@ -68,7 +73,10 @@ export const pathnames = {
 
 export type AppPathname = keyof typeof pathnames;
 
-export const routes = Object.keys(pathnames) as AppPathname[];
+// Real pages only: dynamic templates (keys with "[") are for next-intl's
+// localization, not for enumeration — the scripts, guards, sitemap and census
+// iterate `routes`, and a literal "[slug]" path is not a fetchable page.
+export const routes = Object.keys(pathnames).filter((route) => !route.includes("[")) as AppPathname[];
 
 /** Routes that render but are excluded from the sitemap and carry noindex. */
 export const noindexRoutes: readonly AppPathname[] = ["/visit"];

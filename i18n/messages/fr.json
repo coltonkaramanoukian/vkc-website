@@ -25,6 +25,7 @@
       "containers": "Contenants",
       "industries": "Secteurs",
       "contact": "Nous joindre",
+      "blog": "Blogue",
       "glossary": "Lexique"
     },
     "groups": {
@@ -189,6 +190,10 @@
     "contact": {
       "title": "Joindre VKC Packaging",
       "description": "Comment joindre VKC Packaging pour du remplissage, du conditionnement ou du mélange à façon dans le Grand Montréal, et quoi dire pour obtenir une première réponse utile."
+    },
+    "blog": {
+      "title": "Blogue et études de cas",
+      "description": "Billets, guides et études de cas sur le remplissage, le conditionnement et le mélange à façon, par l’équipe qui fait tourner les lignes dans le Grand Montréal."
     },
     "glossary": {
       "title": "Lexique du remplissage et du conditionnement",
@@ -1205,6 +1210,16 @@
         "Si la réponse dépend de votre plancher, on propose une date pour en faire le tour ensemble."
       ],
       "quoteNote": "Prêt à parler chiffres? Le formulaire long demande le produit, son contenant et le volume : [Obtenir une soumission](/quote)."
+    },
+    "blog": {
+      "eyebrow": "Blogue",
+      "h1": "Notes de l’atelier",
+      "lead": "Ce que nous produisons et apprenons sur le remplissage et le conditionnement. Les nouveaux billets arrivent ici; les études de cas montrent une production finie.",
+      "emptyTitle": "Aucun billet",
+      "emptyBody": "Le premier article s’en vient. Revenez bientôt, ou proposez-nous un sujet à traiter.",
+      "readMore": "Lire le billet",
+      "allPosts": "Tous les billets",
+      "published": "Publié"
     },
     "glossary": {
       "eyebrow": "Lexique",

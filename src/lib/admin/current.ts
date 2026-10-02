@@ -3,9 +3,10 @@
 // even before a module-graph refresh. In production it is the bundled content
 // (what the live site renders until the next deploy). Node-only.
 
+import { allArticles, type Article } from "../blog/articles.ts";
 import { capabilities, clientsForDisplay, contact } from "../content.ts";
 import type { Section } from "./sections.ts";
-import { persistenceMode, readSectionFromDisk } from "./store.ts";
+import { persistenceMode, readCollectionCurrent, readSectionFromDisk } from "./store.ts";
 
 function bundled(section: Section): unknown {
   switch (section.id) {
@@ -27,4 +28,14 @@ export async function currentContent(section: Section): Promise<unknown> {
     }
   }
   return bundled(section);
+}
+
+/** The current article collection for the editor: fresh from the store, else the bundle. */
+export async function currentArticles(): Promise<Article[]> {
+  if (persistenceMode() === "none") return [...allArticles];
+  try {
+    return (await readCollectionCurrent("articles")) as Article[];
+  } catch {
+    return [...allArticles];
+  }
 }
