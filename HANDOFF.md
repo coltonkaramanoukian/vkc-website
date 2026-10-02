@@ -371,6 +371,88 @@ Same `ADMIN_*` envs turn the editor on; the lead needs the §2 mail keys. Set re
 rates and turn off the placeholder flag. Add the §1 carve-out before a future run
 reads §1 and removes the estimator.
 
+## Testimonials / social proof — branch `quality/overhaul` (2026-10-02)
+
+An owner-editable testimonials system: a public home-page section ("What clients
+say" / "Ce que disent les clients") fed by a new top-level
+`content/testimonials.json`, edited at `/admin` → "Testimonials". Each entry is a
+bilingual quote, an author, an optional company/role/date, and an optional 1–5
+rating. Same auth + git-commit-back + save-time guards as the editor (§ above).
+
+### What it does
+
+- **`src/lib/testimonials/testimonials.ts`** — the domain layer.
+  `publishedTestimonials(all, locale)` returns only entries that are `published`,
+  have a non-blank author, and carry a quote in **both** languages (a one-language
+  role is dropped but the entry kept; a non-positive/absent rating normalises to
+  null). `aggregateRating(list)` averages the real ratings or returns null — no
+  ratings, no aggregate.
+- **`src/components/testimonials.tsx`** — an async server component. Renders
+  `<section aria-labelledby="testimonials-heading">` with a `<figure>` per quote
+  (`blockquote` + `figcaption`), an accessible star rating (decorative glyphs
+  `aria-hidden`, a localised `aria-label`), and a `Review` + `AggregateRating`
+  JSON-LD block. Returns **null** when nothing is published, so the empty state
+  renders nothing at all. Added to the home page after the client-stories block.
+- **`src/lib/structured-data.ts`** — new `reviewNode` + `buildTestimonialsJsonLd`:
+  one schema.org `Review` per published testimonial (author `Person`, `worksFor`
+  only when a company is set, `itemReviewed` → the Organization `@id`,
+  `reviewRating` **only when a rating exists**), and an `AggregateRating` merged
+  onto the Organization only when real ratings are present.
+- **Admin:** `/admin/testimonials` (`src/components/admin/testimonials-form.tsx`,
+  a single-page array editor), saving through `src/app/api/admin/testimonials/`
+  → `prepareTestimonials` (`src/lib/admin/testimonials.ts`): drops empty rows,
+  auto-assigns + dedupes ids, coerces/validates rating and date, runs the §1/§4
+  `constitutionProblems` on every text field, and requires author + both-language
+  quote before an entry may be published. Dashboard card added to `/admin`.
+
+### Calls made (flagged to Colton, `NEEDS-COLTON.md` §14)
+
+- **Ships empty.** `content/testimonials.json` holds ONE unpublished, un-named,
+  un-rated example; the live site shows nothing until Colton publishes.
+- **§1 carve-out recommended.** A published testimonial names a company, which
+  the letter of §1 ("client names render only from clients.json approved
+  entries") does not cover. Testimonials carry attribution in their own file,
+  gated by `published` + the save-time §1/§4 checks. Same shape as the Higgsfield
+  and estimator carve-outs — suggested wording is in §14.
+- **Two social-proof systems now coexist** (this + §9's client-stories). Both
+  ship empty, so nothing collides yet; §14 recommends how to split them (quotes +
+  ratings here, the approved client list + case studies in clients.json). Colton's
+  product call.
+
+### Why it does not trip the guards
+
+The section is server-rendered, so published testimonials **are** scanned by the
+build guards (unlike the client-side estimator). It stays green because: numbers
+in `testimonials.json` auto-allow (NC-3 reads `content/*.json`); a quote that
+names "Second Shift" is harmless on the home page, where NC-2 checks the whole
+`main` text and the four facts are already present there; and the claims/staffing
+guards are a real build-time backstop behind the save-time refusal (a forbidden
+claim or staffing term in a published quote goes red — proven by negative control,
+below).
+
+### Adversarial review before commit
+
+Ran a 5-dimension review (constitution, correctness, security, a11y, consistency)
+with 3-skeptic refutation per finding: 14 raised, 11 refuted (including two false
+§3-parity alarms, the client-stories "overlap" as a code defect, and the
+deliberate absence of component tests). **3 survivors, all one a11y issue** — the
+admin form's non-localized inputs (author/company/date/rating/id) and the Remove
+button lacked accessible names. Fixed: `aria-label` on each input (matching the
+file's localized-input convention) + "Remove this testimonial". The same
+span-only pattern exists in the pricing/articles admin forms (pre-existing, behind
+auth, not a public route) — routed to a separate task, not this commit.
+
+### Gate (all green on the ship state)
+
+typecheck · lint (`src scripts guard`) · **203 unit tests** (+21: published
+filter, aggregate math, review/aggregate JSON-LD, prepare-validator §1/§3/§4
+refusals, id dedupe, rating range, date) · production build (44 routes) · render
+44/44 · guards **numbers / staffing (60 SS surfaces) / fr / claims / media** ·
+**census 44/44** (testimonials is a home section, not a new route) · locale-switch
+22. Playwright end-to-end: admin → publish a rated entry → save → the home section
+renders the quote, accessible stars, and `Review` + `AggregateRating` JSON-LD in
+both locales; unpublished → nothing renders. Local only — not merged, not deployed.
+
 ## Usability pass 11 — fresh independent audit, one finding routed (2026-09-29)
 
 A new session reopened the "full-send" usability loop. Rather than inherit the

@@ -6,6 +6,7 @@
 import { allArticles, type Article } from "../blog/articles.ts";
 import { capabilities, clientsForDisplay, contact } from "../content.ts";
 import { coercePricing, pricing, type Pricing } from "../estimator/pricing.ts";
+import { allTestimonials, type Testimonial } from "../testimonials/testimonials.ts";
 import type { Section } from "./sections.ts";
 import { persistenceMode, readCollectionCurrent, readDocumentCurrent, readSectionFromDisk } from "./store.ts";
 
@@ -48,5 +49,15 @@ export async function currentPricing(): Promise<Pricing> {
     return coercePricing(await readDocumentCurrent("pricing"));
   } catch {
     return pricing;
+  }
+}
+
+/** The current testimonials collection for the editor: fresh from the store, else the bundle. */
+export async function currentTestimonials(): Promise<Testimonial[]> {
+  if (persistenceMode() === "none") return [...allTestimonials];
+  try {
+    return (await readCollectionCurrent("testimonials")) as Testimonial[];
+  } catch {
+    return [...allTestimonials];
   }
 }

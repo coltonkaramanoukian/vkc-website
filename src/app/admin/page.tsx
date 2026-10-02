@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { LogoutButton } from "@/components/admin/logout-button";
-import { currentArticles, currentContent, currentPricing } from "@/lib/admin/current";
+import { currentArticles, currentContent, currentPricing, currentTestimonials } from "@/lib/admin/current";
 import { sectionHasContent } from "@/lib/admin/prefill";
 import { SECTIONS } from "@/lib/admin/sections";
 import { persistenceMode } from "@/lib/admin/store";
@@ -22,6 +22,8 @@ export default async function AdminDashboard() {
   const articles = await currentArticles();
   const publishedCount = articles.filter((a) => a.status === "published").length;
   const pricing = await currentPricing();
+  const testimonials = await currentTestimonials();
+  const publishedTestimonialCount = testimonials.filter((t) => t.published).length;
 
   return (
     <main className="mx-auto max-w-3xl px-4 py-12 sm:py-16">
@@ -75,6 +77,19 @@ export default async function AdminDashboard() {
             </div>
             <p className="mt-2 text-sm text-graphite">
               The rates behind the public estimator at /estimate. Shown only as a ballpark range, never a fixed price.
+            </p>
+          </Link>
+        </li>
+        <li>
+          <Link href="/admin/testimonials" className="block rounded-2xl border border-hairline bg-label p-5 transition hover:border-qc">
+            <div className="flex items-center justify-between gap-4">
+              <h2 className="text-lg font-semibold text-ink">Testimonials</h2>
+              <span className={`font-mono text-xs uppercase tracking-wider ${publishedTestimonialCount > 0 ? "text-qc" : "text-graphite"}`}>
+                {testimonials.length === 0 ? "None" : `${publishedTestimonialCount} live · ${testimonials.length - publishedTestimonialCount} draft`}
+              </span>
+            </div>
+            <p className="mt-2 text-sm text-graphite">
+              Customer quotes for the home-page social-proof section. Published only, with permission; no invented names or ratings.
             </p>
           </Link>
         </li>

@@ -59,6 +59,8 @@
     },
     "clientsHeading": "Who we work for",
     "storiesHeading": "In their words",
+    "testimonialsHeading": "What clients say",
+    "testimonialRating": "Rated {rating} out of five",
     "ctaBand": {
       "heading": "Tell us what is backing up.",
       "body": "A product, a container, a rough run size and a date are enough to start."

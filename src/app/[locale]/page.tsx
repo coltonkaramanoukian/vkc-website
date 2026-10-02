@@ -13,6 +13,7 @@ import { PhotoRow } from "@/components/photo";
 import { RelatedPages } from "@/components/related-pages";
 import { Scene, SceneGalleries } from "@/components/scene";
 import { ServiceChooserSection } from "@/components/service-chooser-section";
+import { Testimonials } from "@/components/testimonials";
 import { containerFamilies, serviceNames, services, site, tagline, taglineOption } from "@/lib/content";
 import { getCopy } from "@/lib/i18n";
 import { sceneForRoute, sceneVisible, type SceneItem } from "@/lib/scenes";
@@ -315,6 +316,7 @@ export default async function HomePage({ params }: Props) {
       <Faq locale={locale} heading={t("home.faq.heading")} items={faq} />
 
       <ClientStories locale={locale} heading={t("common.storiesHeading")} />
+      <Testimonials locale={locale} heading={t("common.testimonialsHeading")} />
       <ClientList heading={t("common.clientsHeading")} />
 
       {/* Where this leads next: Montreal, About, Contact, the end of the site's order. */}

@@ -433,6 +433,90 @@ Code: `src/app/[locale]/estimate/`, `src/components/estimator/`,
 `src/lib/estimator/`, `src/app/admin/pricing/`, `src/app/api/admin/pricing/`,
 `src/lib/admin/pricing.ts`, `content/pricing.json`.
 
+## 14. Owner-editable testimonials / social proof (built 2026-10-02)
+
+A testimonials section on the home page ("What clients say" / "Ce que disent
+les clients"), fed by a new owner-editable file, `content/testimonials.json`,
+edited at `/admin` → "Testimonials". Each entry is a quote in both languages,
+an author name, an optional company and role, an optional date, and an optional
+1–5 rating. It runs on the same auth + git-commit-back + save-time guards as
+§11/§12/§13 — nothing extra to turn on beyond the §11 secrets (`ADMIN_PASSWORD`,
+`ADMIN_SESSION_SECRET`), and no new backend.
+
+**It ships empty.** The file holds ONE clearly-labelled example that is
+**unpublished**, with no real name and no rating, so the live site shows
+**nothing** until you publish something. A published entry needs a quote in both
+languages and an author; anything short of that renders nothing.
+
+**When it has a real rating, it earns real stars.** A published entry with a
+rating shows star icons (with a screen-reader label) and emits schema.org
+`Review` + `AggregateRating` structured data pointing at the organization. Leave
+the rating blank and none of that appears — there are **no invented stars and no
+fake aggregate**. The save screen refuses a forbidden claim or a staffing term
+inside a quote (the same §1/§4 checks the rest of `/admin` uses), and the
+build-time guards scan published testimonials too, so a defect is caught in two
+places.
+
+### The permission standard (same as a client name)
+
+A testimonial names a real person and a real company, so it is held to the same
+standard as a client logo under §1: **add one only with that person's
+permission.** The admin screen says so; the example entry says so. No agent will
+ever write a real quote or name here — that is yours, with their written yes.
+
+### Two calls I made that are yours to confirm
+
+1. **A published testimonial names a company, and §1 says client names render
+   only from `content/clients.json` approved entries.** This is a deliberate new
+   carve-out: testimonials carry their attribution in `content/testimonials.json`
+   instead, gated by the "published" flag and the same save-time §1/§4 checks.
+   No guard forbids it (the claims/number guards care about invented *facts*, not
+   a named customer), and it ships safe because nothing is published. But the
+   *letter* of §1 and a testimonial naming a company disagree, and a future run
+   reading §1 could pull the section out. **Recommended: add a dated carve-out to
+   §1**, in the same shape as the Higgsfield (2026-09-27) and estimator
+   (§13) amendments. Suggested wording:
+
+   > *A customer testimonial — a quote with the named customer's permission,
+   > stored in `content/testimonials.json` and shown only while `published` —
+   > may name that customer and carry a real rating (Colton, 2026-10-02). It
+   > invents no rating and no aggregate; an unrated testimonial shows no stars.*
+
+   Until you add it, the section is defensible (it ships empty, double-gated, and
+   permission-bound) but unprotected from a later cleanup.
+
+2. **There are now TWO social-proof systems, and you should decide whether you
+   want both.** §9's "In their words" (`content/clients.json`, rendered by
+   `src/components/client-stories.tsx`) already shows approved-client quotes and
+   case studies on home/contact/visit. This new section (`testimonials.json`,
+   `src/components/testimonials.tsx`) adds standalone quotes with ratings and
+   structured data. Both ship empty today, so nothing collides on the live site
+   yet — but once you fill them you could end up with two quote blocks on the
+   home page. My recommendation, for when you populate them: use
+   **`testimonials.json`** for short named quotes (and any you want to carry a
+   star rating / rich result), and keep **`clients.json`** for the approved
+   client *list* and longer case studies. If you only want one, say which and a
+   run can retire the other cleanly. This is a product call, not a bug.
+
+### How to use it
+
+Go to `/admin` → "Testimonials". Rewrite the example with a real customer's
+words (both languages), add their name, optionally company/role/date, set a
+rating only if it is a real one, tick **Published**, Save. To hide one without
+deleting it, untick Published. As with §11–§13, **`.env.example` could not be
+updated by an agent**; the secrets are the ones already listed there.
+
+Built branch-only, verified locally end-to-end (admin → publish a rated entry →
+save writes `content/testimonials.json` → the home section renders the quote,
+accessible stars, and `Review` + `AggregateRating` JSON-LD in both locales;
+unpublished → the section renders nothing). All guards green at 44 pages; the
+page census is unchanged (testimonials is a home section, not a new route).
+Nothing deployed. Code: `src/components/testimonials.tsx`,
+`src/lib/testimonials/`, `src/app/admin/testimonials/`,
+`src/app/api/admin/testimonials/`, `src/lib/admin/testimonials.ts`, the added
+`Review`/`AggregateRating` builders in `src/lib/structured-data.ts`, and
+`content/testimonials.json`.
+
 ## Things that look like problems and are not
 
 - **Lighthouse best-practices 96 on a local build.** The only failing audit is
