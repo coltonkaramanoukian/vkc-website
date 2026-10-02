@@ -84,6 +84,59 @@ Local only. **Not merged, not deployed, no Vercel build triggered.** One branch
 (`quality/overhaul`), pushed once. Screens captured before/after via the
 Playwright MCP against `next start -p 3100`.
 
+### Perf / SEO / tests deep-dive (2026-10-02, same branch)
+
+A second pass on `quality/overhaul`, local-only, across three axes Colton named.
+
+**1. Performance — measured, healthy, no non-Vito win.** Core Web Vitals on the
+production build (via the Playwright MCP, localhost so LCP is best-case):
+**LCP ~136 ms, CLS 0, 0 ms long tasks, TTFB ~16 ms.** CLS 0 and zero long tasks
+are network-independent and genuinely good. Why nothing to change:
+- **Motion is already deferred.** `home-motion.tsx` dynamic-imports GSAP, GSAP
+  ScrollTrigger and Lenis *after first paint* (inside `useEffect`), gated on
+  `prefers-reduced-motion` and failing silently — none of it is in the first-load
+  bundle, nothing blocks the main thread on load.
+- **Fonts are optimal.** `next/font/local`, self-hosted **woff2**, latin subset
+  with pinned axes, `display: swap`, explicit fallback stacks → `next/font`
+  size-adjust metrics, which is why CLS is 0.
+- **First-load JS ~154 kB gzip**, near the floor for App Router + React 19 +
+  next-intl; near-identical across pages, so routes are split and the shared
+  chunk is framework, not app code. No safe reduction without touching Vito's
+  motion. **Flagged, not changed.**
+
+**2. SEO / structured-data — one factual gap closed.** Added a **`WebSite`**
+JSON-LD node to the global `@graph` (bilingual `inLanguage`, `publisher` → the
+Organization). Verified live on `/en`: the graph now carries Organization (with
+the `logo` added earlier this branch), WebSite, LocalBusiness, plus the page's
+FAQPage. Everything else was already right and was confirmed, not rebuilt:
+`metadataBase`, the `%s | VKC Packaging` title template, full OpenGraph +
+Twitter `summary_large_image`, canonical + hreflang (`fr-CA`/`en-CA`/`x-default`),
+sitemap with per-URL language alternates (and correctly **no** fake `lastmod`),
+robots + sitemap pointer, and the existing Service / BreadcrumbList /
+DefinedTermSet / ContactPage / Organization / LocalBusiness builders. No invented
+facts — all scaffolding.
+
+**3. Test coverage — +22 unit tests and a new E2E suite.**
+- **Unit (`node --test`, now 102 passing, was 80):** `negotiateLocale` (the /v
+  door's Accept-Language logic — q-weight, fallback, case, refusals),
+  `nav.ts` (`groupOf` / `navLabelKey` / `pageKeyFor` + structure invariants: the
+  primary nav can't point off-site, no page listed twice, Regions stays out of
+  the header), and `resolveInlineHref` (the dead-link guard for copy links).
+  (`og-keys` was left untested — its bare JSON import can't load under
+  `node --test` without touching production source, not worth the build risk.)
+- **E2E (`@playwright/test`, already a devDep — `npm run test:e2e`, 10 passing):**
+  `playwright.config.ts` + `e2e/` cover the four real flows — desktop primary-nav
+  + phone menu navigation, locale switch EN↔FR including a translated slug
+  (`/en/quote` → `/fr/soumission`), contact-form server-side validation (empty
+  submit → `aria-invalid` + the alert, stays on page), and the `/v` QR door (307
+  to `/en/visit` / `/fr/visite`, and `de` → French fallback). Config reuses a
+  running server or builds + starts one; artifacts are git-ignored.
+
+**Verification (all green):** typecheck, lint (`src scripts guard e2e`), 102 unit
+tests, 10 E2E, production build, axe (0 violations), and the content guards
+(numbers / claims / staffing / fr / overlap / hreflang / locale-switch). Local
+only — not merged, not deployed.
+
 ## Usability pass 11 — fresh independent audit, one finding routed (2026-09-29)
 
 A new session reopened the "full-send" usability loop. Rather than inherit the
