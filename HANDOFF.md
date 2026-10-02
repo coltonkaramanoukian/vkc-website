@@ -2,6 +2,88 @@ HANDOFF: 2026-09-29 — `main` holds runs 1–5, the image-ban lift (#27), Vito'
 
 # Handoff
 
+## Quality / UX overhaul — branch `quality/overhaul` (2026-10-02)
+
+A new session was asked for a deep, continuous quality + UX overhaul of
+everything **non-imaging** (copy, layout, components, responsiveness, a11y,
+performance, i18n, nav, forms, SEO), on **one branch**, verified **locally**
+(no Vercel/Actions quota: `next build` + `next start`, driven through the
+Playwright MCP at 390/1280, EN + FR), held for **one** merge + deploy Colton
+runs. Vito's imaging lane (image assets, `content/scenes.json`, the image
+schema, `home-motion.tsx` motion, Vito's branches) was left untouched.
+
+**Branch note.** `quality/overhaul` is cut from `docs/usability-pass-11`, so it
+*contains* pass 11's docs (PR #51). Merging this one branch supersedes #51;
+#51 can be closed as included, or merged first (it is an ancestor — no
+conflict either way).
+
+### The honest finding: the site is already in excellent shape
+
+A full fresh audit (not inherited from the pass-1–11 notes) found every
+objective gate **green** on current `main`'s code:
+
+- **a11y:** 80 axe scans (40 URLs × 2 widths) — 3,659 rule passes, **0
+  violations** (WCAG 2.2 AA + best-practice).
+- **Code:** typecheck ✓, scoped lint (`src scripts guard`) ✓, **80/80 tests** ✓,
+  production build ✓.
+- **i18n:** FR/EN key parity ✓, FR length within ±10% every page ✓, 120 hreflang
+  alternates resolve ✓, 20 locale-switch round-trips ✓, `/v` door defaults FR ✓.
+- **Content guards:** numbers ✓, claims ✓, staffing (four Second Shift facts) ✓,
+  copy-overlap ✓.
+- **Responsive:** 0 horizontal overflow at 390px across the pages measured; the
+  compare table stacks; empty states (footer, DemoVideo, scenes) render nothing
+  rather than voids.
+- **Copy:** genuinely strong, bilingual, no filler. **First-load JS** ~154 kB
+  gzip (the bulk is GSAP/Lenis motion — Vito's lane).
+
+So most *perceived* roughness is **pending content** (Colton's lane) and
+**imagery** (Vito's lane), not code — see "What's actually rough" below.
+
+### Shipped on this branch (two real, in-lane fixes)
+
+1. **Mobile home: the fixed "Get a quote" action bar overlapped the hero's own
+   "Which one fits your plant?" button by 34px** (two-thirds of it, hard to tap
+   at first view). The hero is full-height and bottom-aligned, so its CTAs sat
+   exactly where the fixed bar is; axe can't see fixed-overlay occlusion, so the
+   eleven prior passes missed it. Fixed with a `--vkc-action-bar-h` token (reused
+   by `.action-bar-spacer`) and a `max-width: 639px` bottom-padding on
+   `.cine-hero-inner` that lifts the hero foot clear of the bar. Desktop is
+   provably untouched (bar is `display:none` ≥640px; measured hero padding
+   unchanged at 1280). After: both CTAs sit 38–98px above the bar, neither
+   covered. `globals.css` only — no Scene/media/motion touched.
+2. **SEO: Organization JSON-LD had no `logo`.** Added `logo: {baseUrl}/icon.svg`
+   (the brand mark the manifest already ships; schema.org-valid, not a claim) so
+   search has a logo for the Organization entity. `src/components/json-ld.tsx`.
+
+Both re-verified green after the change: production build, a11y (0 violations),
+all guards, typecheck, lint, 80 tests.
+
+### Taste calls (flagged, not decided — no AskUserQuestion per brief)
+
+- **The mobile action bar is always-on** and duplicates the hero CTA. Many sites
+  reveal the sticky CTA only after you scroll past the hero. That needs client JS
+  + touches the shared `action-bar.tsx`, and "always reachable" is a valid
+  choice — so it is Colton's call, not shipped.
+- **The dark cinematic theme** is image-heavy and can read as murky where the
+  imagery is still placeholder-ish. That is Vito's design lane.
+
+### What's actually "rough" — and whose lane it is
+
+- **`content/contact.json` is all null** → no phone / email / address / hours
+  anywhere (footer, contact page, action bar). For a B2B site, no visible way to
+  reach VKC besides the form is the biggest real gap. **Colton's lane** (can't
+  invent facts, §1); the empty state already renders gracefully.
+- `content/capabilities.json` null → no spec numbers · `content/clients.json`
+  `[]` → no social proof · `content/media.json` demo null → no demo video.
+  **Colton's / the video run's lanes.**
+- Final imagery (dark Higgsfield stills/videos) and motion — **Vito's lane.**
+
+### Verification & deploy posture
+
+Local only. **Not merged, not deployed, no Vercel build triggered.** One branch
+(`quality/overhaul`), pushed once. Screens captured before/after via the
+Playwright MCP against `next start -p 3100`.
+
 ## Usability pass 11 — fresh independent audit, one finding routed (2026-09-29)
 
 A new session reopened the "full-send" usability loop. Rather than inherit the

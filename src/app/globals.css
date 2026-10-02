@@ -21,6 +21,9 @@
   --vkc-dur: 200ms;
   --vkc-dur-slow: 900ms;
   --vkc-header-h: 4rem;
+  /* The phone's fixed "Get a quote" bar (.action-bar); one value its spacer,
+     and anything that must clear it, can read. Hidden from 640px up. */
+  --vkc-action-bar-h: 4.5rem;
   /* Where a glossary letter/term lands when jumped to: clear of the header
      AND the sticky A–Z strip (.glossary-jump), plus a little breathing room. */
   --vkc-jump-stick: calc(var(--vkc-header-h) + 3.75rem);
@@ -1192,7 +1195,7 @@
   }
 
   .action-bar-spacer {
-    height: calc(4.5rem + env(safe-area-inset-bottom, 0px));
+    height: calc(var(--vkc-action-bar-h) + env(safe-area-inset-bottom, 0px));
   }
 
   @media (min-width: 640px) {
@@ -1710,6 +1713,16 @@
 
   .cine-hero-foot .lead {
     color: color-mix(in srgb, var(--vkc-ink) 88%, transparent);
+  }
+
+  /* The hero is full-height and bottom-aligned, so its CTAs sit at the viewport
+     floor — exactly where the phone's fixed "Get a quote" bar is. Below 640px,
+     lift the hero's foot clear of that bar so the secondary CTA stays tappable
+     (the bar is gone from 640px up, so desktop padding is untouched). */
+  @media (max-width: 639px) {
+    .cine-hero-inner {
+      padding-bottom: calc(clamp(2.5rem, 5vw, 5rem) + var(--vkc-action-bar-h) + env(safe-area-inset-bottom, 0px));
+    }
   }
 
   /* ---- Home: the container marquee ------------------------------------- */

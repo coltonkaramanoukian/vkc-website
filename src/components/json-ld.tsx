@@ -46,6 +46,9 @@ export function buildJsonLd(): Record<string, unknown> {
         name: site.brandName,
         legalName: site.legalName,
         url,
+        // The brand mark the manifest already ships; gives search a logo to
+        // show. Not a claim, just the icon that is already on the site.
+        logo: `${url}/icon.svg`,
         ...contactFields,
       },
       business,
