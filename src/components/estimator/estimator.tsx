@@ -8,7 +8,7 @@ import {
   serviceById,
   type Pricing,
 } from "@/lib/estimator/pricing";
-import { buildLeadSummary, formatRange } from "@/lib/estimator/summary";
+import { formatRange } from "@/lib/estimator/summary";
 import type { Locale } from "@/i18n/pathnames";
 
 export type EstimatorCopy = Record<string, string>;
@@ -109,25 +109,11 @@ export function Estimator({ locale, pricing, copy, privacyHref, phone }: Props) 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setStatus("sending");
-    const summary = buildLeadSummary({
-      config: pricing,
-      serviceId,
-      quantity: quantityNumber,
-      optionIds,
-      result,
-      locale,
-      labels: {
-        heading: copy.summaryTitle,
-        service: copy.stepService,
-        amount: copy.stepQuantity,
-        addons: copy.stepOptions,
-        range: copy.resultRangeLabel,
-        placeholder: copy.placeholderTag,
-      },
-      notes,
-    });
     const service = serviceById(pricing, serviceId);
     const unit = service ? pricingLabel(service.unitLabel, locale) : "";
+    // The structured estimate carries a stable, non-localized unit (VCM stores
+    // it machine-side); the human `units` string below stays localized.
+    const unitCanonical = service ? pricingLabel(service.unitLabel, "en") : "";
     const body = {
       source: "quote",
       locale,
@@ -136,7 +122,24 @@ export function Estimator({ locale, pricing, copy, privacyHref, phone }: Props) 
       contact,
       service: quoteServiceFor(pricing, serviceId),
       units: `${quantityNumber}${unit ? ` ${unit}` : ""}`,
-      notes: summary,
+      // `notes` carries the customer's own words only; the estimate rides as
+      // structured fields so the server can forward it and rebuild the summary.
+      notes,
+      ...(result.ok
+        ? {
+            estimate: {
+              serviceId,
+              quantity: quantityNumber,
+              unit: unitCanonical,
+              optionIds,
+              low: result.low,
+              high: result.high,
+              currency: result.currency,
+              placeholder: result.placeholder,
+            },
+          }
+        : {}),
+      page_path: typeof window === "undefined" ? null : window.location.pathname,
       website: honeypot,
     };
     try {

@@ -82,6 +82,66 @@ describe("validateQuote", () => {
     assert.equal(isHoneypotFilled({ website: "http://spam" }), true);
     assert.equal(isHoneypotFilled({ website: "" }), false);
   });
+
+  it("has a null estimate and null page path by default", () => {
+    const result = validateQuote(full, CONTAINERS);
+    assert.ok(result.ok);
+    if (result.ok) {
+      assert.equal(result.data.estimate, null);
+      assert.equal(result.data.pagePath, null);
+    }
+  });
+});
+
+const ESTIMATE = {
+  serviceId: "fill-only",
+  quantity: 5000,
+  unit: "units",
+  optionIds: ["labels"],
+  low: 1800,
+  high: 2400,
+  currency: "CAD",
+  placeholder: true,
+};
+
+describe("validateQuote estimate + page path", () => {
+  it("accepts and passes through a well-formed estimate", () => {
+    const result = validateQuote({ ...full, estimate: ESTIMATE, page_path: "/en/estimate" }, CONTAINERS);
+    assert.ok(result.ok);
+    if (result.ok) {
+      assert.deepEqual(result.data.estimate, ESTIMATE);
+      assert.equal(result.data.pagePath, "/en/estimate");
+    }
+  });
+
+  it("rejects a non-object estimate", () => {
+    const result = validateQuote({ ...full, estimate: "1800-2400" }, CONTAINERS);
+    assert.ok(!result.ok && result.errors.estimate === "choice");
+  });
+
+  it("rejects non-finite, negative, or boolean numbers", () => {
+    for (const bad of [{ low: -1 }, { high: Infinity }, { quantity: "lots" }, { low: true }]) {
+      const result = validateQuote({ ...full, estimate: { ...ESTIMATE, ...bad } }, CONTAINERS);
+      assert.ok(!result.ok && result.errors.estimate === "choice", JSON.stringify(bad));
+    }
+  });
+
+  it("rejects low above high", () => {
+    const result = validateQuote({ ...full, estimate: { ...ESTIMATE, low: 3000, high: 2000 } }, CONTAINERS);
+    assert.ok(!result.ok && result.errors.estimate === "choice");
+  });
+
+  it("rejects more than twenty option ids, or an overlong id", () => {
+    const tooMany = validateQuote({ ...full, estimate: { ...ESTIMATE, optionIds: Array(21).fill("x") } }, CONTAINERS);
+    assert.ok(!tooMany.ok && tooMany.errors.estimate === "choice");
+    const tooLong = validateQuote({ ...full, estimate: { ...ESTIMATE, optionIds: ["x".repeat(65)] } }, CONTAINERS);
+    assert.ok(!tooLong.ok && tooLong.errors.estimate === "choice");
+  });
+
+  it("drops an over-long page path rather than failing the lead", () => {
+    const result = validateQuote({ ...full, page_path: "/" + "x".repeat(400) }, CONTAINERS);
+    assert.ok(result.ok && result.data.pagePath === null);
+  });
 });
 
 describe("composeQuoteEmail", () => {
@@ -96,6 +156,22 @@ describe("composeQuoteEmail", () => {
       assert.ok(email.text.startsWith("source=visit locale=fr"));
       assert.ok(!email.text.includes("Units per run"));
       assert.equal(email.replyTo, "a@b.co");
+    }
+  });
+});
+
+describe("composeQuoteEmail with an estimate summary", () => {
+  it("includes the summary block and keeps notes separate", () => {
+    const result = validateQuote(
+      { ...full, notes: "Spring overflow.", estimate: ESTIMATE },
+      CONTAINERS,
+    );
+    assert.ok(result.ok);
+    if (result.ok) {
+      const email = composeQuoteEmail(result.data, (id) => id, "Estimate: a ballpark");
+      assert.ok(email.text.includes("Estimate: a ballpark"));
+      assert.ok(email.text.includes("Notes:"));
+      assert.ok(email.text.includes("Spring overflow."));
     }
   });
 });

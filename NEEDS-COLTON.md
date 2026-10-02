@@ -517,6 +517,78 @@ Nothing deployed. Code: `src/components/testimonials.tsx`,
 `Review`/`AggregateRating` builders in `src/lib/structured-data.ts`, and
 `content/testimonials.json`.
 
+## 15. Website → VCM lead forward (built 2026-10-02)
+
+Every lead the site captures (the quote form, the contact form, and the
+estimator — all through `POST /api/quote`) is now ALSO forwarded to VCM's
+ingestion endpoint, signed with a shared secret, so a quote request lands in the
+call queue and not just your inbox. This is the **website side** of the
+integration VCM's session designed in `WEBSITE_LEAD_INTAKE.md`; the VCM side was
+built there separately.
+
+### Two environment variables — set them in Vercel (Production only)
+
+The forward is **off until both are set**, so the code is safe to ship now and
+the site behaves exactly as today until you turn it on. Add these to the Vercel
+project:
+
+- `VCM_INTAKE_URL` = `https://vcmsalesforce.com/api/v1/intake/website-lead/`
+- `WEBSITE_INTAKE_SECRET` = a shared secret of **≥32 random bytes**, e.g.
+  `python -c "import secrets; print(secrets.token_urlsafe(48))"`
+
+**Set them on Production only — leave Preview UNSET.** Preview deploys then never
+write to the live CRM (the forward skips when either var is blank). As with
+§11–§14, **an agent can't edit `.env*` files here**, so add these yourself (and to
+`.env.example` if you keep it current).
+
+### The same secret must be set on BOTH sides (what the VCM side still needs)
+
+`WEBSITE_INTAKE_SECRET` on Vercel must be the **exact same string** as the secret
+in VCM's droplet `crm/.env`. From `WEBSITE_LEAD_INTAKE.md`, before this does
+anything in production the VCM side still needs:
+
+1. **VCM merged + deployed** (its branch `feat/website-lead-intake`; that push
+   runs migration `0033` on the live CRM database — the VCM session's call, not
+   mine).
+2. **The secret generated once and set in both places** — droplet `crm/.env`
+   (then restart `crm.service`) and Vercel Production here. Until VCM has the
+   secret, its endpoint answers `503 intake_disabled` and the website just logs
+   the forward as failed; nothing breaks.
+3. A reachable `https://vcmsalesforce.com/api/v1/intake/website-lead/`.
+
+The signer here is proven byte-for-byte against VCM's shared test vector
+(`SIGNATURE_VECTOR` in VCM's `core/tests_website_intake.py`), so a mismatch at
+runtime means the secret or the clock differs between the two sides, not the code.
+
+### One deliberate deviation from the spec — for the VCM session to note
+
+`WEBSITE_LEAD_INTAKE.md` §3 says to await the email and the forward
+"concurrently" and show success "if either succeeded." You asked for
+**fire-and-forget — don't block or error the user** — and that wins where the two
+disagree. So the **email stays the user-facing capture** (success and latency
+depend on it, exactly as today), and the forward runs concurrently but **never
+blocks the visitor**: when the email succeeds the forward is detached and finished
+in the background (Vercel `after()`); only when the email fails or is unconfigured
+does the forward get a short (2.5s) grace to still carry the submit before the
+page responds. Net effect — a slow or unreachable VCM never delays or errors a
+visitor, and VCM still receives every lead (its `submission_id` idempotency +
+dedupe absorb any retry). The one case the spec's wording covered and this does
+not: if the **email is down AND the forward is slower than 2.5s**, the visitor
+sees the existing "couldn't send — call us" message even though VCM will still get
+the lead in the background. With leads rare and the email reliable in production,
+that trade reads as right — flagged so both sides agree.
+
+### How to confirm it's live (optional)
+
+After setting the vars and redeploying, submit a real quote and look for the lead
+on VCM's inbound / speed-to-lead card; the website logs the forward outcome as
+`vcm_forwarded` / `vcm_failed` (no personal data in the line). Built branch-only,
+verified locally end-to-end against a mock VCM (valid signed forward received with
+the exact `vkc.website-lead/1` payload; a stalled VCM capped the visitor at 2.5s,
+a refused one at ~15ms). Nothing deployed. Code: `src/lib/quote/forward.ts`,
+`src/app/api/quote/route.ts`, `src/lib/quote/validate.ts`, `src/lib/quote/email.ts`,
+`src/components/estimator/estimator.tsx`, `src/components/quote-form.tsx`.
+
 ## Things that look like problems and are not
 
 - **Lighthouse best-practices 96 on a local build.** The only failing audit is

@@ -453,6 +453,71 @@ refusals, id dedupe, rating range, date) · production build (44 routes) · rend
 renders the quote, accessible stars, and `Review` + `AggregateRating` JSON-LD in
 both locales; unpublished → nothing renders. Local only — not merged, not deployed.
 
+## Website → VCM lead forward — branch `quality/overhaul` (2026-10-02)
+
+The website side of the website→VCM lead integration (the VCM/CRM side was built
+separately; the contract is `~/Desktop/VCM/WEBSITE_LEAD_INTAKE.md`). Every lead
+through `POST /api/quote` (quote form, contact form, estimator) is now ALSO
+forwarded to VCM's ingestion endpoint, signed with a shared secret, so leads reach
+the call queue — not only the notification email.
+
+### What it does
+
+- **`src/lib/quote/forward.ts`** (new) — `forwardConfigFromEnv` (null unless
+  `VCM_INTAKE_URL` + `WEBSITE_INTAKE_SECRET` both set, so it's off until
+  configured and a half-set config can't fire); `buildWebsiteLeadPayload`
+  (QuoteRequest → the `vkc.website-lead/1` wire shape, snake_case); `signBody`
+  (HMAC-SHA256 over `` `${t}.${body}` ``, proven against VCM's shared
+  `SIGNATURE_VECTOR`); `forwardLead` (POST with a 5s per-attempt
+  `AbortSignal.timeout`, retry ONCE on network error / 5xx / 429 with the same
+  `submission_id` + a fresh timestamp, never on 4xx, and it NEVER throws);
+  `resolveLeadResponse` (pure: success if email OR forward succeeded).
+- **`src/lib/quote/validate.ts`** — `QuoteRequest` gained `estimate`
+  (`LeadEstimate | null`) and `pagePath`. `validateEstimate` bound-checks the
+  structured estimate to mirror VCM's own limits (finite non-negative numbers that
+  reject booleans/NaN/Infinity, `low ≤ high`, id/unit/currency length caps, ≤20
+  options); a malformed estimate is rejected (`errors.estimate`), not silently
+  dropped.
+- **`src/app/api/quote/route.ts`** — after validation + the honeypot drop, starts
+  the forward concurrently with the email, logs the outcome with the no-PII
+  `logAttempt` shape (`vcm_forwarded` / `vcm_failed` / `vcm_skipped`), and rebuilds
+  the email's estimate summary server-side (`estimateSummaryFor` → `buildLeadSummary`)
+  so `notes` stays the customer's own words only.
+- **`estimator.tsx` / `quote-form.tsx`** — submit the structured `estimate`
+  (with a non-localized `unit`) and `page_path`; `notes` is the customer's words.
+
+### The resilience design (honours "fire-and-forget, don't block")
+
+The spec said "await both concurrently, success if either." The instruction was
+*don't block or error the user*, which wins: the **email is the user-facing
+capture**; the forward is detached and finished via Vercel `after()` when the email
+succeeds (zero added latency), and only gets a **2.5s grace** to rescue the submit
+when the email failed/is unconfigured. A stalling VCM therefore caps the visitor
+at 2.5s (not the naïve 5s×2 ≈ 10s) and a reachable one adds nothing. Flagged to
+the VCM session in `NEEDS-COLTON.md` §15 as a deliberate deviation.
+
+### Adversarial review before commit
+
+5-dimension review (spec-conformance, correctness, resilience, security,
+integration) with 3-skeptic refutation: 14 raised, 11 refuted. **3 survivors, all
+fixed:** (1) the estimator sent a localized `estimate.unit` → now the canonical
+English label (the human `units` string stays localized); (2) the forward was
+awaited in-band (≤10s worst case) → the `after()` + grace design above; (3) no
+test pinned the non-blocking bound → added a `forwardLead` timeout test (a stalled
+fetch aborts and returns, never hangs).
+
+### Gate (all green)
+
+typecheck · lint (`src scripts guard`) · **226 unit tests** (+23: signer vs the
+VCM vector, payload mapping, retry policy, response reconciliation, env gating,
+timeout bound, estimate validation) · production build (44 routes) · render 44/44 ·
+guards **numbers / staffing / fr / claims / media** · **census 44/44** (the forward
+is server-only — no rendered change, no guard impact). Playwright end-to-end
+against a local mock VCM: estimator walk → "sent" + mock received a **valid signed
+forward** with the exact payload (`notes` = own words, structured `estimate`, UUID
+`submission_id`, `page_path`); VCM refused → 503 in ~15ms; VCM stalled → 503 at the
+2.5s grace. Local only — not merged, not deployed.
+
 ## Usability pass 11 — fresh independent audit, one finding routed (2026-09-29)
 
 A new session reopened the "full-send" usability loop. Rather than inherit the
