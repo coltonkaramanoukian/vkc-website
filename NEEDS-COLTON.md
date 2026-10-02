@@ -46,7 +46,11 @@ with no cookies and nothing in browser storage. That is what `/privacy` says
 
 ## 3. Content that renders nothing until you fill it
 
-`docs/CONTENT-INTAKE.md` lists every field as `file:field`. The short version:
+**You can now fill most of this yourself, without touching code or JSON — see
+§11, the content editor at `/admin`.** The file-by-file notes below still hold
+(they are what the editor writes), and photos/logos/video stay out of the editor
+because they are imaging. `docs/CONTENT-INTAKE.md` lists every field as
+`file:field`. The short version:
 
 - **`content/contact.json`**: phone, email, address, hours, privacy officer.
   Phone is the one that changes the site most: "Call …" appears beside every
@@ -240,6 +244,82 @@ keyboard, so shipping it alone would look done without being done. It is Vito's
 call how his ticker should offer a pause; it waits for him. Minor, not a
 blocker — the content is decorative and repeated as real text elsewhere on the
 page.
+
+## 11. The content editor at `/admin` (built 2026-10-02) — turn it on
+
+A password-protected editor so you can fill the content in §3 and §9 yourself —
+contact details, capabilities/specs, and the client list — with a form instead
+of editing JSON. It writes the same `content/*.json` files by hand, so every
+guard still runs on what you save, and the editor itself refuses, at save time,
+any staffing wording (§4) or forbidden claim (§1) — the same matchers
+`guard:staffing` and `guard:claims` use. **It is off until you set two secrets**,
+and that is deliberate: with nothing set, `/admin` shows a login page but no
+password works, so the surface cannot be used.
+
+**What is NOT in the editor, on purpose:** photos (`photos.json`), client logos
+(the `logo` field), generated scenes (`scenes.json`) and the demo video
+(`media.json`). All of that is imaging — Vito's lane (§8). The editor rounds a
+client's existing logo through untouched; it never sets one.
+
+### Turn it on (two secrets, both required)
+
+Set these on Vercel (project `vkc-website-wz5a`, Settings → Environment
+Variables, Production — and Preview if you want to use it there too):
+
+- `ADMIN_PASSWORD` — the one password that signs you in. Pick a long, random
+  one; it is the only credential.
+- `ADMIN_SESSION_SECRET` — a random string, **16+ characters** (e.g.
+  `openssl rand -hex 32`). It signs the login cookie; it is not typed anywhere.
+  Changing it later signs everyone out.
+
+With both set, go to `https://<the site>/admin`, sign in, and edit. The session
+lasts 12 hours, in an httpOnly cookie; "Sign out" clears it.
+
+### Make saving publish (production persistence)
+
+In local development the editor writes the files on disk. **In production it has
+nowhere to write unless you give it a GitHub token** — then a save becomes a
+commit to the repo, which (because merging to `main` deploys, §1) rebuilds and
+publishes the site a minute or two later. Until the token is set, a save in
+production returns "nothing was saved — no content store configured" and writes
+nothing (a fail-safe, never a silent loss).
+
+Set, on the same project:
+
+- `ADMIN_GITHUB_TOKEN` — a GitHub token with **write access to the `Contents`**
+  of `coltonkaramanoukian/vkc-website` (a fine-grained PAT scoped to just that
+  repo is best). This is what commits your edits.
+- `ADMIN_GITHUB_REPO` — `coltonkaramanoukian/vkc-website`.
+- `ADMIN_GITHUB_BRANCH` — optional, defaults to `main`. Leave it on `main` to
+  publish; point it at a branch if you'd rather review edits as PRs first.
+- `ADMIN_GITHUB_AUTHOR_NAME` / `ADMIN_GITHUB_AUTHOR_EMAIL` — optional, the name
+  on the commit.
+
+Each save commits one file with a message like `content: update contact via
+admin editor`. You can watch them land in the repo's commit history.
+
+### Two things the editor does NOT check (that the full gate does)
+
+- **Numbers (NC-3)** and **FR/EN parity (NC-4)** are not enforced at save. A
+  capability number you type becomes the content the number guard trusts, by
+  design; and the editor lets you save an English value without its French yet.
+  Write both languages for anything public, the way the rest of the site does.
+- It proves wording, not law: §4's lawyer answer (§4 above) is still yours.
+
+### Flagged for you (an agent could not do these)
+
+- **`.env.example` was not updated** with the five `ADMIN_*` keys: this
+  environment blocks agents from reading or writing any `.env*` file. Add them
+  there yourself so the next person sees them. Your local `.env.local` already
+  has `ADMIN_PASSWORD` and `ADMIN_SESSION_SECRET` (added for local testing);
+  change them to real values before relying on them.
+- **Pick the real production password and secret** — the local ones are
+  throwaway test values.
+
+Built branch-only, verified locally (login → edit contact → save → both
+`/en/contact` and `/fr/nous-joindre` re-render; staffing/claim saves refused).
+Nothing was deployed. Code: `src/app/admin/`, `src/app/api/admin/`,
+`src/components/admin/`, `src/lib/admin/`, the `/admin` gate in `src/proxy.ts`.
 
 ## Things that look like problems and are not
 

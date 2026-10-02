@@ -137,6 +137,81 @@ tests, 10 E2E, production build, axe (0 violations), and the content guards
 (numbers / claims / staffing / fr / overlap / hreflang / locale-switch). Local
 only — not merged, not deployed.
 
+## Owner content editor — branch `quality/overhaul` (2026-10-02)
+
+Colton asked for a way to **edit the site's content himself** — the fields that
+are still null (contact, capabilities/specs, clients) — without touching code.
+Built on the same branch, local-only, **not merged/deployed**.
+
+### Approach (reported before building, chosen for this stack)
+
+- **Persistence = git-commit-back, no database.** Facts stay in
+  `content/*.json`, so every published guard (numbers, claims, staffing, fr)
+  keeps running on them and nothing bypasses §1/§2/§4. In dev the editor writes
+  the files on disk; in production it commits them through the GitHub Contents
+  API, which (merging to `main` deploys) rebuilds and publishes the site. A DB or
+  KV would have put facts somewhere `guard:numbers` can't see — rejected for that
+  reason.
+- **Auth = one owner, one password, HMAC-signed cookie.** No user store (there is
+  one user). `ADMIN_PASSWORD` + `ADMIN_SESSION_SECRET`; password compared in
+  constant time (as HMACs, no length leak), session is a signed httpOnly cookie
+  (12 h, `sameSite=lax`, `secure` in prod). Built on Web Crypto so the *same*
+  module runs in the Edge `/admin` gate and the Node API routes. CSRF: an Origin
+  check on every POST on top of sameSite. Brute force: 10 attempts / 5 min / IP
+  (reuses the quote form's limiter). **Fail-safe: with no password/secret set,
+  `/admin` shows a login page but nothing signs in.** This is the one auth
+  surface — flagged for Colton in `NEEDS-COLTON.md` §11.
+
+### What it is
+
+- `/admin/login` (public) → `/admin` dashboard → `/admin/{contact,capabilities,
+  clients}` form pages. Gate lives in `src/proxy.ts` (before next-intl; `/admin`
+  is outside the locale tree with its own root layout). API: `/api/admin/login`,
+  `/logout`, `/save` (each re-checks auth + Origin; `/save` is `runtime=nodejs`).
+- **The editor enforces the constitution at save time.** Every human-written
+  string runs through the *same* staffing (§4) and forbidden-claims (§1) matchers
+  the guards use (`guard/lib.ts` + the JSON rule files), with the guard's
+  negation-awareness — so a save that would fail `guard:staffing`/`guard:claims`
+  is refused inline instead of committed. The canonical JSON shape is rebuilt
+  from the schema on the server, so a malformed payload can't corrupt a file;
+  blanks collapse to `null` (§1 renders nothing).
+- **Imaging stays Vito's lane.** No `photos.json`, no `media.json`, no
+  `scenes.json`, and the client `logo` field is round-tripped untouched, never
+  set from a form.
+- Files: `src/lib/admin/` (session, sections schema, validate, store, prefill,
+  paths, request), `src/app/admin/`, `src/app/api/admin/`, `src/components/admin/`.
+
+### Verified end-to-end (Playwright MCP, local dev, fs persistence)
+
+Login gate (`/admin` → login), wrong password 401, cross-origin 403, no-cookie
+save 401; **forbidden claim and staffing wording refused at save (422)**; then
+through the UI: signed in → filled `/admin/contact` → **saved** → `content/
+contact.json` written with the correct typed shape (blanks → null) →
+**`/en/contact` and `/fr/nous-joindre` both re-render** the phone/email/address/
+hours in the details placard and footer; the `tel:` link builds. Clients form
+add/save produced a type-correct entry (empty case-study/logo omitted). Content
+then **restored to nulls** — nothing committed to `content/`.
+
+### Tests (same `node --test` + `@playwright/test` suites)
+
+- **Unit +35** (`src/lib/admin/*.test.ts`): session (sign/verify, tamper,
+  expiry, wrong-secret, password, `adminConfigured`), validate (coercion,
+  email/url/phone format, service-radius, localized shapes, §1/§4 rejection,
+  negation allowed, clients shaping + nameless-drop + quote-needs-name + logo
+  passthrough), prefill round-trips, immutable paths.
+- **E2E +4** (`e2e/admin.spec.ts`): the gate, the login page, wrong-password
+  feedback, and the authed login → save-guard-blocks-staffing path. The
+  password-dependent two self-skip when `ADMIN_*` isn't set (bare CI stays green).
+
+### Flagged for Colton (`NEEDS-COLTON.md` §11)
+
+Set `ADMIN_PASSWORD` + `ADMIN_SESSION_SECRET` to turn it on; add
+`ADMIN_GITHUB_TOKEN` (+ `ADMIN_GITHUB_REPO`, optional `_BRANCH`/author) to make
+saving publish in production. **`.env.example` could not be updated** — this
+environment blocks agents from any `.env*` file; the five keys are documented in
+§11 for Colton to add. Numbers (NC-3) and FR/EN parity (NC-4) are deliberately
+not enforced at save.
+
 ## Usability pass 11 — fresh independent audit, one finding routed (2026-09-29)
 
 A new session reopened the "full-send" usability loop. Rather than inherit the
