@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { LogoutButton } from "@/components/admin/logout-button";
-import { currentArticles, currentContent } from "@/lib/admin/current";
+import { currentArticles, currentContent, currentPricing } from "@/lib/admin/current";
 import { sectionHasContent } from "@/lib/admin/prefill";
 import { SECTIONS } from "@/lib/admin/sections";
 import { persistenceMode } from "@/lib/admin/store";
@@ -21,6 +21,7 @@ export default async function AdminDashboard() {
   );
   const articles = await currentArticles();
   const publishedCount = articles.filter((a) => a.status === "published").length;
+  const pricing = await currentPricing();
 
   return (
     <main className="mx-auto max-w-3xl px-4 py-12 sm:py-16">
@@ -61,6 +62,19 @@ export default async function AdminDashboard() {
             </div>
             <p className="mt-2 text-sm text-graphite">
               Write, edit and publish posts. Drafts stay private; published posts appear on the blog with their own page and SEO.
+            </p>
+          </Link>
+        </li>
+        <li>
+          <Link href="/admin/pricing" className="block rounded-2xl border border-hairline bg-label p-5 transition hover:border-qc">
+            <div className="flex items-center justify-between gap-4">
+              <h2 className="text-lg font-semibold text-ink">Estimator pricing</h2>
+              <span className={`font-mono text-xs uppercase tracking-wider ${pricing.placeholder ? "text-graphite" : "text-qc"}`}>
+                {pricing.placeholder ? "Placeholder rates" : "Live rates"}
+              </span>
+            </div>
+            <p className="mt-2 text-sm text-graphite">
+              The rates behind the public estimator at /estimate. Shown only as a ballpark range, never a fixed price.
             </p>
           </Link>
         </li>

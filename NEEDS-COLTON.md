@@ -354,6 +354,85 @@ As with §11, **`.env.example` could not be updated by an agent** (this
 environment blocks every `.env*` file); the `ADMIN_*` keys it needs are the same
 ones listed in §11.
 
+## 13. The quote estimator at `/estimate` (built 2026-10-02)
+
+A public, bilingual lead-gen estimator (`/estimate`, FR `/estimation`): the
+visitor picks a service, enters a quantity and a few add-ons, and gets an instant
+**ballpark range** — then a last step turns it into a lead. It runs on the same
+auth + git-commit-back as §11/§12; the rates it uses live in a new
+owner-editable file, `content/pricing.json`, edited at `/admin` → "Estimator
+pricing". Nothing extra to turn on beyond the §11 secrets (and, for the lead
+email, the §2 mail keys — the lead rides the **existing** `/api/quote` handler, no
+new backend).
+
+### Two calls I made that are yours to confirm
+
+1. **This puts dollar figures on the site, which brushes up against CLAUDE.md §1
+   ("No pricing, no dollar amounts").** No guard forbids dollars — `guard:numbers`
+   only bans *invented* numbers in the shipped HTML, and it stays green because
+   every figure is computed in the browser (the guards render with JavaScript
+   off) and the rates live in `content/`. But the *letter* of §1 and a
+   dollars-showing estimator disagree, and a future run reading §1 could tear the
+   estimator out as a violation. **Recommended: add a dated carve-out to §1**, in
+   the same shape as the Higgsfield amendment (2026-09-27). Suggested wording:
+
+   > *An interactive estimate of the customer's own project — computed
+   > client-side from owner-set rates in `content/pricing.json` and shown as a
+   > ballpark range, never a binding quote — is permitted (Colton, 2026-10-02).
+   > It states no fixed price and renders no price list.*
+
+   Until you add it, the estimator is defensible (it says "ballpark, not a quote"
+   throughout) but unprotected from a later cleanup.
+
+2. **I remapped the inputs to VKC's real services.** The brief described
+   floor-coating inputs (square footage, coating system, prep level); VKC does
+   contract filling, packaging and toll blending, not floor coating, so a
+   floor-coating estimator would imply a service that doesn't exist (§1). The
+   estimator is modelled on the real services instead — **Bottleneck** priced per
+   unit, **Second Shift** per shift, **toll blending** per litre — which also
+   matches the site's existing "priced per unit or per shift" language.
+
+### Set your real rates (they ship as PLACEHOLDERS)
+
+`content/pricing.json` ships with **obvious round placeholders** and a
+`"placeholder": true` flag. While that flag is on, the public page shows a
+"placeholder rates" notice and the admin dashboard marks it "Placeholder rates".
+**Go to `/admin` → "Estimator pricing", set your real numbers, then turn off
+"These are placeholder rates".** The seeded placeholders (all made up — replace
+them):
+
+- Bottleneck — $1.25 / unit, $500 setup, $1,000 minimum
+- Second Shift — $2,800 / shift, $0 setup, $2,800 minimum
+- Toll blending — $0.90 / litre, $500 setup, $1,000 minimum
+- Add-ons — labels +$0.25/unit, kitting +$0.75/unit, extra QC docs +$350 flat,
+  rush ×1.25
+- Range spread ±20%, rounded to the nearest $50, currency CAD
+
+Each service also carries a "sends lead as" mapping (which of the quote handler's
+`second-shift` / `bottleneck` / `unsure` the lead is filed under). You can add,
+remove or rename services and add-ons entirely from the editor.
+
+### How the lead reaches you
+
+The final step POSTs to the **same `/api/quote` handler** the quote and contact
+forms use — so a lead needs the §2 mail keys (`RESEND_API_KEY`, `QUOTE_TO_EMAIL`,
+`QUOTE_FROM_EMAIL`) and nothing else. The email's notes carry a readable summary
+(service, amount, add-ons, the ballpark range, and a "placeholder rates" tag
+while the flag is on). Until the mail keys are set, the estimator's send shows
+"the form isn't connected yet — reach us on the contact page", exactly like the
+quote form.
+
+As with §11/§12, **`.env.example` could not be updated by an agent**; the keys are
+the same ones already listed there.
+
+Built branch-only, verified locally end-to-end (walk the estimator → a range →
+submit a lead → it reaches `/api/quote` and validates as `service=bottleneck`;
+edit the Bottleneck rate in `/admin` → save → the public estimate changes
+$6,400–$9,600 → $9,400–$14,100). All guards green at 44 pages. Nothing deployed.
+Code: `src/app/[locale]/estimate/`, `src/components/estimator/`,
+`src/lib/estimator/`, `src/app/admin/pricing/`, `src/app/api/admin/pricing/`,
+`src/lib/admin/pricing.ts`, `content/pricing.json`.
+
 ## Things that look like problems and are not
 
 - **Lighthouse best-practices 96 on a local build.** The only failing audit is

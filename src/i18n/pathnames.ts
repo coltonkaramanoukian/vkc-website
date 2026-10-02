@@ -67,6 +67,7 @@ export const pathnames = {
   // so the guards/sitemap/census never try to fetch a literal "[slug]" URL.
   "/blog/[slug]": { fr: "/blogue/[slug]", en: "/blog/[slug]" },
   "/glossary": { fr: "/lexique", en: "/glossary" },
+  "/estimate": { fr: "/estimation", en: "/estimate" },
   "/quote": { fr: "/soumission", en: "/quote" },
   "/privacy": { fr: "/confidentialite", en: "/privacy" },
 } as const;

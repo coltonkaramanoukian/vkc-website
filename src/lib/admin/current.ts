@@ -5,8 +5,9 @@
 
 import { allArticles, type Article } from "../blog/articles.ts";
 import { capabilities, clientsForDisplay, contact } from "../content.ts";
+import { coercePricing, pricing, type Pricing } from "../estimator/pricing.ts";
 import type { Section } from "./sections.ts";
-import { persistenceMode, readCollectionCurrent, readSectionFromDisk } from "./store.ts";
+import { persistenceMode, readCollectionCurrent, readDocumentCurrent, readSectionFromDisk } from "./store.ts";
 
 function bundled(section: Section): unknown {
   switch (section.id) {
@@ -37,5 +38,15 @@ export async function currentArticles(): Promise<Article[]> {
     return (await readCollectionCurrent("articles")) as Article[];
   } catch {
     return [...allArticles];
+  }
+}
+
+/** The current estimator rate card for the editor: fresh from the store, else the bundle. */
+export async function currentPricing(): Promise<Pricing> {
+  if (persistenceMode() === "none") return pricing;
+  try {
+    return coercePricing(await readDocumentCurrent("pricing"));
+  } catch {
+    return pricing;
   }
 }

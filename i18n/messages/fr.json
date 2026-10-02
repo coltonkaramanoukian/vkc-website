@@ -26,7 +26,8 @@
       "industries": "Secteurs",
       "contact": "Nous joindre",
       "blog": "Blogue",
-      "glossary": "Lexique"
+      "glossary": "Lexique",
+      "estimate": "Estimateur"
     },
     "groups": {
       "services": "Nos services",
@@ -198,6 +199,10 @@
     "glossary": {
       "title": "Lexique du remplissage et du conditionnement",
       "description": "Les mots de ce site et d’un plancher de remplissage, définis comme le métier les emploie : remplissage au niveau ou pondéral, mélange à façon, chef d’équipe, feuille CQ et plus."
+    },
+    "estimate": {
+      "title": "Estimateur de projet",
+      "description": "Un ordre de grandeur instantané pour une série de remplissage, de conditionnement ou de mélange. Entrez votre quantité et vos options, voyez une fourchette — pas une soumission ferme."
     }
   },
   "home": {
@@ -1314,6 +1319,80 @@
         {
           "term": "Viscosité",
           "def": "L’épaisseur d’un liquide, ou sa résistance à couler. C’est la première question d’un remplisseur, parce qu’elle décide de la méthode et de la vitesse."
+        }
+      ]
+    },
+    "estimate": {
+      "eyebrow": "Estimation",
+      "h1": "Un aperçu chiffré avant d’appeler",
+      "lead": "Dites-nous quoi produire et environ combien. Vous obtenez une fourchette en quelques clics, puis vous l’envoyez pour en faire une vraie soumission.",
+      "disclaimerTitle": "Un aperçu, pas une soumission",
+      "disclaimer": "Ceci donne une fourchette estimée à partir de nos tarifs en dossier, pour planifier avant d’appeler. Ce n’est pas une soumission ferme — le vrai montant dépend du produit, du contenant, de l’échéancier et du volume.",
+      "placeholderNote": "À noter — les tarifs derrière cet estimateur sont provisoires le temps de finaliser nos chiffres, alors tenez tout montant pour une illustration approximative.",
+      "servicesTitle": "Ce que vous pouvez estimer",
+      "servicesIntro": "Deux façons de vous aider, selon que le travail se fait à votre usine ou chez nous.",
+      "start": "Lancer l’estimation",
+      "fallbackTitle": "L’estimateur a besoin de JavaScript",
+      "fallbackBody": "Activez-le pour une fourchette, ou décrivez votre projet sur le formulaire et on vous enverra un montant.",
+      "fallbackLink": "Aller à la soumission",
+      "stepService": "Prestation",
+      "stepQuantity": "Quantité",
+      "stepOptions": "Options",
+      "stepResult": "Estimation",
+      "stepDetails": "Coordonnées",
+      "serviceHeading": "Qu’y a-t-il à produire?",
+      "quantityHeading": "Environ quelle quantité?",
+      "quantityHint": "Un chiffre rond suffit — c’est un ordre de grandeur.",
+      "quantityError": "Entrez une quantité supérieure à zéro.",
+      "optionsHeading": "Quelque chose à ajouter?",
+      "optionsHint": "Cochez ce qui s’applique. Laissez vide si vous hésitez.",
+      "optionsNone": "Aucun supplément pour cette prestation.",
+      "resultHeading": "Votre aperçu chiffré",
+      "resultRangeLabel": "Fourchette estimée",
+      "resultNote": "Une fourchette tirée des tarifs en dossier. Envoyez-la et on confirme une vraie soumission.",
+      "back": "Retour",
+      "next": "Suivant",
+      "reset": "Recommencer",
+      "getQuote": "Nous envoyer cette estimation",
+      "detailsHeading": "Où envoyer le suivi?",
+      "detailsIntro": "Ajoutez vos coordonnées et on en fait une vraie soumission.",
+      "company": "Entreprise",
+      "name": "Votre nom",
+      "contact": "Courriel ou téléphone",
+      "contactHint": "Ce qui est le plus simple pour vous joindre.",
+      "notes": "Autre chose?",
+      "notesHint": "Produit, contenant, échéancier — ce qui aide à chiffrer.",
+      "submit": "Envoyer ma demande d’estimation",
+      "sending": "Envoi en cours…",
+      "sent": "Bien reçu — merci.",
+      "sentBody": "Nous avons votre estimation, et on vous revient avec une vraie soumission.",
+      "errorMsg": "L’envoi a échoué. Réessayez, ou joignez-nous sur la page contact.",
+      "rateLimited": "Ça fait quelques essais d’affilée. Patientez une minute, puis renvoyez.",
+      "invalid": "Vérifiez les champs signalés, puis renvoyez.",
+      "unconfigured": "Le formulaire n’est pas encore branché. Joignez-nous sur la page contact.",
+      "unconfiguredPhone": "Le formulaire n’est pas encore branché. Appelez-nous au {phone}.",
+      "required": "(requis)",
+      "privacy": "Vos coordonnées servent à vous répondre.",
+      "privacyLink": "Comment nous traitons vos données",
+      "summaryTitle": "Estimateur en ligne — ordre de grandeur",
+      "placeholderTag": "tarifs provisoires",
+      "faqTitle": "Questions sur l’estimation",
+      "faq": [
+        {
+          "q": "Est-ce une vraie soumission?",
+          "a": "Non — un ordre de grandeur tiré de nos tarifs en dossier. On confirme un vrai montant une fois le produit, le contenant, le volume et l’échéancier connus."
+        },
+        {
+          "q": "Quelle en est la justesse?",
+          "a": "Une fourchette approximative pour situer les attentes, pas un engagement. Plus vous en dites, plus la vraie soumission tombe juste."
+        },
+        {
+          "q": "Comment est-ce calculé?",
+          "a": "À partir d’un tarif à l’unité ou au quart, plus les suppléments choisis, avec une mise en route et un minimum. On fixe ces tarifs et on les tient à jour."
+        },
+        {
+          "q": "Que se passe-t-il après l’envoi?",
+          "a": "Votre fourchette et vos coordonnées nous parviennent comme le [formulaire de soumission](/quote), et une personne vous répond."
         }
       ]
     }

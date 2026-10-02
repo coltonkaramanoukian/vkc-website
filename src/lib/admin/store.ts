@@ -115,6 +115,27 @@ export async function readSectionFromDisk(file: string): Promise<unknown> {
 }
 
 /**
+ * Read one content file's CURRENT value as-is (object OR array), not the
+ * build-time bundle: from disk in dev, from GitHub in prod. The object twin of
+ * readCollectionCurrent, for singletons like pricing.json.
+ */
+export async function readDocumentCurrent(file: string): Promise<unknown> {
+  const mode = persistenceMode();
+  if (mode === "github") {
+    const config = githubConfig();
+    if (!config) throw new Error("GitHub persistence selected but not configured.");
+    const response = await githubRequest(config, `contents/content/${file}.json?ref=${encodeURIComponent(config.branch)}`, { method: "GET" });
+    if (response.status === 404) return null;
+    if (!response.ok) throw new Error(`GitHub read failed (${response.status}): ${await response.text()}`);
+    const json = (await response.json()) as { content?: string };
+    const decoded = Buffer.from(json.content ?? "", "base64").toString("utf8");
+    return JSON.parse(decoded);
+  }
+  if (mode === "fs") return readSectionFromDisk(file);
+  throw new Error("No content store is configured.");
+}
+
+/**
  * Read a collection's CURRENT content (not the build-time bundle) so a save does
  * a true read-modify-write: from disk in dev, from GitHub in prod. This is what
  * keeps an upsert correct in production between deploys.

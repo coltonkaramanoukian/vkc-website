@@ -290,6 +290,87 @@ Same `ADMIN_*` envs turn it on (shared with the content editor). Article cover
 images are a reserved slot for the imaging run. Article pages are not covered by
 the build guards by design — the editor is their gate.
 
+## Quote estimator — branch `quality/overhaul` (2026-10-02)
+
+A public, bilingual lead-gen estimator at `/estimate` (FR `/estimation`): pick a
+service, enter a quantity + add-ons, get an instant **ballpark range**, then a
+lead step that feeds the existing quote handler. Owner-editable rates. Local-only,
+**not merged/deployed**.
+
+### Two judgment calls (flagged, not silently taken)
+
+- **§1 "No pricing, no dollar amounts" vs. a dollars-showing estimator.** No guard
+  forbids dollars (`guard:numbers` only bans *invented* numbers in the shipped
+  HTML, and stays green — see below); the conflict is with the *letter* of §1.
+  Shipped on the explicit brief, behind "ballpark, not a quote" copy and
+  placeholder rates, with a **recommended dated §1 carve-out** written out in
+  `NEEDS-COLTON.md §13` for Colton to paste. Not taken on my own authority.
+- **Business-model remap.** The brief's inputs were floor-coating (sq ft, coating
+  system, prep level); VKC doesn't coat floors (§1: no invented service). Modelled
+  on the real services instead — Bottleneck per unit, Second Shift per shift, toll
+  blending per litre — which matches the site's "priced per unit or per shift".
+
+### Approach
+
+- **Rates live in a new top-level `content/pricing.json`** (owner-editable at
+  `/admin` → "Estimator pricing"). Top-level on purpose: `guard:numbers` reads
+  `content/*.json` non-recursively, so every rate is in the allowed set
+  automatically. Ships with `"placeholder": true` + obvious round placeholders; a
+  visible notice on the page and the admin card say so until Colton flips it.
+- **The estimate is computed entirely client-side** (`lib/estimator/calculate.ts`,
+  pure + unit-tested). The guards render with **JavaScript disabled**
+  (`render-all.ts`), so no computed figure ever reaches NC-3 — the dollar ranges
+  exist only after hydration. The interactive widget is **mount-gated**
+  (`useSyncExternalStore`, hydration-safe + lint-clean), so the no-JS/guard
+  capture sees only a static shell + a link to the quote form.
+- **§4 is satisfied in SSR**: the page names "Second Shift", so it renders the
+  canonical four-fact summary from `content/services.json` in `<main>` — the same
+  text the service pages use. Meta + FAQ JSON-LD avoid the literal service name
+  (they can't carry four facts in a meta description).
+- **A fixed `/estimate` route** (added to `pathnames.ts`, `nav.ts` company group,
+  `related.ts`) auto-joins every guard/census/hreflang/sitemap/OG — count 42→44,
+  nothing hardcoded; the OG card key comes free from `meta.estimate`.
+- **Lead reuses `/api/quote` unchanged** — `source=quote`, the chosen line mapped
+  to the handler's `second-shift`/`bottleneck`/`unsure` enum, the estimate packed
+  into `notes` (pure `lib/estimator/summary.ts`). No new backend, same mail path,
+  same honeypot/validation.
+
+### Owner side
+
+`/admin` gains an "Estimator pricing" card → `/admin/pricing`: a placeholder
+toggle, currency/spread/rounding, and add/remove/edit rows for services (id,
+lead-mapping, bilingual name/unit/quantity labels, rate/setup/minimum) and add-ons
+(id, kind, value, applies-to). API `/api/admin/pricing/save` with the same
+`requireAdmin` + Origin + rate-limited auth; `preparePricing` validates numbers,
+requires both languages, and runs the §1/§4 matchers on every label.
+
+### Verified end-to-end (Playwright MCP, local)
+
+Walked the estimator (Bottleneck → 5000 units → "Apply labels") → range
+**$6,400–$9,600** (= (1.25+0.25)×5000+500, ±20%) → filled the lead → it **POSTed
+to `/api/quote` and validated as `service=bottleneck`** (503 `email_not_configured`
+locally = validation passed, blocked only by the unset mail keys, exactly like the
+quote form; UI showed the graceful "not connected yet" message). Then signed into
+`/admin` → **changed the Bottleneck rate 1.25→2.00 → saved** (git-commit-back fs
+write) → reloaded `/estimate` → the same walk now shows **$9,400–$14,100**. FR
+`/estimation` renders (localized service labels; all four §4 facts present in FR
+`<main>`). Mobile 375px: no horizontal overflow. Then `content/pricing.json` was
+restored to the placeholder seed.
+
+### Gate (all green on the ship state)
+
+typecheck · lint (`src scripts guard`) · **182 unit tests** (+22: estimate math,
+pricing coercion, lead summary, pricing validator) · production build (44 routes,
+`/estimate` + `/estimation` + both OG cards) · guards **numbers / staffing (60 SS
+surfaces) / fr (`/estimate` copy ratio 1.053) / claims / media** · **census 44/44**
+· hreflang (local) · locale-switch 22. Local only — not merged, not deployed.
+
+### Flagged for Colton (`NEEDS-COLTON.md` §13)
+
+Same `ADMIN_*` envs turn the editor on; the lead needs the §2 mail keys. Set real
+rates and turn off the placeholder flag. Add the §1 carve-out before a future run
+reads §1 and removes the estimator.
+
 ## Usability pass 11 — fresh independent audit, one finding routed (2026-09-29)
 
 A new session reopened the "full-send" usability loop. Rather than inherit the
