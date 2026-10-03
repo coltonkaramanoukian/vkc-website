@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
 import { Pictogram, type PictogramName } from "@/components/pictograms";
+import { MAX_LENGTHS } from "@/lib/quote/validate";
 
 type Status = "idle" | "sending" | "sent" | "unconfigured" | "error" | "rate_limited" | "invalid";
 type ErrorCode = "required" | "email" | "contact" | "choice" | "length";
@@ -149,6 +150,7 @@ export function QuoteForm({ mode, source: sourceProp, locale, labels: l, contain
         inputMode={opts.inputMode}
         autoComplete={opts.autoComplete}
         required={opts.required}
+        maxLength={MAX_LENGTHS[name as keyof typeof MAX_LENGTHS]}
         aria-invalid={errors[name] ? true : undefined}
         aria-describedby={describedBy(name, Boolean(opts.hint), opts.describedById)}
         className="field-input mt-1.5"
@@ -340,6 +342,7 @@ export function QuoteForm({ mode, source: sourceProp, locale, labels: l, contain
             id={id("notes")}
             name="notes"
             rows={4}
+            maxLength={MAX_LENGTHS.notes}
             aria-invalid={errors.notes ? true : undefined}
             aria-describedby={describedBy("notes")}
             className="field-input mt-1.5"
