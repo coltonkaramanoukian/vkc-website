@@ -30,12 +30,27 @@ describe("formatMoney", () => {
   it("formats whole-dollar currency for en-CA", () => {
     assert.equal(formatMoney(1234, "CAD", "en"), "$1,234");
   });
+
+  // fr-CA puts the symbol last and groups with a (non-breaking) space, not a
+  // comma. The exact space codepoint shifts between ICU versions, so normalise
+  // whitespace and assert the convention rather than the raw bytes.
+  it("formats whole-dollar currency for fr-CA (symbol last, space grouping)", () => {
+    const fr = formatMoney(1234, "CAD", "fr");
+    assert.equal(fr.replace(/\s/gu, ""), "1234$");
+    assert.ok(!fr.includes(","), `fr-CA money should not use a comma separator: ${JSON.stringify(fr)}`);
+    assert.notEqual(fr, formatMoney(1234, "CAD", "en"));
+  });
 });
 
 describe("formatRange", () => {
   it("joins the low and high with an en dash", () => {
     const result = calculateEstimate(config, { serviceId: "bottleneck", quantity: 5000, optionIds: [] });
     assert.equal(formatRange(result, "en"), "$8,400 – $12,600");
+  });
+
+  it("formats the fr-CA range with the symbol last (whitespace-normalised)", () => {
+    const result = calculateEstimate(config, { serviceId: "bottleneck", quantity: 5000, optionIds: [] });
+    assert.equal(formatRange(result, "fr").replace(/\s/gu, ""), "8400$–12600$");
   });
 });
 

@@ -56,7 +56,12 @@ export type ValidationResult =
   | { ok: true; data: QuoteRequest }
   | { ok: false; errors: Record<string, ErrorCode> };
 
-const MAX = {
+/**
+ * Per-field character caps. Exported so the client forms can set the matching
+ * `maxLength` on each input — one source of truth, so the input limit and the
+ * server rejection can never drift apart.
+ */
+export const MAX_LENGTHS = {
   company: 200,
   name: 200,
   email: 254,
@@ -149,8 +154,8 @@ function validateEstimate(value: unknown): { estimate: LeadEstimate | null; ok: 
 
 export function validateQuote(raw: Raw, containerIds: readonly string[]): ValidationResult {
   const errors: Record<string, ErrorCode> = {};
-  const tooLong = (key: keyof typeof MAX, value: string) => {
-    if (value.length > MAX[key]) errors[key] = "length";
+  const tooLong = (key: keyof typeof MAX_LENGTHS, value: string) => {
+    if (value.length > MAX_LENGTHS[key]) errors[key] = "length";
   };
 
   const company = text(raw, "company");

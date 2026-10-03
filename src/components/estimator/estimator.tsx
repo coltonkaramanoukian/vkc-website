@@ -9,6 +9,7 @@ import {
   type Pricing,
 } from "@/lib/estimator/pricing";
 import { formatRange } from "@/lib/estimator/summary";
+import { MAX_LENGTHS } from "@/lib/quote/validate";
 import type { Locale } from "@/i18n/pathnames";
 
 export type EstimatorCopy = Record<string, string>;
@@ -288,13 +289,13 @@ export function Estimator({ locale, pricing, copy, privacyHref, phone }: Props) 
                 <label htmlFor="estimator-company" className="block font-semibold">
                   {copy.company} <span className="field-name">({copy.required})</span>
                 </label>
-                <input id="estimator-company" value={company} onChange={(e) => setCompany(e.target.value)} autoComplete="organization" required className={FIELD} />
+                <input id="estimator-company" value={company} onChange={(e) => setCompany(e.target.value)} autoComplete="organization" required maxLength={MAX_LENGTHS.company} className={FIELD} />
               </div>
               <div>
                 <label htmlFor="estimator-name" className="block font-semibold">
                   {copy.name} <span className="field-name">({copy.required})</span>
                 </label>
-                <input id="estimator-name" value={name} onChange={(e) => setName(e.target.value)} autoComplete="name" required className={FIELD} />
+                <input id="estimator-name" value={name} onChange={(e) => setName(e.target.value)} autoComplete="name" required maxLength={MAX_LENGTHS.name} className={FIELD} />
               </div>
             </div>
             <div>
@@ -308,6 +309,7 @@ export function Estimator({ locale, pricing, copy, privacyHref, phone }: Props) 
                 onChange={(e) => setContact(e.target.value)}
                 autoComplete="on"
                 required
+                maxLength={MAX_LENGTHS.contact}
                 aria-describedby="estimator-contact-hint"
                 className={FIELD}
               />
@@ -315,7 +317,7 @@ export function Estimator({ locale, pricing, copy, privacyHref, phone }: Props) 
             <div>
               <label htmlFor="estimator-notes" className="block font-semibold">{copy.notes}</label>
               <p id="estimator-notes-hint" className="text-sm text-graphite">{copy.notesHint}</p>
-              <textarea id="estimator-notes" rows={3} value={notes} onChange={(e) => setNotes(e.target.value)} aria-describedby="estimator-notes-hint" className={FIELD} />
+              <textarea id="estimator-notes" rows={3} value={notes} onChange={(e) => setNotes(e.target.value)} maxLength={MAX_LENGTHS.notes} aria-describedby="estimator-notes-hint" className={FIELD} />
             </div>
 
             <div className="hp-field" aria-hidden="true">
@@ -346,10 +348,12 @@ export function Estimator({ locale, pricing, copy, privacyHref, phone }: Props) 
         )}
       </div>
 
-      {/* Navigation: Back / Next between steps, with a reset once a service is chosen. */}
-      {status !== "sent" && (
+      {/* Navigation: Back / Next between steps, with a reset once a service is
+          chosen. After a successful send Back/Next drop away but "Start over"
+          stays, so the widget is never a dead-end. */}
+      {(status !== "sent" || serviceId) && (
         <div className="mt-7 flex flex-wrap items-center gap-3 border-t border-hairline pt-5">
-          {index > 0 && (
+          {status !== "sent" && index > 0 && (
             <button type="button" onClick={() => goBy(-1)} className="btn btn-secondary">
               {copy.back}
             </button>
