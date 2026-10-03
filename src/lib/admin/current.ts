@@ -1,0 +1,63 @@
+// What the editor should prefill: the content as it is right now. In dev/local
+// that means reading the file back from disk, so a save is reflected on reload
+// even before a module-graph refresh. In production it is the bundled content
+// (what the live site renders until the next deploy). Node-only.
+
+import { allArticles, type Article } from "../blog/articles.ts";
+import { capabilities, clientsForDisplay, contact } from "../content.ts";
+import { coercePricing, pricing, type Pricing } from "../estimator/pricing.ts";
+import { allTestimonials, type Testimonial } from "../testimonials/testimonials.ts";
+import type { Section } from "./sections.ts";
+import { persistenceMode, readCollectionCurrent, readDocumentCurrent, readSectionFromDisk } from "./store.ts";
+
+function bundled(section: Section): unknown {
+  switch (section.id) {
+    case "contact":
+      return contact;
+    case "capabilities":
+      return capabilities;
+    case "clients":
+      return clientsForDisplay();
+  }
+}
+
+export async function currentContent(section: Section): Promise<unknown> {
+  if (persistenceMode() === "fs") {
+    try {
+      return await readSectionFromDisk(section.file);
+    } catch {
+      // Fall through to the bundled copy if the file can't be read.
+    }
+  }
+  return bundled(section);
+}
+
+/** The current article collection for the editor: fresh from the store, else the bundle. */
+export async function currentArticles(): Promise<Article[]> {
+  if (persistenceMode() === "none") return [...allArticles];
+  try {
+    return (await readCollectionCurrent("articles")) as Article[];
+  } catch {
+    return [...allArticles];
+  }
+}
+
+/** The current estimator rate card for the editor: fresh from the store, else the bundle. */
+export async function currentPricing(): Promise<Pricing> {
+  if (persistenceMode() === "none") return pricing;
+  try {
+    return coercePricing(await readDocumentCurrent("pricing"));
+  } catch {
+    return pricing;
+  }
+}
+
+/** The current testimonials collection for the editor: fresh from the store, else the bundle. */
+export async function currentTestimonials(): Promise<Testimonial[]> {
+  if (persistenceMode() === "none") return [...allTestimonials];
+  try {
+    return (await readCollectionCurrent("testimonials")) as Testimonial[];
+  } catch {
+    return [...allTestimonials];
+  }
+}

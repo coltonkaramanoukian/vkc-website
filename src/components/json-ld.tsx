@@ -46,7 +46,20 @@ export function buildJsonLd(): Record<string, unknown> {
         name: site.brandName,
         legalName: site.legalName,
         url,
+        // The brand mark the manifest already ships; gives search a logo to
+        // show. Not a claim, just the icon that is already on the site.
+        logo: `${url}/icon.svg`,
         ...contactFields,
+      },
+      // The site entity itself: bilingual, published by the organization. Pure
+      // scaffolding (name/url/language), no claim a content field could make.
+      {
+        "@type": "WebSite",
+        "@id": `${url}/#website`,
+        url,
+        name: site.brandName,
+        inLanguage: ["fr-CA", "en-CA"],
+        publisher: { "@id": `${url}/#organization` },
       },
       business,
     ],

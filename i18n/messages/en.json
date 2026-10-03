@@ -25,7 +25,9 @@
       "containers": "Containers",
       "industries": "Industries",
       "contact": "Contact",
-      "glossary": "Glossary"
+      "blog": "Blog",
+      "glossary": "Glossary",
+      "estimate": "Estimator"
     },
     "groups": {
       "services": "Services",
@@ -57,6 +59,8 @@
     },
     "clientsHeading": "Who we work for",
     "storiesHeading": "In their words",
+    "testimonialsHeading": "What clients say",
+    "testimonialRating": "Rated {rating} out of five",
     "ctaBand": {
       "heading": "Tell us what is backing up.",
       "body": "A product, a container, a rough run size and a date are enough to start."
@@ -190,9 +194,17 @@
       "title": "Contact VKC Packaging",
       "description": "How to reach VKC Packaging for contract filling, packaging and toll blending in greater Montreal, and what to say to get a useful first answer."
     },
+    "blog": {
+      "title": "Blog and case studies",
+      "description": "Notes, guides and case studies on contract filling, packaging and toll blending, written by the crew that runs the lines in greater Montreal."
+    },
     "glossary": {
       "title": "Glossary of filling and packaging terms",
       "description": "The words used on this site and on a filling floor, defined the way the trade uses them: fill-to-line, weigh-fill, toll blending, kitting, lead hand, QC sheet and more."
+    },
+    "estimate": {
+      "title": "Project estimator",
+      "description": "Get an instant ballpark for a filling, packaging, or blending run. Pick a service, enter your quantity and any add-ons, and see an estimated range on the spot — a figure to plan around, not a binding quote."
     }
   },
   "home": {
@@ -1206,6 +1218,16 @@
       ],
       "quoteNote": "Ready to talk numbers? The longer form asks about the product, its container and the run size: [Get a quote](/quote)."
     },
+    "blog": {
+      "eyebrow": "Blog",
+      "h1": "Notes from the plant floor",
+      "lead": "What we run, read and learn about contract filling and packaging. New posts land here; case studies show how a finished production run actually went.",
+      "emptyTitle": "No posts yet",
+      "emptyBody": "The first article is on its way. Come back soon, or tell us what you would like us to write about.",
+      "readMore": "Read the post",
+      "allPosts": "All posts",
+      "published": "Published"
+    },
     "glossary": {
       "eyebrow": "Glossary",
       "h1": "The words on the floor",
@@ -1299,6 +1321,80 @@
         {
           "term": "Weigh-fill",
           "def": "Filling a container to a target weight rather than to a line, so that every unit carries the same amount of product whatever the container’s shape. The other of the two fill methods."
+        }
+      ]
+    },
+    "estimate": {
+      "eyebrow": "Estimate",
+      "h1": "See a ballpark before you call",
+      "lead": "Tell us what you need run and roughly how much of it, and you’ll get an estimated range in a few clicks. Send it straight over to turn into a real quote.",
+      "disclaimerTitle": "A ballpark, not a quote",
+      "disclaimer": "This gives an estimated range from the rates we keep on file, so you can plan around a figure before you call. It is not a binding quote — the real number depends on your product, container, timeline and volume.",
+      "placeholderNote": "Heads up — the rates behind this estimator are placeholders while we finish setting our numbers, so treat any figure here as a rough illustration for now.",
+      "servicesTitle": "What you can estimate",
+      "servicesIntro": "Two ways we can help, depending on whether the work happens at your plant or ours.",
+      "start": "Start the estimate",
+      "fallbackTitle": "The estimator needs JavaScript",
+      "fallbackBody": "Turn it on for an instant range, or tell us about your project on the quote form and we’ll send a number.",
+      "fallbackLink": "Go to the quote form",
+      "stepService": "Service",
+      "stepQuantity": "Amount",
+      "stepOptions": "Add-ons",
+      "stepResult": "Estimate",
+      "stepDetails": "Details",
+      "serviceHeading": "What do you need run?",
+      "quantityHeading": "Roughly how much?",
+      "quantityHint": "A round number is fine — this is a ballpark.",
+      "quantityError": "Enter an amount above zero to see a range.",
+      "optionsHeading": "Anything to add?",
+      "optionsHint": "Tick what applies. Leave them off if you’re not sure.",
+      "optionsNone": "No add-ons apply to this service.",
+      "resultHeading": "Your ballpark",
+      "resultRangeLabel": "Estimated range",
+      "resultNote": "A rough range from the rates on file. Send it over and we’ll confirm a real quote with you.",
+      "back": "Back",
+      "next": "Next",
+      "reset": "Start over",
+      "getQuote": "Send this estimate to us",
+      "detailsHeading": "Where do we send the follow-up?",
+      "detailsIntro": "Add your details and we’ll turn this ballpark into a real quote.",
+      "company": "Company",
+      "name": "Your name",
+      "contact": "Email or phone",
+      "contactHint": "Whichever is easier to reach you on.",
+      "notes": "Anything else?",
+      "notesHint": "Product, container, timeline — whatever helps us price it.",
+      "submit": "Send my estimate request",
+      "sending": "Sending…",
+      "sent": "Got it — thank you.",
+      "sentBody": "We have your estimate and details, and we’ll be in touch with a real quote.",
+      "errorMsg": "That didn’t send. Try again, or reach us on the contact page.",
+      "rateLimited": "That’s a few tries in a row. Give it a minute, then send again.",
+      "invalid": "Check the highlighted fields and send again.",
+      "unconfigured": "The form isn’t connected yet. Please reach us on the contact page.",
+      "unconfiguredPhone": "The form isn’t connected yet. Please call us at {phone}.",
+      "required": "(required)",
+      "privacy": "We use your details only to reply.",
+      "privacyLink": "How we handle your data",
+      "summaryTitle": "On-site estimator — ballpark only",
+      "placeholderTag": "placeholder rates",
+      "faqTitle": "Questions about the estimate",
+      "faq": [
+        {
+          "q": "Is this a real quote?",
+          "a": "No — it’s a ballpark from the rates we keep on file. We confirm a real number once we know your product, container, volume and timeline, and we put it in writing."
+        },
+        {
+          "q": "How accurate is it?",
+          "a": "It’s a rough range meant to set expectations, not a commitment. The more you tell us, the closer the real quote will land."
+        },
+        {
+          "q": "How is it worked out?",
+          "a": "From a per-unit or per-shift rate, plus any add-ons you pick, with a setup amount and a minimum. We set those rates ourselves and keep them current."
+        },
+        {
+          "q": "What happens after I send it?",
+          "a": "Your range and details reach us the same way the [quote form](/quote) does, and a real person replies with a firm number."
         }
       ]
     }

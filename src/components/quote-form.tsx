@@ -78,7 +78,9 @@ export function QuoteForm({ mode, source: sourceProp, locale, labels: l, contain
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = event.currentTarget;
-    const body = Object.fromEntries(new FormData(form).entries());
+    const body: Record<string, FormDataEntryValue | string> = Object.fromEntries(new FormData(form).entries());
+    // Where the form was submitted, for VCM's lead record (nullable, server-bounded).
+    if (typeof window !== "undefined") body.page_path = window.location.pathname;
     setStatus("sending");
     setErrors({});
     try {

@@ -15,6 +15,22 @@ export type FormLocale = (typeof LOCALES)[number];
 
 export type ErrorCode = "required" | "email" | "contact" | "choice" | "length";
 
+/**
+ * The structured estimate the interactive estimator produces. It rides on the
+ * QuoteRequest so /api/quote can forward it to VCM as typed fields and rebuild
+ * the email's text summary from it (see lib/quote/forward.ts, email.ts).
+ */
+export interface LeadEstimate {
+  serviceId: string;
+  quantity: number;
+  unit: string;
+  optionIds: string[];
+  low: number;
+  high: number;
+  currency: string;
+  placeholder: boolean;
+}
+
 export interface QuoteRequest {
   source: Source;
   locale: FormLocale;
@@ -30,6 +46,10 @@ export interface QuoteRequest {
   units: string | null;
   timeline: string | null;
   notes: string | null;
+  /** Present only for leads that came from the estimator; null otherwise. */
+  estimate: LeadEstimate | null;
+  /** The path the form was submitted from, for VCM. Nullable, ≤300. */
+  pagePath: string | null;
 }
 
 export type ValidationResult =
@@ -48,6 +68,11 @@ const MAX = {
   notes: 4000,
 } as const;
 
+// Bounds for the structured estimate, mirroring what VCM re-validates so a
+// well-formed estimate is never rejected on their side.
+const ESTIMATE_MAX = { serviceId: 64, unit: 64, currency: 8, optionId: 64, options: 20 } as const;
+const MAX_PAGE_PATH = 300;
+
 // Deliberately permissive; the reply is by a human, not an automated mailer.
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -65,6 +90,61 @@ function choice<T extends string>(value: string, options: readonly T[]): T | nul
 /** True when the honeypot field carries anything at all. */
 export function isHoneypotFilled(raw: Raw): boolean {
   return text(raw, "website") !== "";
+}
+
+/** A finite, non-negative number — and NOT a boolean (typeof excludes those). */
+function finiteNonNegative(value: unknown): value is number {
+  return typeof value === "number" && Number.isFinite(value) && value >= 0;
+}
+
+/**
+ * Validate the optional structured estimate. Absent/null is fine (not every
+ * lead has one). When present it must be a well-formed object within bounds;
+ * anything malformed is rejected rather than silently dropped, so a tampered or
+ * buggy payload fails fast here instead of at VCM.
+ */
+function validateEstimate(value: unknown): { estimate: LeadEstimate | null; ok: boolean } {
+  if (value === undefined || value === null) return { estimate: null, ok: true };
+  if (typeof value !== "object" || Array.isArray(value)) return { estimate: null, ok: false };
+
+  const raw = value as Raw;
+  const serviceId = typeof raw.serviceId === "string" ? raw.serviceId.trim() : "";
+  const unit = typeof raw.unit === "string" ? raw.unit.trim() : "";
+  const currency = typeof raw.currency === "string" ? raw.currency.trim() : "";
+
+  if (!serviceId || serviceId.length > ESTIMATE_MAX.serviceId) return { estimate: null, ok: false };
+  if (unit.length > ESTIMATE_MAX.unit) return { estimate: null, ok: false };
+  if (!currency || currency.length > ESTIMATE_MAX.currency) return { estimate: null, ok: false };
+  if (!finiteNonNegative(raw.quantity) || !finiteNonNegative(raw.low) || !finiteNonNegative(raw.high)) {
+    return { estimate: null, ok: false };
+  }
+  if (raw.low > raw.high) return { estimate: null, ok: false };
+  if (typeof raw.placeholder !== "boolean") return { estimate: null, ok: false };
+
+  if (!Array.isArray(raw.optionIds) || raw.optionIds.length > ESTIMATE_MAX.options) {
+    return { estimate: null, ok: false };
+  }
+  const optionIds: string[] = [];
+  for (const id of raw.optionIds) {
+    if (typeof id !== "string" || id.length === 0 || id.length > ESTIMATE_MAX.optionId) {
+      return { estimate: null, ok: false };
+    }
+    optionIds.push(id);
+  }
+
+  return {
+    estimate: {
+      serviceId,
+      quantity: raw.quantity,
+      unit,
+      optionIds,
+      low: raw.low,
+      high: raw.high,
+      currency,
+      placeholder: raw.placeholder,
+    },
+    ok: true,
+  };
 }
 
 export function validateQuote(raw: Raw, containerIds: readonly string[]): ValidationResult {
@@ -118,6 +198,13 @@ export function validateQuote(raw: Raw, containerIds: readonly string[]): Valida
   const source = choice(text(raw, "source"), SOURCES) ?? "quote";
   const locale = choice(text(raw, "locale"), LOCALES) ?? "fr";
 
+  const { estimate, ok: estimateOk } = validateEstimate(raw.estimate);
+  if (!estimateOk) errors.estimate = "choice";
+
+  // Low-stakes metadata: drop it rather than fail the lead if it is overlong.
+  const pagePathRaw = text(raw, "page_path");
+  const pagePath = pagePathRaw && pagePathRaw.length <= MAX_PAGE_PATH ? pagePathRaw : null;
+
   if (Object.keys(errors).length > 0 || !service) {
     return { ok: false, errors };
   }
@@ -140,6 +227,8 @@ export function validateQuote(raw: Raw, containerIds: readonly string[]): Valida
       units: units || null,
       timeline: timeline || null,
       notes: notes || null,
+      estimate,
+      pagePath,
     },
   };
 }

@@ -19,6 +19,7 @@ const SERVICE_LABEL: Record<QuoteRequest["service"], string> = {
 export function composeQuoteEmail(
   request: QuoteRequest,
   containerName: (id: string) => string,
+  estimateSummary: string | null = null,
 ): QuoteEmail {
   const container =
     request.container === null
@@ -48,6 +49,9 @@ export function composeQuoteEmail(
     "",
     ...rows.filter(([, value]) => value !== null).map(([label, value]) => `${label}: ${value}`),
   ];
+  // The estimator's summary (rebuilt from the structured estimate), then the
+  // customer's own words — kept separate so `notes` stays their words alone.
+  if (estimateSummary) lines.push("", estimateSummary);
   if (request.notes) lines.push("", "Notes:", request.notes);
 
   const origin = `${request.source} page`;

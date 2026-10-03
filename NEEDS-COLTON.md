@@ -46,7 +46,11 @@ with no cookies and nothing in browser storage. That is what `/privacy` says
 
 ## 3. Content that renders nothing until you fill it
 
-`docs/CONTENT-INTAKE.md` lists every field as `file:field`. The short version:
+**You can now fill most of this yourself, without touching code or JSON — see
+§11, the content editor at `/admin`.** The file-by-file notes below still hold
+(they are what the editor writes), and photos/logos/video stay out of the editor
+because they are imaging. `docs/CONTENT-INTAKE.md` lists every field as
+`file:field`. The short version:
 
 - **`content/contact.json`**: phone, email, address, hours, privacy officer.
   Phone is the one that changes the site most: "Call …" appears beside every
@@ -208,6 +212,382 @@ in-page anchor handler already does). It changes nothing for mouse or touch —
 they never focus a card without also seeing it. It is Vito's call how his reel
 should behave for a keyboard, so it waits for him rather than an agent editing
 his showcase unseen.
+
+### 10b. The container-name marquee and "pause, stop, hide" (Vito's lane)
+
+Found in the 2026-09-29 usability pass 11, and left here for the same reason as
+10 above: it lives in Vito's cinematic motion, not the chrome an agent owns.
+
+The home page runs a container-name ticker (`.marquee` / `.marquee-track` in
+`src/app/globals.css`, rendered from `src/app/[locale]/page.tsx`) that scrolls
+sideways forever (`animation: marquee 50s linear infinite`). It is built
+carefully: it is `aria-hidden="true"` (a decorative, duplicated brand flourish,
+invisible to a screen reader) and the animation is gated behind
+`@media (prefers-reduced-motion: no-preference)`, so a visitor who has asked
+their OS for reduced motion sees it standing still.
+
+The gap is narrow and strict: **WCAG 2.2.2 "Pause, Stop, Hide" (Level A)** asks
+that any content which moves automatically, lasts more than five seconds, and
+sits beside other content offers the visitor a way to pause it — and it asks
+this of *every* visitor, not only the ones who set the OS reduced-motion flag.
+A sighted visitor with vestibular or attention sensitivity who has never found
+that setting gets a ticker that never stops. The reduced-motion gate and the
+`aria-hidden` already cover the two cohorts most sites forget; what 2.2.2 wants
+on top is a control anyone can reach.
+
+Why it is not fixed unseen: the only *complete* fix is a visible pause/play
+control on the ticker, which is a design decision on one of Vito's signature
+home elements. A cheaper CSS-only half-measure —
+`.marquee:hover .marquee-track { animation-play-state: paused }` — gives a
+mouse user a pause but does nothing for touch (the mobile majority) or a
+keyboard, so shipping it alone would look done without being done. It is Vito's
+call how his ticker should offer a pause; it waits for him. Minor, not a
+blocker — the content is decorative and repeated as real text elsewhere on the
+page.
+
+## 11. The content editor at `/admin` (built 2026-10-02) — turn it on
+
+A password-protected editor so you can fill the content in §3 and §9 yourself —
+contact details, capabilities/specs, and the client list — with a form instead
+of editing JSON. It writes the same `content/*.json` files by hand, so every
+guard still runs on what you save, and the editor itself refuses, at save time,
+any staffing wording (§4) or forbidden claim (§1) — the same matchers
+`guard:staffing` and `guard:claims` use. **It is off until you set two secrets**,
+and that is deliberate: with nothing set, `/admin` shows a login page but no
+password works, so the surface cannot be used.
+
+**What is NOT in the editor, on purpose:** photos (`photos.json`), client logos
+(the `logo` field), generated scenes (`scenes.json`) and the demo video
+(`media.json`). All of that is imaging — Vito's lane (§8). The editor rounds a
+client's existing logo through untouched; it never sets one.
+
+### Turn it on (two secrets, both required)
+
+Set these on Vercel (project `vkc-website-wz5a`, Settings → Environment
+Variables, Production — and Preview if you want to use it there too):
+
+- `ADMIN_PASSWORD` — the one password that signs you in. Pick a long, random
+  one; it is the only credential.
+- `ADMIN_SESSION_SECRET` — a random string, **16+ characters** (e.g.
+  `openssl rand -hex 32`). It signs the login cookie; it is not typed anywhere.
+  Changing it later signs everyone out.
+
+With both set, go to `https://<the site>/admin`, sign in, and edit. The session
+lasts 12 hours, in an httpOnly cookie; "Sign out" clears it.
+
+### Make saving publish (production persistence)
+
+In local development the editor writes the files on disk. **In production it has
+nowhere to write unless you give it a GitHub token** — then a save becomes a
+commit to the repo, which (because merging to `main` deploys, §1) rebuilds and
+publishes the site a minute or two later. Until the token is set, a save in
+production returns "nothing was saved — no content store configured" and writes
+nothing (a fail-safe, never a silent loss).
+
+Set, on the same project:
+
+- `ADMIN_GITHUB_TOKEN` — a GitHub token with **write access to the `Contents`**
+  of `coltonkaramanoukian/vkc-website` (a fine-grained PAT scoped to just that
+  repo is best). This is what commits your edits.
+- `ADMIN_GITHUB_REPO` — `coltonkaramanoukian/vkc-website`.
+- `ADMIN_GITHUB_BRANCH` — optional, defaults to `main`. Leave it on `main` to
+  publish; point it at a branch if you'd rather review edits as PRs first.
+- `ADMIN_GITHUB_AUTHOR_NAME` / `ADMIN_GITHUB_AUTHOR_EMAIL` — optional, the name
+  on the commit.
+
+Each save commits one file with a message like `content: update contact via
+admin editor`. You can watch them land in the repo's commit history.
+
+### Two things the editor does NOT check (that the full gate does)
+
+- **Numbers (NC-3)** and **FR/EN parity (NC-4)** are not enforced at save. A
+  capability number you type becomes the content the number guard trusts, by
+  design; and the editor lets you save an English value without its French yet.
+  Write both languages for anything public, the way the rest of the site does.
+- It proves wording, not law: §4's lawyer answer (§4 above) is still yours.
+
+### Flagged for you (an agent could not do these)
+
+- **`.env.example` was not updated** with the five `ADMIN_*` keys: this
+  environment blocks agents from reading or writing any `.env*` file. Add them
+  there yourself so the next person sees them. Your local `.env.local` already
+  has `ADMIN_PASSWORD` and `ADMIN_SESSION_SECRET` (added for local testing);
+  change them to real values before relying on them.
+- **Pick the real production password and secret** — the local ones are
+  throwaway test values.
+
+Built branch-only, verified locally (login → edit contact → save → both
+`/en/contact` and `/fr/nous-joindre` re-render; staffing/claim saves refused).
+Nothing was deployed. Code: `src/app/admin/`, `src/app/api/admin/`,
+`src/components/admin/`, `src/lib/admin/`, the `/admin` gate in `src/proxy.ts`.
+
+## 12. The blog / case-studies system (built 2026-10-02)
+
+A public blog and an editor for it, built on the same auth + git-commit-back as
+the content editor (§11). **It turns on with the same two secrets** —
+`ADMIN_PASSWORD` + `ADMIN_SESSION_SECRET` — and publishes the same way (a save
+in production commits to the repo, which deploys). Nothing extra to configure.
+
+- **Write posts** at `/admin` → "Blog & case studies". Each post has a slug, a
+  date, a category and tags, a bilingual title / excerpt / Markdown body, and a
+  draft ↔ published toggle. The editor refuses staffing wording (§4) and claims
+  the site can't make (§1) on save, the same as the content editor.
+- **A draft is private.** It shows only in the editor; it never appears on the
+  public blog or gets a page until you publish it. The site ships with one
+  **example draft** so you can see the shape — rewrite it or delete it.
+- **Where it appears.** Published posts show on `/blog` (FR `/blogue`), each with
+  its own page at `/blog/<slug>`, newest first, with correct metadata, Article +
+  breadcrumb structured data, hreflang and a sitemap entry — all automatic.
+- **Write both languages.** A post renders in a language only when it has a title
+  and body there (an English-only post shows on `/blog`, not `/blogue`). For a
+  public post, fill EN and FR, the way the rest of the site does.
+- **Article cover images are a reserved slot for the imaging run (Vito).** The
+  `coverImage` field exists on every post but is not set from the editor and not
+  rendered yet; wiring article images (and any guard for them) is imaging work,
+  not an agent's. Everything else on a post is yours to write.
+- **One caveat, by design:** article *pages* are dynamic and are not scanned by
+  the build guards (numbers/claims/staffing/fr) the way the fixed pages are — the
+  editor's save-time checks are their gate. The `/blog` index itself is guarded
+  like any other page.
+
+As with §11, **`.env.example` could not be updated by an agent** (this
+environment blocks every `.env*` file); the `ADMIN_*` keys it needs are the same
+ones listed in §11.
+
+## 13. The quote estimator at `/estimate` (built 2026-10-02)
+
+A public, bilingual lead-gen estimator (`/estimate`, FR `/estimation`): the
+visitor picks a service, enters a quantity and a few add-ons, and gets an instant
+**ballpark range** — then a last step turns it into a lead. It runs on the same
+auth + git-commit-back as §11/§12; the rates it uses live in a new
+owner-editable file, `content/pricing.json`, edited at `/admin` → "Estimator
+pricing". Nothing extra to turn on beyond the §11 secrets (and, for the lead
+email, the §2 mail keys — the lead rides the **existing** `/api/quote` handler, no
+new backend).
+
+### Two calls I made that are yours to confirm
+
+1. **This puts dollar figures on the site, which brushes up against CLAUDE.md §1
+   ("No pricing, no dollar amounts").** No guard forbids dollars — `guard:numbers`
+   only bans *invented* numbers in the shipped HTML, and it stays green because
+   every figure is computed in the browser (the guards render with JavaScript
+   off) and the rates live in `content/`. But the *letter* of §1 and a
+   dollars-showing estimator disagree, and a future run reading §1 could tear the
+   estimator out as a violation. **Recommended: add a dated carve-out to §1**, in
+   the same shape as the Higgsfield amendment (2026-09-27). Suggested wording:
+
+   > *An interactive estimate of the customer's own project — computed
+   > client-side from owner-set rates in `content/pricing.json` and shown as a
+   > ballpark range, never a binding quote — is permitted (Colton, 2026-10-02).
+   > It states no fixed price and renders no price list.*
+
+   Until you add it, the estimator is defensible (it says "ballpark, not a quote"
+   throughout) but unprotected from a later cleanup.
+
+2. **I remapped the inputs to VKC's real services.** The brief described
+   floor-coating inputs (square footage, coating system, prep level); VKC does
+   contract filling, packaging and toll blending, not floor coating, so a
+   floor-coating estimator would imply a service that doesn't exist (§1). The
+   estimator is modelled on the real services instead — **Bottleneck** priced per
+   unit, **Second Shift** per shift, **toll blending** per litre — which also
+   matches the site's existing "priced per unit or per shift" language.
+
+### Set your real rates (they ship as PLACEHOLDERS)
+
+`content/pricing.json` ships with **obvious round placeholders** and a
+`"placeholder": true` flag. While that flag is on, the public page shows a
+"placeholder rates" notice and the admin dashboard marks it "Placeholder rates".
+**Go to `/admin` → "Estimator pricing", set your real numbers, then turn off
+"These are placeholder rates".** The seeded placeholders (all made up — replace
+them):
+
+- Bottleneck — $1.25 / unit, $500 setup, $1,000 minimum
+- Second Shift — $2,800 / shift, $0 setup, $2,800 minimum
+- Toll blending — $0.90 / litre, $500 setup, $1,000 minimum
+- Add-ons — labels +$0.25/unit, kitting +$0.75/unit, extra QC docs +$350 flat,
+  rush ×1.25
+- Range spread ±20%, rounded to the nearest $50, currency CAD
+
+Each service also carries a "sends lead as" mapping (which of the quote handler's
+`second-shift` / `bottleneck` / `unsure` the lead is filed under). You can add,
+remove or rename services and add-ons entirely from the editor.
+
+### How the lead reaches you
+
+The final step POSTs to the **same `/api/quote` handler** the quote and contact
+forms use — so a lead needs the §2 mail keys (`RESEND_API_KEY`, `QUOTE_TO_EMAIL`,
+`QUOTE_FROM_EMAIL`) and nothing else. The email's notes carry a readable summary
+(service, amount, add-ons, the ballpark range, and a "placeholder rates" tag
+while the flag is on). Until the mail keys are set, the estimator's send shows
+"the form isn't connected yet — reach us on the contact page", exactly like the
+quote form.
+
+As with §11/§12, **`.env.example` could not be updated by an agent**; the keys are
+the same ones already listed there.
+
+Built branch-only, verified locally end-to-end (walk the estimator → a range →
+submit a lead → it reaches `/api/quote` and validates as `service=bottleneck`;
+edit the Bottleneck rate in `/admin` → save → the public estimate changes
+$6,400–$9,600 → $9,400–$14,100). All guards green at 44 pages. Nothing deployed.
+Code: `src/app/[locale]/estimate/`, `src/components/estimator/`,
+`src/lib/estimator/`, `src/app/admin/pricing/`, `src/app/api/admin/pricing/`,
+`src/lib/admin/pricing.ts`, `content/pricing.json`.
+
+## 14. Owner-editable testimonials / social proof (built 2026-10-02)
+
+A testimonials section on the home page ("What clients say" / "Ce que disent
+les clients"), fed by a new owner-editable file, `content/testimonials.json`,
+edited at `/admin` → "Testimonials". Each entry is a quote in both languages,
+an author name, an optional company and role, an optional date, and an optional
+1–5 rating. It runs on the same auth + git-commit-back + save-time guards as
+§11/§12/§13 — nothing extra to turn on beyond the §11 secrets (`ADMIN_PASSWORD`,
+`ADMIN_SESSION_SECRET`), and no new backend.
+
+**It ships empty.** The file holds ONE clearly-labelled example that is
+**unpublished**, with no real name and no rating, so the live site shows
+**nothing** until you publish something. A published entry needs a quote in both
+languages and an author; anything short of that renders nothing.
+
+**When it has a real rating, it earns real stars.** A published entry with a
+rating shows star icons (with a screen-reader label) and emits schema.org
+`Review` + `AggregateRating` structured data pointing at the organization. Leave
+the rating blank and none of that appears — there are **no invented stars and no
+fake aggregate**. The save screen refuses a forbidden claim or a staffing term
+inside a quote (the same §1/§4 checks the rest of `/admin` uses), and the
+build-time guards scan published testimonials too, so a defect is caught in two
+places.
+
+### The permission standard (same as a client name)
+
+A testimonial names a real person and a real company, so it is held to the same
+standard as a client logo under §1: **add one only with that person's
+permission.** The admin screen says so; the example entry says so. No agent will
+ever write a real quote or name here — that is yours, with their written yes.
+
+### Two calls I made that are yours to confirm
+
+1. **A published testimonial names a company, and §1 says client names render
+   only from `content/clients.json` approved entries.** This is a deliberate new
+   carve-out: testimonials carry their attribution in `content/testimonials.json`
+   instead, gated by the "published" flag and the same save-time §1/§4 checks.
+   No guard forbids it (the claims/number guards care about invented *facts*, not
+   a named customer), and it ships safe because nothing is published. But the
+   *letter* of §1 and a testimonial naming a company disagree, and a future run
+   reading §1 could pull the section out. **Recommended: add a dated carve-out to
+   §1**, in the same shape as the Higgsfield (2026-09-27) and estimator
+   (§13) amendments. Suggested wording:
+
+   > *A customer testimonial — a quote with the named customer's permission,
+   > stored in `content/testimonials.json` and shown only while `published` —
+   > may name that customer and carry a real rating (Colton, 2026-10-02). It
+   > invents no rating and no aggregate; an unrated testimonial shows no stars.*
+
+   Until you add it, the section is defensible (it ships empty, double-gated, and
+   permission-bound) but unprotected from a later cleanup.
+
+2. **There are now TWO social-proof systems, and you should decide whether you
+   want both.** §9's "In their words" (`content/clients.json`, rendered by
+   `src/components/client-stories.tsx`) already shows approved-client quotes and
+   case studies on home/contact/visit. This new section (`testimonials.json`,
+   `src/components/testimonials.tsx`) adds standalone quotes with ratings and
+   structured data. Both ship empty today, so nothing collides on the live site
+   yet — but once you fill them you could end up with two quote blocks on the
+   home page. My recommendation, for when you populate them: use
+   **`testimonials.json`** for short named quotes (and any you want to carry a
+   star rating / rich result), and keep **`clients.json`** for the approved
+   client *list* and longer case studies. If you only want one, say which and a
+   run can retire the other cleanly. This is a product call, not a bug.
+
+### How to use it
+
+Go to `/admin` → "Testimonials". Rewrite the example with a real customer's
+words (both languages), add their name, optionally company/role/date, set a
+rating only if it is a real one, tick **Published**, Save. To hide one without
+deleting it, untick Published. As with §11–§13, **`.env.example` could not be
+updated by an agent**; the secrets are the ones already listed there.
+
+Built branch-only, verified locally end-to-end (admin → publish a rated entry →
+save writes `content/testimonials.json` → the home section renders the quote,
+accessible stars, and `Review` + `AggregateRating` JSON-LD in both locales;
+unpublished → the section renders nothing). All guards green at 44 pages; the
+page census is unchanged (testimonials is a home section, not a new route).
+Nothing deployed. Code: `src/components/testimonials.tsx`,
+`src/lib/testimonials/`, `src/app/admin/testimonials/`,
+`src/app/api/admin/testimonials/`, `src/lib/admin/testimonials.ts`, the added
+`Review`/`AggregateRating` builders in `src/lib/structured-data.ts`, and
+`content/testimonials.json`.
+
+## 15. Website → VCM lead forward (built 2026-10-02)
+
+Every lead the site captures (the quote form, the contact form, and the
+estimator — all through `POST /api/quote`) is now ALSO forwarded to VCM's
+ingestion endpoint, signed with a shared secret, so a quote request lands in the
+call queue and not just your inbox. This is the **website side** of the
+integration VCM's session designed in `WEBSITE_LEAD_INTAKE.md`; the VCM side was
+built there separately.
+
+### Two environment variables — set them in Vercel (Production only)
+
+The forward is **off until both are set**, so the code is safe to ship now and
+the site behaves exactly as today until you turn it on. Add these to the Vercel
+project:
+
+- `VCM_INTAKE_URL` = `https://vcmsalesforce.com/api/v1/intake/website-lead/`
+- `WEBSITE_INTAKE_SECRET` = a shared secret of **≥32 random bytes**, e.g.
+  `python -c "import secrets; print(secrets.token_urlsafe(48))"`
+
+**Set them on Production only — leave Preview UNSET.** Preview deploys then never
+write to the live CRM (the forward skips when either var is blank). As with
+§11–§14, **an agent can't edit `.env*` files here**, so add these yourself (and to
+`.env.example` if you keep it current).
+
+### The same secret must be set on BOTH sides (what the VCM side still needs)
+
+`WEBSITE_INTAKE_SECRET` on Vercel must be the **exact same string** as the secret
+in VCM's droplet `crm/.env`. From `WEBSITE_LEAD_INTAKE.md`, before this does
+anything in production the VCM side still needs:
+
+1. **VCM merged + deployed** (its branch `feat/website-lead-intake`; that push
+   runs migration `0033` on the live CRM database — the VCM session's call, not
+   mine).
+2. **The secret generated once and set in both places** — droplet `crm/.env`
+   (then restart `crm.service`) and Vercel Production here. Until VCM has the
+   secret, its endpoint answers `503 intake_disabled` and the website just logs
+   the forward as failed; nothing breaks.
+3. A reachable `https://vcmsalesforce.com/api/v1/intake/website-lead/`.
+
+The signer here is proven byte-for-byte against VCM's shared test vector
+(`SIGNATURE_VECTOR` in VCM's `core/tests_website_intake.py`), so a mismatch at
+runtime means the secret or the clock differs between the two sides, not the code.
+
+### One deliberate deviation from the spec — for the VCM session to note
+
+`WEBSITE_LEAD_INTAKE.md` §3 says to await the email and the forward
+"concurrently" and show success "if either succeeded." You asked for
+**fire-and-forget — don't block or error the user** — and that wins where the two
+disagree. So the **email stays the user-facing capture** (success and latency
+depend on it, exactly as today), and the forward runs concurrently but **never
+blocks the visitor**: when the email succeeds the forward is detached and finished
+in the background (Vercel `after()`); only when the email fails or is unconfigured
+does the forward get a short (2.5s) grace to still carry the submit before the
+page responds. Net effect — a slow or unreachable VCM never delays or errors a
+visitor, and VCM still receives every lead (its `submission_id` idempotency +
+dedupe absorb any retry). The one case the spec's wording covered and this does
+not: if the **email is down AND the forward is slower than 2.5s**, the visitor
+sees the existing "couldn't send — call us" message even though VCM will still get
+the lead in the background. With leads rare and the email reliable in production,
+that trade reads as right — flagged so both sides agree.
+
+### How to confirm it's live (optional)
+
+After setting the vars and redeploying, submit a real quote and look for the lead
+on VCM's inbound / speed-to-lead card; the website logs the forward outcome as
+`vcm_forwarded` / `vcm_failed` (no personal data in the line). Built branch-only,
+verified locally end-to-end against a mock VCM (valid signed forward received with
+the exact `vkc.website-lead/1` payload; a stalled VCM capped the visitor at 2.5s,
+a refused one at ~15ms). Nothing deployed. Code: `src/lib/quote/forward.ts`,
+`src/app/api/quote/route.ts`, `src/lib/quote/validate.ts`, `src/lib/quote/email.ts`,
+`src/components/estimator/estimator.tsx`, `src/components/quote-form.tsx`.
 
 ## Things that look like problems and are not
 

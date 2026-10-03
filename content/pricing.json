@@ -1,0 +1,86 @@
+{
+  "placeholder": true,
+  "currency": "CAD",
+  "rangeSpreadPct": 20,
+  "roundTo": 50,
+  "services": [
+    {
+      "id": "bottleneck",
+      "quoteService": "bottleneck",
+      "name": {
+        "en": "Bottleneck — overflow filling and packaging",
+        "fr": "Goulot — remplissage et conditionnement de surplus"
+      },
+      "unitLabel": { "en": "units", "fr": "unités" },
+      "quantityLabel": {
+        "en": "How many units in the run?",
+        "fr": "Combien d’unités dans la série?"
+      },
+      "ratePerUnit": 1.25,
+      "setupFee": 500,
+      "minimum": 1000
+    },
+    {
+      "id": "second-shift",
+      "quoteService": "second-shift",
+      "name": {
+        "en": "Second Shift — we run a shift on your line",
+        "fr": "Deuxième quart — nous faisons rouler un quart sur votre ligne"
+      },
+      "unitLabel": { "en": "shifts", "fr": "quarts" },
+      "quantityLabel": {
+        "en": "How many shifts do you need?",
+        "fr": "Combien de quarts vous faut-il?"
+      },
+      "ratePerUnit": 2800,
+      "setupFee": 0,
+      "minimum": 2800
+    },
+    {
+      "id": "toll-blending",
+      "quoteService": "bottleneck",
+      "name": {
+        "en": "Toll blending — we blend to your formula",
+        "fr": "Mélange à façon — nous mélangeons selon votre formule"
+      },
+      "unitLabel": { "en": "litres", "fr": "litres" },
+      "quantityLabel": {
+        "en": "How many litres to blend?",
+        "fr": "Combien de litres à mélanger?"
+      },
+      "ratePerUnit": 0.9,
+      "setupFee": 500,
+      "minimum": 1000
+    }
+  ],
+  "options": [
+    {
+      "id": "labeling",
+      "name": { "en": "Apply labels", "fr": "Étiquetage" },
+      "kind": "perUnit",
+      "value": 0.25,
+      "appliesTo": ["bottleneck"]
+    },
+    {
+      "id": "kitting",
+      "name": { "en": "Kitting / multi-pack", "fr": "Mise en trousse / multi-pack" },
+      "kind": "perUnit",
+      "value": 0.75,
+      "appliesTo": ["bottleneck"]
+    },
+    {
+      "id": "qc-docs",
+      "name": { "en": "Extra QC documentation", "fr": "Documentation CQ supplémentaire" },
+      "kind": "flat",
+      "value": 350,
+      "appliesTo": ["bottleneck", "second-shift", "toll-blending"]
+    },
+    {
+      "id": "rush",
+      "name": { "en": "Rush timeline", "fr": "Échéancier accéléré" },
+      "kind": "multiplier",
+      "value": 1.25,
+      "appliesTo": ["bottleneck", "second-shift", "toll-blending"]
+    }
+  ]
+}

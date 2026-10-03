@@ -1,0 +1,26 @@
+[
+  {
+    "slug": "example-draft",
+    "status": "draft",
+    "date": "2026-10-02",
+    "category": "guide",
+    "tags": ["example"],
+    "coverImage": null,
+    "title": {
+      "en": "Example draft — rewrite or delete this",
+      "fr": "Brouillon d’exemple — réécrivez-le ou supprimez-le"
+    },
+    "excerpt": {
+      "en": "A placeholder article that shows the shape of a post. It stays a draft, so it never appears on the live site until you publish it.",
+      "fr": "Un article d’exemple qui montre la forme d’un billet. Il reste un brouillon et n’apparaît jamais sur le site tant que vous ne le publiez pas."
+    },
+    "body": {
+      "en": "This is an example draft, written so you can see how a post reads before you write your own. Open it in the editor at /admin, change the words, or delete it.\n\n## Write in Markdown\n\nUse a blank line between paragraphs. Use **bold** for emphasis and a [link to the services page](/services) to point somewhere else on the site.\n\n## Lists work too\n\n- One point per line\n- Keep each one short\n- Three to five is plenty\n\nWhen the post is ready, set its status to published and save. It will show up on the blog index and get its own page.",
+      "fr": "Ceci est un brouillon d’exemple, écrit pour que vous voyiez comment se lit un billet avant d’écrire le vôtre. Ouvrez-le dans l’éditeur à /admin, changez les mots, ou supprimez-le.\n\n## Rédigez en Markdown\n\nLaissez une ligne vide entre les paragraphes. Utilisez le **gras** pour insister et un [lien vers la page des services](/services) pour renvoyer ailleurs sur le site.\n\n## Les listes fonctionnent aussi\n\n- Un point par ligne\n- Gardez chacun bref\n- Trois à cinq, c’est amplement\n\nQuand le billet est prêt, réglez son état sur publié et enregistrez. Il apparaîtra dans l’index du blogue et aura sa propre page."
+    },
+    "seo": {
+      "title": { "en": null, "fr": null },
+      "description": { "en": null, "fr": null }
+    }
+  }
+]

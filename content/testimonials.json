@@ -1,0 +1,18 @@
+[
+  {
+    "id": "example",
+    "published": false,
+    "quote": {
+      "en": "This is an example testimonial. It stays unpublished, so it never appears on the live site until you publish it — rewrite it with a real customer’s words, with their permission, or delete it.",
+      "fr": "Ceci est un témoignage d’exemple. Il reste non publié et n’apparaît jamais sur le site tant que vous ne le publiez pas — réécrivez-le avec les mots d’un vrai client, avec sa permission, ou supprimez-le."
+    },
+    "author": "Example name",
+    "company": "Example company",
+    "role": {
+      "en": "Their role",
+      "fr": "Leur poste"
+    },
+    "date": null,
+    "rating": null
+  }
+]

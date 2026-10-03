@@ -9,6 +9,7 @@
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
     "test": "node --test \"guard/*.test.ts\" \"src/lib/**/*.test.ts\" \"scripts/lib/*.test.ts\"",
+    "test:e2e": "playwright test",
     "brand:sync": "node scripts/sync-wordmark.ts",
     "qr": "node scripts/qr.ts",
     "render": "node scripts/render-all.ts",

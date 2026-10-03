@@ -1,6 +1,613 @@
-HANDOFF: 2026-09-29 — `main` holds runs 1–5, the image-ban lift (#27), Vito's cinematic redesign (#30), a usability loop (#32–#34), a second usability pass (#36), a third verification-only pass, a fourth pass (#39, #40), a fifth pass (#42), a sixth verification-only pass, a seventh verification-only pass, an eighth pass (#46, print stylesheet), a ninth pass (#48, skip-link focus), and a **tenth pass (this one — verification only, no code change)**. Production is live on `vkc-website-wz5a.vercel.app`, serving current `main`; root 307s to `/en`, an FR browser to `/fr`, `/v` to `/fr/visite`. Passes 1–3 converged on a clean, diminishing-returns close; pass 4 re-audited independently and shipped two real fixes (#39 quote-form contact hint, #40 sticky glossary A–Z); pass 5 re-audited live and found the one defect every prior pass had missed by only ever measuring 375px — a 320px (WCAG 1.4.10 reflow) header overflow that clipped the mobile Menu control (#42, shipped and verified live), then swept 320/375/768 clean site-wide. Pass 6 re-audited live on **five dimensions the prior five passes never measured** (text-spacing WCAG 1.4.12, ultrawide 2560, locale-switch deep-path preservation, sticky-CTA/footer overlap, OG social-share image resolution) plus the core brief dimensions independently — all clean, no code change. Pass 7 went again at **six more dimensions no prior pass measured**, in EN and FR (form `autocomplete`/WCAG 1.3.5, menu Escape/outside/link dismissal, mid-band widths 640–1279 + the `xl` boundary/WCAG 1.4.4, focus-not-obscured/WCAG 2.4.11, content visibility under `prefers-reduced-motion`, and forced-colors/Windows High Contrast) — every one clean or already correctly coded, no code change. **Pass 8 (#46, shipped) found a real defect no prior pass had measured: the print stylesheet.** The site is dark-themed; on paper the light colour tokens (secondary prose, near-white FAQ questions, amber links) printed faint or vanished once a printer dropped the dark backgrounds — 44 failing text elements on the home page, 32 on a service page. Fixed by swapping the six colour tokens to the paper palette under `@media print` (the same set `.vkc-negative` uses) and outlining buttons; **0 failing text elements after, verified live on production.** **Pass 9 (#48, shipped) found the next un-measured defect: the skip link scrolled but never moved keyboard focus.** Every page's first Tab lands on "Skip to content", but `<main>` was not focusable (no `tabindex`), so activating it left `document.activeElement` on `<body>` — a screen-reader user heard nothing move and native fragment navigation only worked in browsers that implement the sequential-focus starting point (WCAG 2.4.1). Fixed with `tabIndex={-1}` on `<main id="main">` (page-shell.tsx) so focus lands on the landmark, plus `#main:focus{outline:none}` so a full-width container doesn't draw the 3px ring around the whole page; verified live that focus now moves to `<main>`, EN + FR, no ring, next Tab in content. The one open usability item (desktop pinned-reel keyboard focus, WCAG 2.4.11) remains in Vito's motion lane, flagged in `NEEDS-COLTON.md` §10, not fixed unseen. **Pass 10 independently measured eight dimensions/surfaces no prior pass had — WCAG 2.5.8 target size, a copy/typography anomaly scan of all 40 URLs, French non-breaking-space punctuation, link-purpose 2.4.4/2.4.9 (generic/ambiguous/duplicate link names), the `/visit` QR entry point, the error/not-found/global-error boundaries, the live quote-form empty-submit experience, and the print stylesheet's fixed/sticky chrome — in EN and FR, and found every one clean or already correctly built. No code PR; the loop is closed at genuine diminishing returns, confirmed by fresh measurement, not inherited from notes.
+HANDOFF: 2026-09-29 — `main` holds runs 1–5, the image-ban lift (#27), Vito's cinematic redesign (#30), a usability loop (#32–#34), a second usability pass (#36), a third verification-only pass, a fourth pass (#39, #40), a fifth pass (#42), a sixth verification-only pass, a seventh verification-only pass, an eighth pass (#46, print stylesheet), a ninth pass (#48, skip-link focus), and a **tenth pass (this one — verification only, no code change)**. Production is live on `vkc-website-wz5a.vercel.app`, serving current `main`; root 307s to `/en`, an FR browser to `/fr`, `/v` to `/fr/visite`. Passes 1–3 converged on a clean, diminishing-returns close; pass 4 re-audited independently and shipped two real fixes (#39 quote-form contact hint, #40 sticky glossary A–Z); pass 5 re-audited live and found the one defect every prior pass had missed by only ever measuring 375px — a 320px (WCAG 1.4.10 reflow) header overflow that clipped the mobile Menu control (#42, shipped and verified live), then swept 320/375/768 clean site-wide. Pass 6 re-audited live on **five dimensions the prior five passes never measured** (text-spacing WCAG 1.4.12, ultrawide 2560, locale-switch deep-path preservation, sticky-CTA/footer overlap, OG social-share image resolution) plus the core brief dimensions independently — all clean, no code change. Pass 7 went again at **six more dimensions no prior pass measured**, in EN and FR (form `autocomplete`/WCAG 1.3.5, menu Escape/outside/link dismissal, mid-band widths 640–1279 + the `xl` boundary/WCAG 1.4.4, focus-not-obscured/WCAG 2.4.11, content visibility under `prefers-reduced-motion`, and forced-colors/Windows High Contrast) — every one clean or already correctly coded, no code change. **Pass 8 (#46, shipped) found a real defect no prior pass had measured: the print stylesheet.** The site is dark-themed; on paper the light colour tokens (secondary prose, near-white FAQ questions, amber links) printed faint or vanished once a printer dropped the dark backgrounds — 44 failing text elements on the home page, 32 on a service page. Fixed by swapping the six colour tokens to the paper palette under `@media print` (the same set `.vkc-negative` uses) and outlining buttons; **0 failing text elements after, verified live on production.** **Pass 9 (#48, shipped) found the next un-measured defect: the skip link scrolled but never moved keyboard focus.** Every page's first Tab lands on "Skip to content", but `<main>` was not focusable (no `tabindex`), so activating it left `document.activeElement` on `<body>` — a screen-reader user heard nothing move and native fragment navigation only worked in browsers that implement the sequential-focus starting point (WCAG 2.4.1). Fixed with `tabIndex={-1}` on `<main id="main">` (page-shell.tsx) so focus lands on the landmark, plus `#main:focus{outline:none}` so a full-width container doesn't draw the 3px ring around the whole page; verified live that focus now moves to `<main>`, EN + FR, no ring, next Tab in content. The one open usability item (desktop pinned-reel keyboard focus, WCAG 2.4.11) remains in Vito's motion lane, flagged in `NEEDS-COLTON.md` §10, not fixed unseen. **Pass 10 independently measured eight dimensions/surfaces no prior pass had — WCAG 2.5.8 target size, a copy/typography anomaly scan of all 40 URLs, French non-breaking-space punctuation, link-purpose 2.4.4/2.4.9 (generic/ambiguous/duplicate link names), the `/visit` QR entry point, the error/not-found/global-error boundaries, the live quote-form empty-submit experience, and the print stylesheet's fixed/sticky chrome — in EN and FR, and found every one clean or already correctly built. No code PR; the loop is closed at genuine diminishing returns, confirmed by fresh measurement, not inherited from notes. **Pass 11 (this one, docs only) went again at six more un-measured dimensions** — landscape/short-height viewport (812×375), PWA manifest orientation lock (WCAG 1.3.4), the marquee under 2.2.2 Pause/Stop/Hide, in-page anchor landing under the *double* sticky bar (glossary A–Z, measured with a real Lenis click), heading-level hierarchy across 25 EN+FR URLs, and language-toggle/hreflang integrity on the localized FR slugs — and found **five clean and one minor Level-A finding (the marquee's pause control), routed to `NEEDS-COLTON.md` §10b as Vito's motion decision rather than fixed unseen.** Live `/en` default re-confirmed. The loop remains genuinely closed.
 
 # Handoff
+
+## Quality / UX overhaul — branch `quality/overhaul` (2026-10-02)
+
+A new session was asked for a deep, continuous quality + UX overhaul of
+everything **non-imaging** (copy, layout, components, responsiveness, a11y,
+performance, i18n, nav, forms, SEO), on **one branch**, verified **locally**
+(no Vercel/Actions quota: `next build` + `next start`, driven through the
+Playwright MCP at 390/1280, EN + FR), held for **one** merge + deploy Colton
+runs. Vito's imaging lane (image assets, `content/scenes.json`, the image
+schema, `home-motion.tsx` motion, Vito's branches) was left untouched.
+
+**Branch note.** `quality/overhaul` is cut from `docs/usability-pass-11`, so it
+*contains* pass 11's docs (PR #51). Merging this one branch supersedes #51;
+#51 can be closed as included, or merged first (it is an ancestor — no
+conflict either way).
+
+### The honest finding: the site is already in excellent shape
+
+A full fresh audit (not inherited from the pass-1–11 notes) found every
+objective gate **green** on current `main`'s code:
+
+- **a11y:** 80 axe scans (40 URLs × 2 widths) — 3,659 rule passes, **0
+  violations** (WCAG 2.2 AA + best-practice).
+- **Code:** typecheck ✓, scoped lint (`src scripts guard`) ✓, **80/80 tests** ✓,
+  production build ✓.
+- **i18n:** FR/EN key parity ✓, FR length within ±10% every page ✓, 120 hreflang
+  alternates resolve ✓, 20 locale-switch round-trips ✓, `/v` door defaults FR ✓.
+- **Content guards:** numbers ✓, claims ✓, staffing (four Second Shift facts) ✓,
+  copy-overlap ✓.
+- **Responsive:** 0 horizontal overflow at 390px across the pages measured; the
+  compare table stacks; empty states (footer, DemoVideo, scenes) render nothing
+  rather than voids.
+- **Copy:** genuinely strong, bilingual, no filler. **First-load JS** ~154 kB
+  gzip (the bulk is GSAP/Lenis motion — Vito's lane).
+
+So most *perceived* roughness is **pending content** (Colton's lane) and
+**imagery** (Vito's lane), not code — see "What's actually rough" below.
+
+### Shipped on this branch (two real, in-lane fixes)
+
+1. **Mobile home: the fixed "Get a quote" action bar overlapped the hero's own
+   "Which one fits your plant?" button by 34px** (two-thirds of it, hard to tap
+   at first view). The hero is full-height and bottom-aligned, so its CTAs sat
+   exactly where the fixed bar is; axe can't see fixed-overlay occlusion, so the
+   eleven prior passes missed it. Fixed with a `--vkc-action-bar-h` token (reused
+   by `.action-bar-spacer`) and a `max-width: 639px` bottom-padding on
+   `.cine-hero-inner` that lifts the hero foot clear of the bar. Desktop is
+   provably untouched (bar is `display:none` ≥640px; measured hero padding
+   unchanged at 1280). After: both CTAs sit 38–98px above the bar, neither
+   covered. `globals.css` only — no Scene/media/motion touched.
+2. **SEO: Organization JSON-LD had no `logo`.** Added `logo: {baseUrl}/icon.svg`
+   (the brand mark the manifest already ships; schema.org-valid, not a claim) so
+   search has a logo for the Organization entity. `src/components/json-ld.tsx`.
+
+Both re-verified green after the change: production build, a11y (0 violations),
+all guards, typecheck, lint, 80 tests.
+
+### Taste calls (flagged, not decided — no AskUserQuestion per brief)
+
+- **The mobile action bar is always-on** and duplicates the hero CTA. Many sites
+  reveal the sticky CTA only after you scroll past the hero. That needs client JS
+  + touches the shared `action-bar.tsx`, and "always reachable" is a valid
+  choice — so it is Colton's call, not shipped.
+- **The dark cinematic theme** is image-heavy and can read as murky where the
+  imagery is still placeholder-ish. That is Vito's design lane.
+
+### What's actually "rough" — and whose lane it is
+
+- **`content/contact.json` is all null** → no phone / email / address / hours
+  anywhere (footer, contact page, action bar). For a B2B site, no visible way to
+  reach VKC besides the form is the biggest real gap. **Colton's lane** (can't
+  invent facts, §1); the empty state already renders gracefully.
+- `content/capabilities.json` null → no spec numbers · `content/clients.json`
+  `[]` → no social proof · `content/media.json` demo null → no demo video.
+  **Colton's / the video run's lanes.**
+- Final imagery (dark Higgsfield stills/videos) and motion — **Vito's lane.**
+
+### Verification & deploy posture
+
+Local only. **Not merged, not deployed, no Vercel build triggered.** One branch
+(`quality/overhaul`), pushed once. Screens captured before/after via the
+Playwright MCP against `next start -p 3100`.
+
+### Perf / SEO / tests deep-dive (2026-10-02, same branch)
+
+A second pass on `quality/overhaul`, local-only, across three axes Colton named.
+
+**1. Performance — measured, healthy, no non-Vito win.** Core Web Vitals on the
+production build (via the Playwright MCP, localhost so LCP is best-case):
+**LCP ~136 ms, CLS 0, 0 ms long tasks, TTFB ~16 ms.** CLS 0 and zero long tasks
+are network-independent and genuinely good. Why nothing to change:
+- **Motion is already deferred.** `home-motion.tsx` dynamic-imports GSAP, GSAP
+  ScrollTrigger and Lenis *after first paint* (inside `useEffect`), gated on
+  `prefers-reduced-motion` and failing silently — none of it is in the first-load
+  bundle, nothing blocks the main thread on load.
+- **Fonts are optimal.** `next/font/local`, self-hosted **woff2**, latin subset
+  with pinned axes, `display: swap`, explicit fallback stacks → `next/font`
+  size-adjust metrics, which is why CLS is 0.
+- **First-load JS ~154 kB gzip**, near the floor for App Router + React 19 +
+  next-intl; near-identical across pages, so routes are split and the shared
+  chunk is framework, not app code. No safe reduction without touching Vito's
+  motion. **Flagged, not changed.**
+
+**2. SEO / structured-data — one factual gap closed.** Added a **`WebSite`**
+JSON-LD node to the global `@graph` (bilingual `inLanguage`, `publisher` → the
+Organization). Verified live on `/en`: the graph now carries Organization (with
+the `logo` added earlier this branch), WebSite, LocalBusiness, plus the page's
+FAQPage. Everything else was already right and was confirmed, not rebuilt:
+`metadataBase`, the `%s | VKC Packaging` title template, full OpenGraph +
+Twitter `summary_large_image`, canonical + hreflang (`fr-CA`/`en-CA`/`x-default`),
+sitemap with per-URL language alternates (and correctly **no** fake `lastmod`),
+robots + sitemap pointer, and the existing Service / BreadcrumbList /
+DefinedTermSet / ContactPage / Organization / LocalBusiness builders. No invented
+facts — all scaffolding.
+
+**3. Test coverage — +22 unit tests and a new E2E suite.**
+- **Unit (`node --test`, now 102 passing, was 80):** `negotiateLocale` (the /v
+  door's Accept-Language logic — q-weight, fallback, case, refusals),
+  `nav.ts` (`groupOf` / `navLabelKey` / `pageKeyFor` + structure invariants: the
+  primary nav can't point off-site, no page listed twice, Regions stays out of
+  the header), and `resolveInlineHref` (the dead-link guard for copy links).
+  (`og-keys` was left untested — its bare JSON import can't load under
+  `node --test` without touching production source, not worth the build risk.)
+- **E2E (`@playwright/test`, already a devDep — `npm run test:e2e`, 10 passing):**
+  `playwright.config.ts` + `e2e/` cover the four real flows — desktop primary-nav
+  + phone menu navigation, locale switch EN↔FR including a translated slug
+  (`/en/quote` → `/fr/soumission`), contact-form server-side validation (empty
+  submit → `aria-invalid` + the alert, stays on page), and the `/v` QR door (307
+  to `/en/visit` / `/fr/visite`, and `de` → French fallback). Config reuses a
+  running server or builds + starts one; artifacts are git-ignored.
+
+**Verification (all green):** typecheck, lint (`src scripts guard e2e`), 102 unit
+tests, 10 E2E, production build, axe (0 violations), and the content guards
+(numbers / claims / staffing / fr / overlap / hreflang / locale-switch). Local
+only — not merged, not deployed.
+
+## Owner content editor — branch `quality/overhaul` (2026-10-02)
+
+Colton asked for a way to **edit the site's content himself** — the fields that
+are still null (contact, capabilities/specs, clients) — without touching code.
+Built on the same branch, local-only, **not merged/deployed**.
+
+### Approach (reported before building, chosen for this stack)
+
+- **Persistence = git-commit-back, no database.** Facts stay in
+  `content/*.json`, so every published guard (numbers, claims, staffing, fr)
+  keeps running on them and nothing bypasses §1/§2/§4. In dev the editor writes
+  the files on disk; in production it commits them through the GitHub Contents
+  API, which (merging to `main` deploys) rebuilds and publishes the site. A DB or
+  KV would have put facts somewhere `guard:numbers` can't see — rejected for that
+  reason.
+- **Auth = one owner, one password, HMAC-signed cookie.** No user store (there is
+  one user). `ADMIN_PASSWORD` + `ADMIN_SESSION_SECRET`; password compared in
+  constant time (as HMACs, no length leak), session is a signed httpOnly cookie
+  (12 h, `sameSite=lax`, `secure` in prod). Built on Web Crypto so the *same*
+  module runs in the Edge `/admin` gate and the Node API routes. CSRF: an Origin
+  check on every POST on top of sameSite. Brute force: 10 attempts / 5 min / IP
+  (reuses the quote form's limiter). **Fail-safe: with no password/secret set,
+  `/admin` shows a login page but nothing signs in.** This is the one auth
+  surface — flagged for Colton in `NEEDS-COLTON.md` §11.
+
+### What it is
+
+- `/admin/login` (public) → `/admin` dashboard → `/admin/{contact,capabilities,
+  clients}` form pages. Gate lives in `src/proxy.ts` (before next-intl; `/admin`
+  is outside the locale tree with its own root layout). API: `/api/admin/login`,
+  `/logout`, `/save` (each re-checks auth + Origin; `/save` is `runtime=nodejs`).
+- **The editor enforces the constitution at save time.** Every human-written
+  string runs through the *same* staffing (§4) and forbidden-claims (§1) matchers
+  the guards use (`guard/lib.ts` + the JSON rule files), with the guard's
+  negation-awareness — so a save that would fail `guard:staffing`/`guard:claims`
+  is refused inline instead of committed. The canonical JSON shape is rebuilt
+  from the schema on the server, so a malformed payload can't corrupt a file;
+  blanks collapse to `null` (§1 renders nothing).
+- **Imaging stays Vito's lane.** No `photos.json`, no `media.json`, no
+  `scenes.json`, and the client `logo` field is round-tripped untouched, never
+  set from a form.
+- Files: `src/lib/admin/` (session, sections schema, validate, store, prefill,
+  paths, request), `src/app/admin/`, `src/app/api/admin/`, `src/components/admin/`.
+
+### Verified end-to-end (Playwright MCP, local dev, fs persistence)
+
+Login gate (`/admin` → login), wrong password 401, cross-origin 403, no-cookie
+save 401; **forbidden claim and staffing wording refused at save (422)**; then
+through the UI: signed in → filled `/admin/contact` → **saved** → `content/
+contact.json` written with the correct typed shape (blanks → null) →
+**`/en/contact` and `/fr/nous-joindre` both re-render** the phone/email/address/
+hours in the details placard and footer; the `tel:` link builds. Clients form
+add/save produced a type-correct entry (empty case-study/logo omitted). Content
+then **restored to nulls** — nothing committed to `content/`.
+
+### Tests (same `node --test` + `@playwright/test` suites)
+
+- **Unit +35** (`src/lib/admin/*.test.ts`): session (sign/verify, tamper,
+  expiry, wrong-secret, password, `adminConfigured`), validate (coercion,
+  email/url/phone format, service-radius, localized shapes, §1/§4 rejection,
+  negation allowed, clients shaping + nameless-drop + quote-needs-name + logo
+  passthrough), prefill round-trips, immutable paths.
+- **E2E +4** (`e2e/admin.spec.ts`): the gate, the login page, wrong-password
+  feedback, and the authed login → save-guard-blocks-staffing path. The
+  password-dependent two self-skip when `ADMIN_*` isn't set (bare CI stays green).
+
+### Flagged for Colton (`NEEDS-COLTON.md` §11)
+
+Set `ADMIN_PASSWORD` + `ADMIN_SESSION_SECRET` to turn it on; add
+`ADMIN_GITHUB_TOKEN` (+ `ADMIN_GITHUB_REPO`, optional `_BRANCH`/author) to make
+saving publish in production. **`.env.example` could not be updated** — this
+environment blocks agents from any `.env*` file; the five keys are documented in
+§11 for Colton to add. Numbers (NC-3) and FR/EN parity (NC-4) are deliberately
+not enforced at save.
+
+## Blog / case-studies system — branch `quality/overhaul` (2026-10-02)
+
+A public blog + an owner editor for it, reusing the content editor's auth +
+git-commit-back + save-time-guard pattern. Local-only, **not merged/deployed**.
+
+### Approach
+
+- **Storage: one top-level `content/articles.json` array.** Top-level on purpose:
+  `guard:numbers` reads `content/*.json` non-recursively, so article dates/numbers
+  land in the allowed set automatically, and a single file bundles for production
+  (no runtime fs-read gap). Edited by rewriting the array (read-modify-write),
+  same store as the content editor.
+- **Public routes.** A **fixed** `/blog` index (`pathnames.ts` → `/blog` /
+  `/blogue`) joins every guard/census/hreflang/sitemap automatically (count
+  40→42, no hardcoded totals). Article pages are **dynamic** `/[locale]/blog/[slug]`
+  — SSG for published slugs, `notFound()` for drafts/unknown/locale-incomplete.
+  next-intl localizes the slug via a `"/blog/[slug]"` pattern added to `pathnames`
+  but **filtered out of `routes`** (templates aren't fetchable pages), so the
+  guards never try to GET a literal `[slug]`.
+- **Dynamic article pages are invisible to the build guards** (only fixed routes
+  are enumerated). That's why the **save-time** staffing (§4) + claims (§1) checks
+  run on every article field — the same matchers the guards use. The `/blog`
+  index IS captured, so its chrome is guard-clean and bilingual (±10%, verified).
+- **SEO.** Per-article `generateMetadata` (title/excerpt → description, canonical,
+  both-locale hreflang only where the post exists, `og:type=article`,
+  `article:published_time`), **Article + BreadcrumbList JSON-LD**, a `Blog`
+  listing on the index, and published articles appended to `sitemap.ts`
+  separately (not via `allUrls()`, which census treats as exact).
+- **Body is Markdown**, parsed to a plain AST (`lib/blog/markdown.ts`) and
+  rendered to React (`markdown-view.tsx`) — **no `dangerouslySetInnerHTML`**, so
+  a body can't inject markup. Subset: `##`/`###`, paragraphs, `-`/`1.` lists,
+  `>` quotes, `**bold**`, `*italic*`, `` `code` ``, `[label](/route)` links
+  (internal links localize; only http(s)/known-internal render as links).
+- **Imaging stays Vito's.** `Article.coverImage` is a reserved null slot, passed
+  through untouched and **not rendered yet** (wiring it + any guard is imaging =
+  Vito's lane). No photos/scenes/media touched.
+
+### Owner side
+
+`/admin` gains a "Blog & case studies" card → `/admin/articles` (list with
+publish/unpublish + edit + "New post") → `/admin/articles/[slug]` editor (slug,
+date, category, tags, status toggle, bilingual title/excerpt/Markdown body, SEO
+overrides, delete). API: `/api/admin/articles/{save,delete,status}`, each with
+the same `requireAdmin` + Origin + rate-limited-login auth, and `save` runs
+`prepareArticle` (validation + §1/§4 guards + canonical shaping + slug
+uniqueness/rename).
+
+### Content stance
+
+Ships with **one clearly-labelled EXAMPLE draft** (`content/articles.json`,
+`status: draft`) so Colton sees the shape; it never renders publicly. No case
+studies, client names or numbers invented.
+
+### Verified end-to-end (Playwright MCP, local)
+
+Signed in → **created a post → set Published → saved** → it rendered on
+`/en/blog` (card) and `/en/blog/<slug>` **and** `/fr/blogue/<slug>` (localized
+slug), with the Markdown rendered (h2, bold, tick-list, internal link localized
+per locale) and the full SEO head present (Article JSON-LD author/publisher →
+`#organization`, BreadcrumbList Home›Blog›title, canonical, fr-CA/en-CA/x-default
+hreflang, `og:type=article`). A draft and an unknown slug both 404 publicly.
+Then the test post was reverted to the example-only seed.
+
+### Gate (all green on the ship state)
+
+typecheck · lint (`src scripts guard e2e`) · **160 unit tests** (+20: Markdown
+parser, article validator/collection ops) · production build · guards
+**fr / numbers / claims / staffing** · **census 42/42** · hreflang (local) ·
+locale-switch · overlap. (hreflang against *production* is red only until deploy,
+the documented pre-ship behaviour for any new route.) Local only — not merged,
+not deployed.
+
+### Flagged for Colton (`NEEDS-COLTON.md` §12)
+
+Same `ADMIN_*` envs turn it on (shared with the content editor). Article cover
+images are a reserved slot for the imaging run. Article pages are not covered by
+the build guards by design — the editor is their gate.
+
+## Quote estimator — branch `quality/overhaul` (2026-10-02)
+
+A public, bilingual lead-gen estimator at `/estimate` (FR `/estimation`): pick a
+service, enter a quantity + add-ons, get an instant **ballpark range**, then a
+lead step that feeds the existing quote handler. Owner-editable rates. Local-only,
+**not merged/deployed**.
+
+### Two judgment calls (flagged, not silently taken)
+
+- **§1 "No pricing, no dollar amounts" vs. a dollars-showing estimator.** No guard
+  forbids dollars (`guard:numbers` only bans *invented* numbers in the shipped
+  HTML, and stays green — see below); the conflict is with the *letter* of §1.
+  Shipped on the explicit brief, behind "ballpark, not a quote" copy and
+  placeholder rates, with a **recommended dated §1 carve-out** written out in
+  `NEEDS-COLTON.md §13` for Colton to paste. Not taken on my own authority.
+- **Business-model remap.** The brief's inputs were floor-coating (sq ft, coating
+  system, prep level); VKC doesn't coat floors (§1: no invented service). Modelled
+  on the real services instead — Bottleneck per unit, Second Shift per shift, toll
+  blending per litre — which matches the site's "priced per unit or per shift".
+
+### Approach
+
+- **Rates live in a new top-level `content/pricing.json`** (owner-editable at
+  `/admin` → "Estimator pricing"). Top-level on purpose: `guard:numbers` reads
+  `content/*.json` non-recursively, so every rate is in the allowed set
+  automatically. Ships with `"placeholder": true` + obvious round placeholders; a
+  visible notice on the page and the admin card say so until Colton flips it.
+- **The estimate is computed entirely client-side** (`lib/estimator/calculate.ts`,
+  pure + unit-tested). The guards render with **JavaScript disabled**
+  (`render-all.ts`), so no computed figure ever reaches NC-3 — the dollar ranges
+  exist only after hydration. The interactive widget is **mount-gated**
+  (`useSyncExternalStore`, hydration-safe + lint-clean), so the no-JS/guard
+  capture sees only a static shell + a link to the quote form.
+- **§4 is satisfied in SSR**: the page names "Second Shift", so it renders the
+  canonical four-fact summary from `content/services.json` in `<main>` — the same
+  text the service pages use. Meta + FAQ JSON-LD avoid the literal service name
+  (they can't carry four facts in a meta description).
+- **A fixed `/estimate` route** (added to `pathnames.ts`, `nav.ts` company group,
+  `related.ts`) auto-joins every guard/census/hreflang/sitemap/OG — count 42→44,
+  nothing hardcoded; the OG card key comes free from `meta.estimate`.
+- **Lead reuses `/api/quote` unchanged** — `source=quote`, the chosen line mapped
+  to the handler's `second-shift`/`bottleneck`/`unsure` enum, the estimate packed
+  into `notes` (pure `lib/estimator/summary.ts`). No new backend, same mail path,
+  same honeypot/validation.
+
+### Owner side
+
+`/admin` gains an "Estimator pricing" card → `/admin/pricing`: a placeholder
+toggle, currency/spread/rounding, and add/remove/edit rows for services (id,
+lead-mapping, bilingual name/unit/quantity labels, rate/setup/minimum) and add-ons
+(id, kind, value, applies-to). API `/api/admin/pricing/save` with the same
+`requireAdmin` + Origin + rate-limited auth; `preparePricing` validates numbers,
+requires both languages, and runs the §1/§4 matchers on every label.
+
+### Verified end-to-end (Playwright MCP, local)
+
+Walked the estimator (Bottleneck → 5000 units → "Apply labels") → range
+**$6,400–$9,600** (= (1.25+0.25)×5000+500, ±20%) → filled the lead → it **POSTed
+to `/api/quote` and validated as `service=bottleneck`** (503 `email_not_configured`
+locally = validation passed, blocked only by the unset mail keys, exactly like the
+quote form; UI showed the graceful "not connected yet" message). Then signed into
+`/admin` → **changed the Bottleneck rate 1.25→2.00 → saved** (git-commit-back fs
+write) → reloaded `/estimate` → the same walk now shows **$9,400–$14,100**. FR
+`/estimation` renders (localized service labels; all four §4 facts present in FR
+`<main>`). Mobile 375px: no horizontal overflow. Then `content/pricing.json` was
+restored to the placeholder seed.
+
+### Gate (all green on the ship state)
+
+typecheck · lint (`src scripts guard`) · **182 unit tests** (+22: estimate math,
+pricing coercion, lead summary, pricing validator) · production build (44 routes,
+`/estimate` + `/estimation` + both OG cards) · guards **numbers / staffing (60 SS
+surfaces) / fr (`/estimate` copy ratio 1.053) / claims / media** · **census 44/44**
+· hreflang (local) · locale-switch 22. Local only — not merged, not deployed.
+
+### Flagged for Colton (`NEEDS-COLTON.md` §13)
+
+Same `ADMIN_*` envs turn the editor on; the lead needs the §2 mail keys. Set real
+rates and turn off the placeholder flag. Add the §1 carve-out before a future run
+reads §1 and removes the estimator.
+
+## Testimonials / social proof — branch `quality/overhaul` (2026-10-02)
+
+An owner-editable testimonials system: a public home-page section ("What clients
+say" / "Ce que disent les clients") fed by a new top-level
+`content/testimonials.json`, edited at `/admin` → "Testimonials". Each entry is a
+bilingual quote, an author, an optional company/role/date, and an optional 1–5
+rating. Same auth + git-commit-back + save-time guards as the editor (§ above).
+
+### What it does
+
+- **`src/lib/testimonials/testimonials.ts`** — the domain layer.
+  `publishedTestimonials(all, locale)` returns only entries that are `published`,
+  have a non-blank author, and carry a quote in **both** languages (a one-language
+  role is dropped but the entry kept; a non-positive/absent rating normalises to
+  null). `aggregateRating(list)` averages the real ratings or returns null — no
+  ratings, no aggregate.
+- **`src/components/testimonials.tsx`** — an async server component. Renders
+  `<section aria-labelledby="testimonials-heading">` with a `<figure>` per quote
+  (`blockquote` + `figcaption`), an accessible star rating (decorative glyphs
+  `aria-hidden`, a localised `aria-label`), and a `Review` + `AggregateRating`
+  JSON-LD block. Returns **null** when nothing is published, so the empty state
+  renders nothing at all. Added to the home page after the client-stories block.
+- **`src/lib/structured-data.ts`** — new `reviewNode` + `buildTestimonialsJsonLd`:
+  one schema.org `Review` per published testimonial (author `Person`, `worksFor`
+  only when a company is set, `itemReviewed` → the Organization `@id`,
+  `reviewRating` **only when a rating exists**), and an `AggregateRating` merged
+  onto the Organization only when real ratings are present.
+- **Admin:** `/admin/testimonials` (`src/components/admin/testimonials-form.tsx`,
+  a single-page array editor), saving through `src/app/api/admin/testimonials/`
+  → `prepareTestimonials` (`src/lib/admin/testimonials.ts`): drops empty rows,
+  auto-assigns + dedupes ids, coerces/validates rating and date, runs the §1/§4
+  `constitutionProblems` on every text field, and requires author + both-language
+  quote before an entry may be published. Dashboard card added to `/admin`.
+
+### Calls made (flagged to Colton, `NEEDS-COLTON.md` §14)
+
+- **Ships empty.** `content/testimonials.json` holds ONE unpublished, un-named,
+  un-rated example; the live site shows nothing until Colton publishes.
+- **§1 carve-out recommended.** A published testimonial names a company, which
+  the letter of §1 ("client names render only from clients.json approved
+  entries") does not cover. Testimonials carry attribution in their own file,
+  gated by `published` + the save-time §1/§4 checks. Same shape as the Higgsfield
+  and estimator carve-outs — suggested wording is in §14.
+- **Two social-proof systems now coexist** (this + §9's client-stories). Both
+  ship empty, so nothing collides yet; §14 recommends how to split them (quotes +
+  ratings here, the approved client list + case studies in clients.json). Colton's
+  product call.
+
+### Why it does not trip the guards
+
+The section is server-rendered, so published testimonials **are** scanned by the
+build guards (unlike the client-side estimator). It stays green because: numbers
+in `testimonials.json` auto-allow (NC-3 reads `content/*.json`); a quote that
+names "Second Shift" is harmless on the home page, where NC-2 checks the whole
+`main` text and the four facts are already present there; and the claims/staffing
+guards are a real build-time backstop behind the save-time refusal (a forbidden
+claim or staffing term in a published quote goes red — proven by negative control,
+below).
+
+### Adversarial review before commit
+
+Ran a 5-dimension review (constitution, correctness, security, a11y, consistency)
+with 3-skeptic refutation per finding: 14 raised, 11 refuted (including two false
+§3-parity alarms, the client-stories "overlap" as a code defect, and the
+deliberate absence of component tests). **3 survivors, all one a11y issue** — the
+admin form's non-localized inputs (author/company/date/rating/id) and the Remove
+button lacked accessible names. Fixed: `aria-label` on each input (matching the
+file's localized-input convention) + "Remove this testimonial". The same
+span-only pattern exists in the pricing/articles admin forms (pre-existing, behind
+auth, not a public route) — routed to a separate task, not this commit.
+
+### Gate (all green on the ship state)
+
+typecheck · lint (`src scripts guard`) · **203 unit tests** (+21: published
+filter, aggregate math, review/aggregate JSON-LD, prepare-validator §1/§3/§4
+refusals, id dedupe, rating range, date) · production build (44 routes) · render
+44/44 · guards **numbers / staffing (60 SS surfaces) / fr / claims / media** ·
+**census 44/44** (testimonials is a home section, not a new route) · locale-switch
+22. Playwright end-to-end: admin → publish a rated entry → save → the home section
+renders the quote, accessible stars, and `Review` + `AggregateRating` JSON-LD in
+both locales; unpublished → nothing renders. Local only — not merged, not deployed.
+
+## Website → VCM lead forward — branch `quality/overhaul` (2026-10-02)
+
+The website side of the website→VCM lead integration (the VCM/CRM side was built
+separately; the contract is `~/Desktop/VCM/WEBSITE_LEAD_INTAKE.md`). Every lead
+through `POST /api/quote` (quote form, contact form, estimator) is now ALSO
+forwarded to VCM's ingestion endpoint, signed with a shared secret, so leads reach
+the call queue — not only the notification email.
+
+### What it does
+
+- **`src/lib/quote/forward.ts`** (new) — `forwardConfigFromEnv` (null unless
+  `VCM_INTAKE_URL` + `WEBSITE_INTAKE_SECRET` both set, so it's off until
+  configured and a half-set config can't fire); `buildWebsiteLeadPayload`
+  (QuoteRequest → the `vkc.website-lead/1` wire shape, snake_case); `signBody`
+  (HMAC-SHA256 over `` `${t}.${body}` ``, proven against VCM's shared
+  `SIGNATURE_VECTOR`); `forwardLead` (POST with a 5s per-attempt
+  `AbortSignal.timeout`, retry ONCE on network error / 5xx / 429 with the same
+  `submission_id` + a fresh timestamp, never on 4xx, and it NEVER throws);
+  `resolveLeadResponse` (pure: success if email OR forward succeeded).
+- **`src/lib/quote/validate.ts`** — `QuoteRequest` gained `estimate`
+  (`LeadEstimate | null`) and `pagePath`. `validateEstimate` bound-checks the
+  structured estimate to mirror VCM's own limits (finite non-negative numbers that
+  reject booleans/NaN/Infinity, `low ≤ high`, id/unit/currency length caps, ≤20
+  options); a malformed estimate is rejected (`errors.estimate`), not silently
+  dropped.
+- **`src/app/api/quote/route.ts`** — after validation + the honeypot drop, starts
+  the forward concurrently with the email, logs the outcome with the no-PII
+  `logAttempt` shape (`vcm_forwarded` / `vcm_failed` / `vcm_skipped`), and rebuilds
+  the email's estimate summary server-side (`estimateSummaryFor` → `buildLeadSummary`)
+  so `notes` stays the customer's own words only.
+- **`estimator.tsx` / `quote-form.tsx`** — submit the structured `estimate`
+  (with a non-localized `unit`) and `page_path`; `notes` is the customer's words.
+
+### The resilience design (honours "fire-and-forget, don't block")
+
+The spec said "await both concurrently, success if either." The instruction was
+*don't block or error the user*, which wins: the **email is the user-facing
+capture**; the forward is detached and finished via Vercel `after()` when the email
+succeeds (zero added latency), and only gets a **2.5s grace** to rescue the submit
+when the email failed/is unconfigured. A stalling VCM therefore caps the visitor
+at 2.5s (not the naïve 5s×2 ≈ 10s) and a reachable one adds nothing. Flagged to
+the VCM session in `NEEDS-COLTON.md` §15 as a deliberate deviation.
+
+### Adversarial review before commit
+
+5-dimension review (spec-conformance, correctness, resilience, security,
+integration) with 3-skeptic refutation: 14 raised, 11 refuted. **3 survivors, all
+fixed:** (1) the estimator sent a localized `estimate.unit` → now the canonical
+English label (the human `units` string stays localized); (2) the forward was
+awaited in-band (≤10s worst case) → the `after()` + grace design above; (3) no
+test pinned the non-blocking bound → added a `forwardLead` timeout test (a stalled
+fetch aborts and returns, never hangs).
+
+### Gate (all green)
+
+typecheck · lint (`src scripts guard`) · **226 unit tests** (+23: signer vs the
+VCM vector, payload mapping, retry policy, response reconciliation, env gating,
+timeout bound, estimate validation) · production build (44 routes) · render 44/44 ·
+guards **numbers / staffing / fr / claims / media** · **census 44/44** (the forward
+is server-only — no rendered change, no guard impact). Playwright end-to-end
+against a local mock VCM: estimator walk → "sent" + mock received a **valid signed
+forward** with the exact payload (`notes` = own words, structured `estimate`, UUID
+`submission_id`, `page_path`); VCM refused → 503 in ~15ms; VCM stalled → 503 at the
+2.5s grace. Local only — not merged, not deployed.
+
+## Usability pass 11 — fresh independent audit, one finding routed (2026-09-29)
+
+A new session reopened the "full-send" usability loop. Rather than inherit the
+pass-1–10 close from notes, it ran its own live, measurement-first audit against
+production (`vkc-website-wz5a`) through the Playwright MCP, deliberately
+targeting **six dimensions and surfaces no prior pass had measured**, in EN and
+FR. Five came back clean or already-correct; one produced a single, minor,
+Level-A finding that lives in Vito's motion lane, so it was **routed to
+`NEEDS-COLTON.md` §10b rather than fixed unseen — no code PR, docs only.**
+Vito's lane untouched (no `content/scenes.json`, no media, no image schema, no
+`home-motion.tsx`, no Vito branches). Live `/en` default re-confirmed:
+root (no/EN `Accept-Language`) → 307 → `/en`, FR `Accept-Language` → `/fr`,
+`/en` `/fr` 200, `/v` → `/fr/visite`.
+
+The six, each measured or read this pass:
+
+- **Landscape / short-height viewport (812×375).** Every prior pass measured
+  *portrait* widths only (320 / 375 / 768); none had ever loaded the site on a
+  short landscape phone, where a full-bleed `100svh` hero and a sticky header
+  most often collide. Measured live: **0 horizontal document overflow**
+  (`scrollWidth === clientWidth === 812`); the one element wider than the
+  viewport is the `.marquee-track` ticker, correctly contained by its
+  `overflow: hidden` parent so it adds no document scroll. The `.cine-hero`
+  (`min-height: min(100svh, 62rem)`, `align-items: end`) grows to contain its
+  ~800px of content and is reached by a normal scroll — **nothing is clipped**
+  (the box expands past the 375px min, so `overflow: hidden` never cuts it).
+  Header stays a 65px sticky bar. Clean.
+- **PWA manifest orientation lock (WCAG 1.3.4 Orientation, AA).** A manifest
+  that pins `"orientation": "portrait"` restricts the content to one orientation
+  and fails 1.3.4. Read `src/app/manifest.ts`: `display: "browser"` and **no
+  `orientation` key** — the site never locks orientation. Clean, and confirmed
+  by the landscape test above rendering fine.
+- **The container-name marquee under "Pause, Stop, Hide" (WCAG 2.2.2, A).** Pass
+  7 checked general content-visibility under reduced motion; no pass had held the
+  *auto-scrolling ticker* against 2.2.2 specifically. It is well built —
+  `aria-hidden="true"` and the `animation` gated behind
+  `prefers-reduced-motion: no-preference` — but 2.2.2 asks for a pause mechanism
+  available to *every* visitor, not only those who set the OS reduced-motion
+  flag. The one real finding of the pass. **Routed to `NEEDS-COLTON.md` §10b**
+  (Vito's motion lane): the only complete fix is a visible pause control on one
+  of his signature home elements, and a CSS hover-pause half-measure helps
+  neither touch nor keyboard, so it is not shipped unseen.
+- **In-page anchor landing under the sticky bars.** Pass 10 verified `#book`'s
+  `scroll-margin-top`; this pass measured the tightest case — the glossary A–Z
+  strip, which stacks a **second** sticky bar (the letter strip, ~47px) under the
+  65px header. The mechanism: `html { scroll-padding-top: calc(4rem + 1rem) }`
+  (80px) on the scroll container, plus `--vkc-jump-stick` (`4rem + 3.75rem` =
+  124px) as each letter/term's `scroll-mt`. Verified not by reading CSS but by
+  a **real, Lenis-handled click** on "S" (a programmatic `location.hash` does
+  *not* trigger this site's smooth scroll — anchors are driven from
+  `window.scrollY`): the S heading lands at `top: 204px`, **92px clear** of the
+  strip's 112px bottom. Nothing lands under the chrome. Clean.
+- **Heading-level hierarchy across 25 URLs, EN + FR.** Prior passes counted `h1`
+  (exactly 1); none had checked for *level skips* (an `h2`→`h4` jump a screen
+  reader reports as a missing level). Fetched and parsed every main route in both
+  locales: **exactly one `h1` per page and zero level skips on all 25** (home,
+  services + the three service pages, about, glossary/lexique, industries,
+  containers, quote/soumission, visit/visite, privacy, montreal). The outline is
+  sound site-wide.
+- **Language-toggle / hreflang targets on the localized-slug pages.** The FR
+  slugs are true translations (`/fr/lexique`, `/fr/soumission`), not `/fr/`+the
+  English word — a class of route where a stale toggle would 404 in production.
+  Read the actual toggle and `<link rel="alternate" hreflang>` off `/en/glossary`
+  and `/en/quote`: both point at the real localized FR slug, and each resolves
+  **200** with a clean heading outline. (The two 404s in this pass's console were
+  the audit script's own wrong-guess fetches — `/fr/glossaire`, `/fr/devis` — not
+  links the site emits.) Clean.
+
+**GOTCHA for the next session.** To measure where an in-page anchor *actually*
+lands on this site, you must **click the link** — setting `location.hash` looks
+like it works but skips Lenis, which drives anchor scroll from `window.scrollY`
+(a `location.hash` test here reported the target at `top: 908` — off-screen —
+while a real click put it at the correct `top: 204`). And when auditing routes,
+resolve FR slugs from the page's own `hreflang`/toggle, not by translating the
+English path: the FR slugs are localized (`lexique`, `soumission`, `deuxieme-
+quart`), so guessed paths 404 and pollute the console with false errors.
+
+### §7 sign-off (pass 11)
+
+**Nothing should be cut.** Eleven passes — five of them (3, 6, 7, 10, 11) fresh,
+independent, measurement-first audits that each went at *un*measured dimensions
+rather than redoing the sweep — converge on one read: the fundamentals were built
+right, and every dimension checked (now including landscape/short-viewport,
+1.3.4 orientation, heading-level hierarchy, localized-slug toggle integrity, and
+the tightest double-sticky-bar anchor landing) is clean or already handled in
+code. The single new finding — the marquee's strict 2.2.2 pause control — is a
+minor Level-A item on a decorative, `aria-hidden`, reduced-motion-gated element
+that is Vito's design to change, and it is routed to him in `NEEDS-COLTON.md`
+§10b, not fixed unseen. This loop stays genuinely closed; further in-lane
+usability change would be churn without new content or a Vito motion decision.
 
 ## Usability pass 10 — verification only (2026-09-29)
 
