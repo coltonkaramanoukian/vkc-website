@@ -15,6 +15,11 @@
       "en": "Your line keeps running when your shift ends.",
       "fr": "Votre ligne roule encore quand votre quart finit.",
       "reading": "The Second Shift angle: the output continues after your own shift, run by VKC."
+    },
+    "plantNextDoor": {
+      "en": "The plant next door.",
+      "fr": "L’usine d’à côté.",
+      "reading": "The slogan: VKC as the neighbouring plant you call on, whether it runs a shift in yours or fills the overflow in ours. Shown as the footer sign-off, not the headline."
     }
   }
 }

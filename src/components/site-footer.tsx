@@ -1,6 +1,6 @@
 import { NavLink } from "@/components/nav-link";
 import { Wordmark } from "@/components/wordmark";
-import { addressLine, contact, site, tagline, telHref } from "@/lib/content";
+import { addressLine, contact, site, tagline, taglineOption, telHref } from "@/lib/content";
 import { getCopy } from "@/lib/i18n";
 import { navGroups } from "@/lib/nav";
 import { localizedPath, otherLocale, type AppPathname, type Locale } from "@/i18n/pathnames";
@@ -13,6 +13,7 @@ export async function SiteFooter({ locale, route }: { locale: Locale; route: App
   // Build year; guard/number-allowlist.json carries it (see its note).
   const year = new Date().getFullYear();
   const target = otherLocale(locale);
+  const slogan = taglineOption("plantNextDoor", locale);
 
   const contactRows = [
     contact.phone && phoneHref
@@ -38,6 +39,7 @@ export async function SiteFooter({ locale, route }: { locale: Locale; route: App
             <Wordmark className="h-5 w-auto" />
           </NavLink>
           <p className="mt-4 max-w-[16ch] text-[1.375rem] font-extrabold leading-tight tracking-[-0.01em] [font-stretch:112.5%]">{tagline(locale)}</p>
+          {slogan && <p className="mt-2 text-graphite">{slogan}</p>}
           <p className="field-name mt-3">{site.legalName}</p>
           {contactRows.length > 0 && (
             <dl className="mt-5 space-y-2 text-[0.9375rem]">
