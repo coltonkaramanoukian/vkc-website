@@ -59,4 +59,41 @@ describe("the Bottleneck / Goulot route", () => {
       assert.ok(pages.h2.startsWith(`${count} pages`), `${locale} hub h2: ${pages.h2}`);
     }
   });
+
+  // The service name {bn} links to its own page everywhere, except where the
+  // sentence is about the fill side alone (the contract packaging glossary
+  // entry: "the fill side of {bn}"), which stays on contract packaging.
+  it("is linked by its name to its own page, not to contract packaging", () => {
+    const FILL_SIDE = { en: "the fill side of [{bn}]", fr: "volet remplissage de [{bn}]" };
+    for (const locale of ["en", "fr"] as const) {
+      const messages = JSON.parse(readFileSync(new URL(`../../i18n/messages/${locale}.json`, import.meta.url), "utf8"));
+      const links: { path: string; href: string; text: string }[] = [];
+      const walk = (node: unknown, path: string) => {
+        if (typeof node === "string") {
+          for (const m of node.matchAll(/\[\{bn\}\]\(([^)]*)\)/g)) links.push({ path, href: m[1], text: node });
+        } else if (node && typeof node === "object") {
+          for (const [k, v] of Object.entries(node)) walk(v, `${path}.${k}`);
+        }
+      };
+      walk(messages, locale);
+      assert.ok(links.length > 0, `${locale} has {bn} links`);
+      for (const l of links) {
+        if (l.text.includes(FILL_SIDE[locale])) {
+          assert.equal(l.href, "/services/contract-packaging", `${l.path} (fill side only)`);
+        } else {
+          assert.equal(l.href, "/services/bottleneck", `${l.path} links ${l.href}`);
+        }
+      }
+      // The two entries named in the bug: the about page and the glossary's Bottleneck entry.
+      const about = links.filter((l) => /about/i.test(l.path));
+      const glossary = links.filter((l) => /glossary/i.test(l.path) && !l.text.includes(FILL_SIDE[locale]));
+      assert.ok(about.length > 0, `${locale} about page links {bn}`);
+      assert.ok(glossary.length > 0, `${locale} glossary Bottleneck entry links {bn}`);
+    }
+  });
+
+  it("resolves that link to the English and French slugs", () => {
+    assert.equal(localizedPath("en", "/services/bottleneck"), "/en/services/bottleneck");
+    assert.equal(localizedPath("fr", "/services/bottleneck"), "/fr/services/goulot");
+  });
 });

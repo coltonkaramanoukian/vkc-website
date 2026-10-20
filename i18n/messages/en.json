@@ -1007,7 +1007,7 @@
         {
           "h2": "What we do",
           "body": [
-            "Two things, and they are the same trade seen from two sides. [{ss}](/services/second-shift) is a production shift we run at your plant, on your line, on a shift your plant doesn’t cover. [{bn}](/services/contract-packaging) is the overflow your line can’t absorb: filled, packed and blended at ours.",
+            "Two things, and they are the same trade seen from two sides. [{ss}](/services/second-shift) is a production shift we run at your plant, on your line, on a shift your plant doesn’t cover. [{bn}](/services/bottleneck) is the overflow your line can’t absorb: filled, packed and blended at ours.",
             "Everything else on this site (the containers, the industries, the fill methods) is a description of how those two get done."
           ],
           "slot": "services"
@@ -1251,7 +1251,7 @@
       "terms": [
         {
           "term": "Bottleneck",
-          "def": "The slowest step in a plant, the one every other step waits on, however fast the rest may be. Also the neck of a bottle, the narrow part the product passes through. VKC’s overflow service takes its name from both readings: [{bn}](/services/contract-packaging)."
+          "def": "The slowest step in a plant, the one every other step waits on, however fast the rest may be. Also the neck of a bottle, the narrow part the product passes through. VKC’s overflow service takes its name from both readings: [{bn}](/services/bottleneck)."
         },
         {
           "term": "Changeover",

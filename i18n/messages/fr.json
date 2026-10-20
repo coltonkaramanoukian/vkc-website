@@ -1007,7 +1007,7 @@
         {
           "h2": "Ce qu’on fait",
           "body": [
-            "Deux choses, et c’est le même métier vu de deux côtés. Le [{ss}](/services/second-shift) est un quart de production qu’on fait rouler chez vous, sur votre ligne, pendant un quart que votre usine ne couvre pas. Le [{bn}](/services/contract-packaging), c’est le surplus que votre ligne n’absorbe pas : rempli, emballé et mélangé chez nous.",
+            "Deux choses, et c’est le même métier vu de deux côtés. Le [{ss}](/services/second-shift) est un quart de production qu’on fait rouler chez vous, sur votre ligne, pendant un quart que votre usine ne couvre pas. Le [{bn}](/services/bottleneck), c’est le surplus que votre ligne n’absorbe pas : rempli, emballé et mélangé chez nous.",
             "Tout le reste du site (les contenants, les secteurs, les méthodes) décrit comment ces deux-là se font."
           ],
           "slot": "services"
@@ -1287,7 +1287,7 @@
         },
         {
           "term": "Goulot",
-          "def": "L’étape la plus lente d’une usine, celle que toutes les autres attendent : le goulot d’étranglement. Aussi le col d’une bouteille. Le service de surplus de VKC tient son nom des deux lectures : [{bn}](/services/contract-packaging)."
+          "def": "L’étape la plus lente d’une usine, celle que toutes les autres attendent : le goulot d’étranglement. Aussi le col d’une bouteille. Le service de surplus de VKC tient son nom des deux lectures : [{bn}](/services/bottleneck)."
         },
         {
           "term": "Ligne de remplissage",
