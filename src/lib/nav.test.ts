@@ -6,6 +6,7 @@ describe("groupOf", () => {
   it("finds the group for a hub and for an item", () => {
     assert.equal(groupOf("/services")?.key, "services");
     assert.equal(groupOf("/services/second-shift")?.key, "services");
+    assert.equal(groupOf("/services/bottleneck")?.key, "services");
     assert.equal(groupOf("/containers/pails")?.key, "containers");
     assert.equal(groupOf("/locations/montreal")?.key, "regions");
     assert.equal(groupOf("/quote")?.key, "company");
@@ -21,6 +22,7 @@ describe("navLabelKey", () => {
   it("returns the group key for a hub and the item label for a child", () => {
     assert.equal(navLabelKey("/services"), "services");
     assert.equal(navLabelKey("/services/second-shift"), "secondShift");
+    assert.equal(navLabelKey("/services/bottleneck"), "bottleneck");
     assert.equal(navLabelKey("/industries/sealers-and-coatings"), "sealersCoatings");
   });
 

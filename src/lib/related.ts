@@ -5,6 +5,7 @@ import type { AppPathname } from "@/i18n/pathnames";
 export const ROUTE_PICTO: Partial<Record<AppPathname, PictogramName>> = {
   "/services": "facility",
   "/services/second-shift": "plant",
+  "/services/bottleneck": "facility",
   "/services/contract-packaging": "facility",
   "/services/toll-blending": "blend",
   "/containers": "bottle",
@@ -35,6 +36,9 @@ export const RELATED: Partial<Record<AppPathname, AppPathname[]>> = {
   "/": ["/locations/montreal", "/about", "/contact"],
   "/services": ["/services/second-shift", "/services/contract-packaging", "/services/toll-blending"],
   "/services/second-shift": ["/locations/montreal", "/industries", "/about"],
+  // Its two jobs are already linked in the page body; these are what a
+  // prospect asks next: what we fill, what it goes into, where we are.
+  "/services/bottleneck": ["/industries", "/containers", "/locations/montreal"],
   "/services/contract-packaging": ["/industries", "/services/toll-blending", "/containers"],
   "/services/toll-blending": ["/services/contract-packaging", "/industries/sealers-and-coatings", "/containers/pails"],
   "/containers": ["/industries", "/services/contract-packaging", "/services/toll-blending"],

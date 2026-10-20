@@ -9,6 +9,7 @@
     "home": "Home",
     "nav": {
       "secondShift": "{ss}",
+      "bottleneck": "{bn}",
       "contractPackaging": "Contract packaging",
       "tollBlending": "Toll blending",
       "bottlesAndJugs": "Bottles and jugs",
@@ -133,6 +134,10 @@
     "secondShift": {
       "title": "Second Shift: second shift production at your plant",
       "description": "Second shift production at your plant. Our lead hand directs the shift, our crew does the work, and our QC sheets and production log document it. Priced per unit or per shift."
+    },
+    "bottleneck": {
+      "title": "{bn}: your overflow, packaged and blended at VKC",
+      "description": "When orders outrun what your line can absorb, send the overflow to VKC. We handle the packaging and blending at our own facility. New projects: non-epoxy products only."
     },
     "contractPackaging": {
       "title": "Contract packaging, liquid filling, greater Montreal",
@@ -534,6 +539,15 @@
           }
         ]
       }
+    },
+    "bottleneck": {
+      "eyebrow": "Services: at our facility",
+      "h1": "{bn}: your overflow, packaged and blended at VKC.",
+      "lead": "When orders outrun what your line can absorb, send the overflow to us. VKC handles the packaging and blending at its own facility, and your line keeps its pace.",
+      "scope": "New projects: non-epoxy products only.",
+      "slogan": "The plant next door.",
+      "contact": "Contact us",
+      "jobsHeading": "What {bn} covers"
     },
     "contractPackaging": {
       "eyebrow": "{bn}: contract packaging",

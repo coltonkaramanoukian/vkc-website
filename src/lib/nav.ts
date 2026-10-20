@@ -16,9 +16,10 @@ export interface NavGroup {
 
 /**
  * The site's order, everywhere it is listed (menu, footer, primary nav):
- * Services (Second Shift, then the two Bottleneck pages), Industries,
+ * Services (Second Shift, then Bottleneck and its two pages), Industries,
  * Containers, Regions, then the company pages with Contact before the
- * rest. Colton's brief of 2026-09-27; the labels and slugs did not change.
+ * rest. Colton's brief of 2026-09-27; the Bottleneck page was added for the
+ * cold-call pitch, which names it (SITE-GAPS C8).
  */
 export const navGroups: NavGroup[] = [
   {
@@ -26,6 +27,7 @@ export const navGroups: NavGroup[] = [
     hub: "/services",
     items: [
       { route: "/services/second-shift", label: "secondShift" },
+      { route: "/services/bottleneck", label: "bottleneck" },
       { route: "/services/contract-packaging", label: "contractPackaging" },
       { route: "/services/toll-blending", label: "tollBlending" },
     ],

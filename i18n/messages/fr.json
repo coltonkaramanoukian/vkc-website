@@ -9,6 +9,7 @@
     "home": "Accueil",
     "nav": {
       "secondShift": "{ss}",
+      "bottleneck": "{bn}",
       "contractPackaging": "Conditionnement à forfait",
       "tollBlending": "Mélange à façon",
       "bottlesAndJugs": "Bouteilles et bidons",
@@ -133,6 +134,10 @@
     "secondShift": {
       "title": "Deuxième quart de production dans votre usine",
       "description": "Un deuxième quart de production dans votre usine. Notre chef d’équipe dirige le quart, notre équipe fait le travail, et nos feuilles CQ et notre registre de production le documentent. Facturé à l’unité ou au quart."
+    },
+    "bottleneck": {
+      "title": "{bn} : votre surplus, emballé et mélangé chez VKC",
+      "description": "Votre ligne déborde? Envoyez le surplus chez VKC : conditionnement et mélange dans nos installations. Nouveaux projets : produits sans époxy seulement."
     },
     "contractPackaging": {
       "title": "Conditionnement à forfait, remplissage, Grand Montréal",
@@ -534,6 +539,15 @@
           }
         ]
       }
+    },
+    "bottleneck": {
+      "eyebrow": "Services : chez nous",
+      "h1": "{bn} : votre surplus, emballé et mélangé chez VKC.",
+      "lead": "Quand les commandes dépassent ce que votre ligne peut absorber, envoyez le surplus chez nous. VKC s’occupe du conditionnement et du mélange dans ses installations, et votre ligne garde son rythme.",
+      "scope": "Nouveaux projets : produits sans époxy seulement.",
+      "slogan": "L’usine d’à côté.",
+      "contact": "Nous joindre",
+      "jobsHeading": "Ce que couvre {bn}"
     },
     "contractPackaging": {
       "eyebrow": "{bn} : conditionnement à forfait",
