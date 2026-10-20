@@ -1092,6 +1092,7 @@
       "lead": "Ou bien on fait rouler un quart sur votre ligne, ou bien votre surplus roule sur la nôtre. Tout ce que fait VKC tient dans l’une de ces deux formules; les pages ci-dessous disent comment chacune fonctionne.",
       "cards": {
         "secondShift": "Un quart de production sur votre propre ligne, acheté à la production.",
+        "bottleneck": "Votre surplus, emballé et mélangé chez VKC.",
         "contractPackaging": "Le remplissage : votre produit entre dans ses contenants, chez nous.",
         "tollBlending": "Le lot : votre formule, fabriquée ici avant d’être remplie."
       },
@@ -1111,9 +1112,9 @@
           "slot": "bottleneck"
         },
         {
-          "h2": "Trois pages, deux services",
+          "h2": "Quatre pages, deux services",
           "body": [
-            "{bn} occupe deux pages parce que c’est deux travaux. Le [conditionnement à forfait](/services/contract-packaging), c’est le remplissage : le produit existe et doit entrer dans ses contenants. Le [mélange à façon](/services/toll-blending), c’est le lot : la formule est à vous, et on fabrique le produit avant de le remplir."
+            "{bn} occupe trois pages : [la sienne](/services/bottleneck), qui dit ce qu’il couvre, puis une pour chacun de ses deux travaux. Le [conditionnement à forfait](/services/contract-packaging), c’est le remplissage : le produit existe et doit entrer dans ses contenants. Le [mélange à façon](/services/toll-blending), c’est le lot : la formule est à vous, et on fabrique le produit avant de le remplir."
           ],
           "slot": "pages"
         },

@@ -45,4 +45,18 @@ describe("the Bottleneck / Goulot route", () => {
       }
     }
   });
+
+  it("is one of the services hub's pages, and the hub counts it", () => {
+    for (const locale of ["en", "fr"]) {
+      const messages = JSON.parse(readFileSync(new URL(`../../i18n/messages/${locale}.json`, import.meta.url), "utf8"));
+      const hub = messages.pages.services;
+      assert.ok(hub.cards.bottleneck, `${locale} pages.services.cards.bottleneck`);
+      const pages = hub.sections.find((s: { slot?: string }) => s.slot === "pages");
+      assert.match(pages.body.join(" "), /\]\(\/services\/bottleneck\)/, `${locale} hub links the page`);
+      const services = navGroups.find((g) => g.key === "services");
+      const count = { en: "Four", fr: "Quatre" }[locale];
+      assert.equal(services?.items.length, 4);
+      assert.ok(pages.h2.startsWith(`${count} pages`), `${locale} hub h2: ${pages.h2}`);
+    }
+  });
 });

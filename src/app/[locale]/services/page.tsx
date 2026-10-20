@@ -49,6 +49,12 @@ export default async function ServicesHubPage({ params }: Props) {
                 picto: "plant",
               },
               {
+                route: "/services/bottleneck",
+                title: t("common.nav.bottleneck"),
+                body: t("pages.services.cards.bottleneck"),
+                picto: "facility",
+              },
+              {
                 route: "/services/contract-packaging",
                 title: t("common.nav.contractPackaging"),
                 body: t("pages.services.cards.contractPackaging"),

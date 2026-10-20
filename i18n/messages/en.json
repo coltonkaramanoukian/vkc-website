@@ -1092,6 +1092,7 @@
       "lead": "Either we run a shift on your line, or your overflow runs on ours. Everything VKC does is one of those two, and the pages below say how each one works, who does what, and what it is priced on.",
       "cards": {
         "secondShift": "A production shift run on your own line, bought by the output.",
+        "bottleneck": "Your overflow, packaged and blended at VKC.",
         "contractPackaging": "The fill: your product goes into its containers at our facility.",
         "tollBlending": "The batch: your formula, made here before it is filled."
       },
@@ -1111,9 +1112,9 @@
           "slot": "bottleneck"
         },
         {
-          "h2": "Three pages, two services",
+          "h2": "Four pages, two services",
           "body": [
-            "{bn} is two pages because it is two jobs. [Contract packaging](/services/contract-packaging) is the fill: the product exists and needs to get into containers. [Toll blending](/services/toll-blending) is the batch: the formula is yours, and we make the product before it is filled."
+            "{bn} is three pages: [its own](/services/bottleneck), which says what it covers, then one for each of its two jobs. [Contract packaging](/services/contract-packaging) is the fill: the product exists and needs to get into containers. [Toll blending](/services/toll-blending) is the batch: the formula is yours, and we make the product before it is filled."
           ],
           "slot": "pages"
         },
