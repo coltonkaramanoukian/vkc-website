@@ -248,7 +248,7 @@
         "bottleneck": {
           "title": "{bn}, chez nous",
           "body": "Envoyez-nous le surplus. On le remplit, l’étiquette, l’assemble et l’emballe ici; il revient prêt à expédier.",
-          "link": "Conditionnement à forfait"
+          "link": "Ce que couvre {bn}"
         },
         "tollBlending": {
           "title": "{bn} : le mélange d’abord",
