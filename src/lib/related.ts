@@ -34,7 +34,9 @@ export const RELATED: Partial<Record<AppPathname, AppPathname[]>> = {
   // The home page closes on the three pages that end the site's order:
   // where VKC works, who it is, how to reach it.
   "/": ["/locations/montreal", "/about", "/contact"],
-  "/services": ["/services/second-shift", "/services/contract-packaging", "/services/toll-blending"],
+  // The two services' own pages first; contract packaging is a row in the
+  // hub's page list and a link from the Bottleneck page.
+  "/services": ["/services/second-shift", "/services/bottleneck", "/services/toll-blending"],
   "/services/second-shift": ["/locations/montreal", "/industries", "/about"],
   // Its two jobs are already linked in the page body; these are what a
   // prospect asks next: what we fill, what it goes into, where we are.
