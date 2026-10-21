@@ -21,6 +21,10 @@ export const pathnames = {
     fr: "/services/deuxieme-quart",
     en: "/services/second-shift",
   },
+  "/services/bottleneck": {
+    fr: "/services/goulot",
+    en: "/services/bottleneck",
+  },
   "/services/contract-packaging": {
     fr: "/services/conditionnement-a-forfait",
     en: "/services/contract-packaging",

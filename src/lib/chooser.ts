@@ -13,7 +13,7 @@ export type Recommendation = "secondShift" | "bottleneck" | "tollBlending" | "wa
 
 export const RESULT_ROUTE: Record<Recommendation, AppPathname> = {
   secondShift: "/services/second-shift",
-  bottleneck: "/services/contract-packaging",
+  bottleneck: "/services/bottleneck",
   tollBlending: "/services/toll-blending",
   walkthrough: "/quote",
 };

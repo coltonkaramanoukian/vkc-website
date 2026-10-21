@@ -199,7 +199,7 @@ export default async function HomePage({ params }: Props) {
             <p className="lead">{services.bottleneck.summary[locale]}</p>
             <p className="text-graphite">{services.bottleneck.nameNote?.[locale]}</p>
             <div>
-              <Link href={localizedPath(locale, "/services/contract-packaging")} className="btn btn-primary">
+              <Link href={localizedPath(locale, "/services/bottleneck")} className="btn btn-primary">
                 {t("home.chooser.results.bottleneck.link", names)}
               </Link>
             </div>

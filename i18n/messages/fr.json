@@ -9,6 +9,7 @@
     "home": "Accueil",
     "nav": {
       "secondShift": "{ss}",
+      "bottleneck": "{bn}",
       "contractPackaging": "Conditionnement à forfait",
       "tollBlending": "Mélange à façon",
       "bottlesAndJugs": "Bouteilles et bidons",
@@ -134,6 +135,10 @@
       "title": "Deuxième quart de production dans votre usine",
       "description": "Un deuxième quart de production dans votre usine. Notre chef d’équipe dirige le quart, notre équipe fait le travail, et nos feuilles CQ et notre registre de production le documentent. Facturé à l’unité ou au quart."
     },
+    "bottleneck": {
+      "title": "{bn} : votre surplus, emballé et mélangé chez VKC",
+      "description": "Votre ligne déborde? Envoyez le surplus chez VKC : conditionnement et mélange dans nos installations. Nouveaux projets : produits sans époxy seulement."
+    },
     "contractPackaging": {
       "title": "Conditionnement à forfait, remplissage, Grand Montréal",
       "description": "Sous-traitance d’emballage pour liquides et pâtes. Envoyez-nous le surplus que votre ligne n’absorbe pas : on le remplit, l’étiquette, l’assemble en trousses et l’emballe."
@@ -243,7 +248,7 @@
         "bottleneck": {
           "title": "{bn}, chez nous",
           "body": "Envoyez-nous le surplus. On le remplit, l’étiquette, l’assemble et l’emballe ici; il revient prêt à expédier.",
-          "link": "Conditionnement à forfait"
+          "link": "Ce que couvre {bn}"
         },
         "tollBlending": {
           "title": "{bn} : le mélange d’abord",
@@ -534,6 +539,15 @@
           }
         ]
       }
+    },
+    "bottleneck": {
+      "eyebrow": "Services : chez nous",
+      "h1": "{bn} : votre surplus, emballé et mélangé chez VKC.",
+      "lead": "Quand les commandes dépassent ce que votre ligne peut absorber, envoyez le surplus chez nous. VKC s’occupe du conditionnement et du mélange dans ses installations, et votre ligne garde son rythme.",
+      "scope": "Nouveaux projets : produits sans époxy seulement.",
+      "slogan": "L’usine d’à côté.",
+      "contact": "Nous joindre",
+      "jobsHeading": "Ce que couvre {bn}"
     },
     "contractPackaging": {
       "eyebrow": "{bn} : conditionnement à forfait",
@@ -993,7 +1007,7 @@
         {
           "h2": "Ce qu’on fait",
           "body": [
-            "Deux choses, et c’est le même métier vu de deux côtés. Le [{ss}](/services/second-shift) est un quart de production qu’on fait rouler chez vous, sur votre ligne, pendant un quart que votre usine ne couvre pas. Le [{bn}](/services/contract-packaging), c’est le surplus que votre ligne n’absorbe pas : rempli, emballé et mélangé chez nous.",
+            "Deux choses, et c’est le même métier vu de deux côtés. Le [{ss}](/services/second-shift) est un quart de production qu’on fait rouler chez vous, sur votre ligne, pendant un quart que votre usine ne couvre pas. Le [{bn}](/services/bottleneck), c’est le surplus que votre ligne n’absorbe pas : rempli, emballé et mélangé chez nous.",
             "Tout le reste du site (les contenants, les secteurs, les méthodes) décrit comment ces deux-là se font."
           ],
           "slot": "services"
@@ -1078,6 +1092,7 @@
       "lead": "Ou bien on fait rouler un quart sur votre ligne, ou bien votre surplus roule sur la nôtre. Tout ce que fait VKC tient dans l’une de ces deux formules; les pages ci-dessous disent comment chacune fonctionne.",
       "cards": {
         "secondShift": "Un quart de production sur votre propre ligne, acheté à la production.",
+        "bottleneck": "Votre surplus, emballé et mélangé chez VKC.",
         "contractPackaging": "Le remplissage : votre produit entre dans ses contenants, chez nous.",
         "tollBlending": "Le lot : votre formule, fabriquée ici avant d’être remplie."
       },
@@ -1097,9 +1112,9 @@
           "slot": "bottleneck"
         },
         {
-          "h2": "Trois pages, deux services",
+          "h2": "Quatre pages, deux services",
           "body": [
-            "{bn} occupe deux pages parce que c’est deux travaux. Le [conditionnement à forfait](/services/contract-packaging), c’est le remplissage : le produit existe et doit entrer dans ses contenants. Le [mélange à façon](/services/toll-blending), c’est le lot : la formule est à vous, et on fabrique le produit avant de le remplir."
+            "{bn} occupe trois pages : [la sienne](/services/bottleneck), qui dit ce qu’il couvre, puis une pour chacun de ses deux travaux. Le [conditionnement à forfait](/services/contract-packaging), c’est le remplissage : le produit existe et doit entrer dans ses contenants. Le [mélange à façon](/services/toll-blending), c’est le lot : la formule est à vous, et on fabrique le produit avant de le remplir."
           ],
           "slot": "pages"
         },
@@ -1272,7 +1287,7 @@
         },
         {
           "term": "Goulot",
-          "def": "L’étape la plus lente d’une usine, celle que toutes les autres attendent : le goulot d’étranglement. Aussi le col d’une bouteille. Le service de surplus de VKC tient son nom des deux lectures : [{bn}](/services/contract-packaging)."
+          "def": "L’étape la plus lente d’une usine, celle que toutes les autres attendent : le goulot d’étranglement. Aussi le col d’une bouteille. Le service de surplus de VKC tient son nom des deux lectures : [{bn}](/services/bottleneck)."
         },
         {
           "term": "Ligne de remplissage",

@@ -9,6 +9,7 @@
     "home": "Home",
     "nav": {
       "secondShift": "{ss}",
+      "bottleneck": "{bn}",
       "contractPackaging": "Contract packaging",
       "tollBlending": "Toll blending",
       "bottlesAndJugs": "Bottles and jugs",
@@ -134,6 +135,10 @@
       "title": "Second Shift: second shift production at your plant",
       "description": "Second shift production at your plant. Our lead hand directs the shift, our crew does the work, and our QC sheets and production log document it. Priced per unit or per shift."
     },
+    "bottleneck": {
+      "title": "{bn}: your overflow, packaged and blended at VKC",
+      "description": "When orders outrun what your line can absorb, send the overflow to VKC. We handle the packaging and blending at our own facility. New projects: non-epoxy products only."
+    },
     "contractPackaging": {
       "title": "Contract packaging, liquid filling, greater Montreal",
       "description": "VKC Packaging is a co-packer for liquids and pastes. Send the overflow your line can’t absorb: we fill, label, kit and pack it at our facility."
@@ -243,7 +248,7 @@
         "bottleneck": {
           "title": "{bn}, at our facility",
           "body": "Send us the overflow. We fill, label, kit and pack it here, and it comes back ready to ship.",
-          "link": "Contract packaging"
+          "link": "What {bn} covers"
         },
         "tollBlending": {
           "title": "{bn}: toll blending first",
@@ -534,6 +539,15 @@
           }
         ]
       }
+    },
+    "bottleneck": {
+      "eyebrow": "Services: at our facility",
+      "h1": "{bn}: your overflow, packaged and blended at VKC.",
+      "lead": "When orders outrun what your line can absorb, send the overflow to us. VKC handles the packaging and blending at its own facility, and your line keeps its pace.",
+      "scope": "New projects: non-epoxy products only.",
+      "slogan": "The plant next door.",
+      "contact": "Contact us",
+      "jobsHeading": "What {bn} covers"
     },
     "contractPackaging": {
       "eyebrow": "{bn}: contract packaging",
@@ -993,7 +1007,7 @@
         {
           "h2": "What we do",
           "body": [
-            "Two things, and they are the same trade seen from two sides. [{ss}](/services/second-shift) is a production shift we run at your plant, on your line, on a shift your plant doesn’t cover. [{bn}](/services/contract-packaging) is the overflow your line can’t absorb: filled, packed and blended at ours.",
+            "Two things, and they are the same trade seen from two sides. [{ss}](/services/second-shift) is a production shift we run at your plant, on your line, on a shift your plant doesn’t cover. [{bn}](/services/bottleneck) is the overflow your line can’t absorb: filled, packed and blended at ours.",
             "Everything else on this site (the containers, the industries, the fill methods) is a description of how those two get done."
           ],
           "slot": "services"
@@ -1078,6 +1092,7 @@
       "lead": "Either we run a shift on your line, or your overflow runs on ours. Everything VKC does is one of those two, and the pages below say how each one works, who does what, and what it is priced on.",
       "cards": {
         "secondShift": "A production shift run on your own line, bought by the output.",
+        "bottleneck": "Your overflow, packaged and blended at VKC.",
         "contractPackaging": "The fill: your product goes into its containers at our facility.",
         "tollBlending": "The batch: your formula, made here before it is filled."
       },
@@ -1097,9 +1112,9 @@
           "slot": "bottleneck"
         },
         {
-          "h2": "Three pages, two services",
+          "h2": "Four pages, two services",
           "body": [
-            "{bn} is two pages because it is two jobs. [Contract packaging](/services/contract-packaging) is the fill: the product exists and needs to get into containers. [Toll blending](/services/toll-blending) is the batch: the formula is yours, and we make the product before it is filled."
+            "{bn} is three pages: [its own](/services/bottleneck), which says what it covers, then one for each of its two jobs. [Contract packaging](/services/contract-packaging) is the fill: the product exists and needs to get into containers. [Toll blending](/services/toll-blending) is the batch: the formula is yours, and we make the product before it is filled."
           ],
           "slot": "pages"
         },
@@ -1236,7 +1251,7 @@
       "terms": [
         {
           "term": "Bottleneck",
-          "def": "The slowest step in a plant, the one every other step waits on, however fast the rest may be. Also the neck of a bottle, the narrow part the product passes through. VKC’s overflow service takes its name from both readings: [{bn}](/services/contract-packaging)."
+          "def": "The slowest step in a plant, the one every other step waits on, however fast the rest may be. Also the neck of a bottle, the narrow part the product passes through. VKC’s overflow service takes its name from both readings: [{bn}](/services/bottleneck)."
         },
         {
           "term": "Changeover",

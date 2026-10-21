@@ -1,5 +1,7 @@
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 import { describe, it } from "node:test";
+import { localizedPath } from "../i18n/pathnames.ts";
 import { recommend, RESULT_ROUTE } from "./chooser.ts";
 
 describe("recommend", () => {
@@ -33,6 +35,20 @@ describe("recommend", () => {
   it("maps every result to a real route", () => {
     for (const route of Object.values(RESULT_ROUTE)) {
       assert.ok(route.startsWith("/"), route);
+    }
+  });
+
+  it("sends a Bottleneck answer to the Bottleneck / Goulot page in both locales", () => {
+    assert.equal(localizedPath("en", RESULT_ROUTE.bottleneck), "/en/services/bottleneck");
+    assert.equal(localizedPath("fr", RESULT_ROUTE.bottleneck), "/fr/services/goulot");
+  });
+
+  it("names the Bottleneck page, not contract packaging, on that result's link", () => {
+    for (const locale of ["en", "fr"]) {
+      const messages = JSON.parse(readFileSync(new URL(`../../i18n/messages/${locale}.json`, import.meta.url), "utf8"));
+      const link: string = messages.home.chooser.results.bottleneck.link;
+      assert.match(link, /\{bn\}/, `${locale} home.chooser.results.bottleneck.link`);
+      assert.notEqual(link, messages.common.nav.contractPackaging, `${locale} home.chooser.results.bottleneck.link`);
     }
   });
 });
